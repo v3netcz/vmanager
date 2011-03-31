@@ -1,0 +1,20 @@
+# disable directory listing
+Options -Indexes
+
+# mod_rewrite
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	# RewriteBase /
+
+	# Presmerovani na domenu s WWW
+	#RewriteCond %{HTTP_HOST} !^www
+	#RewriteCond %{HTTP_HOST} !\.web\.v3net\.cz$
+	#RewriteRule (.*) http://www.%{HTTP_HOST}/$1 [R=301,QSA,L]
+
+	# front controller
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
+
+	#RewriteRule .* index.php [L]
+</IfModule>
