@@ -1,0 +1,3 @@
+[submodule "libs/vBuilderFw"]
+	path = libs/vBuilderFw
+	url = git://github.com/vbuilder/framework.git
