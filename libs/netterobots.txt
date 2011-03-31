@@ -1,0 +1,4 @@
+Disallow: dibi/tests
+Disallow: dibi/examples
+Disallow: nette/client-side
+Disallow: nette/tests
