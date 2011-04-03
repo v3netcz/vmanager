@@ -12,7 +12,10 @@ common:
 		# default_charset: "UTF-8"
 
 	service:
-		Nette\Security\IAuthenticator: UsersModel
+		Nette\Security\IAuthenticator: vBuilder\Security\Authenticator
+		Nette\Security\IAuthorizator: vBuilder\Security\Permission
+		vBuilder\Security\IPasswordHashProvider: vBuilder\Security\Sha1SaltedHashProvider
+
 		Nette\Loaders\RobotLoader:
 			option:
 				directory: [%appDir%, %libsDir%]
@@ -22,7 +25,16 @@ common:
 		driver: mysql
 		lazy: true
 		charset: utf8
-		
+
+	security:
+		user:
+			fields:
+				name:
+					name: Name
+				surname:
+					name: Surname
+				email:
+					name: E-mail		
 
 production < common:
 
