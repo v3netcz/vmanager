@@ -18,8 +18,22 @@ common:
 				directory: [%appDir%, %libsDir%]
 			run: true
 
+	database:
+		driver: mysql
+		lazy: true
+		charset: utf8
+		
+
 production < common:
 
 development < common:
+	database:
+		host: 127.0.0.1
+		database: vbuilder_sandbox
+		username: vbuilder
+		password: g1Ut6NMogtyurkZnQRxcaL
+		profiler: true
 
-console < common:
+console < development:
+	database:
+		host: 192.168.1.203

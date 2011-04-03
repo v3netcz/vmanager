@@ -24,6 +24,8 @@ Debug::enable(Debug::DEVELOPMENT);
 // Load configuration from config.neon file
 Environment::loadConfig();
 
+// Dibi
+dibi::connect(Environment::getConfig('database'));
 
 // Configure application
 $application = Environment::getApplication();
