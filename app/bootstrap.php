@@ -29,8 +29,12 @@ dibi::connect(Environment::getConfig('database'));
 
 // Configure application
 $application = Environment::getApplication();
-$application->errorPresenter = 'Error';
+//$application->errorPresenter = 'Error';
 //$application->catchExceptions = TRUE;
+
+// Pri prechodu do produkcniho prostredi odkomentovat ty 2 predchozi radky
+// a zakomentovat tuhle
+$application->catchExceptions = false;
 
 
 // Setup router

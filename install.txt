@@ -15,7 +15,7 @@ before proceeding.
 2) Download project source code by git (or any other method).
 	Make sure you init all modules if you using alternative method.
 
-		git clone git://github.com/vbuilder/sandbox.git myproject
+		git clone git://github.com/v3lbloud/sp1.git myproject
 		cd myproject
 		git submodule init
 		git submodule update

@@ -41,9 +41,9 @@ production < common:
 development < common:
 	database:
 		host: 127.0.0.1
-		database: vbuilder_sandbox
-		username: vbuilder
-		password: g1Ut6NMogtyurkZnQRxcaL
+		database: sp1
+		username: sp1
+		password: L22sZPkKRaKAPFqAghnARm
 		profiler: true
 
 console < development:

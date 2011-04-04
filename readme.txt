@@ -1,15 +1,32 @@
-Welcome to vBuilder Framework
+Welcome
 ==========================
 
-This package is sandbox installation for easy distribution of vBuilder Framework with all it's dependencies.
+You have recieved copy of our solution for collaborative project management.
 
-vBuilder Framework is actively developed by V3Net.cz as part of their commercial
-Content Management System called vBuilder (www.vbuilder.cz). 
+This project is built on top of vBuilder and Nette Framework.
+
+PHP 5.3 or above required.
 
 Project is currently maintained by Adam Staněk <adam.stanek@v3net.cz>
 
-Copyright 2011 V3Net.cz, s.r.o. All rights reserved.
-
-For more information about licensing please view libs/vBuilderFw/readme.txt file.
+Project contributors:
+Adam Staněk <adam.stanek@v3net.cz>
+Petr Tatoušek <petr@tatousek.eu>
+Radek Klein <radek.klein@me.com>
 
 For installation instruction read attached file install.txt.
+
+==========================
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Any other unspecified situation is driven by attached file license.txt.
