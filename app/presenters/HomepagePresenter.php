@@ -7,19 +7,15 @@
  * @package    MyApplication
  */
 
-
-
 /**
  * Homepage presenter.
  *
  * @author     John Doe
  * @package    MyApplication
  */
-class HomepagePresenter extends BasePresenter
-{
+class HomepagePresenter extends BasePresenter {
 
-	public function renderDefault()
-	{
+	public function renderDefault() {		  
 		$this->template->anyVariable = 'any value';
 	}
 
