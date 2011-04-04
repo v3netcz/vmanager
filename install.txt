@@ -1,0 +1,73 @@
+Installation instruction
+========================
+
+Following instructions are written for Apache 2.x, MySQL and PHP 5.3 on 
+UNIX system (Mac OS X and Arch Linux tested). But can be used on other platforms.
+
+Be sure you have your web environment installation running smoothly
+before proceeding.
+
+--------------
+
+1) Check if your platform is suitable for running Nette Framework: 
+		https://github.com/nette/tools/tree/master/Requirements-Checker
+
+2) Download project source code by git (or any other method).
+	Make sure you init all modules if you using alternative method.
+
+		git clone git://github.com/vbuilder/sandbox.git myproject
+		cd myproject
+		git submodule init
+		git submodule update
+
+3) Set write permissions for temp and log directories
+
+		chmod -R 777 temp
+		chmod -R 777 log
+
+	Note: It's not the best solution, if you know owner of apache process it's
+		better to set ownership and not make directories world writeable at all.
+
+4) Create virtual host for your installation and point it's document root 
+	to www directory of this installation. Any other directories should be hidden
+	from visitor!
+
+	Example vhost config for apache:
+		<VirtualHost *:80>
+			ServerAdmin webmaster@localhost.localdomain
+			DocumentRoot "/var/www/sp1/www"
+			ServerName myproject.localhost
+			ServerAlias *.myproject.localhost
+
+			<Directory "/var/www/myproject/www">
+				Options Indexes MultiViews FollowSymlinks
+				AllowOverride All
+				Order allow,deny
+				Allow from all
+
+				# Path to temp or pear depends on your instalation
+				php_admin_value open_basedir /var/www/myproject/:/tmp/:/usr/share/pear/
+
+				# For developers only
+				php_admin_value xdebug.profiler_output_dir /var/www/myproject/temp
+			</Directory>
+		</VirtualHost>
+
+5) Make MySQL database and user for your installation.
+		CREATE DATABASE `vbuilder_myproject`;
+		CREATE USER 'vbuilder'@'%' IDENTIFIED BY 'g1Ut6NMogtyurkZnQRxcaL';
+		GRANT ALL ON `vbuilder_myproject`.* TO 'vbuilder'@'%';
+		FLUSH PRIVILEGES;
+
+	Note 1: Change `sp1` to your database name and 'sp1' to desired username
+	Note 2: '%' can be changed to localhost to allow only local connections to server.
+	Note 3: It's recommended to change your password for production environment.
+
+6) Import database structure for your project (dbdump.sql)
+		mysql -h 127.0.0.1 -u vbuilder --password=g1Ut6NMogtyurkZnQRxcaL vbuilder_myproject < dbdump.sql
+
+7) Set your config in /app/config.neon to match your DB configuration
+
+8) Enjoy your instalation :-)
+	Default login: admin
+	Default password: 1234

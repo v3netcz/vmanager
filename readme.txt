@@ -11,3 +11,5 @@ Project is currently maintained by Adam Staněk <adam.stanek@v3net.cz>
 Copyright 2011 V3Net.cz, s.r.o. All rights reserved.
 
 For more information about licensing please view libs/vBuilderFw/readme.txt file.
+
+For installation instruction read attached file install.txt.
