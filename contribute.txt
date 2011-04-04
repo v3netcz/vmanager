@@ -1,7 +1,7 @@
 Contributor instructions
 ========================
 
-Want to contribute to vBuilder project?
+Want to contribute to project?
 ---------------------------------------
 
 1) Create GitHub account (https://github.com/)
