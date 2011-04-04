@@ -1,0 +1,51 @@
+Contributor instructions
+========================
+
+Want to contribute to vBuilder project?
+---------------------------------------
+
+1) Create GitHub account (https://github.com/)
+2) Send e-mail to info@v3net.cz with request to add as project contributor
+3) Set up GitHub certificates for SSH access
+		For Windows: http://help.github.com/win-set-up-git/
+		For Mac OS X: http://help.github.com/mac-set-up-git/
+		For Linux: http://help.github.com/linux-set-up-git/
+
+4) Deploy project to your development server following instructions in install.txt
+5) Set project push origin remote:
+		git remote set-url origin --push git@github.com:vbuilder/sandbox.git
+		cd libs/vBuilderFw
+		git remote set-url origin --push git@github.com:vbuilder/framework.git
+
+
+
+How to commit changes?
+----------------------
+
+1) If you does not changed vBuilderFw module skip to step 2
+2) First commit changes in module:
+		Review changes:
+			cd libs/vBuilderFw
+			git status
+
+		Commit changes:
+			git add some_changed_file.txt
+			git commit -m "My commit message"
+
+		!!! Push changes:
+			git push
+
+		Don't forget to always push changes to remote, if you not you can 
+			harm pointer to vBuilderFw module revision in sandbox!
+
+3) Commit changes in project
+		In project directory:
+			git status
+			git add some_changed_file.txt
+			git add libs/vBuilderFw
+
+			git commit -m "My commit message"
+			git push
+
+For more info about module commiting read: 
+	http://book.git-scm.com/5_submodules.html

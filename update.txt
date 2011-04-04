@@ -1,0 +1,7 @@
+Update instruction
+==================
+
+For update to current version of project run in PROJECT directory:
+	git pull
+	git submodule update
+	rm -rf temp/*
