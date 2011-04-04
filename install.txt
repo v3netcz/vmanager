@@ -59,7 +59,7 @@ before proceeding.
 		GRANT ALL ON `vbuilder_myproject`.* TO 'vbuilder'@'%';
 		FLUSH PRIVILEGES;
 
-	Note 1: Change `sp1` to your database name and 'sp1' to desired username
+	Note 1: Change `vbuilder_myproject` to your database name and 'vbuilder' to desired username
 	Note 2: '%' can be changed to localhost to allow only local connections to server.
 	Note 3: It's recommended to change your password for production environment.
 
