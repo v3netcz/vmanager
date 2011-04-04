@@ -18,6 +18,9 @@ require LIBS_DIR . '/nette/Nette/loader.php';
 // !!! Uncomment line bellow when goinng to production environment !!!
 Environment::setMode('production', false);
 
+// !!! Uncomment line bellow when goinng to production environment !!!
+Environment::setMode('production', false);
+
 // Enable Nette\Debug for error visualisation & logging
 Debug::$strictMode = TRUE;
 Debug::enable();
