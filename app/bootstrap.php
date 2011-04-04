@@ -16,10 +16,12 @@ use Nette\Application\Route;
 require LIBS_DIR . '/nette/Nette/loader.php';
 
 
+// !!! Uncomment line bellow when goinng to production environment !!!
+Environment::setMode('production', false);
+
 // Enable Nette\Debug for error visualisation & logging
 Debug::$strictMode = TRUE;
-Debug::enable(Debug::DEVELOPMENT);
-
+Debug::enable();
 
 // Load configuration from config.neon file
 Environment::loadConfig();
@@ -30,7 +32,7 @@ dibi::connect(Environment::getConfig('database'));
 // Configure application
 $application = Environment::getApplication();
 $application->errorPresenter = 'Error';
-//$application->catchExceptions = TRUE;
+$application->catchExceptions = Environment::isProduction();
 
 
 // Setup router
