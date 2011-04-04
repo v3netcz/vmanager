@@ -5,7 +5,7 @@ Want to contribute to vBuilder project?
 ---------------------------------------
 
 1) Create GitHub account (https://github.com/)
-2) Send e-mail to info@v3net.cz with request to add as project contributor
+2) Send e-mail to adam.stanek@v3net.cz with request to add as project contributor
 3) Set up GitHub certificates for SSH access
 		For Windows: http://help.github.com/win-set-up-git/
 		For Mac OS X: http://help.github.com/mac-set-up-git/
@@ -13,7 +13,7 @@ Want to contribute to vBuilder project?
 
 4) Deploy project to your development server following instructions in install.txt
 5) Set project push origin remote:
-		git remote set-url origin --push git@github.com:vbuilder/sandbox.git
+		git remote set-url origin --push git@github.com:v3lbloud/sp1.git
 		cd libs/vBuilderFw
 		git remote set-url origin --push git@github.com:vbuilder/framework.git
 
