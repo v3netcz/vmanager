@@ -15,6 +15,7 @@ common:
 		Nette\Security\IAuthenticator: vBuilder\Security\Authenticator
 		Nette\Security\IAuthorizator: vBuilder\Security\Permission
 		vBuilder\Security\IPasswordHashProvider: vBuilder\Security\Sha1SaltedHashProvider
+		Nette\Application\IPresenterFactory: vManager\Application\PresenterFactory
 
 		Nette\Loaders\RobotLoader:
 			option:
