@@ -21,14 +21,25 @@
  * along with vManager. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace vManager\Application;
+namespace vManager\Modules;
+
+use vManager;
 
 /**
- * Base interface for vManager modules
+ * Base vManager system module
  *
  * @author Adam Staněk (V3lbloud)
  * @since Apr 5, 2011
  */
-interface IModule {
+class System extends vManager\Application\Module {
+	
+	/**
+	 * Returns true if this module is enabled in current configuration
+	 * 
+	 * @return bool
+	 */
+	public function isEnabled() {
+		return true; // System module has to be always enabled
+	}
 	
 }

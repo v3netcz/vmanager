@@ -17,11 +17,18 @@
 		<a href="{link Sign:in}">Sign in</a>
 	{/if}
 	
+	
 	<ul id="environment">
 		<li>PHP {=PHP_VERSION}</li>
 		<li n:ifset="$_SERVER['SERVER_SOFTWARE']">Server {$_SERVER['SERVER_SOFTWARE']}</li>
 		<li>Nette Framework {=Nette\Framework::VERSION}</li>
 		<li>vBuilder Framework {=vBuilder\Framework::getVersionString()}</li>
+	</ul>
+	
+	<ul id="modules">
+		{foreach vManager\Application\ModuleManager::getModules() as $module}
+			<li>{=$module->getName()} {=vBuilder\Framework::getVersionString($module->getVersion(), '')}{if !$module->isEnabled()} (disabled){/if}</li>
+		{/foreach}
 	</ul>
 </div>
 {/block}
@@ -113,13 +120,16 @@
 		color: white;
 	}
 
-	#environment {
+	#environment, #modules {
 		font-size: 70%;
 		margin: 3em 0;
-		padding: 1em 0;
-		border-top: 1px solid #EEE;
+		padding: 1em 0 0 0;
 		list-style: none;
 		color: gray;
+	}
+	
+	#environment {
+		border-top: 1px solid #EEE;
 	}
 </style>
 {/block}

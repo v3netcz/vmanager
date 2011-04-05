@@ -23,12 +23,14 @@
 
 namespace vManager\Modules;
 
+use vManager;
+
 /**
  * Ticketing system module
  *
  * @author Adam Staněk (V3lbloud)
  * @since Apr 5, 2011
  */
-class Tickets implements vManager\Application\IModule {
+class Tickets extends vManager\Application\Module {
 	
 }
