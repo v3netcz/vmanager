@@ -37,6 +37,9 @@ common:
 				email:
 					name: E-mail		
 
+	Tickets:
+		enabled: true
+
 production < common:
 
 development < common:

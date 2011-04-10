@@ -1,40 +1,118 @@
-{**
- * My Application layout template.
- *
- * @copyright  Copyright (c) 2010 John Doe
- * @package    MyApplication
- *
- * @param string   $basePath web base path
- * @param string   $robots   tell robots how to index the content of a page (optional)
- * @param array    $flashes  flash messages
- *}
-
 <!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-	<meta name="description" content="vManager">
-	<meta name="robots" content="{$robots}" n:ifset="$robots">
+		{*<meta name="description" content="">*}
+		<meta name="robots" content="{$robots}" n:ifset="$robots">
 
-	<title>vManager</title>
+		<!-- iPhone, iPad and Android specific settings -->	
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1;">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-	<!-- <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css" type="text/css"> -->
-	<!-- <link rel="stylesheet" media="print" href="{$basePath}/css/print.css" type="text/css"> -->
-	<!-- <link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon"> -->
+		<title>vManager</title>
 
-	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script> -->
-	{block head}{/block}
-</head>
+		<!-- Create an icon and splash screen for iPhone and iPad -->
+		<link rel="apple-touch-icon" href="{$basePath}/images/iOS_icon.png">
+		<!-- <link rel="apple-touch-startup-image" href="{$basePath}/images/iOS_startup.png"> --> 
 
-<body>
-	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/bg_dark_wood.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/theme_red.css" media="screen">
+		
+		<!-- These stylesheets are used  -->
+		<!-- <link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/switcher.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/switcher1.php?default=switcher.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/switcher2.php?default=switcher.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/switcher3.php?default=switcher.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/switcher4.php?default=switcher.css" media="screen" /> -->
 
-	{include #content}
-	
-	<ul>
-		<li><a href="{link :System:Homepage:default}">Homepage</a></li>
-		<li><a href="{link :Tickets:Default:default}">Ticketovací systém</a></li>
-	</ul>
-</body>
+		<!--[if IE 6]><link rel="stylesheet" type="text/css" href="{$basePath}/css/ie6.css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" type="text/css" href="{$basePath}/css/ie.css" media="screen" /><![endif]-->
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/all.css" media="screen">
+
+		<!-- Load JQuery -->		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+		<!-- Load JQuery UI -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+		
+		<!-- Load Interface Plugins -->
+		<!-- <script src="{$basePath}/js/plugins.js"></script>
+		
+		<script type="text/javascript" src="{$basePath}/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/quicksand/jquery.quicksand.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/quicksand/custom_sorter.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/quicksand/dash_sorter.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/quicksand/jquery-css-transform.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/quicksand/jquery-animate-css-rotate-scale.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/tinyeditor/tinyeditor.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/DataTables/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/jqueryFileTree/jqueryFileTree.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/slidernav/slidernav.js"></script> -->
+
+		<!-- This file configures the various jQuery plugins for Adminica. Contains links to help pages for each plugin. -->
+		<!-- <script type="text/javascript" src="{$basePath}/js/adminica/adminica_ui.js"></script> -->
+		{block head}{/block}						
+	</head>
+	<body>
+		{if !isset($baseLayoutOnly) || !$baseLayoutOnly}
+			
+			<!-- SIDEBAR -->
+			<div id="sidebar">
+				<div class="cog">+</div>
+
+				<a href="{link :System:Homepage:default}" class="logo"><span>Adminica Pro II</span></a>
+
+				<div class="user_box round_all clearfix">
+					<img src="{$basePath}/images/profile.jpg" width="55" alt="Profile Pic" />
+					<h2>{=implode($user->getIdentity()->getRoles(), ", ")}</h2>
+					<h3><a class="text_shadow" href="#">{=$user->getIdentity()->getName()} {=$user->getIdentity()->getSurname()}</a></h3>
+					<ul>
+						<li><a href="{link :System:User:settings}">settings</a><span class="divider">|</span></li>
+						<li><a href="{link :System:Sign:out}">logout</a></li>
+					</ul>
+				</div><!-- #user_box -->
+
+				<ul id="accordion">
+					{* TODO: Prepsat na viceurovnovou nerekurzivni variantu *}
+					{foreach vManager\Application\Navigation::getMenuItems() as $curr}
+						<li>
+							<a href="{$curr['url']}" class="top_level">
+								{if isset($curr['icon'])}<img src="{$curr['icon']}"/>{/if}
+								{$curr['label']}
+							</a>
+							{if isset($curr['children']) && count($curr['children']) > 0}
+								<ul class="drawer">
+								{foreach $curr['children'] as $curr2}
+									<li><a href="{$curr2['url']}">{$curr2['label']}</a></li>
+								{/foreach}
+								</ul>
+							{/if}
+						</li>
+					{/foreach}
+				</ul>
+				
+				<!-- SEARCH -->
+				<form id="search_side" method="get" action="{link :System:Search:default}"><input class="round_all" name="s" type="text" value="Search..." onclick="value=''"></form>
+				
+				<!-- Other links -->
+				<ul id="side_links" class="text_shadow" >
+					<li><a href="https://github.com/v3lbloud/sp1">GitHub</a>
+					<li><a href="https://project.fit.cvut.cz/trac/Ticket">Project Trac</a></li>
+					<li><a href="http://apidoc.sp1.bilahora.v3net.cz">API Documentation</a></li>
+				</ul>
+			</div><!-- #sidebar -->
+			
+			<div id="main_container" class="main_container container_16 clearfix">
+				{*include 'includes/navigation.php'*}
+				<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>	
+				{include #content}
+			</div>	
+				
+		{* Implementace cisteho layoutu *}
+		{else}
+			{include #content}
+		{/if}
+	</body>
 </html>

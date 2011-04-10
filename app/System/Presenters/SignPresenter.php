@@ -48,7 +48,7 @@ class SignPresenter extends BasePresenter {
 		$form->addPassword('password', 'Password:')
 				  ->setRequired('Please provide a password.');
 
-		$form->addCheckbox('remember', 'Remember me on this computer');
+		$form->addCheckbox('remember', 'Auto-login in future.');
 
 		$form->addSubmit('send', 'Sign in');
 
@@ -66,10 +66,8 @@ class SignPresenter extends BasePresenter {
 			}
 			$this->getUser()->login($values->username, $values->password);
 						
-			if($values->backlink)
-				$this->getPresenter()->getApplication()->restoreRequest($values->backlink);
-			else
-				$this->redirect('Homepage:');
+			$this->getPresenter()->getApplication()->restoreRequest($values->backlink);
+			$this->redirect('Homepage:');
 		} catch(Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}

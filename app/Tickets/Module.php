@@ -23,7 +23,8 @@
 
 namespace vManager\Modules;
 
-use vManager;
+use vManager, Nette,
+	 vManager\Modules\System;
 
 /**
  * Ticketing system module
@@ -31,6 +32,27 @@ use vManager;
  * @author Adam Staněk (V3lbloud)
  * @since Apr 5, 2011
  */
-class Tickets extends vManager\Application\Module {
-	
+class Tickets extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule {
+
+	/**
+	 * Returns menu structure for this module
+	 *
+	 * @return array of menu items
+	 */
+	public function getMenuItems() {
+		$menu = array();
+		$menu[] = array(
+			 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
+			 'label' => 'Tickets',
+			 'icon' => System::getBasePath() . '/images/icons/small/grey/Flag.png',
+			 'children' => array(
+				  array(
+						'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
+						'label' => 'My tickets'
+				  )
+			 )
+		);
+		return $menu;
+	}
+
 }

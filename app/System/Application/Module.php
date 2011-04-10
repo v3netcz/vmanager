@@ -23,7 +23,7 @@
 
 namespace vManager\Application;
 
-use vManager, Nette;
+use vManager, vBuilder, Nette;
 
 /**
  * Base module class
@@ -31,14 +31,14 @@ use vManager, Nette;
  * @author Adam Staněk (V3lbloud)
  * @since Apr 5, 2011
  */
-class Module {
+class Module extends vBuilder\Object {
 	
 	private static $instance = array();
 	
 	/**
 	 * Private constructor. Singleton by getInstance.
 	 */
-	final protected function __construct() {
+	protected function __construct() {
 		
 	}
 	
@@ -61,7 +61,7 @@ class Module {
 	}
 	
 	public function getName() {
-		return get_called_class();
+		return substr(get_called_class(), 17);
 	}
 	
 	/**
