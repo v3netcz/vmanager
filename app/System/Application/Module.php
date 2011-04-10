@@ -36,13 +36,6 @@ class Module extends vBuilder\Object {
 	private static $instance = array();
 	
 	/**
-	 * Private constructor. Singleton by getInstance.
-	 */
-	protected function __construct() {
-		
-	}
-	
-	/**
 	 * Factory method
 	 * 
 	 * PHP 5.3 required!

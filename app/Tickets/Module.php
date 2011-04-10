@@ -32,8 +32,23 @@ use vManager, Nette,
  * @author Adam Staněk (V3lbloud)
  * @since Apr 5, 2011
  */
-class Tickets extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule {
-
+class Tickets extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
+	vManager\Application\IAclEnabledModule {
+		
+	/**
+	 * Initializes permission resources/roles/etc.
+	 * 
+	 * @param Nette\Security\Permission reference to permission class
+	 */
+	public function initPermission(Nette\Security\Permission & $acl) {
+		$acl->addResource('Tickets');
+		$acl->addResource('Tickets:Default', 'Tickets');
+		$acl->addRole('Ticket user', 'User');
+		
+		$acl->allow('Ticket user', 'Tickets', Nette\Security\Permission::ALL);
+	}
+	
+	
 	/**
 	 * Returns menu structure for this module
 	 *
@@ -41,17 +56,21 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 	 */
 	public function getMenuItems() {
 		$menu = array();
-		$menu[] = array(
-			 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
-			 'label' => 'Tickets',
-			 'icon' => System::getBasePath() . '/images/icons/small/grey/Flag.png',
-			 'children' => array(
-				  array(
-						'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
-						'label' => 'My tickets'
-				  )
-			 )
-		);
+		
+		if(Nette\Environment::getUser()->isAllowed('Tickets:Default', 'default')) {
+			$menu[] = array(
+				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
+				'label' => 'Tickets',
+				 'icon' => System::getBasePath() . '/images/icons/small/grey/Flag.png',
+				 'children' => array(
+					  array(
+							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
+							'label' => 'My tickets'
+					  )
+				 )
+			);
+		}
+		
 		return $menu;
 	}
 

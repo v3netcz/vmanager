@@ -28,7 +28,15 @@ CREATE TABLE `security_user_roles` (
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
+LOCK TABLES `security_user_roles` WRITE;
+/*!40000 ALTER TABLE `security_user_roles` DISABLE KEYS */;
+INSERT INTO `security_user_roles` (`user`,`role`)
+VALUES
+	(1,'Administrator'),
+	(2,'Ticket user');
 
+/*!40000 ALTER TABLE `security_user_roles` ENABLE KEYS */;
+UNLOCK TABLES;
 
 # Dump of table security_users
 # ------------------------------------------------------------
@@ -51,7 +59,8 @@ LOCK TABLES `security_users` WRITE;
 /*!40000 ALTER TABLE `security_users` DISABLE KEYS */;
 INSERT INTO `security_users` (`id`,`username`,`password`,`registrationTime`,`name`,`surname`,`email`)
 VALUES
-	(1,'admin','cb91e593d13c922e2f3bdbf854e7d086213406a2','2011-02-10 18:37:03','Jan','Noha','info@v3net.cz');
+	(1,'admin','cb91e593d13c922e2f3bdbf854e7d086213406a2','2011-02-10 18:37:03','Jan','Noha','info@v3net.cz'),
+	(2,'user','bc3a31c074ba06554693c6985dade73a2974be0a','2011-04-11 00:48:31','','','');
 
 /*!40000 ALTER TABLE `security_users` ENABLE KEYS */;
 UNLOCK TABLES;

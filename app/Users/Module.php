@@ -32,8 +32,22 @@ use vManager, Nette,
  * @author Adam Staněk (V3lbloud)
  * @since Apr 5, 2011
  */
-class Users extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule {
-
+class Users extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
+	vManager\Application\IAclEnabledModule {
+	
+	/**
+	 * Initializes permission resources/roles/etc.
+	 * 
+	 * @param Nette\Security\Permission reference to permission class
+	 */
+	public function initPermission(Nette\Security\Permission & $acl) {
+		$acl->addResource('Users');
+		$acl->addResource('Users:Default', 'Users');
+		$acl->addRole('User manager', 'User');
+		
+		$acl->allow('User manager', 'Users', Nette\Security\Permission::ALL);
+	}
+	
 	/**
 	 * Returns menu structure for this module
 	 *
@@ -41,17 +55,21 @@ class Users extends vManager\Application\Module implements vManager\Application\
 	 */
 	public function getMenuItems() {
 		$menu = array();
-		$menu[] = array(
-			 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Users:Default:default'),
-			 'label' => 'Users',
-			 'icon' => System::getBasePath() . '/images/icons/small/grey/User%202.png',
-			 'children' => array(
-				  array(
-						'url' => Nette\Environment::getApplication()->getPresenter()->link(':Users:Default:addNewUser'),
-						'label' => 'Add new user'
-				  )
-			 )
-		);
+		
+		if(Nette\Environment::getUser()->isAllowed('Users:Default', 'default')) {
+			$menu[] = array(
+				'url' => Nette\Environment::getApplication()->getPresenter()->link(':Users:Default:default'),
+				'label' => 'Users',
+				'icon' => System::getBasePath() . '/images/icons/small/grey/User%202.png',
+				'children' => array(
+					  array(
+							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Users:Default:addNewUser'),
+							'label' => 'Add new user'
+					)
+				)
+			);
+		}
+		
 		return $menu;
 	}
 

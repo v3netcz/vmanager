@@ -46,6 +46,9 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addPassword('password', 'Password:')
 				  ->setRequired('Please provide a password.');
 
+		foreach(Nette\Environment::getUser()->getAuthorizationHandler()->getAllRegistredRoles() as $role) 
+			$form->addCheckbox('grp' . Nette\String::replace($role, '/\\s/', ''), $role);
+		
 		$form->addSubmit('send', 'Create user');
 
 		$form->onSubmit[] = callback($this, 'userFormSubmitted');
@@ -58,6 +61,13 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 		$user = new vBuilder\Security\User;
 		$user->username = $values['username'];
 		$user->password = $values['password'];
+		
+		$roles = array();
+		foreach(Nette\Environment::getUser()->getAuthorizationHandler()->getAllRegistredRoles() as $role)
+			if($values['grp' . Nette\String::replace($role, '/\\s/', '')]) $roles[] = $role;
+			
+		$user->setRoles($roles);
+		
 		$user->save();
 		
 		$this->flashMessage('Uživatel č. ' . $user->id . ' byl úspěšně vytvořen');

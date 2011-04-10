@@ -66,7 +66,7 @@
 
 				<div class="user_box round_all clearfix">
 					<img src="{$basePath}/images/profile.jpg" width="55" alt="Profile Pic" />
-					<h2>{=implode($user->getIdentity()->getRoles(), ", ")}</h2>
+					<h2>{if $user->isInRole('Administrator')}Administrator{else}User{/if}</h2>
 					<h3><a class="text_shadow" href="#">{=$user->getIdentity()->getName()} {=$user->getIdentity()->getSurname()}</a></h3>
 					<ul>
 						<li><a href="{link :System:User:settings}">settings</a><span class="divider">|</span></li>
@@ -78,7 +78,7 @@
 					{* TODO: Prepsat na viceurovnovou nerekurzivni variantu *}
 					{foreach vManager\Application\Navigation::getMenuItems() as $curr}
 						<li>
-							<a href="{$curr['url']}" class="top_level">
+							<a href="{$curr['url']}"{if isset($curr['children']) && count($curr['children'])} class="top_level"{/if}>
 								{if isset($curr['icon'])}<img src="{$curr['icon']}"/>{/if}
 								{$curr['label']}
 							</a>
