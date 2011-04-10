@@ -40,6 +40,9 @@ common:
 	Tickets:
 		enabled: true
 
+	Users:
+		enabled: true
+
 production < common:
 
 development < common:
