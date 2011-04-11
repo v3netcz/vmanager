@@ -1,5 +1,59 @@
 {var $robots = noindex}
 {block #content}
-	TODO: User settings
+	<div id="login_alerts" style="width: 350px; margin: 10px auto 10px auto;">
+		<div n:foreach="$flashes as $flash" class="alert alert_blue">
+			<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+			 {$flash->message}
+		</div>
+
+		{if $control['userSettingsForm']->hasErrors()}
+			<div class="alert alert_orange">
+				<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+          <div class="errors">
+          {foreach $presenter['userSettingsForm']->errors as $error}
+          {$error} <br />
+          {/foreach}
+          </div>
+			</div>
+		{/if}
+	</div>
+
+		{control userSettingsForm begin}
+		{*control userSettingsForm errors*}
+		{var form => $control['userSettingsForm']}
+					<div class="box grid_8 round_all">
+						<h2 class="box_head grad_colour">Base user settings</h2>
+						<a href="#" class="grabber">&nbsp;</a>
+						<a href="#" class="toggle">&nbsp;</a>
+						<div class="toggle_container">
+							<div class="block">
+								<form>
+									<label>{$form['name']->caption}</label>
+									<input type="text" name="name" id="name" value="{$form['name']->value}" class="medium">
+
+									<label>{$form['surname']->caption}</label>
+									<input type="text" name="surname" id="surname" value="{$form['surname']->value}" class="medium">
+
+									<label>{$form['username']->caption}</label>
+									<input type="text" name="username" id="username" value="{$form['username']->value}" class="medium">
+
+									<label>{$form['email']->caption}</label>
+									<input type="text" name="email" id="email" value="{$form['email']->value}" class="medium">
+
+									<label>{$form['password']->caption}</label>
+									<input type="text" name="password" id="password" class="medium">
+
+									<label>{$form['password2']->caption}</label>
+									<input type="text" name="password2" id="password2" class="medium">
+
+									<button class="button_colour round_all">
+                    <img height="24" width="24" alt="Bended Arrow Right" src="{$basePath}/images/icons/small/white/Bended%20Arrow%20Right.png">
+                    <span>{$form['send']->caption}</span>
+                  </button>
+								</form>
+							</div>
+						</div>
+
+    {control userSettingsForm end}
 {/block}
 		

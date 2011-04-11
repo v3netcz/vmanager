@@ -23,7 +23,9 @@
 
 namespace vManager\Modules\System;
 
-use vManager, Nette;
+use vManager, Nette,
+  vBuilder\Orm\Repository,
+  Nette\Application\AppForm;
 
 /**
  * Sign in/out presenter
@@ -33,6 +35,64 @@ use vManager, Nette;
  */
 class UserPresenter extends SecuredPresenter {
 
-	
+	/**
+	 * User settings form component factory.
+   *
+	 * @return AppForm
+	 */
+	protected function createComponentUserSettingsForm() {
+    $user = Nette\Environment::getUser()->getIdentity();    
+    
+    $form = new AppForm;
+    // $form->addFile('icon', 'Avatar:'); TODO: pridat podporu v db
+    $form->addText('name', 'Name:')
+      ->setValue($user->name);
+    $form->addText('surname', 'Surname:')
+      ->setValue($user->surname);
+    $form->addText('username', 'Username:')
+      ->setValue($user->username);
+		$form->addText('email', 'E-mail:')
+      ->setValue($user->email)
+      ->addCondition(AppForm::FILLED)
+        ->addRule(AppForm::EMAIL, 'E-mail is not valid');
+    $form->addPassword('password', 'New password:');
+    $form->addPassword('password2', 'Confirm new password:');
 
+    $form['password2']
+      ->addConditionOn($form['password'], AppForm::FILLED)
+        ->addRule(AppForm::EQUAL, 'Confirmation password didnt match.', $form['password']);
+
+    $form->addSubmit('send', 'Save');
+
+		$form->onSubmit[] = callback($this, 'userSettingsFormSubmitted');
+		return $form;
+  }
+
+
+  /**
+	 * User settings form subbmited action handler
+	 *
+   * @param AppForm
+	 */
+  public function userSettingsFormSubmitted($form) {
+		try {
+			$values = $form->getValues();
+      $user = Nette\Environment::getUser()->getIdentity();
+
+      $user->name = $values->name;
+      $user->surname = $values->surname;
+      $user->username = $values->username;           
+      $user->email = $values->email;
+      
+      if ($values->password != '') {
+        $user->setPassword($values->password);
+      }
+
+      $user->save();
+      $this->flashMessage('All changes are saved.');
+      $this->redirect('Homepage:');
+		} catch(Nette\Security\AuthenticationException $e) {
+			$form->addError($e->getMessage());
+		}
+  }
 }

@@ -62,6 +62,10 @@ class SignPresenter extends BasePresenter {
 		return $form;
 	}
 
+  /**
+	 * Password reset form component factory.
+	 * @return AppForm
+	 */
   protected function createComponentPwdResetForm() {
 		$form = new AppForm;
 
@@ -88,6 +92,11 @@ class SignPresenter extends BasePresenter {
 		return $form;
   }
 
+  /**
+	 * Sign in form subbmited action handler
+	 *
+   * @param AppForm
+	 */
 	public function signInFormSubmitted($form) {
 		try {
 			$values = $form->getValues();
@@ -105,6 +114,11 @@ class SignPresenter extends BasePresenter {
 		}
 	}
 
+  /**
+	 * Reset password form subbmited action handler
+	 *
+   * @param AppForm
+	 */
   public function pwdResetFormSubmitted($form) {
 		try {
 			$values = $form->getValues();
@@ -147,12 +161,22 @@ class SignPresenter extends BasePresenter {
 		}
   }
 
+  /**
+	 * Sign out action handler
+	 *
+	 */
 	public function actionOut() {
 		$this->getUser()->logout();
 		$this->flashMessage('You have been signed out.');
 		$this->redirect('in');
 	}
 
+  /**
+	 * Function for generating password
+	 *
+   * @param $lngth password length
+   * @return string password
+	 */
   public function generatePwd($length = 8) {
     $password = "";
     $possible = "2346789bcdfghjkmnpqrtvwxyzBCDFGHJKLMNPQRTVWXYZ";
