@@ -23,7 +23,13 @@
 
 namespace vManager\Modules\System;
 
-use vManager, Nette;
+use vManager, Nette,
+  Nette\Mail\Mail,
+  Nette\Mail\SendmailMailer,
+  vBuilder\Orm\Repository,
+  Nette\Application\AppForm,
+  Nette\Templates\FileTemplate,
+  Nette\Templates\LatteFilter;
 
 /**
  * Sign in/out presenter
@@ -35,10 +41,10 @@ class SignPresenter extends BasePresenter {
 
 	/**
 	 * Sign in form component factory.
-	 * @return Nette\Application\AppForm
+	 * @return AppForm
 	 */
 	protected function createComponentSignInForm() {
-		$form = new Nette\Application\AppForm;
+		$form = new AppForm;
 	
 		$form->addHidden('backlink', $this->getParam('backlink'));
 		
@@ -55,6 +61,32 @@ class SignPresenter extends BasePresenter {
 		$form->onSubmit[] = callback($this, 'signInFormSubmitted');
 		return $form;
 	}
+
+  protected function createComponentPwdResetForm() {
+		$form = new AppForm;
+
+		$form->addHidden('backlink', $this->getParam('backlink'));
+
+		$form->addText('username', 'Username:');
+    
+		$form->addText('email', 'E-mail:')
+      ->setEmptyValue('@')
+      ->addCondition(AppForm::FILLED)
+        ->addRule(AppForm::EMAIL, 'E-mail is not valid');
+
+    $form['username']
+      ->addConditionOn($form['email'], AppForm::EQUAL, '')
+        ->addRule(AppForm::FILLED, 'Please provide your username or e-mail.');
+    $form['email']
+      ->addConditionOn($form['username'], AppForm::EQUAL, '')
+        ->addRule(AppForm::FILLED, 'Please provide your username or e-mail.');
+
+    $form->addSubmit('back', 'Back');
+		$form->addSubmit('send', 'Send new password');
+
+		$form->onSubmit[] = callback($this, 'pwdResetFormSubmitted');
+		return $form;
+  }
 
 	public function signInFormSubmitted($form) {
 		try {
@@ -73,10 +105,74 @@ class SignPresenter extends BasePresenter {
 		}
 	}
 
+  public function pwdResetFormSubmitted($form) {
+		try {
+			$values = $form->getValues();
+      $username = $values->username;
+      $email = $values->email;
+      $newPassword = $this->generatePwd(8);
+
+      if (!isset($email) || $email == '' ) {
+          $user = Repository::findAll('vBuilder\Security\User')->where('[username] = %s', $username)->fetch();
+      } else if (!isset($username) || $username == '' ) {
+          $user = Repository::findAll('vBuilder\Security\User')->where('[email] = %s', $email)->fetch();
+      } 
+
+      if ($user != false && $user->email != '') {
+        $user->setPassword($newPassword);
+
+        $emailTemplate = new FileTemplate;
+        $emailTemplate->setFile(Nette\Environment::getVariable('appDir') . '/System/Templates/Emails/pwdReset.latte');
+        $emailTemplate->registerFilter(new LatteFilter);
+        $emailTemplate->username = $user->username;
+        $emailTemplate->newPassword = $newPassword;
+
+        $mail = new Mail;
+        $mail->setFrom('vManagerTest@gmail.com','vManager'); //TODO: nacitat z globalniho nastaveni
+        $mail->addTo($user->email);
+        $mail->setSubject('vManager - new password');
+        $mail->setHtmlBody($emailTemplate);
+        $mailer = new SendmailMailer();
+        $mailer->send($mail);
+
+        $user->save();
+
+        $this->flashMessage('A new password has been sent to your e-mail address.');
+        $this->redirect('Sign:in');
+      } else {
+        $form->addError('User not found or didnt filled email!');
+      }
+		} catch(Nette\Security\AuthenticationException $e) {
+			$form->addError($e->getMessage());
+		}
+  }
+
 	public function actionOut() {
 		$this->getUser()->logout();
 		$this->flashMessage('You have been signed out.');
 		$this->redirect('in');
 	}
 
+  public function generatePwd($length = 8) {
+    $password = "";
+    $possible = "2346789bcdfghjkmnpqrtvwxyzBCDFGHJKLMNPQRTVWXYZ";
+
+    $maxlength = strlen($possible);
+
+    if ($length > $maxlength) {
+      $length = $maxlength;
+    }
+    $i = 0;
+    while ($i < $length) {
+      $char = substr($possible, mt_rand(0, $maxlength-1), 1);
+
+      if (!strstr($password, $char)) {
+        $password .= $char;
+        $i++;
+      }
+
+    }
+
+    return $password;
+  }
 }

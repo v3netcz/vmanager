@@ -11,6 +11,10 @@ common:
 		# zlib.output_compression: yes
 		# default_charset: "UTF-8"
 
+	mailer:
+		host: 127.0.0.1
+		port: 12457
+
 	service:
 		Nette\Security\IAuthenticator: vBuilder\Security\Authenticator
 		Nette\Security\IAuthorizator: vBuilder\Security\Permission
@@ -40,17 +44,14 @@ common:
 	Tickets:
 		enabled: true
 
-	Users:
-		enabled: true
-
 production < common:
 
 development < common:
 	database:
 		host: 127.0.0.1
 		database: sp1
-		username: sp1
-		password: L22sZPkKRaKAPFqAghnARm
+		username: root
+		password: 
 		profiler: true
 
 console < development:
