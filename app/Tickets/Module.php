@@ -34,7 +34,7 @@ use vManager, Nette,
  */
 class Tickets extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
 	vManager\Application\IAclEnabledModule {
-		
+	
 	/**
 	 * Initializes permission resources/roles/etc.
 	 * 
@@ -60,12 +60,12 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 		if(Nette\Environment::getUser()->isAllowed('Tickets:Default', 'default')) {
 			$menu[] = array(
 				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
-				'label' => 'Tickets',
+				 'label' => __('Tasks'),
 				 'icon' => System::getBasePath() . '/images/icons/small/grey/Flag.png',
 				 'children' => array(
 					  array(
 							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
-							'label' => 'My tickets'
+							'label' => __('My tickets')
 					  )
 				 )
 			);

@@ -47,14 +47,14 @@ class SecuredPresenter extends BasePresenter {
 
 		if(!$user->isLoggedIn()) {
 			if($user->getLogoutReason() === Nette\Web\User::INACTIVITY) {
-				$this->flashMessage('Byl jste automaticky odhlášen. Pro pokračování prosím vyplňte vaše heslo', 'warning');
+				$this->flashMessage(__('You have been signed off during long inactivity.'), 'warning');
 			}
 
 			$backlink = $this->getApplication()->storeRequest();
 			$this->redirect(':System:Sign:in', array('backlink' => $backlink));
 		} elseif(!$user->isAllowed($this->name, $this->action)) {	
 			Nette\Debug::log('Access denied for UID:'. $user->getId().' when accessing resource "'. $this->name .'": "'. $this->action .'"', Nette\Debug::WARNING);
-			$this->flashMessage('Nemáte odstatečné oprávnění pro provedení této akce', 'warning');
+			$this->flashMessage(__('You don\'t have enough privileges to perform this action.'), 'warning');
 			
 			$backlink = $this->getApplication()->storeRequest();
 			$this->redirect(':System:Sign:in', array('backlink' => $backlink));

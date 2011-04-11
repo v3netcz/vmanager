@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2011-04-11 17:09+0200\n"
+"Language: cs\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /Volumes/www/sp1/tools/../app/Users/Module.php:62
+msgid "Users"
+msgstr "Uživatelé"
+
+#: /Volumes/www/sp1/tools/../app/Users/Module.php:67
+msgid "Add new user"
+msgstr "Přidat nového uživatele"

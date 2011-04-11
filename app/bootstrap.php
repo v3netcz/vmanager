@@ -14,6 +14,7 @@ use Nette\Application\Route;
 // this allows load Nette Framework classes automatically so that
 // you don't have to litter your code with 'require' statements
 require LIBS_DIR . '/nette/Nette/loader.php';
+require LIBS_DIR . '/NetteTranslator/shortcuts.php';
 
 // !!! Uncomment line bellow when goinng to production environment !!!
 Environment::setMode('production', false);
@@ -27,6 +28,14 @@ Environment::loadConfig();
 
 // Dibi
 dibi::connect(Environment::getConfig('database'));
+
+// Load vManager modules
+vManager\Application\ModuleManager::getModules();
+
+// Translator
+// TODO: Chtelo by to ukladat v nejakych uzivatelskych settings a detekci az jako fallback
+Environment::setVariable('lang', Environment::getHttpRequest()->detectLanguage((array) Environment::getConfig('languages', array('en'))));
+//NetteTranslator\Panel::register();
 
 // Configure application
 $application = Environment::getApplication();

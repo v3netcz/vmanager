@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2011-04-11 16:18+0200\n"
+"Language: cs\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /Volumes/www/sp1/tools/./../app/System/Presenters/SignPresenter.php:78
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:78
+msgid "You have been signed out."
+msgstr "Byl jste úspěšně odhlášen."
+
+#: /Volumes/www/sp1/tools/./../app/System/Module.php:68
+#: /Volumes/www/sp1/tools/../app/System/Module.php:68
+msgid "Homepage"
+msgstr "Úvod"
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SecuredPresenter.php:50
+msgid "You have been signed off during long inactivity."
+msgstr "Byl jste automaticky odhlášen z důvodu dlouhé nečinnosti."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SecuredPresenter.php:57
+msgid "You don't have enough privileges to perform this action."
+msgstr "Nemáte dostatečné oprávnění k provedení této akce."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:45
+msgid "Username:"
+msgstr "Login:"
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:46
+msgid "Please provide a username."
+msgstr "Prosím zadejte uživatelské jméno"
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:48
+msgid "Password:"
+msgstr "Heslo:"
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:49
+msgid "Please provide a password."
+msgstr "Prosím zadejte heslo."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:51
+msgid "Auto-login in future."
+msgstr "Přihlašovat automaticky"
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:53
+msgid "Sign in"
+msgstr "Přihlásit"
+
+#: /Volumes/www/sp1/tools/../app/System/Templates/Sign/in.latte:30
+msgid "Forgot your password?"
+msgstr "Zapomněli jste heslo?"
+
+#: /Volumes/www/sp1/tools/../app/System/Templates/Sign/in.latte:13
+msgid "Access denied."
+msgstr "Přístup zamítnut."
+
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:69
+msgid "Administrator"
+msgstr "Administrátor"
+
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:69
+msgid "User"
+msgstr "Uživatel"
+
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:72
+msgid "settings"
+msgstr "nastavení"
+
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:73
+msgid "logout"
+msgstr "odhlásit"
+
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:97
+msgid "Search..."
+msgstr "Hledat..."

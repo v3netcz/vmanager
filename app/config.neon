@@ -16,11 +16,14 @@ common:
 		Nette\Security\IAuthorizator: vManager\Security\Permission
 		vBuilder\Security\IPasswordHashProvider: vBuilder\Security\Sha1SaltedHashProvider
 		Nette\Application\IPresenterFactory: vManager\Application\PresenterFactory
+		Nette\ITranslator: vManager\Application\Translator::getTranslator
 
 		Nette\Loaders\RobotLoader:
 			option:
 				directory: [%appDir%, %libsDir%]
 			run: true
+
+	languages: ['cs', 'en']
 
 	database:
 		driver: mysql

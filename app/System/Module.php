@@ -65,7 +65,7 @@ class System extends vManager\Application\Module implements vManager\Application
 		$menu = array();
 		$menu[] = array(
 			 'url' => Nette\Environment::getApplication()->getPresenter()->link(':System:Homepage:default'),
-			 'label' => 'Homepage',
+			 'label' => __('Homepage'),
 			 'icon' => self::getBasePath() . '/images/icons/small/grey/Home.png'
 		);
 		return $menu;

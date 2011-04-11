@@ -86,4 +86,12 @@ class Module extends vBuilder\Object {
 		return isset($c["enabled"]) && $c["enabled"];
 	}
 	
+	/**
+	 * Returns path to directory containing string translations for this module
+	 * @return type 
+	 */
+	public function getTranslationsDir() {
+		return APP_DIR . '/' . $this->getName() . '/Translations';
+	}
+	
 }

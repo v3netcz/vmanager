@@ -42,15 +42,15 @@ class SignPresenter extends BasePresenter {
 	
 		$form->addHidden('backlink', $this->getParam('backlink'));
 		
-		$form->addText('username', 'Username:')
-				  ->setRequired('Please provide a username.');
+		$form->addText('username', __('Username:'))
+				  ->setRequired(__('Please provide a username.'));
 
-		$form->addPassword('password', 'Password:')
-				  ->setRequired('Please provide a password.');
+		$form->addPassword('password', __('Password:'))
+				  ->setRequired(__('Please provide a password.'));
 
-		$form->addCheckbox('remember', 'Auto-login in future.');
+		$form->addCheckbox('remember', __('Auto-login in future.'));
 
-		$form->addSubmit('send', 'Sign in');
+		$form->addSubmit('send', __('Sign in'));
 
 		$form->onSubmit[] = callback($this, 'signInFormSubmitted');
 		return $form;
@@ -75,7 +75,7 @@ class SignPresenter extends BasePresenter {
 
 	public function actionOut() {
 		$this->getUser()->logout();
-		$this->flashMessage('You have been signed out.');
+		$this->flashMessage(__('You have been signed out.'));
 		$this->redirect('in');
 	}
 

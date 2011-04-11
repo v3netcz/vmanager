@@ -59,12 +59,12 @@ class Users extends vManager\Application\Module implements vManager\Application\
 		if(Nette\Environment::getUser()->isAllowed('Users:Default', 'default')) {
 			$menu[] = array(
 				'url' => Nette\Environment::getApplication()->getPresenter()->link(':Users:Default:default'),
-				'label' => 'Users',
+				'label' => __('Users'),
 				'icon' => System::getBasePath() . '/images/icons/small/grey/User%202.png',
 				'children' => array(
 					  array(
 							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Users:Default:addNewUser'),
-							'label' => 'Add new user'
+							'label' => __('Add new user')
 					)
 				)
 			);
