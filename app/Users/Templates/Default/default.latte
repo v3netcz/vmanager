@@ -1,4 +1,15 @@
 {block content}
-	<h2>Users module</h2>
-	Presenter: <strong>Default</strong>
+	<h2><?php echo __('User administration'); ?></h2>
+	
+	<table>
+	{foreach $users as $curr}
+		<tr>
+			<td>{$curr->id}</td>
+			<td>{$curr->username}</td>
+			<td>{$curr->name}</td>
+			<td>{$curr->surname}</td>
+			<td>{=implode(',', $curr->roles)}</td>
+		</tr>
+	{/foreach}
+	</table>
 {/block}

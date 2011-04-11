@@ -78,7 +78,7 @@
 					{* TODO: Prepsat na viceurovnovou nerekurzivni variantu *}
 					{foreach vManager\Application\Navigation::getMenuItems() as $curr}
 						<li>
-							<a href="{$curr['url']}"{if isset($curr['children']) && count($curr['children'])} class="top_level"{/if}>
+							<a href="{if isset($curr['url'])}{$curr['url']}{else}#{/if}"{if isset($curr['children']) && count($curr['children'])} class="top_level"{/if}>
 								{if isset($curr['icon'])}<img src="{$curr['icon']}"/>{/if}
 								{$curr['label']}
 							</a>

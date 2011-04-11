@@ -46,6 +46,9 @@ common:
 	Users:
 		enabled: true
 
+	Dummy:
+		enabled: true
+
 production < common:
 
 development < common:

@@ -21,13 +21,12 @@
  * along with vManager. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace vManager\Modules\Users;
+namespace vManager\Modules\Dummy;
 
-use vManager, vBuilder, Nette,
-	 vBuilder\Orm\Repository;
+use vManager, vBuilder, Nette;
 
 /**
- * Default presenter of users module
+ * Default presenter dummy presenter
  *
  * @author Adam Staněk (V3lbloud)
  * @since Apr 5, 2011
@@ -35,9 +34,38 @@ use vManager, vBuilder, Nette,
 class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 	
 	public function renderDefault() {
-		$users = Repository::findAll('vBuilder\Security\User')->fetchAll();
 		
-		$this->template->users = $users;
+	}
+	
+	protected function createComponentDummyForm() {
+		$form = new Nette\Application\AppForm;
+	
+		$form->addText('username', 'Normal text field:')
+				  ->setRequired('Please provide a some text.');
+
+		$form->addPassword('password', 'Password field:')
+				  ->setRequired('Please provide a password.');
+		
+		$form->addSelect('color', 'Favourite color', array('red', 'green', 'blue'));
+		
+		$form->addRadioList('gender', 'Gender', array('Male', 'Female'));
+		
+		$form->addTextArea('text', 'Some note');
+		
+		$form->addFile('f', 'File attachment');		
+		
+		$form->addCheckbox('ch1', 'I agree check');
+		
+		$form->addSubmit('send', 'Send');
+
+		$form->onSubmit[] = callback($this, 'dummyFormSubmitted');
+		return $form;
+	}
+
+	public function dummyFormSubmitted($form) {
+		//$values = $form->getValues();
+		
+		$this->flashMessage('Form submitted');
 	}
 	
 }
