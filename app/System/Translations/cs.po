@@ -56,21 +56,54 @@ msgid "Access denied."
 msgstr "Přístup zamítnut."
 
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:69
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:81
 msgid "Administrator"
 msgstr "Administrátor"
 
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:69
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:81
 msgid "User"
 msgstr "Uživatel"
 
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:72
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:84
 msgid "settings"
 msgstr "nastavení"
 
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:73
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:85
 msgid "logout"
 msgstr "odhlásit"
 
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:97
+#: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:109
 msgid "Search..."
 msgstr "Hledat..."
+
+#: /Volumes/www/sp1/tools/../app/System/Gridito/Templates/grid.latte:82
+msgid "entry"
+msgid_plural "entries"
+msgstr[0] "záznam"
+msgstr[1] "záznamů"
+
+msgid "Showing %d to %d of %d entries"
+msgstr "Zobrazen %d. až %d. záznam z %d záznamů"
+
+msgid "Showing 1 of 1 entry"
+msgstr "Zobrazen jediný záznam"
+
+#: /Volumes/www/sp1/tools/../app/System/Gridito/Templates/grid.latte:89
+msgid "First"
+msgstr "První"
+
+#: /Volumes/www/sp1/tools/../app/System/Gridito/Templates/grid.latte:90
+msgid "Previous"
+msgstr "Předchozí"
+
+#: /Volumes/www/sp1/tools/../app/System/Gridito/Templates/grid.latte:96
+msgid "Next"
+msgstr "Další"
+
+#: /Volumes/www/sp1/tools/../app/System/Gridito/Templates/grid.latte:97
+msgid "Last"
+msgstr "Poslední"

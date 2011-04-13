@@ -21,7 +21,7 @@
 			header: 'li a.top_level',
 			autoHeight:false,
 			icons:false
-		});
+		}); 
 
 	// Top Nav Dropdown Accordion Config				
 		$( "ul.dropdown" ).accordion({
@@ -32,7 +32,7 @@
 			event: 'mousedown',
 			icons:false
 		});
- 	
+ 	/*
  	// Content Box Toggle Config 
 		$("a.toggle").click(function(){
 			$(this).toggleClass("toggle_closed").next().slideToggle("slow");
@@ -160,7 +160,7 @@
 		$('ul.content_accordion').sortable();
 		$('a.handle').addTouch();
 		$('.ui-slider-handle').addTouch();
-		
+		*/
 	// DataTables Config (more info can be found at http://www.datatables.net/)
 		var oTable = $('.table').dataTable( {
 					"bJQueryUI": true,
@@ -174,9 +174,9 @@
 					"bScrollCollapse": true,
 					"sPaginationType": "full_numbers",
 					"bRetrieve": true
-					} );
+					} ); 
 
-
+/*
 
 	// DataTables Config - this reloads dataTables when it is placed in a hidden tab			
 		$(".tabs").tabs( {
@@ -221,5 +221,5 @@
 
 	//Slide to top link
 		$().UItoTop({ easingType: 'easeOutQuart' });
-	
+	*/
 });

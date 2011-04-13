@@ -22,7 +22,7 @@ APP_DIR="$dir/../app"
 PROJECT="vManager"
 VERSION="1.0"
 NOW=`date "+%Y-%m-%d% %H:%M%z"`
-ARGS="-j --language=PHP --from-code=UTF-8 --keyword=__ --omit-header"
+ARGS="-j --language=PHP --from-code=UTF-8 --keyword=__ --keyword=_n --omit-header"
 PLURAL="\"Plural-Forms: nplurals=2; plural=(n != 1);\\\\n\""
 
 for MODULE in "$APP_DIR"/*; do

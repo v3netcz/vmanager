@@ -10,5 +10,14 @@ msgid "Users"
 msgstr "Uživatelé"
 
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:67
+#: /Volumes/www/sp1/tools/../app/Users/Module.php:71
 msgid "Add new user"
 msgstr "Přidat nového uživatele"
+
+#: /Volumes/www/sp1/tools/../app/Users/Module.php:67
+msgid "Show users"
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Templates/Default/default.latte:2
+msgid "User administration"
+msgstr ""

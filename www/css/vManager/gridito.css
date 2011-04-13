@@ -1,0 +1,215 @@
+/**
+ * Gridito CSS
+ */
+
+ /* flashes */
+div.gridito-flash {
+	padding: 0.5em;
+	margin: 1em 0;
+}
+div.gridito-flash .ui-icon {
+	float: left;
+	margin-right: 0.5em;
+}
+
+/* toolbar */
+.gridito-toolbar {
+	margin-bottom: 1em;
+}
+
+/* table */
+.gridito-table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.gridito-actioncell .ui-button {
+	margin: 0 0.5em 0 0;
+}
+.gridito-actioncell .ui-button:first-child {
+	margin-left: 0;
+}
+.gridito-actioncell {
+	text-align: center;
+}
+
+/* th */
+.gridito-table th .gridito-sorting {
+	float:right;
+	margin-left: 0.5em;
+	margin-top: 0;
+	padding: 0;
+}
+.gridito-table th .gridito-sorting .ui-icon {
+	opacity: 0.5
+}
+.gridito-table th:hover .gridito-sorting .ui-icon, .gridito-table th .gridito-sorting .ui-icon.ui-icon-triangle-1-s, .gridito-table th .gridito-sorting .ui-icon.ui-icon-triangle-1-n {
+	opacity: 1
+}
+
+/***********************************/
+ 
+.gridito-table {
+	border: none !important;
+}
+ 
+.gridito-table TBODY .gridito-cell,
+.gridito-table TBODY .ui-state-highlight {
+	padding: 8px 15px;
+	border-left: none !important;
+	border-right: none !important;
+}
+ 
+.gridito-table .ui-state-hover .gridito-cell {
+	background-color:#E6ECEF !important;
+}
+
+.gridito-table .odd .gridito-cell {
+	background-color: #edf1f3;
+	border-bottom:1px solid #d8dcde;
+}
+
+.gridito-table .odd .ui-state-highlight {
+	background-color: #dfecf2;
+}
+
+.gridito-table .even .gridito-cell {
+	border-bottom:1px solid #e1e5e7;
+}
+
+.gridito-table .even .ui-state-highlight {
+	background-color: #f5fafc; 
+}
+
+.gridito-table .ui-widget-header {
+	text-shadow:0px 1px 0px #000;
+	background-color: #4c5766;
+	font-weight:normal;
+}
+
+.gridito-table THEAD .globalHeader TD {
+	border: none;
+}
+
+.gridito-table TH A {
+	display: block;	
+	padding: 0 20px 0 5px; 
+
+	line-height: 36px;
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #AAAAAA !important;
+	background-position: 8px center;
+	background-repeat: no-repeat;
+	font-weight: normal !important;
+	
+	text-align:center;
+	font-size: 1em;
+	color:#333;
+	text-shadow: 0 1px 0 #FFFFFF;
+	
+}
+
+.gridito-table TH A:hover {
+	color:#0a4e98 !important;
+}
+
+.gridito-table TH A.nosort {
+	background-image: url('../../images/gridito/sort.gif');
+}
+
+.gridito-table TH A.nosort:hover {
+	background-image: url('../../images/gridito/asc.gif');
+}
+
+.gridito-table TH A.asc {
+	background-image: url('../../images/gridito/asc.gif');
+}
+
+.gridito-table TH A.asc:hover {
+	background-image: url('../../images/gridito/desc.gif');
+}
+
+.gridito-table TH A.desc {
+	background-image: url('../../images/gridito/desc.gif');
+}
+
+.gridito-table TH A.desc:hover {
+	background-image: url('../../images/gridito/sort.gif');
+}
+
+.gridito-table TH {		
+	border-top: 1px solid #FFFFFF;
+	border-bottom: 1px solid #AAAAAA;
+	margin-bottom:0;
+		
+   
+	
+	font-weight: normal; 
+}
+
+.gridito-table TH.first A {
+	border-left: none !important;
+}
+
+.gridito-table TH.last A {
+	border-right: none !important;
+}
+
+.gridito-table TFOOT TD {
+	padding: 10px 10px 10px 15px;
+}
+
+.gridito-info {
+	float: left;
+	line-height:26px;
+}
+
+.gridito-paginator {
+	float: right;
+	margin: 0;
+}
+
+
+.gridito-paginator .ui-button,
+.gridito-paginator .ui-state-active {
+	background-image:none;
+	background-color:#DFE2E4 !important;
+	text-shadow: 0 1px 0 #FFFFFF;
+	color:#333 !important;
+   border-bottom: 1px solid #aaa;
+	border-left:1px solid white;
+	border-top:1px solid white;
+	border-right:1px solid #aaa;
+	
+	margin:0 !important;
+	filter:none !important;
+	float: left;
+}
+	
+.gridito-paginator .first{
+    border-left: 1px solid white;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+	
+.gridito-paginator .last{
+    border-right: 1px solid #fff;
+	-webkit-border-top-right-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	}
+
+.gridito-paginator .disabled {
+	opacity:1 !important; 
+	color:#888 !important;
+}

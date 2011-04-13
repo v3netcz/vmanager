@@ -1,15 +1,9 @@
 {block content}
+<div class="flat_area grid_16">
 	<h2><?php echo __('User administration'); ?></h2>
-	
-	<table>
-	{foreach $users as $curr}
-		<tr>
-			<td>{$curr->id}</td>
-			<td>{$curr->username}</td>
-			<td>{$curr->name}</td>
-			<td>{$curr->surname}</td>
-			<td>{=implode(',', $curr->roles)}</td>
-		</tr>
-	{/foreach}
-	</table>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas posuere risus sit amet dolor imperdiet quis varius nulla porttitor. Maecenas malesuada iaculis luctus. Aenean vitae tortor lorem, ut sagittis metus. Donec hendrerit, enim ut malesuada mattis, nulla diam lacinia orci, sit amet malesuada turpis nunc placerat nibh.</p>
+</div>
+<div class="box grid_16 round_all">
+{control userGrid}
+</div>
 {/block}

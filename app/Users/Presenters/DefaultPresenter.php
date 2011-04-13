@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Users;
 
-use vManager, vBuilder, Nette,
+use vManager, vBuilder, Nette, Gridito,
 	 vBuilder\Orm\Repository;
 
 /**
@@ -35,9 +35,34 @@ use vManager, vBuilder, Nette,
 class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 	
 	public function renderDefault() {
-		$users = Repository::findAll('vBuilder\Security\User')->fetchAll();
 		
-		$this->template->users = $users;
+	}
+	
+	protected function createComponentUserGrid($name) {
+		$grid = new vManager\Grid($this, $name);
+
+		$grid->setModel(new Gridito\DibiFluentModel(Repository::findAll('vBuilder\Security\User')->toFluent()));
+		$grid->setItemsPerPage(10);
+		
+		// columns
+		$grid->addColumn("id", "ID")->setSortable(true);
+		$grid->addColumn("username", __('Username'))->setSortable(true);
+		$grid->addColumn("name", __("Name"))->setSortable(true);
+		$grid->addColumn("surname", __("Surname"))->setSortable(true);
+		$grid->addColumn("email", __("E-mail"), array(
+			 "renderer" => function ($row) {
+				 echo Nette\Web\Html::el("a")->href("mailto:$row->email")->setText($row->email);
+			 },
+			 "sortable" => true,
+		));
+			 
+		/*
+		$grid->addColumn("roles", __("User groups"), array(
+			 "renderer" => function ($row) {
+				echo count($row->roles) > 1 ? array_diff($row->roles, array('User')) : $row->roles;
+			 },
+			 "sortable" => true,
+		)); */
 	}
 	
 }
