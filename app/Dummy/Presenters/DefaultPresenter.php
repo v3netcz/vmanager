@@ -59,6 +59,16 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addSubmit('send', 'Send');
 
 		$form->onSubmit[] = callback($this, 'dummyFormSubmitted');
+		
+		$form->setRenderer(new vManager\Application\DefaultFormRenderer());
+		
+		/*$renderer = $form->getRenderer();
+		$renderer->wrappers['form']['container'] = 'div class=box';
+		$renderer->wrappers['controls']['container'] = 'div class=block';
+		$renderer->wrappers['pair']['container'] = NULL;
+		$renderer->wrappers['label']['container'] = NULL;
+		$renderer->wrappers['control']['container'] = NULL; */
+		
 		return $form;
 	}
 
