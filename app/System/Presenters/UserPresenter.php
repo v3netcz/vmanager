@@ -45,22 +45,23 @@ class UserPresenter extends SecuredPresenter {
     
     $form = new AppForm;
     // $form->addFile('icon', 'Avatar:'); TODO: pridat podporu v db
-    $form->addText('name', 'Name:')
+    $form->addText('name', __('Name:'))
       ->setValue($user->name);
-    $form->addText('surname', 'Surname:')
+    $form->addText('surname', __('Surname:'))
       ->setValue($user->surname);
-    $form->addText('username', 'Username:')
+    $form->addText('username', __('Username:'))
       ->setValue($user->username);
 		$form->addText('email', 'E-mail:')
       ->setValue($user->email)
       ->addCondition(AppForm::FILLED)
-        ->addRule(AppForm::EMAIL, 'E-mail is not valid');
-    $form->addPassword('password', 'New password:');
-    $form->addPassword('password2', 'Confirm new password:');
+        ->addRule(AppForm::EMAIL, __('E-mail is not valid'));
+    $form->addPassword('oldPassword', __('Old password:'));
+    $form->addPassword('password', __('New password:'));
+    $form->addPassword('password2', __('Confirm new password:'));
 
     $form['password2']
       ->addConditionOn($form['password'], AppForm::FILLED)
-        ->addRule(AppForm::EQUAL, 'Confirmation password didnt match.', $form['password']);
+        ->addRule(AppForm::EQUAL, __('Confirmation password didnt match.'), $form['password']);
 
     $form->addSubmit('send', 'Save');
 
@@ -85,11 +86,15 @@ class UserPresenter extends SecuredPresenter {
       $user->email = $values->email;
       
       if ($values->password != '') {
-        $user->setPassword($values->password);
+        if ($user->checkPassword($values->oldPassword)) {
+          $user->setPassword($values->password);
+        } else {
+          $form->addError(__('Old password inst correct!'));
+        }
       }
 
       $user->save();
-      $this->flashMessage('All changes are saved.');
+      $this->flashMessage(__('All changes are saved.'));
       $this->redirect('Homepage:');
 		} catch(Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
