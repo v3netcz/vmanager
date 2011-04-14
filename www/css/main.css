@@ -376,12 +376,18 @@ form#search_side{width:100%;}
          Login Box
 --------------------------------*/
 
+#login_alerts {
+	width: 340px;
+	margin: 0px auto;
+	padding-top: 10%;
+}
+
 #login_box{
 	background: #eee url(../images/grey_noise.png) repeat;
 	background-color: #e5e8ea;
 	z-index:10;
 	display: block;
-	margin:10% auto 100px;
+	margin: 10px auto 100px;
 	border:3px solid white;
 	position:relative;
 	width:340px;

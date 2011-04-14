@@ -28,7 +28,15 @@ CREATE TABLE `security_user_roles` (
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
+LOCK TABLES `security_user_roles` WRITE;
+/*!40000 ALTER TABLE `security_user_roles` DISABLE KEYS */;
+INSERT INTO `security_user_roles` (`user`,`role`)
+VALUES
+	(1,'Administrator'),
+	(2,'Ticket user');
 
+/*!40000 ALTER TABLE `security_user_roles` ENABLE KEYS */;
+UNLOCK TABLES;
 
 # Dump of table security_users
 # ------------------------------------------------------------
@@ -51,13 +59,41 @@ LOCK TABLES `security_users` WRITE;
 /*!40000 ALTER TABLE `security_users` DISABLE KEYS */;
 INSERT INTO `security_users` (`id`,`username`,`password`,`registrationTime`,`name`,`surname`,`email`)
 VALUES
-	(1,'admin','cb91e593d13c922e2f3bdbf854e7d086213406a2','2011-02-10 18:37:03','Jan','Noha','info@v3net.cz');
+	(1,'admin','cb91e593d13c922e2f3bdbf854e7d086213406a2','2011-02-10 18:37:03','Jan','Noha','info@v3net.cz'),
+	(2,'user','bc3a31c074ba06554693c6985dade73a2974be0a','2011-04-11 00:48:31','','','');
 
 /*!40000 ALTER TABLE `security_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
+# Dump of table pm_comments
+# ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `pm_comments`;
+
+CREATE TABLE `pm_comments` (
+  `commentId` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `comment` text NOT NULL,
+  `public` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`commentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table pm_projects
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `pm_projects`;
+
+CREATE TABLE `pm_projects` (
+  `projectId` smallint(6) unsigned NOT NULL,
+  `revision` smallint(6) NOT NULL DEFAULT '1',
+  `author` smallint(6) unsigned DEFAULT NULL,
+  `commentId` int(11) unsigned DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`projectId`,`revision`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

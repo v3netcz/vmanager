@@ -1,0 +1,22 @@
+{? $render->renderBegin();}
+{? $render->renderErrors();}
+<?php
+
+$controls = $form->getComponents(TRUE, 'Nette\Forms\IFormControl');
+
+?>
+
+<table>
+	<tr n:foreach="$controls AS $control">
+		<th>
+			Label: {!$control->label}
+		</th>
+		<td>
+			{=get_class($control)}
+			{!$control->control}
+		</td>
+	</tr>
+</table>
+
+
+{? $render->renderEnd();}

@@ -44,7 +44,8 @@ body .grad_grey,
 .list_slider .slide-down,
 #sidebar ul#side_links li a,
 div.main_container .tabs ul.tab_header li a, 
-div.main_container .tabs ul.tab_sider li a
+div.main_container .tabs ul.tab_sider li a,
+.gridito-table .columnHeader TH
 {
 
 background: #DFE2E4; /* old browsers */

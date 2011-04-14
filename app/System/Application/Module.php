@@ -36,13 +36,6 @@ class Module extends vBuilder\Object {
 	private static $instance = array();
 	
 	/**
-	 * Private constructor. Singleton by getInstance.
-	 */
-	protected function __construct() {
-		
-	}
-	
-	/**
 	 * Factory method
 	 * 
 	 * PHP 5.3 required!
@@ -91,6 +84,14 @@ class Module extends vBuilder\Object {
 	public function isEnabled() {
 		$c = $this->getConfig();
 		return isset($c["enabled"]) && $c["enabled"];
+	}
+	
+	/**
+	 * Returns path to directory containing string translations for this module
+	 * @return type 
+	 */
+	public function getTranslationsDir() {
+		return APP_DIR . '/' . $this->getName() . '/Translations';
 	}
 	
 }

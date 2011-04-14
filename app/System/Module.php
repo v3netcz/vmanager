@@ -31,7 +31,8 @@ use vManager, Nette;
  * @author Adam Staněk (V3lbloud)
  * @since Apr 5, 2011
  */
-class System extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule {
+class System extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
+	vManager\Application\IAclEnabledModule {
 	
 	/**
 	 * Returns true if this module is enabled in current configuration
@@ -43,6 +44,19 @@ class System extends vManager\Application\Module implements vManager\Application
 	}
 	
 	/**
+	 * Initializes permission resources/roles/etc.
+	 * 
+	 * @param Nette\Security\Permission reference to permission class
+	 */
+	public function initPermission(Nette\Security\Permission & $acl) {
+		$acl->addResource('System');
+		$acl->addResource('System:Homepage', 'System');
+		$acl->addResource('System:Search', 'System');
+		$acl->addResource('System:User', 'System');
+		$acl->allow('User', 'System', Nette\Security\Permission::ALL);
+	}
+	
+	/**
 	 * Returns menu structure for this module
 	 *
 	 * @return array of menu items
@@ -51,7 +65,7 @@ class System extends vManager\Application\Module implements vManager\Application
 		$menu = array();
 		$menu[] = array(
 			 'url' => Nette\Environment::getApplication()->getPresenter()->link(':System:Homepage:default'),
-			 'label' => 'Homepage',
+			 'label' => __('Homepage'),
 			 'icon' => self::getBasePath() . '/images/icons/small/grey/Home.png'
 		);
 		return $menu;

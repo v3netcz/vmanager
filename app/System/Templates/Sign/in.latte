@@ -10,7 +10,7 @@
 		{if $control['signInForm']->hasErrors()}
 			<div class="alert alert_orange">
 				<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
-				Access denied
+				<?php echo __('Access denied.'); ?>
 			</div>
 		{/if}
 	</div>
@@ -27,7 +27,7 @@
 			
 			<div id="bar" class="round_bottom">
 				<label>{$form['remember']->control}{$form['remember']->caption}</label>
-				<a href="{link Sign:pwdReset}">Forgot your password?</a>
+				<a href="{link Sign:pwdReset}"><?php echo __('Forgot your password?'); ?></a>
 			</div>	
 
 		{control signInForm end}

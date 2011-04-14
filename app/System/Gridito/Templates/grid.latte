@@ -1,0 +1,130 @@
+{snippet}
+<div class="gridito">
+    {if isset($windowOutput)}
+
+        {* window (non javascript fallback) *}
+        {block window}
+        <h2>{$windowLabel}</h2>
+        {!$windowOutput}
+        {/block}
+
+    {else}
+
+        {block grid}
+
+        {* flash messages *}
+        {block flashes}
+        <div n:class="gridito-flash, $flash->type === 'error' ? 'ui-state-error' : 'ui-state-highlight', ui-corner-all" n:foreach="$flashes as $flash">
+            <span n:class="ui-icon, $flash->type === 'error' ? 'ui-icon-alert' : 'ui-icon-info'"></span>
+            {$flash->message}
+        </div>
+        {/block}
+
+        
+
+        {* table or empty message *}
+        {block data}
+
+        {if $control->getModel()->count() > 0}
+
+            {* grid table *}
+            {block table}
+            <table class="gridito-table">
+                <thead>
+						 <tr n:if="$control->hasToolbar()">
+							 <td colspan="{=count($control['columns']->getComponents())}" class="globalHeader">
+								 {* top toolbar *}
+								  {block toptoolbar}
+								  <div class="gridito-toolbar" n:if="$control->hasToolbar()" n:inner-foreach="$control['toolbar']->getComponents() as $button">
+										{control $button}
+								  </div>
+								  {/block}
+							 </td>
+						 </tr>
+                    <tr class="columnHeader">
+                        {block tableheader}
+                        <th n:foreach="$control['columns']->getComponents() as $column" n:class="$iterator->isFirst() ? first, $iterator->isLast() ? last">
+                           {block tableheadercontent}
+									
+									{if $column->isSortable()}
+										{if $column->sorting === 'asc'}<a n:href="sort!, $column->getName(), desc" n:class="asc, $control->getAjaxClass()">
+										{elseif $column->sorting === 'desc'}<a n:href="sort!, null, null" n:class="desc, $control->getAjaxClass()">
+										{else}<a n:href="sort!, $column->getName(), asc" n:class="nosort, $control->getAjaxClass()">{/if}
+									{else}
+										<a href="#" n:class="unsortable, $control->getAjaxClass()">
+									{/if}
+									
+                            <!-- <span class="gridito-sorting" n:if="$column->isSortable()">
+                                <a n:if="$column->getSorting() === null" n:href="sort!, $column->getName(), asc" n:class="$control->getAjaxClass()"><span class="ui-icon ui-icon-carat-2-n-s"></span></a>
+                                <a n:if="$column->sorting === 'asc'" n:href="sort!, $column->getName(), desc" n:class="$control->getAjaxClass()"><span class="ui-icon ui-icon-triangle-1-n"></span></a>
+                                <a n:if="$column->sorting === 'desc'" n:href="sort!, null, null" n:class="$control->getAjaxClass()"><span class="ui-icon ui-icon-triangle-1-s"></span></a>
+                            </span> -->
+                            {$column->getLabel()}
+									 </a>
+                           {/block} 
+                        </th>
+                        <th n:if="$control->hasActions()"></th>
+                        {/block}
+                    </tr>
+                </thead>
+                <tbody>
+                    {block tablebody}
+                    <tr n:foreach="$control->getModel() as $item" n:class="$control->getRowClass($iterator, $item)">
+                        <td n:class="gridito-cell, $column->getCellClass($iterator, item), $control->getHighlightOrderedColumn() && $column->getSorting() ? ui-state-highlight" n:foreach="$control['columns']->getComponents() as $column">
+                            {control $column:cell $item}
+                        </td>
+                        <td class="gridito-actioncell" n:if="$control->hasActions()" n:inner-foreach="$control['actions']->getComponents() as $button">
+                            {control $button $item}
+                        </td>
+                    </tr>
+                    {/block}
+                </tbody>
+					 
+					 <tfoot n:if="$control->getPaginator()->getItemCount() > 0">
+						 <tr>
+							 <td colspan="{=count($control['columns']->getComponents())}">
+								 
+								 {block info}
+									{var $paginator = $control->getPaginator()}
+									<div class="gridito-info">
+										<?php 
+											if($paginator->getItemCount() > 1)
+												echo _x('Showing %d to %d of %d entries', array($paginator->getOffset() + 1, $paginator->getOffset() + min($paginator->getItemsPerPage(), $paginator->getItemCount() - $paginator->getOffset()), $paginator->getItemCount()) );
+											else
+												echo __('Showing 1 of 1 entry');
+										?>
+									</div>
+								 {/block}
+								 
+								 {block paginator}
+								  {var $paginator = $control->getPaginator()}
+								  <div class="gridito-paginator" n:if="$paginator->pageCount > 1">
+										<a n:href="changePage! page => 1" n:class="gridito-button, first, $control->getAjaxClass(), $paginator->isFirst() ? disabled"><?php echo __('First'); ?></a>
+										<a n:href="changePage! page => $paginator->page - 1" n:class="gridito-button, $control->getAjaxClass(), $paginator->isFirst() ? disabled"><?php echo __('Previous'); ?></a>
+
+										{for $i = 1; $i <= $paginator->pageCount; $i++}
+										<a n:href="changePage! page => $i" n:class="gridito-button, $control->getAjaxClass(), $paginator->page === $i ? disabled">{$i}</a>
+										{/for}
+
+										<a n:href="changePage! page => $paginator->page + 1" n:class="gridito-button, $control->getAjaxClass(), $paginator->isLast() ? disabled"><?php echo __('Next'); ?></a>
+										<a n:href="changePage! page => $paginator->pageCount" n:class="gridito-button, last, $control->getAjaxClass(), $paginator->isLast() ? disabled"><?php echo __('Last'); ?></a>
+								  </div>
+								  {/block}
+							 </td>
+						 </tr>
+					 </tfoot>
+            </table>
+            {/block}
+
+        {else}
+            {block emptyResult}{/block}
+        {/if}
+
+        {/block}
+
+        
+
+        {/block}
+    {/if}
+</div>
+{/snippet}

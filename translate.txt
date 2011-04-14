@@ -1,0 +1,21 @@
+Translator instructions
+=======================
+
+This project can be easily translated by GetText. All translations are automatically
+generated from PHP source code wherever __('string') is used. 
+
+For refreshing translations of all modules just run ./tr-update.sh <lang> in your
+tools directory.
+
+This command will perform all necessary steps and update PO files in module directories.
+
+You can edit them with any text editor or POEdit if you want. Just be sure you use UTF-8
+encoding when saving your file.
+
+After making desired changes it is necessary to compile PO files to binary form.
+Just run ./tr-compile.sh in your tools directory.
+
+If you adding new language, don't forget to include it in config 'languages'.
+
+Thats all.
+Thanks for helping with translating this project.

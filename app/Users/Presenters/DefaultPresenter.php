@@ -23,7 +23,8 @@
 
 namespace vManager\Modules\Users;
 
-use vManager, vBuilder, Nette;
+use vManager, vBuilder, Nette, Gridito,
+	 vBuilder\Orm\Repository;
 
 /**
  * Default presenter of users module
@@ -33,34 +34,35 @@ use vManager, vBuilder, Nette;
  */
 class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 	
-	/**
-	 * Sign in form component factory.
-	 * @return Nette\Application\AppForm
-	 */
-	protected function createComponentUserForm() {
-		$form = new Nette\Application\AppForm;
-	
-		$form->addText('username', 'Username:')
-				  ->setRequired('Please provide a username.');
-
-		$form->addPassword('password', 'Password:')
-				  ->setRequired('Please provide a password.');
-
-		$form->addSubmit('send', 'Create user');
-
-		$form->onSubmit[] = callback($this, 'userFormSubmitted');
-		return $form;
+	public function renderDefault() {
+		
 	}
+	
+	protected function createComponentUserGrid($name) {
+		$grid = new vManager\Grid($this, $name);
 
-	public function userFormSubmitted($form) {
-		$values = $form->getValues();
+		$grid->setModel(new Gridito\DibiFluentModel(Repository::findAll('vBuilder\Security\User')->toFluent()));
+		$grid->setItemsPerPage(10);
 		
-		$user = new vBuilder\Security\User;
-		$user->username = $values['username'];
-		$user->password = $values['password'];
-		$user->save();
-		
-		$this->flashMessage('Uživatel č. ' . $user->id . ' byl úspěšně vytvořen');
+		// columns
+		$grid->addColumn("id", "ID")->setSortable(true);
+		$grid->addColumn("username", __('Username'))->setSortable(true);
+		$grid->addColumn("name", __("Name"))->setSortable(true);
+		$grid->addColumn("surname", __("Surname"))->setSortable(true);
+		$grid->addColumn("email", __("E-mail"), array(
+			 "renderer" => function ($row) {
+				 echo Nette\Web\Html::el("a")->href("mailto:$row->email")->setText($row->email);
+			 },
+			 "sortable" => true,
+		));
+			 
+		/*
+		$grid->addColumn("roles", __("User groups"), array(
+			 "renderer" => function ($row) {
+				echo count($row->roles) > 1 ? array_diff($row->roles, array('User')) : $row->roles;
+			 },
+			 "sortable" => true,
+		)); */
 	}
 	
 }

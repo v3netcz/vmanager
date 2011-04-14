@@ -1,0 +1,16 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2011-04-11 16:18+0200\n"
+"Language: cs\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /Volumes/www/sp1/tools/./../app/Tickets/Module.php:63
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:63
+msgid "Tasks"
+msgstr "Úkoly"
+
+#: /Volumes/www/sp1/tools/./../app/Tickets/Module.php:68
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:68
+msgid "My tickets"
+msgstr "Moje úkoly"
