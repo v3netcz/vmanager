@@ -66,7 +66,34 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table pm_comments
+# ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `pm_comments`;
+
+CREATE TABLE `pm_comments` (
+  `commentId` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `comment` text NOT NULL,
+  `public` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`commentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table pm_projects
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `pm_projects`;
+
+CREATE TABLE `pm_projects` (
+  `projectId` smallint(6) unsigned NOT NULL,
+  `revision` smallint(6) NOT NULL DEFAULT '1',
+  `author` smallint(6) unsigned DEFAULT NULL,
+  `commentId` int(11) unsigned DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`projectId`,`revision`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
