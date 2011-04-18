@@ -66,7 +66,8 @@ before proceeding.
 6) Import database structure for your project (dbdump.sql)
 		mysql -h 127.0.0.1 -u vbuilder --password=g1Ut6NMogtyurkZnQRxcaL vbuilder_myproject < dbdump.sql
 
-7) Set your config in /app/config.neon to match your DB configuration
+7) Copy sample config file /app/config.neon.sample to /app/config.neon
+8) Set your config (/app/config.neon) to match your DB configuration and your needs
 
 8) Enjoy your instalation :-)
 	Default login: admin

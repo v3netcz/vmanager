@@ -11,10 +11,6 @@ common:
 		# zlib.output_compression: yes
 		# default_charset: "UTF-8"
 
-	mailer:
-		host: 127.0.0.1
-		port: 12457
-
 	service:
 		Nette\Security\IAuthenticator: vBuilder\Security\Authenticator
 		Nette\Security\IAuthorizator: vManager\Security\Permission
@@ -27,6 +23,7 @@ common:
 				directory: [%appDir%, %libsDir%]
 			run: true
 
+	# Fallback sequence for language choice (see translate.txt)
 	languages: ['cs', 'en']
 
 	database:
@@ -35,6 +32,7 @@ common:
 		charset: utf8
 
 	security:
+		# Optional fields for User entity (don't forget to ALTER your table if you add any)
 		user:
 			fields:
 				name:
@@ -44,22 +42,36 @@ common:
 				email:
 					name: E-mail		
 
+	# Ticketing system
 	Tickets:
 		enabled: true
 
-	Dummy:
+	# User administration module
+	Users:
 		enabled: true
 
+	# Dummy module (fot test purposes only)
+	Dummy:
+		enabled: false
+
 production < common:
+	database:
+		# DB setup for production environment
+		host: 127.0.0.1
+		database: yourdbname
+		username: yourusername
+		password: yourpassword
 
 development < common:
 	database:
+		# DB setup for development server
 		host: 127.0.0.1
-		database: sp1
+		database: vmanager
 		username: root
 		password: 
 		profiler: true
 
 console < development:
-	database:
-		host: 192.168.1.203
+	# DB setup for running CLI PHP (tests from console)
+	# database:
+	#	host: 192.168.1.203
