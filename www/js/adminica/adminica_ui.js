@@ -32,13 +32,13 @@
 			event: 'mousedown',
 			icons:false
 		});
- 	/*
+ 	
  	// Content Box Toggle Config 
 		$("a.toggle").click(function(){
 			$(this).toggleClass("toggle_closed").next().slideToggle("slow");
 			return false; //Prevent the browser jump to the link anchor
 		});
- 	
+ 	/*
  	// Content Box Tabs Config
 			$( ".tabs" ).tabs({ 
 				fx: {opacity: 'toggle', duration: 'slow', height:'toggle'} 
@@ -58,7 +58,7 @@
 			event: 'mousedown',
 			icons:false,
 			animated: true
-		});
+		}); */
 		
 	// Sortable Content Boxes Config				
 		$( ".main_container" ).sortable({
@@ -72,7 +72,7 @@
 			placeholder: 'dashed_placeholder',		
 			forcePlaceholderSize:true
 		});
-
+/*
 	// Sortable Accordion Items Config			
 		$( ".content_accordion" ).sortable({
 			handle:'a.handle',
@@ -120,12 +120,12 @@
 		$( "#progressbar" ).progressbar({
 			value: 37
 		});
-		
+		*/
 	// Dismiss alert box
 		$(".alert").click(function(){
 			$(this).fadeOut('slow');
 		});
-				
+			/*	
 		
 // Other Scripts
 
