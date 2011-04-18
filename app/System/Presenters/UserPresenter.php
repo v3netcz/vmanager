@@ -61,7 +61,7 @@ class UserPresenter extends SecuredPresenter {
 
     $form['password2']
       ->addConditionOn($form['password'], AppForm::FILLED)
-        ->addRule(AppForm::EQUAL, __('Confirmation password didnt match.'), $form['password']);
+        ->addRule(AppForm::EQUAL, __('Confirmation password have to be the same as password.'), $form['password']);
 
     $form->addSubmit('send', 'Save');
 
@@ -89,7 +89,7 @@ class UserPresenter extends SecuredPresenter {
         if ($user->checkPassword($values->oldPassword)) {
           $user->setPassword($values->password);
         } else {
-          $form->addError(__('Old password inst correct!'));
+          $form->addError(__('Old password is not correct!'));
         }
       }
 

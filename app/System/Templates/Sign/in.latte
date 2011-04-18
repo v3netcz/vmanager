@@ -1,7 +1,7 @@
 {var $robots = noindex}
 {var $baseLayoutOnly = true}
 {block #content}
-	<div id="login_alerts" style="width: 350px; margin: 10px auto 10px auto;">
+	<div id="login_alerts" class="smallFormBox_alerts">
 		<div n:foreach="$flashes as $flash" class="alert alert_blue">
 			<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
 			 {$flash->message}
@@ -15,7 +15,7 @@
 		{/if}
 	</div>
 
-	<div id="login_box" class="round_all clearfix">	
+	<div id="login_box" class="round_all clearfix smallFormBox">	
 		{*control signInForm*}
 		{control signInForm begin}
 		{*control signInForm errors*}

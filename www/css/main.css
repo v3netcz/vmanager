@@ -376,13 +376,17 @@ form#search_side{width:100%;}
          Login Box
 --------------------------------*/
 
-#login_alerts {
-	width: 340px;
-	margin: 0px auto;
+.smallFormBox_alerts {
 	padding-top: 10%;
+	width: 390px;
+	margin: 10px auto 10px auto;
 }
 
-#login_box{
+#login_alerts {
+	width: 350px;
+}
+
+.smallFormBox {
 	background: #eee url(../images/grey_noise.png) repeat;
 	background-color: #e5e8ea;
 	z-index:10;
@@ -390,17 +394,21 @@ form#search_side{width:100%;}
 	margin: 10px auto 100px;
 	border:3px solid white;
 	position:relative;
-	width:340px;
-	
-} 
+	width: 390px;
+}
 
-#login_box label.fields{
+#login_box {
+	width:340px;
+}
+
+
+.smallFormBox label.fields {
 	position: relative;
 	display:block;
 	margin: 20px 30px 10px;	
 }
 
-#login_box label.fields strong{
+.smallFormBox label.fields strong {
 	display:block;
 	width:85px;
 	float:left;
@@ -412,41 +420,49 @@ form#search_side{width:100%;}
     text-shadow: 0 1px 0 #FFFFFF;
 	}
 	
-
-#login_box label.fields input.indent{
-	width:185px;
+.smallFormBox label.fields input.indent {
+	width:235px;
 	height:22px;
 	padding:0 5px;
 	line-height:22px;
     text-shadow: 0 1px 0 #FFFFFF;}
-	
-#login_box button {
+
+#login_box label.fields input.indent {
+	width:185px;
+}
+
+.smallFormBox button {
 	float:right;
 	margin:10px 30px 55px;
 	display:block;
     clear: both;
 }
 
-#login_box #bar{
+.smallFormBox #bar {
 	color:white;
 	background-color:#4c5766;
 	position:absolute;
 	bottom:-5px;
-	left:-4px;
-	width:306px;
+	left:-3px;
+	width:356px;
 	padding:10px 20px;
 	border-left:none;
 	border-right:none;
 	font-size: 12px;
 	border-bottom: 1px solid #59676B !important;
-	
 }
 
-#login_box #bar a{ margin-left:30px; color:#ccc}
-#login_box #bar a:hover{ color:#fff;}
+#login_box #bar {
+	left:-4px;
+	width:306px;
+}
 
-#login_box a#login_logo{
-	background: transparent url("../images/adminica_logo_black-trans.png") 0 -15px no-repeat;
+
+.smallFormBox #bar a{ margin-left:30px; color:#ccc}
+.smallFormBox #bar a:hover{ color:#fff;}
+
+.smallFormBox a#login_logo{
+	background: transparent url("../images/adminica_logo_black-trans.png") 0 -15px no-repeat !important;
 	position:absolute;
 	bottom:-72px;
 	right:24px;
@@ -454,7 +470,7 @@ form#search_side{width:100%;}
 	width:253px;
 }
 
-#login_box a#login_logo span{ visibility:hidden;}
+.smallFormBox a#login_logo span{ visibility:hidden;}
 
 /*----- End of Login Page -------*/
 
@@ -677,7 +693,7 @@ button img{
 
 button span{
 	display:inline-block;
-	text-transform:capitalize;
+	/* text-transform:capitalize; */
 	margin:-2px 5px 0 5px;
 }
 

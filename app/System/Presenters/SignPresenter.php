@@ -71,22 +71,22 @@ class SignPresenter extends BasePresenter {
 
 		$form->addHidden('backlink', $this->getParam('backlink'));
 
-		$form->addText('username', 'Username:');
+		$form->addText('username', __('Username:'));
     
-		$form->addText('email', 'E-mail:')
+		$form->addText('email', __('E-mail:'))
       ->setEmptyValue('@')
       ->addCondition(AppForm::FILLED)
-        ->addRule(AppForm::EMAIL, 'E-mail is not valid');
+        ->addRule(AppForm::EMAIL, __('E-mail is not valid'));
 
     $form['username']
       ->addConditionOn($form['email'], AppForm::EQUAL, '')
-        ->addRule(AppForm::FILLED, 'Please provide your username or e-mail.');
+        ->addRule(AppForm::FILLED, __('Please provide your username or e-mail.'));
     $form['email']
       ->addConditionOn($form['username'], AppForm::EQUAL, '')
-        ->addRule(AppForm::FILLED, 'Please provide your username or e-mail.');
+        ->addRule(AppForm::FILLED, __('Please provide your username or e-mail.'));
 
     $form->addSubmit('back', 'Back');
-		$form->addSubmit('send', 'Send new password');
+		$form->addSubmit('send', __('Send new password'));
 
 		$form->onSubmit[] = callback($this, 'pwdResetFormSubmitted');
 		return $form;
@@ -130,7 +130,10 @@ class SignPresenter extends BasePresenter {
           $user = Repository::findAll('vBuilder\Security\User')->where('[username] = %s', $username)->fetch();
       } else if (!isset($username) || $username == '' ) {
           $user = Repository::findAll('vBuilder\Security\User')->where('[email] = %s', $email)->fetch();
-      } 
+      } else {
+			$form->addError(__('Please provide your username or e-mail.'));
+			return ;
+		}
 
       if ($user != false && $user->email != '') {
         $user->setPassword($newPassword);
@@ -144,18 +147,19 @@ class SignPresenter extends BasePresenter {
         $mail = new Mail;
         $mail->setFrom('vManagerTest@gmail.com','vManager'); //TODO: nacitat z globalniho nastaveni
         $mail->addTo($user->email);
-        $mail->setSubject('vManager - new password');
+        $mail->setSubject(__('vManager - new password'));
         $mail->setHtmlBody($emailTemplate);
         $mailer = new SendmailMailer();
         $mailer->send($mail);
 
         $user->save();
 
-        $this->flashMessage('A new password has been sent to your e-mail address.');
+        $this->flashMessage(__('A new password has been sent to your e-mail address.'));
         $this->redirect('Sign:in');
       } else {
-        $form->addError('User not found or didnt filled email!');
+        $form->addError(__('User not found.'));
       }
+		
 		} catch(Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}
