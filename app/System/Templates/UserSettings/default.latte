@@ -1,0 +1,27 @@
+{var $robots = noindex}
+{block #content}
+	{include ../Includes/flashes.latte}
+
+	<div class="box grid_8 round_all">
+		<h2 class="box_head grad_colour"><?php echo __('Basic user info'); ?></h2>
+		<a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>
+		<div class="toggle_container">
+			<div class="block">
+				{control userProfileForm}
+			</div>
+		</div>
+	</div>
+	
+	<div class="box grid_8 round_all">
+		<h2 class="box_head grad_colour"><?php echo __('Change password'); ?></h2>
+		<a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>
+		<div class="toggle_container">
+			<div class="block">
+				{control userPasswordForm}
+			</div>
+		</div>
+	</div>
+{/block}
+		

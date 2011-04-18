@@ -1,0 +1,8 @@
+{if count($flashes)}
+	<div class="grid_16">
+		<div n:foreach="$flashes as $flash" class="alert alert_blue">
+			<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+			{$flash->message}
+		</div>
+	</div>
+{/if}

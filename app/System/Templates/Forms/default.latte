@@ -1,22 +1,40 @@
 {? $render->renderBegin();}
-{? $render->renderErrors();}
+{*? $render->renderErrors();*}
+
+{if $form->hasErrors()}
+	<div n:foreach="$form->getErrors() as $error" class="alert alert_orange">
+		<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+		{$error}
+	</div>
+{/if}
+
 <?php
 
 $controls = $form->getComponents(TRUE, 'Nette\Forms\IFormControl');
 
 ?>
 
-<table>
-	<tr n:foreach="$controls AS $control">
-		<th>
-			Label: {!$control->label}
-		</th>
-		<td>
-			{=get_class($control)}
+{foreach $controls AS $control}
+	{if $control instanceof Nette\Forms\TextInput}
+		{!$control->label}
+		<input type="{$control->control->attrs['type']}" class="medium text" name="{$control->name}" id="frm{$control->parent->name}-{$control->name}" value="{$control->control->attrs['type'] != 'password' ? $control->value}" />
+	{elseif $control instanceof Nette\Forms\Checkbox}
+		<div class="input_group">
 			{!$control->control}
-		</td>
-	</tr>
-</table>
+			{$control->caption}<br />
+		</div>
+	{elseif $control instanceof Nette\Forms\SubmitButton}
+		<button class="button_colour round_all">
+			<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
+         <span>{$control->caption}</span>
+		</button>
+	{else}
+		{? dump($control);}
+		{!$control->label}
+		{!$control->control}
+	{/if}	
+	
+{/foreach}
 
 
 {? $render->renderEnd();}

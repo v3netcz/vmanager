@@ -9,6 +9,7 @@ msgstr ""
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:78
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:170
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:173
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:174
 msgid "You have been signed out."
 msgstr "Byl jste úspěšně odhlášen."
 
@@ -19,7 +20,7 @@ msgstr "Úvod"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SecuredPresenter.php:50
 msgid "You have been signed off during long inactivity."
-msgstr "Byl jste automaticky odhlášen z důvodu dlouhé nečinnosti."
+msgstr "Byl/a jste odhlášen z důvodu dlouhé nečinnosti."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SecuredPresenter.php:57
 msgid "You don't have enough privileges to perform this action."
@@ -29,6 +30,7 @@ msgstr "Nemáte dostatečné oprávnění k provedení této akce."
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:52
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:51
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:74
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:56
 msgid "Username:"
 msgstr "Login:"
 
@@ -129,27 +131,33 @@ msgid "Last"
 msgstr "Poslední"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:48
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:50
 msgid "Name:"
 msgstr "Jméno:"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:50
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:53
 msgid "Surname:"
 msgstr "Příjmení:"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:57
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:79
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:71
 msgid "E-mail is not valid"
 msgstr "Zadaná e-mailová adresa není platná"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:58
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:113
 msgid "Old password:"
 msgstr "Vaše staré heslo:"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:59
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:119
 msgid "New password:"
 msgstr "Nové heslo:"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:60
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:122
 msgid "Confirm new password:"
 msgstr "Nové heslo (znovu):"
 
@@ -158,6 +166,8 @@ msgid "Confirmation password didnt match."
 msgstr "Zadaná hesla se neshodují."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:97
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:95
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:146
 msgid "All changes are saved."
 msgstr "Všechny změny byly úspěšně uloženy."
 
@@ -171,6 +181,7 @@ msgstr ""
 "zasláno na e-mail vyplněný při registraci."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:64
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:124
 msgid "Confirmation password have to be the same as password."
 msgstr "Políčka 'Heslo' a 'Heslo (znovu)' musí být shodné."
 
@@ -195,11 +206,13 @@ msgstr "Zaslat nové heslo"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:147
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:149
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:150
 msgid "vManager - new password"
 msgstr "vManager - nové heslo"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:154
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:156
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:157
 msgid "A new password has been sent to your e-mail address."
 msgstr "Nové heslo bylo zasláno na Vaši e-mailovou adresu."
 
@@ -212,5 +225,43 @@ msgid "Back to login form"
 msgstr "Zpět na přihlašovací formulář"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:159
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:160
 msgid "User not found."
 msgstr "Uživatel nenalezen."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:51
+msgid "Name cannot be empty."
+msgstr "Vaše jméno nemůže být prázdné."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:54
+msgid "Surname cannot be empty."
+msgstr "Příjmení nemůže být prázdné."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:58
+msgid "Username cannot be empty."
+msgstr "Uživatelské jméno nemůže být prázdné."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:66
+msgid "Desired username is already taken. Please use something else."
+msgstr "Zvolené uživatelské jméno je již obsazeno. Zvolte prosím jiné."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:117
+msgid "Invalid password. Access denied."
+msgstr "Špatné heslo. Přístup zamítnut."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:120
+msgid "Please provide password."
+msgstr "Prosím zadejte heslo."
+
+#: /Volumes/www/sp1/tools/../app/System/Templates/UserSettings/default.latte:6
+msgid "Basic user info"
+msgstr "Osobní údaje"
+
+#: /Volumes/www/sp1/tools/../app/System/Templates/UserSettings/default.latte:17
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:126
+msgid "Change password"
+msgstr "Změnit heslo"
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:73
+msgid "Save"
+msgstr "Uložit"

@@ -39,7 +39,8 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 	 */
 	protected function createComponentUserForm() {
 		$form = new Nette\Application\AppForm;
-	
+		$form->setRenderer(new vManager\Application\DefaultFormRenderer());
+		
 		$form->addText('username', 'Username:')
 				  ->setRequired('Please provide a username.');
 
@@ -49,7 +50,7 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 		foreach(Nette\Environment::getUser()->getAuthorizationHandler()->getAllRegistredRoles() as $role) 
 			$form->addCheckbox('grp' . Nette\String::replace($role, '/\\s/', ''), $role);
 		
-		$form->addSubmit('send', 'Create user');
+		$form->addSubmit('send', __('Create user'));
 
 		$form->onSubmit[] = callback($this, 'userFormSubmitted');
 		return $form;

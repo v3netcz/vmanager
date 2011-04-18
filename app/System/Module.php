@@ -52,7 +52,7 @@ class System extends vManager\Application\Module implements vManager\Application
 		$acl->addResource('System');
 		$acl->addResource('System:Homepage', 'System');
 		$acl->addResource('System:Search', 'System');
-		$acl->addResource('System:User', 'System');
+		$acl->addResource('System:UserSettings', 'System');
 		$acl->allow('User', 'System', Nette\Security\Permission::ALL);
 	}
 	
