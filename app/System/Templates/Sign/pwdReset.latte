@@ -1,6 +1,8 @@
 {var $robots = noindex}
 {var $baseLayoutOnly = true}
 {block #content}
+	<img width="230" height="61" src="{$basePath}/images/vmanager-logo-w230.png" class="smallFormBox_logo" alt="vManager" />
+
 	<div id="pwdReset_alerts" class="smallFormBox_alerts">
 		<div n:foreach="$flashes as $flash" class="alert alert_blue">
 			<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
@@ -34,7 +36,6 @@
 			</div>
 
 		{control pwdResetForm end}
-		<a href="#" id="login_logo"><span>Adminica Pro II</span></a>
 	</div>
 
 	<script type="text/javascript">

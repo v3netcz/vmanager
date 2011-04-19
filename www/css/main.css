@@ -93,6 +93,11 @@ a.logo{
 	margin-top: -15px;
 }
 
+#vmanager_logo {
+	display: block;
+	margin: 15px auto 8px auto;
+}
+
 
 #sidebar div.cog{
 	display: none;
@@ -376,8 +381,13 @@ form#search_side{width:100%;}
          Login Box
 --------------------------------*/
 
+.smallFormBox_logo {
+	display: block;
+	margin: 0px auto 25px auto;
+	padding-top: 15%;
+}
+
 .smallFormBox_alerts {
-	padding-top: 10%;
 	width: 390px;
 	margin: 10px auto 10px auto;
 }
@@ -1171,7 +1181,6 @@ form .LV_invalid{
 	color: #f80e27;
 }
     
-
 
 .alert{
 	border: 1px solid #999;
@@ -2121,3 +2130,6 @@ body .round_right{
 }
 
 
+#sidebar .user_box H3 A {
+	color: #cc6633;
+}

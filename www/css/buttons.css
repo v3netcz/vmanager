@@ -1,5 +1,10 @@
 /* Blue .main_container button */
 
+
+.smallFormBox_alerts .alert {
+	-webkit-box-shadow: none;
+}
+
 .main_container button.blue, .alert_blue{
 
 	background: #1C5EA0; /* old browsers */
