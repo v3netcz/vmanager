@@ -56,6 +56,10 @@ class UserSettingsPresenter extends SecuredPresenter {
 		$form->addText('username', __('Username:'))
 				  ->setValue($user->username)
 				  ->addRule(AppForm::FILLED, __('Username cannot be empty.'))
+				  ->addRule(AppForm::REGEXP, __('Username have to contain alpha-numeric chars only (with exception for chars ._@-). Nor spaces or diacritic chars are allowed.'), '/^[A-Z0-9\\.\\-_@]+$/i')
+				  ->addFilter(function ($value) {
+					  return Nette\String::lower($value);
+				  })
 				  ->addRule(function ($control) {
 					  $user = Nette\Environment::getUser()->getIdentity();
 					  
@@ -67,7 +71,6 @@ class UserSettingsPresenter extends SecuredPresenter {
 		
 		$form->addText('email', 'E-mail:')
 				  ->setValue($user->email)
-				  ->addCondition(AppForm::FILLED)
 				  ->addRule(AppForm::EMAIL, __('E-mail is not valid'));
 
 		$form->addSubmit('send', __('Save'));
@@ -117,10 +120,10 @@ class UserSettingsPresenter extends SecuredPresenter {
 							 }, __('Invalid password. Access denied.'));
 
 		$form->addPassword('password', __('New password:'))
+			->addRule(AppForm::MIN_LENGTH, __('Password have to be at least 6 chars long.'), 6)
 			->addRule(AppForm::FILLED, __('Please provide password.'));
 		
 		$form->addPassword('password2', __('Confirm new password:'))
-				  ->addConditionOn($form['password'], AppForm::FILLED)
 				  ->addRule(AppForm::EQUAL, __('Confirmation password have to be the same as password.'), $form['password']);
 
 		$form->addSubmit('send', __('Change password'));

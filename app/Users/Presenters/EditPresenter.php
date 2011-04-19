@@ -23,7 +23,11 @@
 
 namespace vManager\Modules\Users;
 
-use vManager, vBuilder, Nette;
+use vManager,
+	 vBuilder,
+	 vBuilder\Orm\Repository,
+	 Nette,
+	 Nette\Application\AppForm;
 
 /**
  * Presenter for creating and editing users
@@ -32,7 +36,7 @@ use vManager, vBuilder, Nette;
  * @since Apr 5, 2011
  */
 class EditPresenter extends vManager\Modules\System\SecuredPresenter {
-	
+
 	/**
 	 * Sign in form component factory.
 	 * @return Nette\Application\AppForm
@@ -40,16 +44,37 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentUserForm() {
 		$form = new Nette\Application\AppForm;
 		$form->setRenderer(new vManager\Application\DefaultFormRenderer());
-		
-		$form->addText('username', 'Username:')
-				  ->setRequired('Please provide a username.');
 
-		$form->addPassword('password', 'Password:')
-				  ->setRequired('Please provide a password.');
+		$form->addText('name', __('Name:'))
+				  ->addRule(AppForm::FILLED, __('Name cannot be empty.'));
 
-		foreach(Nette\Environment::getUser()->getAuthorizationHandler()->getAllRegistredRoles() as $role) 
-			$form->addCheckbox('grp' . Nette\String::replace($role, '/\\s/', ''), $role);
-		
+		$form->addText('surname', __('Surname:'))
+				  ->addRule(AppForm::FILLED, __('Surname cannot be empty.'));
+
+		$form->addText('username', __('Username:'))
+				  ->addRule(AppForm::FILLED, __('Username cannot be empty.'))
+				  ->addRule(AppForm::REGEXP, __('Username have to contain alpha-numeric chars only (with exception for chars ._@-). Nor spaces or diacritic chars are allowed.'), '/^[A-Z0-9\\.\\-_@]+$/i')
+				  ->addFilter(function ($value) {
+					  return Nette\String::lower($value);
+				  })
+				  ->addRule(function ($control) {
+								 $users = Repository::findAll('vBuilder\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
+								 return ($users === false);
+							 }, __('Desired username is already taken. Please use something else.'));
+
+		$form->addText('email', 'E-mail:')
+				  ->addRule(AppForm::EMAIL, __('E-mail is not valid'));
+
+		$form->addPassword('password', __('Password:'))
+				  ->addRule(AppForm::MIN_LENGTH, __('Password have to be at least 6 chars long.'), 6)
+				  ->addRule(AppForm::FILLED, __('Please provide password.'));
+
+		$form->addPassword('password2', __('Confirm password:'))
+				  ->addRule(AppForm::EQUAL, __('Confirmation password have to be the same as password.'), $form['password']);
+
+		foreach(Nette\Environment::getUser()->getAuthorizationHandler()->getAllRegistredRoles() as $role)
+			$form->addCheckbox('grp'.Nette\String::replace($role, '/\\s/', ''), $role);
+
 		$form->addSubmit('send', __('Create user'));
 
 		$form->onSubmit[] = callback($this, 'userFormSubmitted');
@@ -58,20 +83,23 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 
 	public function userFormSubmitted($form) {
 		$values = $form->getValues();
-		
+
 		$user = new vBuilder\Security\User;
-		$user->username = $values['username'];
-		$user->password = $values['password'];
-		
+		foreach($values as $key => $value) {
+			if(isset($user->$key))
+				$user->$key = $value;
+		}
+
 		$roles = array();
 		foreach(Nette\Environment::getUser()->getAuthorizationHandler()->getAllRegistredRoles() as $role)
-			if($values['grp' . Nette\String::replace($role, '/\\s/', '')]) $roles[] = $role;
-			
+			if($values['grp'.Nette\String::replace($role, '/\\s/', '')])
+				$roles[] = $role;
+
 		$user->setRoles($roles);
-		
+
 		$user->save();
-		
-		$this->flashMessage('Uživatel č. ' . $user->id . ' byl úspěšně vytvořen');
+
+		$this->flashMessage(_x('User n. %d has been successfuly created.', array($user->id)));
 	}
-	
+
 }

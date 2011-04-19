@@ -143,21 +143,25 @@ msgstr "Příjmení:"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:57
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:79
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:71
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:74
 msgid "E-mail is not valid"
 msgstr "Zadaná e-mailová adresa není platná"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:58
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:113
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:116
 msgid "Old password:"
 msgstr "Vaše staré heslo:"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:59
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:119
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:122
 msgid "New password:"
 msgstr "Nové heslo:"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:60
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:122
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:125
 msgid "Confirm new password:"
 msgstr "Nové heslo (znovu):"
 
@@ -168,6 +172,8 @@ msgstr "Zadaná hesla se neshodují."
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:97
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:95
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:146
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:98
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:148
 msgid "All changes are saved."
 msgstr "Všechny změny byly úspěšně uloženy."
 
@@ -182,6 +188,7 @@ msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:64
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:124
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:126
 msgid "Confirmation password have to be the same as password."
 msgstr "Políčka 'Heslo' a 'Heslo (znovu)' musí být shodné."
 
@@ -242,14 +249,17 @@ msgid "Username cannot be empty."
 msgstr "Uživatelské jméno nemůže být prázdné."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:66
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:70
 msgid "Desired username is already taken. Please use something else."
 msgstr "Zvolené uživatelské jméno je již obsazeno. Zvolte prosím jiné."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:117
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:120
 msgid "Invalid password. Access denied."
 msgstr "Špatné heslo. Přístup zamítnut."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:120
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:123
 msgid "Please provide password."
 msgstr "Prosím zadejte heslo."
 
@@ -259,9 +269,21 @@ msgstr "Osobní údaje"
 
 #: /Volumes/www/sp1/tools/../app/System/Templates/UserSettings/default.latte:17
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:126
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:128
 msgid "Change password"
 msgstr "Změnit heslo"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:73
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:76
 msgid "Save"
 msgstr "Uložit"
+
+msgid "Password have to be at least 6 chars long."
+msgstr "Heslo musí být dlouhé alespoň 6 znaků."
+
+#: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:59
+msgid ""
+"Username have to contain alpha-numeric chars only (with exception for chars ."
+"_@-). Nor spaces or diacritic chars are allowed."
+msgstr "Uživatelské jméno může obsahovat pouze znaky anglické abecedy a čísla "
+"(s vyjímkou znaků ._@-). Mezery ani znaky s diakritikou nejsou povoleny."

@@ -5,6 +5,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:49
+msgid "Username"
+msgstr "Uživatel. jméno"
+ 
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:50
+msgid "Name"
+msgstr "Jméno"
+ 
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:51
+msgid "Surname"
+msgstr "Příjmení"
+ 
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:52
+msgid "E-mail"
+msgstr "E-mail"
+
+
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:62
 msgid "Users"
 msgstr "Uživatelé"
@@ -16,33 +33,26 @@ msgstr "Přidat nového uživatele"
 
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:67
 msgid "Show users"
-msgstr ""
+msgstr "Zobrazit seznam uživatelů"
 
 #: /Volumes/www/sp1/tools/../app/Users/Templates/Default/default.latte:2
 #: /Volumes/www/sp1/tools/../app/Users/Templates/Default/default.latte:3
 msgid "User administration"
-msgstr ""
-
-#: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:49
-msgid "Username"
-msgstr ""
-
-#: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:50
-msgid "Name"
-msgstr ""
-
-#: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:51
-msgid "Surname"
-msgstr ""
-
-#: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:52
-msgid "E-mail"
-msgstr ""
+msgstr "Správa uživatelů"
 
 #: /Volumes/www/sp1/tools/../app/Users/Templates/Edit/addNewUser.latte:5
 msgid "Create new user"
-msgstr ""
+msgstr "Založit nový uživatelský účet"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:53
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:78
 msgid "Create user"
-msgstr ""
+msgstr "Vytvořit uživatele"
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:68
+msgid "Password:"
+msgstr "Heslo:"
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:72
+msgid "Confirm password:"
+msgstr "Heslo (znovu):"
