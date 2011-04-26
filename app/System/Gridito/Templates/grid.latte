@@ -29,8 +29,27 @@
 
             {* grid table *}
             {block table}
-            <table class="gridito-table">
+	        <table class="gridito-table">
                 <thead>
+						 <tr>
+							 <td colspan="{=count($control['columns']->getComponents())}" class="ui-widget-header">
+								<div class="tableheader">
+									<div class="dataTables_length">
+										Show 
+										<select size="1">
+											<option value="10">10</option>
+											<option value="25">25</option>
+											<option value="50">50</option>
+											<option value="100">100</option>
+										</select> 
+										entries
+									</div>
+									<div class="dataTables_filter">
+										Search: <input type="text">
+									</div>
+								</div>							 
+							 </td>
+						 </tr>
 						 <tr n:if="$control->hasToolbar()">
 							 <td colspan="{=count($control['columns']->getComponents())}" class="globalHeader">
 								 {* top toolbar *}

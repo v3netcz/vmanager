@@ -646,7 +646,7 @@ div.main_container .box .no_padding{
 }
 
 .box .block input{
-	display:block;
+	/*display:block;*/
 	border:1px solid #b5b8bb;
 	background-color:#e7edef;
 	height:1.8em;
@@ -2132,4 +2132,12 @@ body .round_right{
 
 #sidebar .user_box H3 A {
 	color: #cc6633;
+}
+
+.tableheader {
+	padding:10px 10px 35px 15px;
+}
+
+input[type="checkbox"] {
+	display:inline;
 }

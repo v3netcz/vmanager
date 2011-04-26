@@ -16,13 +16,12 @@ $controls = $form->getComponents(TRUE, 'Nette\Forms\IFormControl');
 
 {foreach $controls AS $control}
 	{if $control instanceof Nette\Forms\TextInput}
-		{!$control->label}
+		<div>
+        {!$control->label}
 		<input type="{$control->control->attrs['type']}" class="medium text" name="{$control->name}" id="frm{$control->parent->name}-{$control->name}" value="{$control->control->attrs['type'] != 'password' ? $control->value}" />
+        </div>
 	{elseif $control instanceof Nette\Forms\Checkbox}
-		<div class="input_group">
-			{!$control->control}
-			{$control->caption}<br />
-		</div>
+		<div>{!$control->control} {$control->caption}</div>
 	{elseif $control instanceof Nette\Forms\SubmitButton}
 		<button class="button_colour round_all">
 			<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
