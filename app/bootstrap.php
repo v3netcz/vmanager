@@ -29,6 +29,9 @@ Environment::loadConfig();
 // Dibi
 dibi::connect(Environment::getConfig('database'));
 
+// Captcha (https://github.com/PavelMaca/CaptchaControl)
+PavelMaca\Captcha\CaptchaControl::register();
+
 // Load vManager modules
 vManager\Application\ModuleManager::getModules();
 

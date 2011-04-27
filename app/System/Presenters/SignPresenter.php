@@ -29,7 +29,8 @@ use vManager, Nette,
   vBuilder\Orm\Repository,
   Nette\Application\AppForm,
   Nette\Templates\FileTemplate,
-  Nette\Templates\LatteFilter;
+  Nette\Templates\LatteFilter,
+  PavelMaca\Captcha\CaptchaControl;
 
 /**
  * Sign in/out presenter
@@ -77,6 +78,14 @@ class SignPresenter extends BasePresenter {
       ->setEmptyValue('@')
       ->addCondition(AppForm::FILLED)
         ->addRule(AppForm::EMAIL, __('E-mail is not valid'));
+
+    $captcha = new CaptchaControl();
+    $form['captcha'] = $captcha;
+    $form['captcha']->caption = (__('Security code:'));
+    $form['captcha']->setTextColor(\Nette\Image::rgb(48, 48, 48));
+	 $form['captcha']->setBackgroundColor(\Nette\Image::rgb(232, 234, 236));
+    $form['captcha']->addRule(Nette\Forms\Form::FILLED, __('Rewrite text from image.'));
+    $form['captcha']->addRule($form["captcha"]->getValidator(), __('Security code is incorrect. Read it carefuly from image above.'));
 
     $form['username']
       ->addConditionOn($form['email'], AppForm::EQUAL, '')
