@@ -43,6 +43,7 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 	public function initPermission(Nette\Security\Permission & $acl) {
 		$acl->addResource('Tickets');
 		$acl->addResource('Tickets:Default', 'Tickets');
+		$acl->addResource('Tickets:Ticket', 'Tickets');
 		$acl->addRole('Ticket user', 'User');
 		
 		$acl->allow('Ticket user', 'Tickets', Nette\Security\Permission::ALL);

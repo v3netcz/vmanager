@@ -1,0 +1,14 @@
+<div class="summary">
+	<h3>{$data->name}</h3>
+	<div class="description">
+		{$data->description}
+	</div>
+</div>
+
+{if count($history)}
+	<div class="history">
+		<div n:foreach="$history as $curr" class="revisionBlock">
+			{? dump($curr)}
+		</div>
+	</div>
+{/if}
