@@ -162,7 +162,7 @@
 		$('.ui-slider-handle').addTouch();
 		*/
 	// DataTables Config (more info can be found at http://www.datatables.net/)
-		var oTable = $('.table').dataTable( {
+		/* var oTable = $('.table').dataTable( {
 					"bJQueryUI": true,
 					"sScrollX": "",
 					"bSortClasses": false,
@@ -174,7 +174,7 @@
 					"bScrollCollapse": true,
 					"sPaginationType": "full_numbers",
 					"bRetrieve": true
-					} ); 
+					} ); */
 
 /*
 

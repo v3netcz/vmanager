@@ -61,60 +61,40 @@
 		<script type="text/javascript" src="{$basePath}/js/jquery.nette.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/jquery.ui.gridito.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/jquery.ui.gridito.js"></script>
+				
+		<!-- Texyla core -->
+		<script src="{$basePath}/texyla/js/texyla.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/selection.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/texy.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/buttons.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/dom.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/view.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/ajaxupload.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/window.js" type="text/javascript"></script>
+
+		<!-- languages -->
+		<script src="{$basePath}/texyla/languages/cs.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/languages/sk.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/languages/en.js" type="text/javascript"></script>
+
+		<!-- plugins -->
+		<script src="{$basePath}/texyla/plugins/keys/keys.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/resizableTextarea/resizableTextarea.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/img/img.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/table/table.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/link/link.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/emoticon/emoticon.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/symbol/symbol.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/files/files.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/color/color.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/textTransform/textTransform.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/youtube/youtube.js" type="text/javascript"></script>
 		
 		<!-- This file configures the various jQuery plugins for Adminica. Contains links to help pages for each plugin. -->
 		<script type="text/javascript" src="{$basePath}/js/adminica/adminica_ui.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/vManager.js"></script>
-		
-			<!-- Texyla core -->
-	<script src="{$basePath}/texyla/js/texyla.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/js/selection.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/js/texy.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/js/buttons.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/js/dom.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/js/view.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/js/ajaxupload.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/js/window.js" type="text/javascript"></script>
 
-	<!-- languages -->
-	<script src="{$basePath}/texyla/languages/cs.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/languages/sk.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/languages/en.js" type="text/javascript"></script>
-
-	<!-- plugins -->
-	<script src="{$basePath}/texyla/plugins/keys/keys.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/resizableTextarea/resizableTextarea.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/img/img.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/table/table.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/link/link.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/emoticon/emoticon.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/symbol/symbol.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/files/files.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/color/color.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/textTransform/textTransform.js" type="text/javascript"></script>
-	<script src="{$basePath}/texyla/plugins/youtube/youtube.js" type="text/javascript"></script>
-
-	<!-- init -->
-	<script type="text/javascript">
-		//<![CDATA[
-		
-		$.texyla.setDefaults({
-			texyCfg: "admin",
-			baseDir: 'texyla',
-			previewPath: "texyla/preview.php",
-			filesPath: "texyla/filesplugin/files.php",
-			filesThumbPath: "texyla/filesplugin/thumbnail.php?image=%var%",
-			filesUploadPath: "texyla/filesplugin/files/upload.php"
-		});
-		
-		$(function () {			
-			$.texyla({
-				buttonType: "button"
-			});
-			
-		});
-		//]]>
-	</script>
+	{*
 	<script>
 $(document).ready(function () {
     $("input.date").each(function () { // input[type=date] does not work in IE
@@ -143,7 +123,7 @@ $(document).ready(function () {
         el.val($.datepicker.formatDate(el.datepicker("option", "dateFormat"), date));
     });
 });
-</script>
+</script> *}
 	
 		
 		{block head}{/block}						
