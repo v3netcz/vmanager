@@ -27,7 +27,7 @@ use vManager, vBuilder, Nette;
 
 use Nette\Forms\FormContainer;
 FormContainer::extensionMethod('addDatePicker', function (FormContainer $container, $name, $label = NULL) {
-    return $container[$name] = new JanTvrdik\Components\DatePicker($label);
+    return $container[$name] = new \JanTvrdik\Components\DatePicker($label);
 });
 
 

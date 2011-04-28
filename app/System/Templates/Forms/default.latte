@@ -27,6 +27,11 @@ $controls = $form->getComponents(TRUE, 'Nette\Forms\IFormControl');
 			<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
          <span>{$control->caption}</span>
 		</button>
+	{elseif $control instanceof JanTvrdik\Components\DatePicker}
+		<div>
+        {!$control->label}
+		{!$control->control}
+      </div>
 	{else}
 		{? dump($control);}
 		{!$control->label}
