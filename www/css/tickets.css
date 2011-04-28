@@ -1,0 +1,25 @@
+.history .revisionBlock {
+	border-top: 1px solid gray;
+	margin: 20px 0px;
+	padding: 10px 10px;
+}
+
+.history .revisionBlock .author {
+	font-weight: bold;
+}
+
+.history .revisionBlock .comment {
+	font-style: italic;
+}
+
+.history .revisionBlock .changes {
+	margin: 15px 0px;	
+}
+
+.history .revisionBlock .changes .change .value {
+	color: orange;
+}
+
+.history .revisionBlock .changes .change .field {
+	color: blue;
+}

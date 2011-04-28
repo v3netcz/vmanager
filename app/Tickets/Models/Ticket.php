@@ -37,9 +37,11 @@ use vManager, vBuilder, Nette;
  * 
  * @Column(id, realName="ticketId", pk, type="integer")
  * @Column(revision, pk, type="integer")
+ * @Column(author, type="OneToOne", entity="vBuilder\Security\User", joinOn="author=id")
  * @Column(comment, realName="commentId", type="OneToOne", entity="vManager\Modules\Tickets\Comment", joinOn="comment=id")
  * @Column(name, type="string")
  * @Column(description, type="string")
+ * @Column(timestamp, type="DateTime")
  */
 class Ticket extends vBuilder\Orm\ActiveEntity {
 		
