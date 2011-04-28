@@ -10,6 +10,7 @@
 		{foreach $history as $curr}
 			{if !$iterator->isFirst()}
 				<div class="revisionBlock">
+					<img src="{=$curr->author->avatarUrl}" width="55" alt="Avatar" />
 					<div class="author">{$curr->author->username}:</div>
 					<div class="date">{$curr->timestamp}</div>
 			

@@ -84,7 +84,7 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 	public function userFormSubmitted($form) {
 		$values = $form->getValues();
 
-		$user = new vBuilder\Security\User;
+		$user = new vManager\Security\User;
 		foreach($values as $key => $value) {
 			if(isset($user->$key))
 				$user->$key = $value;

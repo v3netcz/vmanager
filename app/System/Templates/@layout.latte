@@ -77,7 +77,7 @@
 				</a>
 
 				<div class="user_box round_all clearfix">
-					<img src="{$basePath}/images/profile.jpg" width="55" alt="Profile Pic" />
+					<img src="{=$user->getIdentity()->getAvatarUrl()}" width="55" alt="Profile Pic" />
 					<h2>{if $user->isInRole('Administrator')}<?php echo __('Administrator'); ?>{else}<?php echo __('User'); ?>{/if}</h2>
 					<h3><a class="text_shadow" href="#">{=$user->getIdentity()->getName()} {=$user->getIdentity()->getSurname()}</a></h3>
 					<ul>
