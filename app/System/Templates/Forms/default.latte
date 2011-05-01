@@ -10,19 +10,19 @@
 
 <?php
 
-$controls = $form->getComponents(TRUE, 'Nette\Forms\IFormControl');
+$controls = $form->getComponents(TRUE, 'Nette\Forms\IControl');
 
 ?>
 
 {foreach $controls AS $control}
-	{if $control instanceof Nette\Forms\TextInput}
+	{if $control instanceof Nette\Forms\Controls\TextInput}
 		<div>
         {!$control->label}
 		<input type="{$control->control->attrs['type']}" class="medium text" name="{$control->name}" id="frm{$control->parent->name}-{$control->name}" value="{$control->control->attrs['type'] != 'password' ? $control->value}" />
         </div>
-	{elseif $control instanceof Nette\Forms\Checkbox}
+	{elseif $control instanceof Nette\Forms\Controls\Checkbox}
 		<div>{!$control->control} {$control->caption}</div>
-	{elseif $control instanceof Nette\Forms\SubmitButton}
+	{elseif $control instanceof Nette\Forms\Controls\SubmitButton}
 		<button class="button_colour round_all">
 			<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
          <span>{$control->caption}</span>

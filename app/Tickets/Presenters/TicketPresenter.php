@@ -50,7 +50,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->addColumn("id", __('ID'), array(
 			 "renderer" => function ($row) {
 				 $link = Nette\Environment::getApplication()->getPresenter()->link('detail', $row->ticketId);
-				 echo Nette\Web\Html::el("a")->href($link)->setText('#' . $row->ticketId);
+				 echo Nette\Utils\Html::el("a")->href($link)->setText('#' . $row->ticketId);
 			 },
 			 "sortable" => true,
 		));
@@ -58,7 +58,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->addColumn("name", __('Ticket name'), array(
 			 "renderer" => function ($row) {
 				 $link = Nette\Environment::getApplication()->getPresenter()->link('detail', $row->ticketId);
-				 echo Nette\Web\Html::el("a")->href($link)->setText($row->name);
+				 echo Nette\Utils\Html::el("a")->href($link)->setText($row->name);
 			 },
 			 "sortable" => true,
 		));

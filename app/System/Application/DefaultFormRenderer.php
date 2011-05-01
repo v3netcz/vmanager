@@ -107,7 +107,7 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	 * @return Template
 	 */
 	public function createTemplate($file = null) {
-		$template = new Nette\Templates\FileTemplate($file);
+		$template = new Nette\Templating\FileTemplate($file);
 		$presenter = $this->form->getParent()->getPresenter(FALSE);
 		$template->onPrepareFilters[] = array("vManager\Application\DefaultFormRenderer", 'templatePrepareFilters');
 		$template->presenter = $presenter;
@@ -123,7 +123,7 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	 */
 	public static function templatePrepareFilters($template) {
 		// default filters
-		$template->registerFilter(new Nette\Templates\LatteFilter);
+		$template->registerFilter(new Nette\Latte\Engine);
 	}
 
 	// Rendering helpers ->>
@@ -138,7 +138,7 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	 */
 	private function getConventionalRenderer() {
 		if(!$this->convenctionalRenderer)
-			$this->convenctionalRenderer = new Nette\Forms\DefaultFormRenderer();
+			$this->convenctionalRenderer = new Nette\Forms\Rendering\DefaultFormRenderer();
 		return $this->convenctionalRenderer;
 	}
 

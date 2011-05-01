@@ -10,7 +10,7 @@ use Nette\ComponentContainer, Nette\Environment, Nette\Paginator;
  * @author Jan Marek
  * @license MIT
  */
-class Grid extends \Nette\Application\Control
+class Grid extends \Nette\Application\UI\Control
 {
 	// <editor-fold defaultstate="collapsed" desc="variables">
 

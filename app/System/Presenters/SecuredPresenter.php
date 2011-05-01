@@ -46,7 +46,7 @@ class SecuredPresenter extends BasePresenter {
 		$user = $this->getUser();
 
 		if(!$user->isLoggedIn()) {
-			if($user->getLogoutReason() === Nette\Web\User::INACTIVITY) {
+			if($user->getLogoutReason() === Nette\Http\User::INACTIVITY) {
 				$this->flashMessage(__('You have been signed off during long inactivity.'), 'warning');
 			}
 

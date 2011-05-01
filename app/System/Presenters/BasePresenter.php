@@ -33,7 +33,7 @@ use vManager, Nette;
  * @author Adam Staněk (V3lbloud)
  * @since Apr 5, 2011
  */
-class BasePresenter extends Nette\Application\Presenter {
+class BasePresenter extends Nette\Application\UI\Presenter {
 
 	/**
 	 * Formats view template file names.
@@ -42,7 +42,7 @@ class BasePresenter extends Nette\Application\Presenter {
 	 * @return array
 	 */
 	public function formatTemplateFiles($presenter, $view) {
-		if(($path = Nette\String::replace($presenter, "/^([^\\:]+)\\:(.+)$/", '/${1}/${2}')) === NULL)
+		if(($path = Nette\Utils\Strings::replace($presenter, "/^([^\\:]+)\\:(.+)$/", '/${1}/${2}')) === NULL)
 			throw new \LogicException('Something wrong with presenter name');
 
 		$appDir = Nette\Environment::getVariable('appDir');
@@ -67,7 +67,7 @@ class BasePresenter extends Nette\Application\Presenter {
 		$list = array();
 		
 		foreach(array($presenter, "System:Default") as $curr) {
-			if(($path = Nette\String::replace($curr, "/^([^\\:]+)\\:(.+)$/", '/${1}/${2}')) === NULL)
+			if(($path = Nette\Utils\Strings::replace($curr, "/^([^\\:]+)\\:(.+)$/", '/${1}/${2}')) === NULL)
 				throw new \LogicException('Something wrong with presenter name');
 
 			$appDir = Nette\Environment::getVariable('appDir');

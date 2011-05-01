@@ -31,7 +31,7 @@ use vManager, Nette, vBuilder\Orm\Repository;
  * @author Adam Staněk (V3lbloud)
  * @since Apr 27, 2011
  */
-class VersionableEntityView extends Nette\Application\Control {
+class VersionableEntityView extends Nette\Application\UI\Control {
 	
 	/** @var string name of ORM entity */
 	protected $entityName;

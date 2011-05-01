@@ -51,7 +51,7 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->addColumn("surname", __("Surname"))->setSortable(true);
 		$grid->addColumn("email", __("E-mail"), array(
 			 "renderer" => function ($row) {
-				 echo Nette\Web\Html::el("a")->href("mailto:$row->email")->setText($row->email);
+				 echo Nette\Utils\Html::el("a")->href("mailto:$row->email")->setText($row->email);
 			 },
 			 "sortable" => true,
 		));

@@ -28,7 +28,7 @@ use vManager,
 	 Nette\Mail\Mail,
 	 Nette\Mail\SendmailMailer,
 	 vBuilder\Orm\Repository,
-	 Nette\Application\AppForm,
+	 Nette\Application\UI\Form,
 	 Nette\Templates\FileTemplate,
 	 Nette\Templates\LatteFilter,
 	 PavelMaca\Captcha\CaptchaControl;
@@ -43,10 +43,10 @@ class SignPresenter extends BasePresenter {
 
 	/**
 	 * Sign in form component factory.
-	 * @return AppForm
+	 * @return Form
 	 */
 	protected function createComponentSignInForm() {
-		$form = new AppForm;
+		$form = new Form;
 
 		$form->addHidden('backlink', $this->getParam('backlink'));
 
@@ -78,10 +78,10 @@ class SignPresenter extends BasePresenter {
 
 	/**
 	 * Password reset form component factory.
-	 * @return AppForm
+	 * @return Form
 	 */
 	protected function createComponentPwdResetForm() {
-		$form = new AppForm;
+		$form = new Form;
 
 		$form->addHidden('backlink', $this->getParam('backlink'));
 
@@ -92,8 +92,8 @@ class SignPresenter extends BasePresenter {
 		
 		$form->addText('email', __('E-mail:'))
 				  ->setEmptyValue('@')
-				  ->addCondition(AppForm::FILLED)
-				  ->addRule(AppForm::EMAIL, __('E-mail is not valid'));
+				  ->addCondition(Form::FILLED)
+				  ->addRule(Form::EMAIL, __('E-mail is not valid'));
 
 		$captcha = new CaptchaControl();
 		$form['captcha'] = $captcha;
@@ -104,11 +104,11 @@ class SignPresenter extends BasePresenter {
 		$form['captcha']->addRule($form["captcha"]->getValidator(), __('Security code is incorrect. Read it carefuly from image above.'));
 
 		$form['username']
-				  ->addConditionOn($form['email'], AppForm::EQUAL, '')
-				  ->addRule(AppForm::FILLED, __('Please provide your username or e-mail.'));
+				  ->addConditionOn($form['email'], Form::EQUAL, '')
+				  ->addRule(Form::FILLED, __('Please provide your username or e-mail.'));
 		$form['email']
-				  ->addConditionOn($form['username'], AppForm::EQUAL, '')
-				  ->addRule(AppForm::FILLED, __('Please provide your username or e-mail.'));
+				  ->addConditionOn($form['username'], Form::EQUAL, '')
+				  ->addRule(Form::FILLED, __('Please provide your username or e-mail.'));
 		
 		$form->addSubmit('back', 'Back');
 		$form->addSubmit('send', __('Send new password'));
@@ -120,7 +120,7 @@ class SignPresenter extends BasePresenter {
 	/**
 	 * Sign in form subbmited action handler
 	 *
-	 * @param AppForm
+	 * @param Form
 	 */
 	public function signInFormSubmitted($form) {
 		try {
@@ -144,7 +144,7 @@ class SignPresenter extends BasePresenter {
 	/**
 	 * Reset password form subbmited action handler
 	 *
-	 * @param AppForm
+	 * @param Form
 	 */
 	public function pwdResetFormSubmitted($form) {
 		try {

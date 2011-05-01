@@ -38,7 +38,7 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 	}
 	
 	protected function createComponentDummyForm() {
-		$form = new Nette\Application\AppForm;
+		$form = new Nette\Application\UI\Form;
 	
 		$form->addText('username', 'Normal text field:')
 				  ->setRequired('Please provide a some text.');

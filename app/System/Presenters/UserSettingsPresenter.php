@@ -26,7 +26,7 @@ namespace vManager\Modules\System;
 use vManager,
 	 Nette,
 	 vBuilder\Orm\Repository,
-	 Nette\Application\AppForm;
+	 Nette\Application\UI\Form;
 
 /**
  * Sign in/out presenter
@@ -39,26 +39,26 @@ class UserSettingsPresenter extends SecuredPresenter {
 	/**
 	 * User profile form component factory.
 	 *
-	 * @return AppForm
+	 * @return Form
 	 */
 	protected function createComponentUserProfileForm() {
 		$user = Nette\Environment::getUser()->getIdentity();
 
-		$form = new AppForm;
+		$form = new Form;
 		$form->setRenderer(new vManager\Application\DefaultFormRenderer());
 		// $form->addFile('icon', 'Avatar:'); TODO: pridat podporu v db
 		$form->addText('name', __('Name:'))
-				  ->addRule(AppForm::FILLED, __('Name cannot be empty.'))
+				  ->addRule(Form::FILLED, __('Name cannot be empty.'))
 				  ->setValue($user->name);
 		$form->addText('surname', __('Surname:'))
-				  ->addRule(AppForm::FILLED, __('Surname cannot be empty.'))
+				  ->addRule(Form::FILLED, __('Surname cannot be empty.'))
 				  ->setValue($user->surname);
 		$form->addText('username', __('Username:'))
 				  ->setValue($user->username)
-				  ->addRule(AppForm::FILLED, __('Username cannot be empty.'))
-				  ->addRule(AppForm::REGEXP, __('Username have to contain alpha-numeric chars only (with exception for chars ._@-). Nor spaces or diacritic chars are allowed.'), '/^[A-Z0-9\\.\\-_@]+$/i')
+				  ->addRule(Form::FILLED, __('Username cannot be empty.'))
+				  ->addRule(Form::REGEXP, __('Username have to contain alpha-numeric chars only (with exception for chars ._@-). Nor spaces or diacritic chars are allowed.'), '/^[A-Z0-9\\.\\-_@]+$/i')
 				  ->addFilter(function ($value) {
-					  return Nette\String::lower($value);
+					  return Nette\Utils\Strings::lower($value);
 				  })
 				  ->addRule(function ($control) {
 					  $user = Nette\Environment::getUser()->getIdentity();
@@ -71,7 +71,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 		
 		$form->addText('email', 'E-mail:')
 				  ->setValue($user->email)
-				  ->addRule(AppForm::EMAIL, __('E-mail is not valid'));
+				  ->addRule(Form::EMAIL, __('E-mail is not valid'));
 
 		$form->addSubmit('send', __('Save'));
 
@@ -82,7 +82,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 	/**
 	 * User settings form subbmited action handler
 	 *
-	 * @param AppForm
+	 * @param Form
 	 */
 	public function userProfileFormSubmitted($form) {
 		try {
@@ -105,12 +105,12 @@ class UserSettingsPresenter extends SecuredPresenter {
 	/**
 	 * User profile form component factory.
 	 *
-	 * @return AppForm
+	 * @return Form
 	 */
 	protected function createComponentUserPasswordForm() {
 		$user = Nette\Environment::getUser()->getIdentity();
 
-		$form = new AppForm;
+		$form = new Form;
 		$form->setRenderer(new vManager\Application\DefaultFormRenderer());
 
 		$form->addPassword('oldPassword', __('Old password:'))
@@ -120,11 +120,11 @@ class UserSettingsPresenter extends SecuredPresenter {
 							 }, __('Invalid password. Access denied.'));
 
 		$form->addPassword('password', __('New password:'))
-			->addRule(AppForm::MIN_LENGTH, __('Password have to be at least 6 chars long.'), 6)
-			->addRule(AppForm::FILLED, __('Please provide password.'));
+			->addRule(Form::MIN_LENGTH, __('Password have to be at least 6 chars long.'), 6)
+			->addRule(Form::FILLED, __('Please provide password.'));
 		
 		$form->addPassword('password2', __('Confirm new password:'))
-				  ->addRule(AppForm::EQUAL, __('Confirmation password have to be the same as password.'), $form['password']);
+				  ->addRule(Form::EQUAL, __('Confirmation password have to be the same as password.'), $form['password']);
 
 		$form->addSubmit('send', __('Change password'));
 
@@ -135,7 +135,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 	/**
 	 * User settings form subbmited action handler
 	 *
-	 * @param AppForm
+	 * @param Form
 	 */
 	public function userPasswordFormSubmitted($form) {
 		try {
