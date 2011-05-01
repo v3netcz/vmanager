@@ -16,8 +16,9 @@ use Nette\Application\Route;
 require LIBS_DIR . '/nette/Nette/loader.php';
 require LIBS_DIR . '/NetteTranslator/shortcuts.php';
 
-// !!! Uncomment line bellow when goinng to production environment !!!
-Environment::setMode('production', false);
+// Enables debuging mode
+// !!! Comment line bellow when going to production environment !!!
+//Environment::setMode('production', false);
 
 // Enable Nette\Debug for error visualisation & logging
 Debug::$strictMode = TRUE;
