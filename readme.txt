@@ -1,4 +1,4 @@
-Welcome
+Welcome to vManager
 ==========================
 
 You have recieved copy of our solution for collaborative project management.
@@ -8,11 +8,7 @@ This project is built on top of vBuilder and Nette Framework.
 PHP 5.3 or above required.
 
 Project is currently maintained by Adam Staněk <adam.stanek@v3net.cz>
-
-Project contributors:
-Adam Staněk <adam.stanek@v3net.cz>
-Petr Tatoušek <petr@tatousek.eu>
-Radek Klein <radek.klein@me.com>
+and it is fork of existing university work made for CTU FIT BI-SP1.
 
 For installation instruction read attached file install.txt.
 
