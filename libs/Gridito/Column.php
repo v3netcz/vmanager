@@ -8,7 +8,7 @@ namespace Gridito;
  * @author Jan Marek
  * @license MIT
  */
-class Column extends \Nette\Application\Control
+class Column extends \Nette\Application\UI\Control
 {
 	// <editor-fold defaultstate="collapsed" desc="variables">
 

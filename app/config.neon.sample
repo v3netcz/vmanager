@@ -32,15 +32,18 @@ common:
 		charset: utf8
 
 	security:
-		# Optional fields for User entity (don't forget to ALTER your table if you add any)
 		user:
+			# User data class, can be changed if overloaded
+			entity: vManager\Security\User
+
+			# Optional fields for User entity (don't forget to ALTER your table if you add any)
 			fields:
 				name:
 					name: Name
 				surname:
 					name: Surname
 				email:
-					name: E-mail		
+					name: E-mail	
 
 	# Ticketing system
 	Tickets:

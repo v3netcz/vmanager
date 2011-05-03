@@ -54,7 +54,7 @@ class PresenterFactory extends Nette\Application\PresenterFactory {
 	 * @return string
 	 */
 	public function formatPresenterClass($presenter) {
-		if(($p = Nette\String::replace($presenter, "/^([^\\:]+)\\:(.+)$/", 'vManager\\Modules\\\${1}\\\${2}Presenter')) !== NULL)
+		if(($p = Nette\Utils\Strings::replace($presenter, "/^([^\\:]+)\\:(.+)$/", 'vManager\\Modules\\\${1}\\\${2}Presenter')) !== NULL)
 			return $p;
 
 
@@ -67,7 +67,7 @@ class PresenterFactory extends Nette\Application\PresenterFactory {
 	 * @return string
 	 */
 	public function unformatPresenterClass($class) {
-		if(($c = Nette\String::replace($class, "/^vManager\\\\Modules\\\\([^\\\\]+)\\\\(.+?)Presenter$/", '${1}:${2}')) !== NULL)
+		if(($c = Nette\Utils\Strings::replace($class, "/^vManager\\\\Modules\\\\([^\\\\]+)\\\\(.+?)Presenter$/", '${1}:${2}')) !== NULL)
 			return $c;
 
 		return parent::unformatPresenterClass($class);
@@ -79,7 +79,7 @@ class PresenterFactory extends Nette\Application\PresenterFactory {
 	 * @return string
 	 */
 	public function formatPresenterFile($presenter) {
-		if(($p = Nette\String::replace($presenter, "/^([^\\:]+)\\:(.+)$/", $this->baseDir . '/${1}/Presenters/${2}Presenter.php')) !== NULL)  
+		if(($p = Nette\Utils\Strings::replace($presenter, "/^([^\\:]+)\\:(.+)$/", $this->baseDir . '/${1}/Presenters/${2}Presenter.php')) !== NULL)  
 			return $p;
 				
 		return parent::formatPresenterFile($presenter);

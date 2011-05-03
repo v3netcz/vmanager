@@ -60,15 +60,15 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 		
 		if(Nette\Environment::getUser()->isAllowed('Tickets:Default', 'default')) {
 			$menu[] = array(
-				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
+				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:default'),
 				 'label' => __('Tasks'),
 				 'icon' => System::getBasePath() . '/images/icons/small/grey/Flag.png',
-				 'children' => array(
+				 /*'children' => array(
 					  array(
-							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Default:default'),
+							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:default'),
 							'label' => __('My tickets')
 					  )
-				 )
+				 ) */
 			);
 		}
 		

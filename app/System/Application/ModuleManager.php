@@ -71,8 +71,8 @@ class ModuleManager {
 
 			foreach($classes as $className) {
 				// Protoze je to vyrazne rychlejsi nez overovat interface pro vsechny
-				if(Nette\String::startsWith($className, 'vManager\\Modules\\')) {
-					$class = new Nette\Reflection\ClassReflection($className);
+				if(Nette\Utils\Strings::startsWith($className, 'vManager\\Modules\\')) {
+					$class = new Nette\Reflection\ClassType($className);
 					if($class->isSubclassOf('vManager\\Application\\Module'))
 						$moduleClasses[] = $className;
 				}

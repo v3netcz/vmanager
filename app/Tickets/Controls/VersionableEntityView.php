@@ -31,7 +31,7 @@ use vManager, Nette, vBuilder\Orm\Repository;
  * @author Adam Staněk (V3lbloud)
  * @since Apr 27, 2011
  */
-class VersionableEntityView extends Nette\Application\Control {
+class VersionableEntityView extends Nette\Application\UI\Control {
 	
 	/** @var string name of ORM entity */
 	protected $entityName;
@@ -61,7 +61,7 @@ class VersionableEntityView extends Nette\Application\Control {
 				  ->where('[ticketId] = %i', $this->id)
 				  ->clause('ORDER BY ABS([revision])');
 
-		$this->data = $fluent->fetchAll();
+		$this->data = $fluent->fetchAll(); 
 	}
 	
 	/**
@@ -74,7 +74,7 @@ class VersionableEntityView extends Nette\Application\Control {
 		$tpl->setFile(__DIR__ . '/../Templates/VersionableEntityView/default.latte');
 		
 		$tpl->data = end($this->data);
-		$tpl->history = count($this->data) > 1 ? array_slice($this->data, 1) : array();
+		$tpl->history = $this->data; 
 		
 		return $tpl;
 	}

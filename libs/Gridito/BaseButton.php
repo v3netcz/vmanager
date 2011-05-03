@@ -10,7 +10,7 @@ use Nette\Web\Html;
  * @author Jan Marek
  * @license MIT
  */
-abstract class BaseButton extends \Nette\Application\PresenterComponent
+abstract class BaseButton extends \Nette\Application\UI\PresenterComponent
 {
 	/** @var string */
 	private $label;

@@ -7,8 +7,41 @@
 
 {if count($history)}
 	<div class="history">
-		<div n:foreach="$history as $curr" class="revisionBlock">
-			{? dump($curr)}
-		</div>
+		{foreach $history as $curr}
+			{if !$iterator->isFirst()}
+				<div class="revisionBlock">
+					<img src="{=$curr->author->avatarUrl}" width="55" alt="Avatar" />
+					<div class="author">{$curr->author->username}:</div>
+					<div class="date">{$curr->timestamp}</div>
+			
+					<div class="changes">
+					<?php
+						$previousRevision = $history[$iterator->getCounter() - 2];
+						foreach($previousRevision->getMetadata()->getFields() as $field) {
+							if(in_array($field, array('timestamp', 'author', 'revision', 'comment')))
+								continue;
+							
+							if($history[$iterator->getCounter() - 2]->$field != $curr->$field) {
+								echo "<div class=\"change\">";
+									
+								if(strlen($curr->$field) < 40)
+									echo _x('Changed field <span class="field">%s</span> to <span class="value">%s</span>', array($field, $curr->$field));
+								else
+									echo _x('Changed field <span class="field">%s</span>', array($field));
+									
+								echo "</div>";
+							}
+						}
+					?>
+					</div>
+				
+					<div class="comment">
+						{* TODO: Texy *}
+						{if $curr->comment}{$curr->comment->text}
+						{else}<?php echo __('No comment'); ?>{/if}
+					</div>
+				</div>
+			{/if}
+		{/foreach}
 	</div>
 {/if}

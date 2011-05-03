@@ -5,9 +5,9 @@
  */
 
 
-use Nette\Debug;
+use Nette\Diagnostics\Debugger;
 use Nette\Environment;
-use Nette\Application\Route;
+use Nette\Application\Routers\Route;
 
 
 // Load Nette Framework
@@ -16,12 +16,13 @@ use Nette\Application\Route;
 require LIBS_DIR . '/nette/Nette/loader.php';
 require LIBS_DIR . '/NetteTranslator/shortcuts.php';
 
-// !!! Uncomment line bellow when goinng to production environment !!!
-Environment::setMode('production', false);
+// Enables debuging mode
+// !!! Comment line bellow when going to production environment !!!
+//Environment::setMode('production', false);
 
 // Enable Nette\Debug for error visualisation & logging
-Debug::$strictMode = TRUE;
-Debug::enable();
+Debugger::$strictMode = TRUE;
+Debugger::enable();
 
 // Load configuration from config.neon file
 Environment::loadConfig();

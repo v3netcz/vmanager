@@ -2,7 +2,7 @@
 
 namespace Gridito;
 
-use Nette\ComponentContainer, Nette\Environment, Nette\Paginator;
+use Nette\ComponentModel\Container, Nette\Environment, Nette\Utils\Paginator;
 
 /**
  * Grid
@@ -10,7 +10,7 @@ use Nette\ComponentContainer, Nette\Environment, Nette\Paginator;
  * @author Jan Marek
  * @license MIT
  */
-class Grid extends \Nette\Application\Control
+class Grid extends \Nette\Application\UI\Control
 {
 	// <editor-fold defaultstate="collapsed" desc="variables">
 
@@ -54,13 +54,13 @@ class Grid extends \Nette\Application\Control
 
 	// <editor-fold defaultstate="collapsed" desc="constructor">
 
-	public function __construct(\Nette\IComponentContainer $parent = null, $name = null)
+	public function __construct(\Nette\ComponentModel\IContainer $parent = null, $name = null)
 	{
 		parent::__construct($parent, $name);
 
-		$this->addComponent(new ComponentContainer, "toolbar");
-		$this->addComponent(new ComponentContainer, "actions");
-		$this->addComponent(new ComponentContainer, "columns");
+		$this->addComponent(new Container, "toolbar");
+		$this->addComponent(new Container, "actions");
+		$this->addComponent(new Container, "columns");
 
 		$this->paginator = new Paginator;
 		$this->paginator->setItemsPerPage($this->defaultItemsPerPage);
@@ -189,7 +189,7 @@ class Grid extends \Nette\Application\Control
 
 	/**
 	 * Get paginator
-	 * @return Nette\Paginator
+	 * @return Nette\Utils\Paginator
 	 */
 	public function getPaginator()
 	{

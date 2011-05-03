@@ -21,29 +21,39 @@
  * along with vManager. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace vManager\Modules\Tickets;
+namespace vManager\Security;
 
 use vManager, vBuilder, Nette;
 
 /**
- * Project entity data class
+ * Overloaded user entity
  *
+ * @Table(name="security_users")
+ *
+ * @Behavior(Secure)
+ * 
+ * @Column(id, pk, type="integer", generatedValue)
+ * @Column(username, type="string")
+ * @Column(password, type="string")
+ * @Column(email, type="string")
+ * @Column(registrationTime, type="DateTime")
+ * @Column(roles, type="OneToMany", table="security_user_roles", joinOn="id=user")
+ * 
  * @author Adam Staněk (V3lbloud)
- * @since Apr 27, 2011
- * 
- * @Table(name="pm_tickets")
- * 
- * @Behavior(Versionable, idField = "id", revisionField = "revision")
- * 
- * @Column(id, realName="ticketId", pk, type="integer")
- * @Column(revision, pk, type="integer")
- * @Column(author, type="OneToOne", entity="vManager\Security\User", joinOn="author=id")
- * @Column(comment, realName="commentId", type="OneToOne", entity="vManager\Modules\Tickets\Comment", joinOn="comment=id")
- * @Column(name, type="string")
- * @Column(description, type="string")
- * @Column(timestamp, type="DateTime")
+ * @since Apr 28, 2011
  */
-class Ticket extends vBuilder\Orm\ActiveEntity {
+class User extends vBuilder\Security\User {
+	
+	/**
+	 * Returns avatar picture URL
+	 * 
+	 * @return string URL
+	 */
+	function getAvatarUrl() {
+		// TODO: dynamicke na zaklde upravy v profilu
 		
+		return vManager\Modules\System::getBasePath()
+				  . '/images/profile.jpg';
+	}
 	
 }

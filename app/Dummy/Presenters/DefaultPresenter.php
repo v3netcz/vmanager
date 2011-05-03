@@ -25,8 +25,8 @@ namespace vManager\Modules\Dummy;
 
 use vManager, vBuilder, Nette;
 
-use Nette\Forms\FormContainer;
-FormContainer::extensionMethod('addDatePicker', function (FormContainer $container, $name, $label = NULL) {
+use Nette\Forms\Container;
+Container::extensionMethod('addDatePicker', function (Container $container, $name, $label = NULL) {
     return $container[$name] = new \JanTvrdik\Components\DatePicker($label);
 });
 
@@ -44,7 +44,7 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 	}
 	
 	protected function createComponentDummyForm() {
-		$form = new Nette\Application\AppForm;
+		$form = new Nette\Application\UI\Form;
 		$form->addDatePicker('datePicker1');
 	
 		$form->addText('username', 'Normal text field:')

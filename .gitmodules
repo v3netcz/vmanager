@@ -7,6 +7,3 @@
 [submodule "libs/nette"]
 	path = libs/nette
 	url = git://github.com/nette/nette.git
-[submodule "libs/NetteTranslator"]
-	path = libs/NetteTranslator
-	url = git://github.com/Vrtak-CZ/NetteTranslator.git

@@ -41,7 +41,7 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentUserGrid($name) {
 		$grid = new vManager\Grid($this, $name);
 
-		$grid->setModel(new Gridito\DibiFluentModel(Repository::findAll('vBuilder\Security\User')));
+		$grid->setModel(new Gridito\DibiFluentModel(Repository::findAll('vManager\Security\User')));
 		$grid->setItemsPerPage(10);
 		
 		// columns
@@ -51,7 +51,7 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->addColumn("surname", __("Surname"))->setSortable(true);
 		$grid->addColumn("email", __("E-mail"), array(
 			 "renderer" => function ($row) {
-				 echo Nette\Web\Html::el("a")->href("mailto:$row->email")->setText($row->email);
+				 echo Nette\Utils\Html::el("a")->href("mailto:$row->email")->setText($row->email);
 			 },
 			 "sortable" => true,
 		));

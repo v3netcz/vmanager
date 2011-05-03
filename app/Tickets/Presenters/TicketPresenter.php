@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Tickets;
 
-use vManager, vBuilder\Orm\Repository;
+use vManager, Nette, vBuilder\Orm\Repository, Gridito;
 
 /**
  * Presenter for viewing tickets
@@ -33,10 +33,41 @@ use vManager, vBuilder\Orm\Repository;
  */
 class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	
-	public function createComponentTicketView() {		
-		$view = new VersionableEntityView('vManager\\Modules\\Tickets\\Ticket', 1);
+	public function renderDefault() {
 		
-		return $view;
+	}
+	
+	protected function createComponentTicketListingGrid($name) {
+		$grid = new vManager\Grid($this, $name);
+
+		$ds = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
+				  ->where('[revision] > 0');
+		
+		$grid->setModel(new Gridito\DibiFluentModel($ds));
+		$grid->setItemsPerPage(20);
+		
+		// columns
+		$grid->addColumn("id", __('ID'), array(
+			 "renderer" => function ($row) {
+				 $link = Nette\Environment::getApplication()->getPresenter()->link('detail', $row->ticketId);
+				 echo Nette\Utils\Html::el("a")->href($link)->setText('#' . $row->ticketId);
+			 },
+			 "sortable" => true,
+		));
+			 
+		$grid->addColumn("name", __('Ticket name'), array(
+			 "renderer" => function ($row) {
+				 $link = Nette\Environment::getApplication()->getPresenter()->link('detail', $row->ticketId);
+				 echo Nette\Utils\Html::el("a")->href($link)->setText($row->name);
+			 },
+			 "sortable" => true,
+		));
+
+		$grid->addColumn("timestamp", __("Last change"))->setSortable(true);
+	}
+	
+	public function renderDetail($id) {
+		$this->template->historyWidget = new VersionableEntityView('vManager\\Modules\\Tickets\\Ticket', $id);
 	}
 	
 }

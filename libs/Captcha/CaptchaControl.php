@@ -13,15 +13,15 @@
 namespace PavelMaca\Captcha;
 
 use Nette;
-use Nette\Forms\FormContainer as FormContainer;
+use Nette\Forms\Container as FormContainer;
 use Nette\Forms\Form;
-use Nette\Forms\HiddenField;
-use Nette\Web\Html;
+use Nette\Forms\Controls\HiddenField;
+use Nette\Utils\Html;
 use Nette\Image;
 use Nette\Environment;
 use Nette\Http\Session;
 
-class CaptchaControl extends \Nette\Forms\TextBase
+class CaptchaControl extends \Nette\Forms\Controls\TextBase
 {
 	/*	 * #@+ character groups */
 	const CONSONANTS = 'bcdfghjkmnpqrstvwxz';
