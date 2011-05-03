@@ -1,3 +1,4 @@
+<div class="flat_area grid_16">
 <div class="summary">
 	<h3>{$data->name}</h3>
 	<div class="description">
@@ -37,7 +38,7 @@
 				
 					<div class="comment">
 						{* TODO: Texy *}
-						{if $curr->comment}{$curr->comment->text}
+						{if $curr->comment}{!$curr->comment->text|texy}
 						{else}<?php echo __('No comment'); ?>{/if}
 					</div>
 				</div>
@@ -45,3 +46,4 @@
 		{/foreach}
 	</div>
 {/if}
+</div>
