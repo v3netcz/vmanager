@@ -47,18 +47,18 @@
 			$( ".side_tabs" ).tabs({ 
 				fx: {opacity: 'toggle', duration: 'slow', height:'auto'} 
 			});
-		
+		*/
 
 	// Content Box Accordion Config		
 		$( ".content_accordion" ).accordion({
 			collapsible: true,
-			active:false,
+			// active:false,
 			header: 'h3.bar', // this is the element that will be clicked to activate the accordion 
 			autoHeight:false,
 			event: 'mousedown',
 			icons:false,
 			animated: true
-		}); */
+		}); 
 		
 	// Sortable Content Boxes Config				
 		$( ".main_container" ).sortable({

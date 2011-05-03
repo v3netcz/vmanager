@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Tickets;
 
-use vManager, Nette, vBuilder\Orm\Repository, Gridito;
+use vManager, Nette, vBuilder\Orm\Repository, Gridito, Nette\Application\UI\Form;
 
 /**
  * Presenter for viewing tickets
@@ -68,6 +68,38 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	
 	public function renderDetail($id) {
 		$this->template->historyWidget = new VersionableEntityView('vManager\\Modules\\Tickets\\Ticket', $id);
+	}
+	
+	/**
+	 * Sign in form component factory.
+	 * @return Nette\Application\UI\Form
+	 */
+	protected function createComponentUpdateForm() {				
+		$form = new Form;
+		
+		$form->addTextArea('comment');
+		
+		$form->addSubmit('send', __('Send'));
+
+		$form->onSubmit[] = callback($this, 'updateFormSubmitted');
+		
+		return $form; 
+	}
+	
+	public function updateFormSubmitted(Form $form) {
+		$values = $form->getValues();
+
+		$ticket = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
+				  ->where('[revision] > 0 AND [ticketId] = %i', $this->getParam('id'))->fetch();
+		
+		if(isset($values['comment'])) {
+			$ticket->comment = new Comment();
+			$ticket->comment->text = $values['comment'];
+		}
+		
+		$ticket->save(); 
+		
+		$this->flashMessage(__('Change has been saved.'));
 	}
 	
 }

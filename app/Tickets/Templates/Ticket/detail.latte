@@ -1,5 +1,47 @@
 {block content}
+	{include ../../../System/Templates/Includes/flashes.latte}
 
-{$historyWidget->render()}
+	{$historyWidget->render()}
+
+	{control updateForm begin}
+	{var form => $control['updateForm']}
+	<div class="grid_16">
+		<ul class="block content_accordion no_header" id="formAccordion">
+			<li>
+				<a href="#" class="handle">&nbsp;</a>
+				<h3 class="bar"><?php echo __('Add comment'); ?></h3>
+				<div class="content">
+					{$form['comment']->control}
+				</div>
+			</li>
+			<li>
+				<a href="#" class="handle">&nbsp;</a>
+				<h3 class="bar"><?php echo __('Attach files'); ?></h3>
+				<div class="content">
+					<p>TODO: Upload form</p>
+				</div>
+			</li>
+			<li>
+				<a href="#" class="handle">&nbsp;</a>
+				<h3 class="bar"><?php echo __('Change ticket description'); ?></h3>
+				<div class="content">
+					<p>TODO: Texyla for ticket description</p>
+				</div>
+			</li>
+			<li>
+				<a href="#" class="handle">&nbsp;</a>
+				<h3 class="bar"><?php echo __('Change ticket details'); ?></h3>
+				<div class="content">
+					<p>TODO: Form for deadline, name and other fields</p>
+				</div>
+			</li>
+		</ul>
+		
+		<button type="submit" class="button_colour round_all">
+			<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
+			<span>{$form['send']->caption}</span>
+		</button>
+	</div>
+	{control updateForm end}
 
 {/block}
