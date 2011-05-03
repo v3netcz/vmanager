@@ -51,6 +51,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	function __construct($entityName, $id) {
 		$this->entityName = $entityName;
 		$this->id = $id;
+		$this->load();
 	}
 	
 	/**
@@ -91,7 +92,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	 * Renders control to standard output
 	 */
 	function render() {
-		$this->load();
+		
 		$this->getTemplate()->render();
 	}
 

@@ -1,47 +1,52 @@
 {block content}
 	{include ../../../System/Templates/Includes/flashes.latte}
-
-	{$historyWidget->render()}
-
+<div class="flat_area grid_16">
+	<h2>Ticket #{$historyWidget->getTemplate()->data->id} - {$historyWidget->getTemplate()->data->name}</h2>
+	<p>{$historyWidget->getTemplate()->data->description}</p>
+</div>
 	{control updateForm begin}
 	{var form => $control['updateForm']}
-	<div class="grid_16">
-		<ul class="block content_accordion no_header" id="formAccordion">
-			<li>
-				<a href="#" class="handle">&nbsp;</a>
-				<h3 class="bar"><?php echo __('Add comment'); ?></h3>
-				<div class="content">
-					{$form['comment']->control}
-				</div>
-			</li>
-			<li>
-				<a href="#" class="handle">&nbsp;</a>
-				<h3 class="bar"><?php echo __('Attach files'); ?></h3>
-				<div class="content">
-					<p>TODO: Upload form</p>
-				</div>
-			</li>
-			<li>
-				<a href="#" class="handle">&nbsp;</a>
-				<h3 class="bar"><?php echo __('Change ticket description'); ?></h3>
-				<div class="content">
-					<p>TODO: Texyla for ticket description</p>
-				</div>
-			</li>
-			<li>
-				<a href="#" class="handle">&nbsp;</a>
-				<h3 class="bar"><?php echo __('Change ticket details'); ?></h3>
-				<div class="content">
-					<p>TODO: Form for deadline, name and other fields</p>
-				</div>
-			</li>
-		</ul>
-		
+	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
+		<ul class="tab_header grad_colour clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+						<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">Add comment</a></li>
+						<li class="ui-state-default ui-corner-top"><a href="#tabs-2">Attach files</a></li>
+                        <li class="ui-state-default ui-corner-top"><a href="#tabs-3">Ticket description</a></li>
+                        <li class="ui-state-default ui-corner-top"><a href="#tabs-4">Ticket details</a></li>
+					</ul>
+        	<a href="#" class="grabber">&nbsp;</a>
+            <a href="#" class="toggle">&nbsp;</a>
+            <div class="toggle_container">
+						<div id="tabs-1" class="block ui-tabs-panel ui-widget-content ui-corner-bottom">
+							<div class="content">
+								{$form['comment']->control}
+							</div>
+						</div>
+						<div id="tabs-2" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+							<div class="content">
+							<p>TODO: Upload form</p>
+							</div>
+						</div>
+                        <div id="tabs-3" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+							<div class="content">
+							<p>TODO: Texyla for ticket description</p>
+							</div>
+						</div>
+                        <div id="tabs-4" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+							<div class="content">
+							<p>TODO: Form for deadline, name and other fields</p>
+							</div>
+						</div>
+					</div>
+              
+   		<div class="block">
 		<button type="submit" class="button_colour round_all">
 			<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
 			<span>{$form['send']->caption}</span>
 		</button>
+        </div>
 	</div>
 	{control updateForm end}
+    
+    {$historyWidget->render()}
 
 {/block}

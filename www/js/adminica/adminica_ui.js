@@ -38,7 +38,7 @@
 			$(this).toggleClass("toggle_closed").next().slideToggle("slow");
 			return false; //Prevent the browser jump to the link anchor
 		});
- 	/*
+ 	
  	// Content Box Tabs Config
 			$( ".tabs" ).tabs({ 
 				fx: {opacity: 'toggle', duration: 'slow', height:'toggle'} 
@@ -47,7 +47,7 @@
 			$( ".side_tabs" ).tabs({ 
 				fx: {opacity: 'toggle', duration: 'slow', height:'auto'} 
 			});
-		*/
+		
 
 	// Content Box Accordion Config		
 		$( ".content_accordion" ).accordion({

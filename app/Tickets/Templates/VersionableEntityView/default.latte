@@ -1,5 +1,5 @@
 <div class="flat_area grid_16">
-<div class="summary">
+<div class="summary" style="display:none">
 	<h3>{$data->name}</h3>
 	<div class="description">
 		{$data->description}
@@ -10,10 +10,15 @@
 	<div class="history">
 		{foreach $history as $curr}
 			{if !$iterator->isFirst()}
-				<div class="revisionBlock">
-					<img src="{=$curr->author->avatarUrl}" width="55" alt="Avatar" />
-					<div class="author">{$curr->author->username}:</div>
-					<div class="date">{$curr->timestamp}</div>
+            <div class="box grid_16">
+					<h2 class="box_head grad_colour round_top"><img src="{=$curr->author->avatarUrl}" width="30" alt="Avatar" style="vertical-align:middle; padding-top:10px; padding-bottom:10px; padding-right:10px" />
+					{$curr->author->username} on {$curr->timestamp}</h2>
+					<a href="#" class="grabber">&nbsp;</a>
+					<a href="#" class="toggle">&nbsp;</a>
+					<div class="toggle_container">					
+						<div class="block">
+				
+					
 			
 					<div class="changes">
 					<?php
@@ -41,6 +46,8 @@
 						{if $curr->comment}{!$curr->comment->text|texy}
 						{else}<?php echo __('No comment'); ?>{/if}
 					</div>
+				</div>
+                </div>
 				</div>
 			{/if}
 		{/foreach}
