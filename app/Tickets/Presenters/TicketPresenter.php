@@ -33,6 +33,9 @@ use vManager, Nette, vBuilder\Orm\Repository, Gridito, Nette\Application\UI\Form
  */
 class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	
+	/** @var Ticket */
+	protected $ticket;
+	
 	public function renderDefault() {
 		
 	}
@@ -66,7 +69,15 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->addColumn("timestamp", __("Last change"))->setSortable(true);
 	}
 	
-	public function renderDetail($id) {
+	public function renderDetail($id) {	
+		$texy = new \Texy();
+      $texy->encoding = 'utf-8';
+      $texy->allowedTags = \Texy::NONE;
+      $texy->allowedStyles = \Texy::NONE;
+      $texy->setOutputMode(\Texy::XHTML1_STRICT);
+		
+		$this->template->registerHelper('texy', callback($texy, 'process'));
+		
 		$this->template->historyWidget = new VersionableEntityView('vManager\\Modules\\Tickets\\Ticket', $id);
 	}
 	
@@ -77,7 +88,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentUpdateForm() {				
 		$form = new Form;
 		
-		$form->addTextArea('comment');
+		$ticket = $this->getTicket();
+		
+		$form->addTextArea('comment')->setAttribute('class', 'texyla');
+		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
 		
 		$form->addSubmit('send', __('Send'));
 
@@ -89,17 +103,29 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	public function updateFormSubmitted(Form $form) {
 		$values = $form->getValues();
 
-		$ticket = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
-				  ->where('[revision] > 0 AND [ticketId] = %i', $this->getParam('id'))->fetch();
+		$ticket = $this->getTicket();
 		
 		if(isset($values['comment'])) {
 			$ticket->comment = new Comment();
 			$ticket->comment->text = $values['comment'];
 		}
 		
+		if(isset($values['description'])) {
+			$ticket->description = $values['description'];
+		}
+		
 		$ticket->save(); 
 		
 		$this->flashMessage(__('Change has been saved.'));
+	}
+	
+	protected function getTicket() {
+		if($this->ticket !== null) return $this->ticket;
+		
+		$this->ticket = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
+				  ->where('[revision] > 0 AND [ticketId] = %i', $this->getParam('id'))->fetch();
+		
+		return $this->ticket;
 	}
 	
 }

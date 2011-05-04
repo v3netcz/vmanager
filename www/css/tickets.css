@@ -13,13 +13,14 @@
 }
 
 .history .revisionBlock .changes {
-	margin: 15px 0px;	
+	padding: 0px 0 10px 0;	
 }
 
 .history .revisionBlock .changes .change .value {
-	color: orange;
+	color: #000000;
+	font-style: italic;
 }
 
 .history .revisionBlock .changes .change .field {
-	color: blue;
+	color: #000000;
 }
