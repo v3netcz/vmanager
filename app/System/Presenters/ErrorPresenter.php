@@ -25,7 +25,7 @@ namespace vManager\Modules\System;
 
 use vManager,
 	 Nette,
-	 Nette\Debug,
+	 Nette\Diagnostics\Debugger as Debug,
 	 Nette\Application as NA;
 
 /**
