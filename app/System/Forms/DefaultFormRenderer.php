@@ -21,7 +21,7 @@
  * along with vManager. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace vManager\Application;
+namespace vManager\Forms;
 
 use vManager,
 	 vBuilder,
@@ -109,7 +109,7 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	public function createTemplate($file = null) {
 		$template = new Nette\Templating\FileTemplate($file);
 		$presenter = $this->form->getParent()->getPresenter(FALSE);
-		$template->onPrepareFilters[] = array("vManager\Application\DefaultFormRenderer", 'templatePrepareFilters');
+		$template->onPrepareFilters[] = array("vManager\Forms\DefaultFormRenderer", 'templatePrepareFilters');
 		$template->presenter = $presenter;
 		$template->baseUri = Nette\Environment::getVariable('baseUri');
 		$template->basePath = rtrim($template->baseUri, '/');

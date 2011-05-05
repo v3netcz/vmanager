@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Tickets;
 
-use vManager, Nette, vBuilder\Orm\Repository, Gridito, Nette\Application\UI\Form;
+use vManager, Nette, vBuilder\Orm\Repository, Gridito, vManager\Form;
 
 /**
  * Presenter for viewing tickets
@@ -87,6 +87,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	 */
 	protected function createComponentUpdateForm() {				
 		$form = new Form;
+		$form->setRenderer(new Nette\Forms\Rendering\DefaultFormRenderer());
 		
 		$ticket = $this->getTicket();
 		

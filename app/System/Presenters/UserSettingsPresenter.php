@@ -26,7 +26,7 @@ namespace vManager\Modules\System;
 use vManager,
 	 Nette,
 	 vBuilder\Orm\Repository,
-	 Nette\Application\UI\Form;
+	 vManager\Form;
 
 /**
  * Sign in/out presenter
@@ -45,7 +45,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 		$user = Nette\Environment::getUser()->getIdentity();
 
 		$form = new Form;
-		$form->setRenderer(new vManager\Application\DefaultFormRenderer());
+
 		// $form->addFile('icon', 'Avatar:'); TODO: pridat podporu v db
 		$form->addText('name', __('Name:'))
 				  ->addRule(Form::FILLED, __('Name cannot be empty.'))
@@ -111,7 +111,6 @@ class UserSettingsPresenter extends SecuredPresenter {
 		$user = Nette\Environment::getUser()->getIdentity();
 
 		$form = new Form;
-		$form->setRenderer(new vManager\Application\DefaultFormRenderer());
 
 		$form->addPassword('oldPassword', __('Old password:'))
 				  ->addRule(function ($control) {

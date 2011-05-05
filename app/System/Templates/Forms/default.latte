@@ -20,6 +20,9 @@ $controls = $form->getComponents(TRUE, 'Nette\Forms\IControl');
         {!$control->label}
 		<input type="{$control->control->attrs['type']}" class="medium text" name="{$control->name}" id="frm{$control->parent->name}-{$control->name}" value="{$control->control->attrs['type'] != 'password' ? $control->value}" />
         </div>
+	{elseif $control instanceof Nette\Forms\Controls\TextArea}
+		{!$control->label}
+		{!$control->control}
 	{elseif $control instanceof Nette\Forms\Controls\Checkbox}
 		<div>{!$control->control} {$control->caption}</div>
    {elseif $control instanceof Nette\Forms\Controls\UploadControl}

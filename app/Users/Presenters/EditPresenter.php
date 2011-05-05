@@ -27,7 +27,7 @@ use vManager,
 	 vBuilder,
 	 vBuilder\Orm\Repository,
 	 Nette,
-	 Nette\Application\UI\Form;
+	 vManager\Form;
 
 /**
  * Presenter for creating and editing users
@@ -43,7 +43,6 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 	 */
 	protected function createComponentUserForm() {
 		$form = new Form;
-		$form->setRenderer(new vManager\Application\DefaultFormRenderer());
 
 		$form->addText('name', __('Name:'))
 				  ->addRule(Form::FILLED, __('Name cannot be empty.'));
