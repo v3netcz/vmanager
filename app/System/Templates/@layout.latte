@@ -57,6 +57,11 @@
 		<script type="text/javascript" src="{$basePath}/js/jqueryFileTree/jqueryFileTree.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/slidernav/slidernav.js"></script> -->
 		
+		<!-- Lokalizace DatePickeru -->
+		{if Nette\Environment::getVariable('lang') == 'cs'}	
+			<script type="text/javascript" src="{$basePath}/js/jquery.ui.datepicker-cs.js"></script>
+		{/if}
+		
 		<script type="text/javascript" src="{$basePath}/js/jquery.livequery.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/jquery.nette.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/jquery.ui.gridito.js"></script>
@@ -112,39 +117,7 @@
 		<!-- This file configures the various jQuery plugins for Adminica. Contains links to help pages for each plugin. -->
 		<script type="text/javascript" src="{$basePath}/js/adminica/adminica_ui.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/vManager.js"></script>
-
 	
-	<script>
-$(document).ready(function () {
-    $("input.date").each(function () { // input[type=date] does not work in IE
-        var el = $(this);
-        var value = el.val();
-        var date = (value ? $.datepicker.parseDate($.datepicker.W3C, value) : null);
-
-        var minDate = el.attr("min") || null;
-        if (minDate) minDate = $.datepicker.parseDate($.datepicker.W3C, minDate);
-        var maxDate = el.attr("max") || null;
-        if (maxDate) maxDate = $.datepicker.parseDate($.datepicker.W3C, maxDate);
-
-        // input.attr("type", "text") throws exception
-        if (el.attr("type") == "date") {
-            var tmp = $("<input/>");
-            $.each("class,disabled,id,maxlength,name,readonly,required,size,style,tabindex,title,value".split(","), function(i, attr)  {
-                tmp.attr(attr, el.attr(attr));
-            });
-            el.replaceWith(tmp);
-            el = tmp;
-        }
-        el.datepicker({
-            minDate: minDate,
-            maxDate: maxDate
-        });
-        el.val($.datepicker.formatDate(el.datepicker("option", "dateFormat"), date));
-    });
-});
-</script>
-	
-		
 		{block head}{/block}						
 	</head>
 	<body>
