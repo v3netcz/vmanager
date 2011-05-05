@@ -29,7 +29,7 @@ namespace NetteTranslator;
 require_once __DIR__ . "/shortcuts.php";
 
 use Nette\Environment,
-	Nette\String;
+	Nette\Utils\Strings as String;
 
 /**
  * Gettext translator.

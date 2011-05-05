@@ -38,7 +38,7 @@
 			$(this).toggleClass("toggle_closed").next().slideToggle("slow");
 			return false; //Prevent the browser jump to the link anchor
 		});
- 	/*
+ 	
  	// Content Box Tabs Config
 			$( ".tabs" ).tabs({ 
 				fx: {opacity: 'toggle', duration: 'slow', height:'toggle'} 
@@ -52,13 +52,13 @@
 	// Content Box Accordion Config		
 		$( ".content_accordion" ).accordion({
 			collapsible: true,
-			active:false,
+			// active:false,
 			header: 'h3.bar', // this is the element that will be clicked to activate the accordion 
 			autoHeight:false,
 			event: 'mousedown',
 			icons:false,
 			animated: true
-		}); */
+		}); 
 		
 	// Sortable Content Boxes Config				
 		$( ".main_container" ).sortable({
@@ -162,7 +162,7 @@
 		$('.ui-slider-handle').addTouch();
 		*/
 	// DataTables Config (more info can be found at http://www.datatables.net/)
-		var oTable = $('.table').dataTable( {
+		/* var oTable = $('.table').dataTable( {
 					"bJQueryUI": true,
 					"sScrollX": "",
 					"bSortClasses": false,
@@ -174,7 +174,7 @@
 					"bScrollCollapse": true,
 					"sPaginationType": "full_numbers",
 					"bRetrieve": true
-					} ); 
+					} ); */
 
 /*
 

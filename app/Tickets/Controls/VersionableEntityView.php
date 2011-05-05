@@ -51,6 +51,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	function __construct($entityName, $id) {
 		$this->entityName = $entityName;
 		$this->id = $id;
+		$this->load();
 	}
 	
 	/**
@@ -73,6 +74,14 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 		$tpl = parent::createTemplate();
 		$tpl->setFile(__DIR__ . '/../Templates/VersionableEntityView/default.latte');
 		
+		$texy = new \Texy();
+      $texy->encoding = 'utf-8';
+      $texy->allowedTags = \Texy::NONE;
+      $texy->allowedStyles = \Texy::NONE;
+      $texy->setOutputMode(\Texy::XHTML1_STRICT);
+		
+		$tpl->registerHelper('texy', callback($texy, 'process'));
+		
 		$tpl->data = end($this->data);
 		$tpl->history = $this->data; 
 		
@@ -83,7 +92,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	 * Renders control to standard output
 	 */
 	function render() {
-		$this->load();
+		
 		$this->getTemplate()->render();
 	}
 

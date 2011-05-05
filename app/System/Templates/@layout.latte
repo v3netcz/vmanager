@@ -23,7 +23,7 @@
 		<link rel="stylesheet" type="text/css" href="{$basePath}/css/jqueryui.css" media="screen">
 		<link rel="stylesheet" type="text/css" href="{$basePath}/css/vManager/gridito.css" media="screen">
 		
-		<!-- These stylesheets are used  -->
+		<!-- These stylesheets are used  --> 
 		<!-- <link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/switcher.css" media="screen">
 		<link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/switcher1.php?default=switcher.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="{$basePath}/css/theme/switcher2.php?default=switcher.css" media="screen" />
@@ -33,6 +33,9 @@
 		<!--[if IE 6]><link rel="stylesheet" type="text/css" href="{$basePath}/css/ie6.css" media="screen" /><![endif]-->
 		<!--[if IE 7]><link rel="stylesheet" type="text/css" href="{$basePath}/css/ie.css" media="screen" /><![endif]-->
 		<link rel="stylesheet" type="text/css" href="{$basePath}/css/all.css" media="screen">
+		
+		<link rel="stylesheet" href="{$basePath}/texyla/css/style.css" type="text/css">
+		<link rel="stylesheet" href="{$basePath}/texyla/themes/default/theme.css" type="text/css">
 
 		<!-- Load JQuery -->		
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
@@ -58,10 +61,89 @@
 		<script type="text/javascript" src="{$basePath}/js/jquery.nette.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/jquery.ui.gridito.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/jquery.ui.gridito.js"></script>
+				
+		<!-- Texyla core -->
+		<script src="{$basePath}/texyla/js/texyla.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/selection.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/texy.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/buttons.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/dom.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/view.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/ajaxupload.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/js/window.js" type="text/javascript"></script>
+
+		<!-- languages -->
+		<script src="{$basePath}/texyla/languages/cs.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/languages/sk.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/languages/en.js" type="text/javascript"></script>
+
+		<!-- plugins -->
+		<script src="{$basePath}/texyla/plugins/keys/keys.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/resizableTextarea/resizableTextarea.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/img/img.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/table/table.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/link/link.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/emoticon/emoticon.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/symbol/symbol.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/files/files.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/color/color.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/textTransform/textTransform.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/youtube/youtube.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+		//<![CDATA[
+		
+		$.texyla.setDefaults({	
+			texyCfg: "admin",
+			baseDir: '/texyla',
+			previewPath: "preview.php",
+			filesPath: "filesplugin/files.php",
+			filesThumbPath: "filesplugin/thumbnail.php?image=%var%",
+			filesUploadPath: "filesplugin/files/upload.php",
+			bottomLeftToolbar: [],
+			bottomRightEditToolbar: [],
+			toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol'],
+			width: 500
+			// Je tu problem s taby, nejspise by bylo potreba znovunastavit sirku pri prepnuti tabu
+			//width: '100%' 
+		});
+		</script>
 		
 		<!-- This file configures the various jQuery plugins for Adminica. Contains links to help pages for each plugin. -->
 		<script type="text/javascript" src="{$basePath}/js/adminica/adminica_ui.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/vManager.js"></script>
+
+	
+	<script>
+$(document).ready(function () {
+    $("input.date").each(function () { // input[type=date] does not work in IE
+        var el = $(this);
+        var value = el.val();
+        var date = (value ? $.datepicker.parseDate($.datepicker.W3C, value) : null);
+
+        var minDate = el.attr("min") || null;
+        if (minDate) minDate = $.datepicker.parseDate($.datepicker.W3C, minDate);
+        var maxDate = el.attr("max") || null;
+        if (maxDate) maxDate = $.datepicker.parseDate($.datepicker.W3C, maxDate);
+
+        // input.attr("type", "text") throws exception
+        if (el.attr("type") == "date") {
+            var tmp = $("<input/>");
+            $.each("class,disabled,id,maxlength,name,readonly,required,size,style,tabindex,title,value".split(","), function(i, attr)  {
+                tmp.attr(attr, el.attr(attr));
+            });
+            el.replaceWith(tmp);
+            el = tmp;
+        }
+        el.datepicker({
+            minDate: minDate,
+            maxDate: maxDate
+        });
+        el.val($.datepicker.formatDate(el.datepicker("option", "dateFormat"), date));
+    });
+});
+</script>
+	
 		
 		{block head}{/block}						
 	</head>

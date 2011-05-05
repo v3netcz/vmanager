@@ -95,6 +95,21 @@ CREATE TABLE `pm_projects` (
   PRIMARY KEY (`projectId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+# Dump of table pm_tickets
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `pm_tickets`;
+
+CREATE TABLE `pm_tickets` (
+  `ticketId` smallint(6) unsigned NOT NULL,
+  `revision` smallint(6) NOT NULL DEFAULT '1',
+  `author` smallint(6) unsigned DEFAULT NULL,
+  `commentId` int(11) unsigned DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ticketId`,`revision`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

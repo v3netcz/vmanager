@@ -22,11 +22,22 @@ $controls = $form->getComponents(TRUE, 'Nette\Forms\IControl');
         </div>
 	{elseif $control instanceof Nette\Forms\Controls\Checkbox}
 		<div>{!$control->control} {$control->caption}</div>
+   {elseif $control instanceof Nette\Forms\Controls\UploadControl}
+		<div class="uploader">
+			<input type="file" style="opacity: 0; " name="{$control->name}" id="frm{$control->parent->name}-{$control->name}">
+			<span class="filename">No file selected</span>
+			<span class="action">Choose File</span>
+		</div>
 	{elseif $control instanceof Nette\Forms\Controls\SubmitButton}
 		<button class="button_colour round_all">
 			<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
          <span>{$control->caption}</span>
 		</button>
+	{elseif $control instanceof JanTvrdik\Components\DatePicker}
+		<div>
+        {!$control->label}
+		{!$control->control}
+      </div>
 	{else}
 		{? dump($control);}
 		{!$control->label}
