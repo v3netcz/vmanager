@@ -34,18 +34,22 @@ use Nette, dibi;
 class InvoiceManager {
 	
 	private static $invoices;
+	private static $invoicesByYear;
 	
 	public static function getInvoices($year = null, $ic = null) {
 		if(self::$invoices === null) self::loadInvoices();
 		if($year === null && $ic === null) return self::$invoices;
 		
+		if($year === null) $src = &self::$invoices;
+		elseif(isset(self::$invoicesByYear[$year])) $src = &self::$invoicesByYear[$year];
+		else return array();
+		
+		if($ic === null) return $src;
+		
 		$invoices = array();
-		foreach(self::$invoices as $curr) {
-			if( ($year === null || $curr->getDate()->format("Y") == $year)
-				 && ($ic === null || $curr->getCustomerId() == $ic)
-					  )
-							
-						$invoices[] = $curr;
+		foreach($src as &$curr) {
+			if($curr->getCustomerId() == $ic)				
+				$invoices[] = &$curr;
 		}
 		
 		return $invoices;
@@ -61,7 +65,7 @@ class InvoiceManager {
 		
 		asort($ids);
 		$ordered = array();
-		foreach($ids as $key=>$value) $ordered[] = $invoices[$key];
+		foreach($ids as $key=>$value) $ordered[] = &$invoices[$key];
 
 		return $ordered;
 	}
@@ -69,14 +73,7 @@ class InvoiceManager {
 	public static function getYears() {
 		if(self::$invoices === null) self::loadInvoices();
 		
-		$years = array();
-		foreach(self::$invoices as $curr) {
-			$year = (int) $curr->getDate()->format('Y');
-			
-			if(!in_array($year, $years))
-				$years[] = $year;
-		}
-		
+		$years = array_keys(self::$invoicesByYear);
 		sort($years);
 		return $years;
 	}
@@ -122,10 +119,19 @@ class InvoiceManager {
 	private static function loadInvoices() {
 		$files = Nette\Utils\Finder::findFiles("*.xml")->from(self::getInvoiceDirPath());
 		self::$invoices = array();
+		self::$invoicesByYear = array();
 		
 		foreach($files as $curr) {
-			if(!Nette\Utils\Strings::match($curr->getPath(), '/\\.AppleDouble/'))
-				self::$invoices[] = new Invoice($curr->getPath() . '/' .$curr->getFilename());
+			if(!Nette\Utils\Strings::match($curr->getPath(), '/\\.AppleDouble/') && !Nette\Utils\Strings::match($curr->getPath(), '/workspace/') && !Nette\Utils\Strings::startsWith($curr->getFilename(), '.')) {
+				$invoice = new Invoice($curr->getPath() . '/' .$curr->getFilename());
+				
+				if(!isset(self::$invoicesByYear[$invoice->getDate()->format("Y")]))
+					self::$invoicesByYear[$invoice->getDate()->format("Y")] = array();	  
+				
+				$index = count(self::$invoices);
+				self::$invoices[$index] = $invoice;
+				self::$invoicesByYear[$invoice->getDate()->format("Y")][] = &self::$invoices[$index];
+			}
 		}
 	}
 	

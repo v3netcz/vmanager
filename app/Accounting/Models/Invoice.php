@@ -36,63 +36,81 @@ use dibi, Nette;
 class Invoice extends Nette\Object {
 	
 	private $filename;
-	private $xml;
+	private $data;
+	private $paymentDate;
 	
 	public function __construct($filename) {
 		$this->filename = $filename;
 		
-		$this->loadFromFile();
+		$cache = $this->getCache();
+		if(isset($cache[$filename]) && $cache[$filename]['timestamp'] >= filemtime($filename)) {
+			$this->data = $cache[$filename]['data'];
+			if($cache[$filename]['paymentDate'] !== null && $cache[$filename]['paymentDate'] !== false)
+				$this->paymentDate = $cache[$filename]['paymentDate'];
+		} else {
+			$this->loadFromFile();
+			unset($cache[$filename]);
+		}
+	}
+	
+	public function __destruct() {
+		if($this->data !== null && !isset($cache[$this->filename])) {
+			$cache = $this->getCache();
+			$cache[$this->filename] = array(
+				 'timestamp' => time(),
+				 'data' => $this->data,
+				 'paymentDate' => $this->paymentDate
+			);
+		}
 	}
 	
 	public function getId() {
-		return (int) preg_replace("/[^0-9]+/", "", $this->getFormatedId());
+		return $this->data['id'];
 	}
 	
 	public function getIdPrefix() {
-		return (int) mb_substr($this->getFormatedId(), 4);
+		return (int) mb_substr((String) $this->data['id'], 4);
 	}
 	
 	public function getIdSulfix() {
-		return (int) mb_substr($this->getFormatedId(), 5);
+		return (int) mb_substr((String) $this->data['id'], 4);
 	}
 	
 	public function getFormatedId() {
-		return (String) $this->xml['number'];
+		return $this->getIdPrefix() . '/' . $this->getIdSulfix();
 	}
 	
 	public function getDate() {
-		return new \DibiDateTime($this->xml['created']);
+		return new \DibiDateTime($this->data['created']);
 	}
 	
 	public function getDeadline() {
-		return new \DibiDateTime((String) $this->xml->payment[0]->deadline);
+		return new \DibiDateTime($this->data['due']);
 	}
 	
 	public function getTotal() {
-		$total = 0.0;
-		
-		foreach($this->xml->items[0]->item as $curr) {
-			$amount = isset($curr['amount']) ? (int) $curr['amount'] : 1;
-			$total += $amount * (float) $curr['price'];
-		}
-		
-		return $total;
+		return $this->data['total'];
 	}
 	
 	public function getPaymentDate() {
-		$results = dibi::query("SELECT [date] FROM [accounting_invoicePayments] WHERE [invoiceId] = %i AND [date] <> 'cancel'", $this->getId())->fetch();
-		if($results == false) return null;
-		else return new \DibiDateTime($results['date']);
+		if($this->paymentDate === null) $this->loadPaymentRecord();
+		
+		if($this->paymentDate != 'cancel' && $this->paymentDate !== false)
+			return new \DibiDateTime($this->paymentDate);
+		
+		return null;
 	}
 	
 	public function isPaid() {
-		$results = dibi::query("SELECT 1 FROM [accounting_invoicePayments] WHERE [invoiceId] = %i AND [date] <> 'cancel'", $this->getId())->fetch();
-		return $results !== false;
+		if($this->paymentDate === null) $this->loadPaymentRecord();
+		
+		return $this->paymentDate != 'cancel' && $this->paymentDate !== false;
 	}
 	
 	public function isCanceled() {
-		$results = dibi::query("SELECT 1 FROM [accounting_invoicePayments] WHERE [invoiceId] = %i AND [date] = 'cancel'", $this->getId())->fetch();
-		return $results !== false;
+		if($this->paymentDate === null) $this->loadPaymentRecord();
+		
+		return $this->paymentDate == 'cancel';
 	}
 	
 	public function isOverdue() {
@@ -100,22 +118,44 @@ class Invoice extends Nette\Object {
 	}
 	
 	public function getCustomerName() {
-		return (String) $this->xml->customer[0]->invoicename[0];
+		return $this->data['customerName'];
 	}
 	
 	public function getCustomerId() {
-		return (int) $this->xml->customer[0]['ic'];
+		return $this->data['customerId'];
 	}
 	
 	private function loadFromFile() {
-		if($this->xml !== null) return ;
+		if($this->data !== null) return ;
 		
 		if(!file_exists($this->filename)) throw new \FileNotFoundException("Invoice XML file '$this->filename' was not found");
 		
 		$xml = simplexml_load_file($this->filename);
 		if($xml === false) throw new \Exception("Error parsixng invoice XML file '$this->filename'");
 		
-		$this->xml = $xml;
+		$this->data = array();
+		$this->data['id'] = (int) preg_replace("/[^0-9]+/", "", (String) $xml['number']);
+		
+		$this->data['customerId'] = (int) $xml->customer[0]['ic'];
+		$this->data['customerName'] = (String) $xml->customer[0]->invoicename[0];
+		
+		$this->data['created'] = (String) $xml['created'];
+		$this->data['due'] = (String) $xml->payment[0]->deadline;
+		
+		$this->data['total'] = 0.0;
+		foreach($xml->items[0]->item as $curr) {
+			$amount = isset($curr['amount']) ? (int) $curr['amount'] : 1;
+			$this->data['total'] += $amount * (float) $curr['price'];
+		}
+	}
+	
+	protected function loadPaymentRecord() {
+		$this->paymentDate = dibi::query("SELECT [date] FROM [accounting_invoicePayments] WHERE [invoiceId] = %i", $this->getId())->fetchSingle();
+	}
+	
+	protected function & getCache() {
+		$cache = Nette\Environment::getCache('Accounting.Invoice');
+		return $cache;
 	}
 	
 }
