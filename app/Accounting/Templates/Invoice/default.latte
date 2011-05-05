@@ -1,0 +1,77 @@
+{block head}
+	<style>
+		.invoiceListing .id {
+			width: 80px;
+		}
+		
+		.invoiceListing .price {
+			text-align: right;
+		}
+		
+		.invoiceListing .issuance, .invoiceListing .deadline {
+			text-align: center;
+			width: 100px;
+		}
+		
+		.invoiceListing .overdueInvoice TD {
+			color: brown;
+		}
+		
+		.invoiceListing .paidInvoice A.gridito-button,
+		.invoiceListing .canceledInvoice A.gridito-button{
+			display: none;
+		}
+
+		DIV.yearSelectionBox,
+		DIV.summaryBox {
+			line-height: 180%;
+		}
+
+		DIV.summaryBox .price {
+			font-weight: bold;
+		}
+	</style>
+{/block}
+
+{block content}
+	<div class="flat_area grid_16">
+		<h2><?php echo __('Invoices'); ?></h2>
+		
+		{*if isset($years)}
+			<div class="yearSelectionBox">
+			Roky: 
+			{foreach $years as $curr}
+				[<a href="{link this, 'year' => $curr}">{$curr}</a>]
+			{/foreach}
+			</div>
+		{/if*}
+	</div>
+	
+	{include ../../../System/Templates/Includes/flashes.latte}
+
+	<div class="box grid_16 round_all">
+		<div class="invoiceListing">
+			{control invoiceGrid}
+		</div>
+	</div>
+
+	<div class="box grid_8 round_all">
+		<h2 class="box_head grad_colour"><?php echo __('Summary'); ?></h2>
+		<a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>
+		<div class="toggle_container">
+			<div class="block summaryBox">
+				Celkem zbývá zaplatit: <span class="price">{$totalExpecting|currency}</span><br />
+				Celkem vystaveno: <span class="price">{$total|currency}</span>
+				{if isset($year)}
+					<br />
+					Součet danitelných přijmů za rok {$year}: <span class="price">{$paidThisYear|currency}</span>
+				{/if}
+				{if isset($lastPaymentDate)}
+					<br />
+					Poslední platba obdržena: <span class="price">{$lastPaymentDate->format("d.m.Y")}</span>
+				{/if}
+			</div>
+		</div>
+	</div>
+{/block}
