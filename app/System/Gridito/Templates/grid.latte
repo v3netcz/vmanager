@@ -62,7 +62,7 @@
 						 </tr>
                     <tr class="columnHeader">
                         {block tableheader}
-                        <th n:foreach="$control['columns']->getComponents() as $column" n:class="$iterator->isFirst() ? first, $iterator->isLast() ? last">
+                        <th n:foreach="$control['columns']->getComponents() as $column" n:class="$iterator->isFirst() ? first, $iterator->isLast() && !$control->hasActions() ? last">
                            {block tableheadercontent}
 									
 									{if $column->isSortable()}
@@ -72,13 +72,8 @@
 									{else}
 										<a href="#" n:class="unsortable, $control->getAjaxClass()">
 									{/if}
-									
-                            <!-- <span class="gridito-sorting" n:if="$column->isSortable()">
-                                <a n:if="$column->getSorting() === null" n:href="sort!, $column->getName(), asc" n:class="$control->getAjaxClass()"><span class="ui-icon ui-icon-carat-2-n-s"></span></a>
-                                <a n:if="$column->sorting === 'asc'" n:href="sort!, $column->getName(), desc" n:class="$control->getAjaxClass()"><span class="ui-icon ui-icon-triangle-1-n"></span></a>
-                                <a n:if="$column->sorting === 'desc'" n:href="sort!, null, null" n:class="$control->getAjaxClass()"><span class="ui-icon ui-icon-triangle-1-s"></span></a>
-                            </span> -->
-                            {$column->getLabel()}
+
+										{$column->getLabel()}
 									 </a>
                            {/block} 
                         </th>
@@ -92,8 +87,8 @@
                         <td n:class="gridito-cell, $column->getCellClass($iterator, item), $control->getHighlightOrderedColumn() && $column->getSorting() ? ui-state-highlight" n:foreach="$control['columns']->getComponents() as $column">
                             {control $column:cell $item}
                         </td>
-                        <td class="gridito-actioncell" n:if="$control->hasActions()" n:inner-foreach="$control['actions']->getComponents() as $button">
-                            {control $button $item}
+                        <td n:class="gridito-actioncell, $column->getCellClass($iterator, item)" n:if="$control->hasActions()" n:inner-foreach="$control['actions']->getComponents() as $button">
+									{control $button $item}
                         </td>
                     </tr>
                     {/block}
@@ -101,7 +96,7 @@
 					 
 					 <tfoot n:if="$control->getPaginator()->getItemCount() > 0">
 						 <tr>
-							 <td colspan="{=count($control['columns']->getComponents())}">
+							 <td colspan="{=count($control['columns']->getComponents())+$control->hasActions()}">
 								 
 								 {block info}
 									{var $paginator = $control->getPaginator()}
