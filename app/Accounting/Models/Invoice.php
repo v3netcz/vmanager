@@ -69,11 +69,11 @@ class Invoice extends Nette\Object {
 	}
 	
 	public function getIdPrefix() {
-		return (int) mb_substr((String) $this->data['id'], 4);
+		return mb_substr((String) $this->data['id'], 0, 4);
 	}
 	
 	public function getIdSulfix() {
-		return (int) mb_substr((String) $this->data['id'], 4);
+		return mb_substr((String) $this->data['id'], 4);
 	}
 	
 	public function getFormatedId() {
