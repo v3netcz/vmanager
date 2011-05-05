@@ -2,7 +2,7 @@
 
 namespace Gridito;
 
-use Nette\Web\Html;
+use Nette\Utils\Html;
 
 /**
  * Button base
@@ -30,6 +30,9 @@ abstract class BaseButton extends \Nette\Application\UI\PresenterComponent
 	/** @var bool */
 	private $showText = true;
 	
+	/** @var array of classes */
+	private $classes = array();
+	
 
 
 	/**
@@ -55,9 +58,18 @@ abstract class BaseButton extends \Nette\Application\UI\PresenterComponent
 	}
 
 
+	public function setClass($class) {
+		if(is_array($class)) $this->classes = $class;
+		else $this->classes = array($class);
+	}
+	
+	public function getClass() {
+		return trim(implode(' ', $this->classes));
+	}
+	
 
 	/**
-	 * Get jQuery UI icon
+	 * Get icon URL
 	 * @return string
 	 */
 	public function getIcon()
@@ -68,7 +80,7 @@ abstract class BaseButton extends \Nette\Application\UI\PresenterComponent
 
 
 	/**
-	 * Set jQuery UI icon
+	 * Set icon URL
 	 * @param string icon
 	 * @return BaseButton
 	 */
@@ -241,8 +253,7 @@ abstract class BaseButton extends \Nette\Application\UI\PresenterComponent
 	{
 		return Html::el("a")
 			->href($this->getLink($row))
-			->data("gridito-icon", $this->icon)
-			->class(array("gridito-button", $this->showText ? null : "gridito-hide-text"))
+			->class(array_merge(array("gridito-button", $this->showText ? null : "gridito-hide-text"), $this->classes))
 			->setText($this->label);
 	}
 

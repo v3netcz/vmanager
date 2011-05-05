@@ -15,10 +15,10 @@ $.widget("ui.gridito_custom", $.extend({}, $.ui.gridito.prototype, {
 				
 		this.table.find("tfoot td").addClass("ui-widget-header");		
 		
-		this.element.find("a.gridito-button").each(function () {
+		/*this.element.find("a.gridito-button").each(function () {
 			var el = $(this);
 			el.addClass("ui-button");
-		});
+		}); */ 
 	}
 
 }));

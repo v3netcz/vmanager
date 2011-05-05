@@ -33,7 +33,7 @@ $.widget("ui.gridito", {
 		initSortingIcons("ui-icon-triangle-1-s", "ui-icon-carat-2-n-s");
 
 		// buttons
-		this.element.find("a.gridito-button").each(function () {
+		this.element.find("TFOOT a.gridito-button").each(function () {
 			var el = $(this);
 			el.button({
 				icons: {
