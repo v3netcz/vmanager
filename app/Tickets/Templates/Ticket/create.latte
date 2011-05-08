@@ -1,0 +1,96 @@
+{block head}
+<script type="text/javascript">
+	$(document).ready(function () {
+		var tabs = $('#ticketCreateFormTabs');
+		
+		tabs.bind('tabsshow', function(event, ui) {
+			if(ui.panel.id == 'tabs-2') {
+				$('#frmcreateForm-description').focus();
+			} else if(ui.panel.id == 'tabs-1') {
+				$('#frmcreateForm-name').focus();
+			}
+		});
+						
+		$('#frmcreateForm-name').focus();
+	});
+</script>
+
+<style>
+	#ticketCreateFormTabs INPUT.text {
+		width: 350px;
+	}
+</style>
+{/block}
+
+{block content}
+	{include ../../../System/Templates/Includes/flashes.latte}
+	
+	<div class="flat_area grid_16">
+		<h2><?php echo __('Create new task'); ?></h2>
+	</div>
+	
+	{control createForm begin}
+	{var form => $control['createForm']}
+	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all" id="ticketCreateFormTabs">
+		<ul class="tab_header grad_colour clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+			<li class="ui-state-default ui-corner-top"><a href="#tabs-1"><?php echo __('Ticket summary'); ?></a></li>
+			<li class="ui-state-default ui-corner-top"><a href="#tabs-2"><?php echo __('Ticket description'); ?></a></li>
+		</ul>
+
+		<!-- <a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a> -->
+		<div class="toggle_container">
+			<div id="tabs-1" class="block ui-tabs-panel ui-widget-content ui-corner-bottom">
+				<div class="content">
+					<div style="width: 45%; float: left;">
+						<div>
+							{!$form['name']->label}
+							{!$form['name']->control}
+						</div>
+
+						<div n:if="isset($form['deadline'])">
+							{!$form['deadline']->label}
+							{!$form['deadline']->control}
+						</div>
+
+						<div n:if="isset($form['assignTo'])">
+							{!$form['assignTo']->label}
+							{!$form['assignTo']->control}
+						</div>
+					</div>
+					
+					<div style="width: 45%; float: right;">
+						<div n:if="isset($form['priority'])">
+							{!$form['priority']->label}
+							{!$form['priority']->control}
+						</div>
+					</div>
+					
+					
+					<div style="clear: both;">&nbsp;</div>
+				</div>
+			</div>
+			<div id="tabs-2" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+				<div class="content">
+					{$form['description']->control}
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="grad_colour clearfix tab_footer">
+			<button class="round_all btnTabPrev">
+				<img height="24" width="24" alt="Next" src="{$basePath}/images/icons/small/grey/Bended%20Arrow%20Left.png">
+				<span><?php echo __('Back'); ?></span>
+			</button>
+			
+			<button type="submit" class="round_all btnTabNext">
+				<img height="24" width="24" alt="Next" src="{$basePath}/images/icons/small/grey/Bended%20Arrow%20Right.png">
+				<span><?php echo __('Next'); ?></span>
+				<span class="submit hidden">{$form['send']->caption}</span>
+			</button>
+		</div>
+	</div>
+	{control createForm end}
+    
+{/block}

@@ -41,7 +41,7 @@
  	
  	// Content Box Tabs Config
 			$( ".tabs" ).tabs({ 
-				fx: {opacity: 'toggle', duration: 'slow', height:'toggle'} 
+				fx: {opacity: 'toggle', duration: 'normal', height:'toggle'} 
 			});
 
 			$( ".side_tabs" ).tabs({ 
