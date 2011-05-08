@@ -93,10 +93,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	 */
 	protected function createComponentCreateForm() {
 		$form = new Form;
-		$form->setRenderer(new Nette\Forms\Rendering\DefaultFormRenderer());
+		
+		//$form->setRenderer(new Nette\Forms\Rendering\DefaultFormRenderer());
 
 		$form->addText('name', __('Name:'))->setAttribute('title', __('Short task description. Please be concrete.'))
-			 ->addRule(Form::FILLED);
+			 ->addRule(Form::FILLED, __('Name of ticket has to be filled.'));
 		
 		/*
 		$form->addDatePicker('deadline', __('Deadline:'))->setAttribute('title', __('When has to be task done?'));

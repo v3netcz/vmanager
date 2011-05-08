@@ -42,6 +42,13 @@
 		<div class="toggle_container">
 			<div id="tabs-1" class="block ui-tabs-panel ui-widget-content ui-corner-bottom">
 				<div class="content">
+					{if $form->hasErrors()}
+						<div n:foreach="$form->getErrors() as $error" class="alert alert_orange">
+							<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+							{$error}
+						</div>
+					{/if}
+
 					<div style="width: 45%; float: left;">
 						<div>
 							{!$form['name']->label}
