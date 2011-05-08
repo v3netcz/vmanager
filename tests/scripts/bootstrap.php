@@ -32,9 +32,6 @@ define('APP_DIR', TEST_DIR . '/../app');
 // absolute filesystem path to the libraries
 define('LIBS_DIR', TEST_DIR . '/../libs');
 
-// absolute filesystem path to the temporary files
-define('TEMP_DIR', TEST_DIR . '/../temp');
-
 require LIBS_DIR . '/vBuilderFw/tests/bootstrap.php';
 
 /** PUT ANY APPLICATION SPECIFIC INITIALIZATION BELLOW ************************/

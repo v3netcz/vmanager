@@ -52,10 +52,10 @@ dibi::query("CREATE TEMPORARY TABLE [pm_projects_temp] LIKE [".vManager\Modules\
 class Comment extends vManager\Modules\Tickets\Comment {
 	
 	protected static function & getMetadataInternal() {
-		$reflection = new Nette\Reflection\ClassReflection('vManager\Modules\Tickets\Comment');
+		$reflection = new Nette\Reflection\ClassType('vManager\Modules\Tickets\Comment');
 		$metadata = new vBuilder\Orm\AnnotationMetadata($reflection);
 		
-		$reflection2 = new Nette\Reflection\ClassReflection(get_called_class());
+		$reflection2 = new Nette\Reflection\ClassType(get_called_class());
 		$metadata2 = new vBuilder\Orm\AnnotationMetadata($reflection2);		
 		
 		$metadata3 =  new vBuilder\Orm\MergedMetadata($metadata, $metadata2);
@@ -73,10 +73,10 @@ class Comment extends vManager\Modules\Tickets\Comment {
 class Project extends vManager\Modules\Tickets\Project {
 	
 	protected static function & getMetadataInternal() {
-		$reflection = new Nette\Reflection\ClassReflection('vManager\Modules\Tickets\Project');
+		$reflection = new Nette\Reflection\ClassType('vManager\Modules\Tickets\Project');
 		$metadata = new vBuilder\Orm\AnnotationMetadata($reflection);
 		
-		$reflection2 = new Nette\Reflection\ClassReflection(get_called_class());
+		$reflection2 = new Nette\Reflection\ClassType(get_called_class());
 		$metadata2 = new vBuilder\Orm\AnnotationMetadata($reflection2);		
 		
 		$metadata3 =  new vBuilder\Orm\MergedMetadata($metadata, $metadata2);

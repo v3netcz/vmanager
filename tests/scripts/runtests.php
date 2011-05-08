@@ -33,7 +33,7 @@ define('LIBS_DIR', TEST_DIR . '/../libs');
 // absolute filesystem path to the temporary files
 define('TEMP_DIR', TEST_DIR . '/../temp');
 
-require LIBS_DIR . '/nette/tests/NetteTest/TestRunner.php';
+require LIBS_DIR . '/nette/tests/Test/TestRunner.php';
 
 echo "\n";
 echo "vBuilder Framework Test script\n";
