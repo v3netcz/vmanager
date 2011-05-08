@@ -138,7 +138,7 @@
 				<div class="user_box round_all clearfix">
 					<img src="{=$user->getIdentity()->getAvatarUrl()}" width="55" alt="Profile Pic" />
 					<h2>{if $user->isInRole('Administrator')}<?php echo __('Administrator'); ?>{else}<?php echo __('User'); ?>{/if}</h2>
-					<h3><a class="text_shadow" href="#">{=$user->getIdentity()->getName()} {=$user->getIdentity()->getSurname()}</a></h3>
+					<h3><a class="text_shadow" href="{link :System:UserSettings:default}">{=$user->getIdentity()->getName()} {=$user->getIdentity()->getSurname()}</a></h3>
 					<ul>
 						<li><a href="{link :System:UserSettings:default}"><?php echo __('settings'); ?></a><span class="divider">|</span></li>
 						<li><a href="{link :System:Sign:out}"><?php echo __('logout'); ?></a></li>
