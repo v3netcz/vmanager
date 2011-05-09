@@ -2005,3 +2005,7 @@ zoom:1;
 .tabs .tab_footer BUTTON.btnTabSubmit { 
 	float: right;
 }
+
+.box a.nograbber {
+	right:12px;
+}
