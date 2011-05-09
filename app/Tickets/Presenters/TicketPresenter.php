@@ -185,24 +185,39 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$values = $form->getValues();
 		$ticket = $this->getTicket();
 
-		$this->saveTicket($ticket, $values);
-
-		$this->flashMessage(__('Change has been saved.'));
+		if($this->saveTicket($ticket, $values))
+			$this->flashMessage(__('Change has been saved.'));
+		else
+			$this->flashMessage(__('Nothing to change.'));
+		
+		
 		$this->redirect('this');
 	}
 
 	protected function saveTicket(Ticket $ticket, $values) {
-		if(isset($values['comment'])) {
+		$changed = false;
+		
+		if(isset($values['comment']) && !empty($values['comment'])) {
 			$ticket->comment = new Comment();
 			$ticket->comment->text = $values['comment'];
+			$changed = true;
+		} else {
+			$ticket->comment = null;
 		}
 
-		if(isset($values['name'])) $ticket->name = $values['name'];
-		if(isset($values['description'])) $ticket->description = $values['description'];
+		foreach(array('name', 'description') as $curr) {
+			if(isset($values[$curr]) && $ticket->{$curr} != $values[$curr]) {
+				$ticket->{$curr} = $values[$curr];
+				$changed = true;
+			}
+		}
+				
+		if($changed) {
+			$ticket->author = Nette\Environment::getUser()->getIdentity();
+			$ticket->save();
+		}
 		
-		$ticket->author = Nette\Environment::getUser()->getIdentity();
-
-		$ticket->save();
+		return $changed;
 	}
 
 	protected function getTicket() {
