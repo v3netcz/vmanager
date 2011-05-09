@@ -43,6 +43,7 @@ class Form extends Nette\Application\UI\Form {
 	public function __construct(Nette\ComponentModel\IContainer $parent = NULL, $name = NULL) {
 		parent::__construct($parent, $name);
 		
+		$this->getElementPrototype()->novalidate = 'novalidate';
 		$this->setRenderer(new Forms\DefaultFormRenderer());
 	}
 	

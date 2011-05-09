@@ -63,12 +63,16 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:default'),
 				 'label' => __('Tasks'),
 				 'icon' => System::getBasePath() . '/images/icons/small/grey/Flag.png',
-				 /*'children' => array(
+				 'children' => array(
 					  array(
 							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:default'),
 							'label' => __('My tickets')
+					  ),
+					  array(
+							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:create'),
+							'label' => __('Create new ticket')
 					  )
-				 ) */
+				 )
 			);
 		}
 		

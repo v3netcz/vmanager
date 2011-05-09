@@ -114,6 +114,10 @@
 		});
 		</script>
 		
+		<!-- Tipsy -->
+		<link rel="stylesheet" href="{$basePath}/tipsy/css/tipsy.css" type="text/css">
+		<script src="{$basePath}/tipsy/jquery.tipsy.js" type="text/javascript" charset="utf-8"></script>
+		
 		<!-- This file configures the various jQuery plugins for Adminica. Contains links to help pages for each plugin. -->
 		<script type="text/javascript" src="{$basePath}/js/adminica/adminica_ui.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/vManager.js"></script>
@@ -134,7 +138,7 @@
 				<div class="user_box round_all clearfix">
 					<img src="{=$user->getIdentity()->getAvatarUrl()}" width="55" alt="Profile Pic" />
 					<h2>{if $user->isInRole('Administrator')}<?php echo __('Administrator'); ?>{else}<?php echo __('User'); ?>{/if}</h2>
-					<h3><a class="text_shadow" href="#">{=$user->getIdentity()->getName()} {=$user->getIdentity()->getSurname()}</a></h3>
+					<h3><a class="text_shadow" href="{link :System:UserSettings:default}">{=$user->getIdentity()->getName()} {=$user->getIdentity()->getSurname()}</a></h3>
 					<ul>
 						<li><a href="{link :System:UserSettings:default}"><?php echo __('settings'); ?></a><span class="divider">|</span></li>
 						<li><a href="{link :System:Sign:out}"><?php echo __('logout'); ?></a></li>

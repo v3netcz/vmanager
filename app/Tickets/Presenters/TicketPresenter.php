@@ -23,7 +23,11 @@
 
 namespace vManager\Modules\Tickets;
 
-use vManager, Nette, vBuilder\Orm\Repository, Gridito, vManager\Form;
+use vManager,
+	 Nette,
+	 vBuilder\Orm\Repository,
+	 Gridito,
+	 vManager\Form;
 
 /**
  * Presenter for viewing tickets
@@ -32,32 +36,34 @@ use vManager, Nette, vBuilder\Orm\Repository, Gridito, vManager\Form;
  * @since Apr 27, 2011
  */
 class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
-	
+
 	/** @var Ticket */
 	protected $ticket;
-	
+	/** @var array of suggestions to Assign form field */
+	protected $assignToSuggestions = array();
+
 	public function renderDefault() {
 		
 	}
-	
+
 	protected function createComponentTicketListingGrid($name) {
 		$grid = new vManager\Grid($this, $name);
 
 		$ds = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
 				  ->where('[revision] > 0');
-		
+
 		$grid->setModel(new Gridito\DibiFluentModel($ds));
 		$grid->setItemsPerPage(20);
-		
+
 		// columns
 		$grid->addColumn("id", __('ID'), array(
 			 "renderer" => function ($row) {
 				 $link = Nette\Environment::getApplication()->getPresenter()->link('detail', $row->ticketId);
-				 echo Nette\Utils\Html::el("a")->href($link)->setText('#' . $row->ticketId);
+				 echo Nette\Utils\Html::el("a")->href($link)->setText('#'.$row->ticketId);
 			 },
 			 "sortable" => true,
 		));
-			 
+
 		$grid->addColumn("name", __('Ticket name'), array(
 			 "renderer" => function ($row) {
 				 $link = Nette\Environment::getApplication()->getPresenter()->link('detail', $row->ticketId);
@@ -68,65 +74,162 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$grid->addColumn("timestamp", __("Last change"))->setSortable(true);
 	}
-	
-	public function renderDetail($id) {	
+
+	public function renderDetail($id) {
 		$texy = new \Texy();
-      $texy->encoding = 'utf-8';
-      $texy->allowedTags = \Texy::NONE;
-      $texy->allowedStyles = \Texy::NONE;
-      $texy->setOutputMode(\Texy::XHTML1_STRICT);
-		
+		$texy->encoding = 'utf-8';
+		$texy->allowedTags = \Texy::NONE;
+		$texy->allowedStyles = \Texy::NONE;
+		$texy->setOutputMode(\Texy::XHTML1_STRICT);
+
 		$this->template->registerHelper('texy', callback($texy, 'process'));
-		
+
 		$this->template->historyWidget = new VersionableEntityView('vManager\\Modules\\Tickets\\Ticket', $id);
 	}
-	
+
 	/**
-	 * Sign in form component factory.
-	 * @return Nette\Application\UI\Form
+	 * Create form
+	 * @return vManager\Form
 	 */
-	protected function createComponentUpdateForm() {				
+	protected function createComponentCreateForm() {
+		$form = new Form;
+		
+		//$form->setRenderer(new Nette\Forms\Rendering\DefaultFormRenderer());
+
+		$form->addText('name', __('Name:'))->setAttribute('title', __('Short task description. Please be concrete.'))
+			 ->addRule(Form::FILLED, __('Name of ticket has to be filled.'));
+		
+		/*
+		$form->addDatePicker('deadline', __('Deadline:'))->setAttribute('title', __('When has to be task done?'));
+
+		$form->addText('assignTo', __('Assign to:'))
+				  ->setAttribute('autocomplete-src', $this->link('suggestAssignTo'))
+				  ->setAttribute('title', __('Who will resolve this issue?'));
+
+		$form->addSelect('priority', __('Priority:'), array(
+			__('Low'), __('Normal'), __('High') 
+		)); */
+		
+		$form->addTextArea('description')
+				  ->getControlPrototype()->class('texyla');
+
+		$form->addSubmit('send', __('Save'));
+
+		$form->onSubmit[] = callback($this, 'createFormSubmitted');
+
+		return $form;
+	}
+
+	/**
+	 * Set matching items for current query given in typedText parameter (GET term)
+	 * 
+	 * @param string $typedText The text the user typed in the input
+	 *
+	 * @return void
+	 */
+	public function actionSuggestAssignTo() {
+		$typedText = $this->getParam('term', '');
+		
+		$users = Repository::findAll('vManager\\Security\\User')
+				  ->where('[username] LIKE %s', $typedText.'%')->limit(10)
+				  ->fetchAll();		
+		
+		$data = array();
+		foreach($users as $curr) {
+			$data[] = $curr->getUsername();
+		}
+		
+		$this->assignToSuggestions = $data;
+	}
+
+	/**
+	 * Send the matching items for assign to field completer (JSON)
+	 * 
+	 * @return void
+	 */
+	public function renderSuggestAssignTo() {
+		$this->sendResponse(new Nette\Application\Responses\JsonResponse($this->assignToSuggestions));
+	}
+
+	public function createFormSubmitted(Form $form) {
+		$values = $form->getValues();
+		$ticket = new Ticket();
+
+		$this->saveTicket($ticket, $values);
+
+		$this->flashMessage(__('New ticket has been created.'));
+		$this->redirect('detail', $ticket->id);
+	}
+
+	/**
+	 * Update form
+	 * @return vManager\Form
+	 */
+	protected function createComponentUpdateForm() {
 		$form = new Form;
 		$form->setRenderer(new Nette\Forms\Rendering\DefaultFormRenderer());
-		
+
 		$ticket = $this->getTicket();
-		
+
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
 		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
-		
-		$form->addSubmit('send', __('Send'));
+
+		$form->addSubmit('send', __('Save'));
 
 		$form->onSubmit[] = callback($this, 'updateFormSubmitted');
-		
-		return $form; 
+
+		return $form;
 	}
-	
+
 	public function updateFormSubmitted(Form $form) {
 		$values = $form->getValues();
-
 		$ticket = $this->getTicket();
+
+		if($this->saveTicket($ticket, $values))
+			$this->flashMessage(__('Change has been saved.'));
+		else
+			$this->flashMessage(__('Nothing to change.'));
 		
-		if(isset($values['comment'])) {
+		
+		$this->redirect('this');
+	}
+
+	protected function saveTicket(Ticket $ticket, $values) {
+		$changed = false;
+		
+		if(isset($values['comment']) && !empty($values['comment'])) {
 			$ticket->comment = new Comment();
 			$ticket->comment->text = $values['comment'];
+			$changed = true;
+		} else {
+			$ticket->comment = null;
+		}
+
+		foreach(array('name', 'description') as $curr) {
+			if(isset($values[$curr]) && $ticket->{$curr} != $values[$curr]) {
+				$ticket->{$curr} = $values[$curr];
+				$changed = true;
+			}
+		}
+				
+		if($changed) {
+			$ticket->author = Nette\Environment::getUser()->getIdentity();
+			$ticket->save();
 		}
 		
-		if(isset($values['description'])) {
-			$ticket->description = $values['description'];
-		}
-		
-		$ticket->save(); 
-		
-		$this->flashMessage(__('Change has been saved.'));
+		return $changed;
 	}
-	
+
 	protected function getTicket() {
-		if($this->ticket !== null) return $this->ticket;
-		
+		if($this->getParam('id') === null)
+			return null;
+		if($this->ticket !== null)
+			return $this->ticket;
+
 		$this->ticket = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
-				  ->where('[revision] > 0 AND [ticketId] = %i', $this->getParam('id'))->fetch();
-		
+							 ->where('[revision] > 0 AND [ticketId] = %i', $this->getParam('id'))->fetch();
+
 		return $this->ticket;
 	}
-	
+
 }

@@ -91,15 +91,23 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	 * Renders the form
 	 * @param Form $form
 	 */
-	function render(Nette\Forms\Form $form) {
+	function render(Nette\Forms\Form $form, $mode = NULL) {
 		$this->form = $form;
 		$this->onBeforeRender($this);
 
-		// Creates template
-		$template = $this->createTemplate()->setFile($this->getTemplate());
-		$template->form = $form;
-		$template->render = $this;
-		$template->render();
+		if($mode == 'begin')
+			$this->renderBegin();
+		elseif($mode == 'end')
+			$this->renderEnd();
+		elseif($mode == 'errors')
+			$this->renderErrors();			
+		
+		elseif($mode == null) {
+			$template = $this->createTemplate()->setFile($this->getTemplate());
+			$template->form = $form;
+			$template->render = $this;
+			$template->render();
+		}
 	}
 
 	/**
