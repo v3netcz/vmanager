@@ -41,6 +41,8 @@ use vManager, vBuilder, Nette;
  * @Column(comment, realName="commentId", type="OneToOne", entity="vManager\Modules\Tickets\Comment", joinOn="comment=id")
  * @Column(name, type="string")
  * @Column(description, type="string")
+ * @Column(deadline, type="DateTime")
+ * @Column(assignedTo, type="OneToOne", entity="vManager\Security\User", joinOn="assignedTo=id")
  * @Column(timestamp, type="DateTime")
  */
 class Ticket extends vBuilder\Orm\ActiveEntity {

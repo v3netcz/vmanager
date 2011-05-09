@@ -99,13 +99,20 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addText('name', __('Name:'))->setAttribute('title', __('Short task description. Please be concrete.'))
 			 ->addRule(Form::FILLED, __('Name of ticket has to be filled.'));
 		
-		/*
+		
 		$form->addDatePicker('deadline', __('Deadline:'))->setAttribute('title', __('When has to be task done?'));
 
 		$form->addText('assignTo', __('Assign to:'))
 				  ->setAttribute('autocomplete-src', $this->link('suggestAssignTo'))
-				  ->setAttribute('title', __('Who will resolve this issue?'));
+				  ->setAttribute('title', __('Who will resolve this issue?'))
+				  ->addCondition(Form::FILLED)
+				  ->addRule(function ($control) {
+								 $users = Repository::findAll('vManager\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
+								 return ($users !== false);
+							 }, __('Responsible person does not exist.'));
+						  
 
+		/*
 		$form->addSelect('priority', __('Priority:'), array(
 			__('Low'), __('Normal'), __('High') 
 		)); */
@@ -205,7 +212,12 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$ticket->comment = null;
 		}
 
-		foreach(array('name', 'description') as $curr) {
+		if(isset($values['assignTo']) && !empty($values['assignTo'])) {
+			$user = Repository::findAll('vManager\Security\User')->where('[username] = %s', $values['assignTo'])->fetch();
+			$ticket->assignedTo = $user !== false ? $user : null;
+		}
+		
+		foreach(array('name', 'description', 'deadline') as $curr) {
 			if(isset($values[$curr]) && $ticket->{$curr} != $values[$curr]) {
 				$ticket->{$curr} = $values[$curr];
 				$changed = true;
