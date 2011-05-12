@@ -3,7 +3,7 @@
 {if count($history)}
 	<div class="history">
 		{foreach $history as $curr}
-			{if !$iterator->isFirst()}
+			{if ($order == vManager\Modules\Tickets\VersionableEntityView::DESC && !$iterator->isLast()) || ($order == vManager\Modules\Tickets\VersionableEntityView::ASC && !$iterator->isFirst())}
             <div class="revisionBlock box grid_16">
 					<h2 class="box_head grad_colour round_top"><img src="{=$curr->author->avatarUrl}" width="30" alt="Avatar" style="vertical-align:middle; padding-top:10px; padding-bottom:10px; padding-right:10px" />
 					{if $curr->author !== null}{if $curr->author->exists()}{$curr->author->username}{else}<?php echo _x('User n. %d', array($curr->author->id)); ?>{/if}{else}<?php echo __('nobody'); ?>{/if} on {$curr->timestamp}</h2>
@@ -15,7 +15,7 @@
 			
 					<div class="changes">
 					<?php
-						$previousRevision = $history[$iterator->getCounter() - 2];
+						$previousRevision = $history[$order == vManager\Modules\Tickets\VersionableEntityView::DESC ? $iterator->getCounter() : $iterator->getCounter() - 2];
 						foreach($previousRevision->getMetadata()->getFields() as $field) {
 							if(in_array($field, array('timestamp', 'author', 'revision', 'comment')))
 								continue;

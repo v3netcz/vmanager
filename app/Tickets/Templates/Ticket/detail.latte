@@ -2,9 +2,12 @@
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
 	<div class="flat_area grid_16">
-		<h2>Ticket #{$historyWidget->getTemplate()->data->id} - {$historyWidget->getTemplate()->data->name}</h2>
-		<p>{!$historyWidget->getTemplate()->data->description|texy}</p>
+		{var $data = $historyWidget->getTemplate()->data}
+		<h2>Ticket #{$data->id} - {$data->name}</h2>
+		<p>{!$data->description|texy}</p>
 	</div>
+	
+	{$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->render()}
 	
 	{control updateForm begin}
 	{var form => $control['updateForm']}
@@ -51,6 +54,6 @@
 	</div>
 	{control updateForm end}
     
-   {$historyWidget->render()}
+   {$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::DESC ? $historyWidget->render()}
 
 {/block}
