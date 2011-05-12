@@ -27,10 +27,13 @@
 										if($previousRevision->$field !== $curr->$field) 
 											$change =  __('Ressigned to <span class="value">nobody</span>');
 								} elseif($previousRevision->$field === null || $previousRevision->$field->id != $curr->$field->id) {
-										$change = _x('Reassigned to <span class="value">%s</span>', array($curr->$field->exists() ? $curr->$field->username() : _x('User n. %d', array($curr->$field->id))));
+										$change = _x('Reassigned to <span class="value">%s</span>', array($curr->$field->exists() ? $curr->$field->username : _x('User n. %d', array($curr->$field->id))));
 								}
-							} else if($previousRevision->$field !== $curr->$field) {
-								if(strlen($curr->$field) < 40)
+								
+							} else if($previousRevision->$field != $curr->$field) {
+								if(is_object($curr->$field) && $curr->$field instanceof vBuilder\Orm\DataTypes\DateTime)
+									$change = _x('Changed field <span class="field">%s</span> to <span class="value">%s</span>', array($field, $curr->$field->format("d. m. Y")));
+								elseif(strlen($curr->$field) < 40)
 									$change = _x('Changed field <span class="field">%s</span> to <span class="value">%s</span>', array($field, $curr->$field));
 								else
 									$change = _x('Changed field <span class="field">%s</span>', array($field));								

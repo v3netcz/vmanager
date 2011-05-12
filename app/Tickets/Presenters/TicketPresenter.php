@@ -94,8 +94,24 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentCreateForm() {
 		$form = new Form;
 		
-		//$form->setRenderer(new Nette\Forms\Rendering\DefaultFormRenderer());
+		$this->setupTicketDetailForm($form);		
+		
+		$form->addTextArea('description')
+				  ->getControlPrototype()->class('texyla');
 
+		$form->addSubmit('send', __('Save'));
+
+		$form->onSubmit[] = callback($this, 'createFormSubmitted');
+
+		return $form;
+	}
+	
+	/**
+	 * Function helper for setting up form fields of addtional ticket info
+	 * 
+	 * @param vManager\Form reference to form
+	 */
+	protected function setupTicketDetailForm(Form & $form) {
 		$form->addText('name', __('Name:'))->setAttribute('title', __('Short task description. Please be concrete.'))
 			 ->addRule(Form::FILLED, __('Name of ticket has to be filled.'));
 		
@@ -116,15 +132,6 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addSelect('priority', __('Priority:'), array(
 			__('Low'), __('Normal'), __('High') 
 		)); */
-		
-		$form->addTextArea('description')
-				  ->getControlPrototype()->class('texyla');
-
-		$form->addSubmit('send', __('Save'));
-
-		$form->onSubmit[] = callback($this, 'createFormSubmitted');
-
-		return $form;
 	}
 
 	/**
@@ -181,6 +188,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
 		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
 
+		$this->setupTicketDetailForm($form);
+		$form['name']->setValue($ticket->name);
+		$form['deadline']->setValue($ticket->deadline);
+		if($ticket->assignedTo !== null && $ticket->assignedTo->exists()) $form['assignTo']->setValue($ticket->assignedTo->username);
+		
 		$form->addSubmit('send', __('Save'));
 
 		$form->onSubmit[] = callback($this, 'updateFormSubmitted');
@@ -212,9 +224,19 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$ticket->comment = null;
 		}
 
-		if(isset($values['assignTo']) && !empty($values['assignTo'])) {
-			$user = Repository::findAll('vManager\Security\User')->where('[username] = %s', $values['assignTo'])->fetch();
-			$ticket->assignedTo = $user !== false ? $user : null;
+		if(isset($values['assignTo'])) {
+			if(!empty($values['assignTo'])) {
+				$user = Repository::findAll('vManager\Security\User')->where('[username] = %s', $values['assignTo'])->fetch();
+				$newAssignedTo = $user !== false ? $user : null;
+			} else
+				$newAssignedTo = null;
+			
+			if(!$changed)
+				$changed = $newAssignedTo === null
+					? ($ticket->assignedTo !== null)
+					: ($ticket->assignedTo === null || $newAssignedTo->id != $ticket->assignedTo->id);
+					  			
+			$ticket->assignedTo = $newAssignedTo;
 		}
 		
 		foreach(array('name', 'description', 'deadline') as $curr) {
