@@ -165,14 +165,9 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 		$now = new \DateTime('now');
 		
 		$form = new Form;
-		$form->addDatePicker('date')
+		$form->addDatePicker('date', __('Date of payment recieve:'))
 				  ->addRule(Form::FILLED)
 				  ->setDefaultValue($now->format("d.m.Y"));
-		
-		/*$form->addText('date', __('Date of payment recieve:'), 60, 100)
-				  ->addRule(Form::FILLED)
-				  ->addRule(Form::REGEXP, __('Date has to be in format of (d)d.(m)m.yyyy'),  '/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$/')
-				  ->setDefaultValue($now->format("d.m.Y")); */
 		
 		$form->addSubmit('save', __('Save'));
 		//$form->addSubmit('back', 'Zpět')->setValidationScope(NULL);
@@ -189,7 +184,7 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 			$this->flashMessage(__('Payment has been recorded.'));
 			$values = $form->getValues();
 
-			InvoiceManager::payInvoice($id, new \DateTime($values["date"]));
+			InvoiceManager::payInvoice($id, $values["date"]);
 		}
 		
 		$this->redirect('Invoice:default');
