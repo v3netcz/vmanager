@@ -1,0 +1,21 @@
+{**
+ * New ticket creation
+ *
+ * @param vManager\Modules\Tickets\Ticket $ticket
+ * @param vManager\Security\User $user
+ *}
+
+{extends '../../../System/Templates/Emails/@layout.latte'}
+{block content}
+ 
+<h1 style="font-size: large;">{$ticket->name}</h1>
+
+<div n:if="$ticket->author !== null && $ticket->author->exists()">
+	<?php echo _x('User <span>%s</span> changed ticket <span>%s</span>:', array($ticket->author->username, $ticket->name)); ?>
+</div>
+
+{* TODO: log *}
+
+<div n:if="!empty($ticket->description)">
+	{$ticket->description}
+</div>

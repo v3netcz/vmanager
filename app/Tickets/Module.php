@@ -24,7 +24,8 @@
 namespace vManager\Modules;
 
 use vManager, Nette,
-	 vManager\Modules\System;
+	 vManager\Modules\System,
+	 vManager\Modules\Tickets\Ticket;
 
 /**
  * Ticketing system module
@@ -34,6 +35,15 @@ use vManager, Nette,
  */
 class Tickets extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
 	vManager\Application\IAclEnabledModule {
+	
+	/**
+	 * Constructor. Initializes module and registers event handlers
+	 */
+	public function __construct() {
+		// TODO: udelat to konfigurovatelny
+		Ticket::$onTicketCreated[] = callback(__CLASS__ . '\\TicketChangeMailer::ticketCreated');
+		Ticket::$onTicketUpdated[] = callback(__CLASS__ . '\\TicketChangeMailer::ticketUpdated');
+	}
 	
 	/**
 	 * Initializes permission resources/roles/etc.

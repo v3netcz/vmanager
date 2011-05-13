@@ -53,6 +53,27 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 	const STATE_OPENED = 1;
 	const STATE_CLOSED = 0;
 	
+	/** @var array of function(Ticket $t); event handlers for performing actions after new ticket creation */
+	public static $onTicketCreated = array();
+	
+	/** @var array of function(Ticket $t); event handlers for performing actions depending on ticket update */
+	public static $onTicketUpdated = array();
+	
+	/**
+	 * Overloaded constructor for setting event handlers
+	 * 
+	 * @param array data
+	 */
+	public function __construct(array $data = array()) {
+		call_user_func_array(array('parent', '__construct'), func_get_args());
+		
+		// Nastavim staticke eventy pro vsechny tickety
+		$this->onCreate[] = function (Ticket $t) {
+			if($t->revision == 1) Ticket::onTicketCreated($t);
+			else Ticket::onTicketUpdated($t);
+		};
+	}
+	
 	/**
 	 * Return true, if ticket is opened
 	 * 
