@@ -44,8 +44,22 @@ use vManager, vBuilder, Nette;
  * @Column(deadline, type="DateTime")
  * @Column(assignedTo, type="OneToOne", entity="vManager\Security\User", joinOn="assignedTo=id")
  * @Column(timestamp, type="DateTime")
+ * 
+ * TODO: Pak predelat na stavy dle analyzy
+ * @Column(state, type="integer")
  */
 class Ticket extends vBuilder\Orm\ActiveEntity {
 		
+	const STATE_OPENED = 1;
+	const STATE_CLOSED = 0;
+	
+	/**
+	 * Return true, if ticket is opened
+	 * 
+	 * @return bool
+	 */
+	function isOpened() {
+		return $this->state == self::STATE_OPENED;
+	}
 	
 }

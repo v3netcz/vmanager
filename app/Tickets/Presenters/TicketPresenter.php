@@ -71,8 +71,17 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			 },
 			 "sortable" => true,
 		));
-
+			
 		$grid->addColumn("timestamp", __("Last change"))->setSortable(true);
+			 
+		$grid->addColumn("state", __('State'), array(
+			 "renderer" => function ($row) {
+				 echo Nette\Utils\Html::el("span")->style($row->state == Ticket::STATE_CLOSED ? 'color: green' : 'color: orange')->setText($row->state == Ticket::STATE_CLOSED ? __('Closed') : __('Opened'));
+			 },
+			 "sortable" => true,
+		));
+
+		
 	}
 
 	public function renderDetail($id) {
@@ -188,6 +197,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
 		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
 
+		if($ticket->isOpened())
+			  $form->addCheckbox('close', __('Close ticket with this comment'));
+		else
+			  $form->addCheckbox('reopen', __('Reopen this ticket'));
+		
 		$this->setupTicketDetailForm($form);
 		$form['name']->setValue($ticket->name);
 		$form['deadline']->setValue($ticket->deadline);
@@ -215,6 +229,16 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 	protected function saveTicket(Ticket $ticket, $values) {
 		$changed = false;
+		
+		if(isset($values['reopen']) && $values['reopen'] && !$ticket->isOpened()) {
+			$ticket->state = Ticket::STATE_OPENED;
+			$changed = true;
+		}
+		
+		if(isset($values['close']) && $values['close'] && $ticket->isOpened()) {
+			$ticket->state = Ticket::STATE_CLOSED;
+			$changed = true;
+		}			
 		
 		if(isset($values['comment']) && !empty($values['comment'])) {
 			$ticket->comment = new Comment();
@@ -248,6 +272,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				
 		if($changed) {
 			$ticket->author = Nette\Environment::getUser()->getIdentity();
+			$ticket->timestamp = null;	// Vyuzivam CURRENT_TIMESTAMP defaultu
 			$ticket->save();
 		}
 		

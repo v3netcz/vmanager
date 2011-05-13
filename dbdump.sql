@@ -91,7 +91,7 @@ CREATE TABLE `pm_projects` (
   `author` smallint(6) unsigned DEFAULT NULL,
   `commentId` int(11) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`projectId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -108,8 +108,9 @@ CREATE TABLE `pm_tickets` (
   `name` varchar(255) NOT NULL,
   `description` text,
   `deadline` date DEFAULT NULL,
-  `assignedTo` smallint(6) unsigned DEFAULT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `assignedTo` smallint(6) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `state` smallint(6) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ticketId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -1,3 +1,14 @@
+{block head}
+<style>
+	.changeStateCheckboxBlock {
+		width: 350px;
+		float: left;
+		line-height: 30px;
+		color: white;
+	}
+</style>
+{/block}
+
 {block content}
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
@@ -44,6 +55,16 @@
 			</div>
 			
 			<div class="grad_colour clearfix tab_footer">
+				<div n:if="isset($form['reopen'])" class="changeStateCheckboxBlock reopenCheckboxBlock">
+					{$form['reopen']->control}
+					{$form['reopen']->label}
+				</div>
+				
+				<div n:if="isset($form['close'])" class="changeStateCheckboxBlock closeCheckboxBlock">
+					{$form['close']->control}
+					{$form['close']->label}
+				</div>
+				
 				<button type="submit" class="round_all btnTabNext btnTabDirectSubmit">
 					<img height="24" width="24" alt="Next" src="{$basePath}/images/icons/small/grey/Create%20Write.png">
 					<span>{$form['send']->caption}</span>
