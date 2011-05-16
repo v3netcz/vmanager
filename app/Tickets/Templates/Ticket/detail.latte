@@ -12,9 +12,19 @@
 {block content}
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
+	{var $data = $historyWidget->getTemplate()->data}
+	{var $firstRevision = vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->getTemplate()->history[0] : $historyWidget->getTemplate()->history[count($historyWidget->getTemplate()->history) - 1]}
+	
 	<div class="flat_area grid_16">
-		{var $data = $historyWidget->getTemplate()->data}
 		<h2>Ticket #{$data->id} - {$data->name}</h2>
+		
+		<div class="ticketSummary">
+			<?php echo _x('Created by: <span class="value">%s</span>', array($firstRevision->author !== null ? ($firstRevision->author->exists() ? $firstRevision->author->username : _x('user n. %d', array($firstRevision->author->id))) : __('anonymous'))); ?><br />
+			<?php echo _x('Assigned to: <span class="value">%s</span>', array($firstRevision->assignedTo !== null ? ($firstRevision->assignedTo->exists() ? $firstRevision->assignedTo->username : _x('user n. %d', array($firstRevision->assignedTo->id))) : __('nobody'))); ?><br />
+			{if $data->deadline}<?php echo _x('Deadline: <span class="value">%s</span>', array($data->deadline->format('d. m. Y'))); ?><br />{/if}
+			<?php echo _x('State: <span class="value">%s</span>', array(!$data->isOpened() ? __('Closed') : __('Opened'))); ?>
+		</div>		
+		
 		<p>{!$data->description|texy}</p>
 	</div>
 	
