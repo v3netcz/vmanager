@@ -32,7 +32,16 @@
 	
 	{control updateForm begin}
 	{var form => $control['updateForm']}
-	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
+	{if $form->hasErrors()}
+		<script type="text/javascript">
+			$(document).ready(function () {
+				var tabs = $('#ticketUpdateFormTabs');
+				tabs.tabs('select', 2);
+			});
+		</script>
+	{/if}
+	
+	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all" id="ticketUpdateFormTabs">
 		<ul class="tab_header grad_colour clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1"><?php echo __('Add comment'); ?></a></li>
 			<!-- <li class="ui-state-default ui-corner-top"><a href="#tabs-2"><?php echo __('Attach files'); ?></a></li> -->
