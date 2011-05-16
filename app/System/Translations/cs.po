@@ -12,6 +12,7 @@ msgstr ""
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:174
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:183
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:200
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:194
 msgid "You have been signed out."
 msgstr "Byl jste úspěšně odhlášen."
 
@@ -37,6 +38,8 @@ msgstr "Nemáte dostatečné oprávnění k provedení této akce."
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:75
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:53
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:88
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:50
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:85
 msgid "Username:"
 msgstr "Login:"
 
@@ -44,6 +47,7 @@ msgstr "Login:"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:52
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:53
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:54
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:51
 msgid "Please provide a username."
 msgstr "Prosím zadejte uživatelské jméno"
 
@@ -51,6 +55,7 @@ msgstr "Prosím zadejte uživatelské jméno"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:54
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:55
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:56
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:53
 msgid "Password:"
 msgstr "Heslo:"
 
@@ -58,6 +63,7 @@ msgstr "Heslo:"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:55
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:56
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:57
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:54
 msgid "Please provide a password."
 msgstr "Prosím zadejte heslo."
 
@@ -65,6 +71,7 @@ msgstr "Prosím zadejte heslo."
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:57
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:58
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:59
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:56
 msgid "Auto-login in future."
 msgstr "Přihlašovat automaticky"
 
@@ -72,6 +79,7 @@ msgstr "Přihlašovat automaticky"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:59
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:60
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:61
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:58
 msgid "Sign in"
 msgstr "Přihlásit"
 
@@ -186,6 +194,7 @@ msgstr "Příjmení:"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:74
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:80
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:96
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:93
 msgid "E-mail is not valid"
 msgstr "Zadaná e-mailová adresa není platná"
 
@@ -247,6 +256,7 @@ msgstr "Vyplněné současné heslo není platné!"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:76
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:77
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:93
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:90
 msgid "E-mail:"
 msgstr "E-mail:"
 
@@ -260,12 +270,15 @@ msgstr "E-mail:"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:108
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:111
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:161
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:105
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:158
 msgid "Please provide your username or e-mail."
 msgstr "Prosím zadejte vaše uživatelské jméno nebo e-mail."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:89
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:98
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:114
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:111
 msgid "Send new password"
 msgstr "Zaslat nové heslo"
 
@@ -274,6 +287,7 @@ msgstr "Zaslat nové heslo"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:150
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:159
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:177
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:170
 msgid "vManager - new password"
 msgstr "vManager - nové heslo"
 
@@ -282,6 +296,7 @@ msgstr "vManager - nové heslo"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:157
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:166
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:184
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:178
 msgid "A new password has been sent to your e-mail address."
 msgstr "Nové heslo bylo zasláno na Vaši e-mailovou adresu."
 
@@ -298,6 +313,7 @@ msgstr "Zpět na přihlašovací formulář"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:160
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:169
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:187
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:181
 msgid "User not found."
 msgstr "Uživatel nenalezen."
 
@@ -361,16 +377,19 @@ msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:84
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:100
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:97
 msgid "Security code:"
 msgstr "Bezpeč. kód:"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:87
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:103
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:100
 msgid "Rewrite text from image."
 msgstr "Přepište text z obrázku."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:88
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:104
+#: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:101
 msgid "Security code is incorrect. Read it carefuly from image above."
 msgstr ""
 "Bezpečnosntí kód byl vyplněn nesprávně. Přepište jej prosím pečlivě z "

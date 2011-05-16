@@ -8,12 +8,14 @@ msgstr ""
 #: /Volumes/www/sp1/tools/./../app/Tickets/Module.php:63
 #: /Volumes/www/sp1/tools/../app/Tickets/Module.php:63
 #: /Volumes/www/sp1/tools/../app/Tickets/Module.php:64
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:74
 msgid "Tasks"
 msgstr "Úkoly"
 
 #: /Volumes/www/sp1/tools/./../app/Tickets/Module.php:68
 #: /Volumes/www/sp1/tools/../app/Tickets/Module.php:68
 #: /Volumes/www/sp1/tools/../app/Tickets/Module.php:69
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:79
 msgid "My tickets"
 msgstr "Moje úkoly"
 
@@ -95,6 +97,7 @@ msgid "Nothing to change."
 msgstr "Žádné změny nebyly provedeny."
 
 #: /Volumes/www/sp1/tools/../app/Tickets/Module.php:73
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:83
 msgid "Create new ticket"
 msgstr "Vytvořit nový úkol"
 
@@ -104,21 +107,25 @@ msgstr "Úkoly"
 
 #: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:16
 #: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:27
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:37
 msgid "Add comment"
 msgstr "Přidat komentář"
 
 #: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:17
 #: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:28
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:38
 msgid "Attach files"
 msgstr "Přiložit soubory"
 
 #: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:18
 #: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:29
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:39
 msgid "Change ticket description"
 msgstr "Změnit popis úkolu"
 
 #: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:19
 #: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:30
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:40
 msgid "Change ticket details"
 msgstr "Změnit atributy úkolu"
 
@@ -143,6 +150,7 @@ msgid "Next"
 msgstr "Další"
 
 #: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:9
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:23
 msgid "nobody"
 msgstr "nikdo"
 
@@ -206,9 +214,56 @@ msgid "State"
 msgstr "Stav úkolu"
 
 #: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:79
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:25
 msgid "Closed"
 msgstr "Vyřešený"
 
 #: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:79
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:25
 msgid "Opened"
 msgstr "Otevřený"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Events/TicketChangeMailer.php:45
+#, php-format
+msgid "[NEW TASK] %s"
+msgstr "[NOVY UKOL] %s"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Events/TicketChangeMailer.php:60
+#, php-format
+msgid "[UPDATE] %s"
+msgstr "[ZMENA] %s"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:22
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:23
+#, php-format
+msgid "user n. %d"
+msgstr "uživatel č. %d"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:22
+msgid "anonymous"
+msgstr "anonym"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:22
+#, php-format
+msgid "Created by: <span class=\"value\">%s</span>"
+msgstr "Úkol vytvořen uživatelem: <span class=\"value\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:23
+#, php-format
+msgid "Assigned to: <span class=\"value\">%s</span>"
+msgstr "Úkol přiřazen uživateli: <span class=\"value\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:24
+#, php-format
+msgid "Deadline: <span class=\"value\">%s</span>"
+msgstr "Deadline: <span class=\"value\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:25
+#, php-format
+msgid "State: <span class=\"value\">%s</span>"
+msgstr "Stav: <span class=\"value\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:14
+#, php-format
+msgid "User <span>%s</span> changed ticket <span>%s</span>:"
+msgstr "Uživatel <span>%s</span> změnil ticket <span>%s</span>:"
