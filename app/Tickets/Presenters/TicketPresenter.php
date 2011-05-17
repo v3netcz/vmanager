@@ -178,6 +178,8 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$values = $form->getValues();
 		$ticket = new Ticket();
 
+		$values['reopen'] = true;
+		
 		$this->saveTicket($ticket, $values);
 
 		$this->flashMessage(__('New ticket has been created.'));
