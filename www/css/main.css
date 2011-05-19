@@ -2009,3 +2009,14 @@ zoom:1;
 .box a.nograbber {
 	right:12px;
 }
+
+ABBR {
+	/*
+		border-bottom: 1px dotted #ffffff;
+	*/
+	
+	/*
+	text-decoration: underline;
+	text-underline-style: dotted;
+	*/
+}

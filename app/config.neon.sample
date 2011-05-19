@@ -17,6 +17,7 @@ common:
 		vBuilder\Security\IPasswordHashProvider: vBuilder\Security\Sha1SaltedHashProvider
 		Nette\Application\IPresenterFactory: vManager\Application\PresenterFactory
 		Nette\ITranslator: vManager\Application\Translator::getTranslator
+		Nette\Mail\IMailer: Nette\Mail\SendmailMailer
 
 		Nette\Loaders\RobotLoader:
 			option:
@@ -30,6 +31,10 @@ common:
 		driver: mysql
 		lazy: true
 		charset: utf8
+
+	mailer:
+		sender: info@vmanager.cz
+		senderName: vManager
 
 	security:
 		user:
@@ -53,7 +58,7 @@ common:
 	Users:
 		enabled: true
 
-	# Dummy module (fot test purposes only)
+	# Dummy module (for test purposes only)
 	Dummy:
 		enabled: false
 

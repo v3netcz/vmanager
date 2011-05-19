@@ -71,8 +71,17 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			 },
 			 "sortable" => true,
 		));
-
+			
 		$grid->addColumn("timestamp", __("Last change"))->setSortable(true);
+			 
+		$grid->addColumn("state", __('State'), array(
+			 "renderer" => function ($row) {
+				 echo Nette\Utils\Html::el("span")->style($row->state == Ticket::STATE_CLOSED ? 'color: green' : 'color: orange')->setText($row->state == Ticket::STATE_CLOSED ? __('Closed') : __('Opened'));
+			 },
+			 "sortable" => true,
+		));
+
+		
 	}
 
 	public function renderDetail($id) {
@@ -94,21 +103,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentCreateForm() {
 		$form = new Form;
 		
-		//$form->setRenderer(new Nette\Forms\Rendering\DefaultFormRenderer());
-
-		$form->addText('name', __('Name:'))->setAttribute('title', __('Short task description. Please be concrete.'))
-			 ->addRule(Form::FILLED, __('Name of ticket has to be filled.'));
-		
-		/*
-		$form->addDatePicker('deadline', __('Deadline:'))->setAttribute('title', __('When has to be task done?'));
-
-		$form->addText('assignTo', __('Assign to:'))
-				  ->setAttribute('autocomplete-src', $this->link('suggestAssignTo'))
-				  ->setAttribute('title', __('Who will resolve this issue?'));
-
-		$form->addSelect('priority', __('Priority:'), array(
-			__('Low'), __('Normal'), __('High') 
-		)); */
+		$this->setupTicketDetailForm($form);		
 		
 		$form->addTextArea('description')
 				  ->getControlPrototype()->class('texyla');
@@ -118,6 +113,34 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->onSubmit[] = callback($this, 'createFormSubmitted');
 
 		return $form;
+	}
+	
+	/**
+	 * Function helper for setting up form fields of addtional ticket info
+	 * 
+	 * @param vManager\Form reference to form
+	 */
+	protected function setupTicketDetailForm(Form & $form) {
+		$form->addText('name', __('Name:'))->setAttribute('title', __('Short task description. Please be concrete.'))
+			 ->addRule(Form::FILLED, __('Name of ticket has to be filled.'));
+		
+		
+		$form->addDatePicker('deadline', __('Deadline:'))->setAttribute('title', __('When has to be task done?'));
+
+		$form->addText('assignTo', __('Assign to:'))
+				  ->setAttribute('autocomplete-src', $this->link('suggestAssignTo'))
+				  ->setAttribute('title', __('Who will resolve this issue?'))
+				  ->addCondition(Form::FILLED)
+				  ->addRule(function ($control) {
+								 $users = Repository::findAll('vManager\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
+								 return ($users !== false);
+							 }, __('Responsible person does not exist.'));
+						  
+
+		/*
+		$form->addSelect('priority', __('Priority:'), array(
+			__('Low'), __('Normal'), __('High') 
+		)); */
 	}
 
 	/**
@@ -155,6 +178,8 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$values = $form->getValues();
 		$ticket = new Ticket();
 
+		$values['reopen'] = true;
+		
 		$this->saveTicket($ticket, $values);
 
 		$this->flashMessage(__('New ticket has been created.'));
@@ -174,6 +199,16 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
 		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
 
+		if($ticket->isOpened())
+			  $form->addCheckbox('close', __('Close ticket with this comment'));
+		else
+			  $form->addCheckbox('reopen', __('Reopen this ticket'));
+		
+		$this->setupTicketDetailForm($form);
+		$form['name']->setValue($ticket->name);
+		$form['deadline']->setValue($ticket->deadline);
+		if($ticket->assignedTo !== null && $ticket->assignedTo->exists()) $form['assignTo']->setValue($ticket->assignedTo->username);
+		
 		$form->addSubmit('send', __('Save'));
 
 		$form->onSubmit[] = callback($this, 'updateFormSubmitted');
@@ -197,6 +232,16 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function saveTicket(Ticket $ticket, $values) {
 		$changed = false;
 		
+		if(isset($values['reopen']) && $values['reopen'] && !$ticket->isOpened()) {
+			$ticket->state = Ticket::STATE_OPENED;
+			$changed = true;
+		}
+		
+		if(isset($values['close']) && $values['close'] && $ticket->isOpened()) {
+			$ticket->state = Ticket::STATE_CLOSED;
+			$changed = true;
+		}			
+		
 		if(isset($values['comment']) && !empty($values['comment'])) {
 			$ticket->comment = new Comment();
 			$ticket->comment->text = $values['comment'];
@@ -205,7 +250,22 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$ticket->comment = null;
 		}
 
-		foreach(array('name', 'description') as $curr) {
+		if(isset($values['assignTo'])) {
+			if(!empty($values['assignTo'])) {
+				$user = Repository::findAll('vManager\Security\User')->where('[username] = %s', $values['assignTo'])->fetch();
+				$newAssignedTo = $user !== false ? $user : null;
+			} else
+				$newAssignedTo = null;
+			
+			if(!$changed)
+				$changed = $newAssignedTo === null
+					? ($ticket->assignedTo !== null)
+					: ($ticket->assignedTo === null || $newAssignedTo->id != $ticket->assignedTo->id);
+					  			
+			$ticket->assignedTo = $newAssignedTo;
+		}
+		
+		foreach(array('name', 'description', 'deadline') as $curr) {
 			if(isset($values[$curr]) && $ticket->{$curr} != $values[$curr]) {
 				$ticket->{$curr} = $values[$curr];
 				$changed = true;
@@ -214,6 +274,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				
 		if($changed) {
 			$ticket->author = Nette\Environment::getUser()->getIdentity();
+			$ticket->timestamp = null;	// Vyuzivam CURRENT_TIMESTAMP defaultu
 			$ticket->save();
 		}
 		

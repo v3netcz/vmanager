@@ -45,7 +45,7 @@ VALUES
 	(1,-3,2,2,'První ticket','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac risus a massa scelerisque accumsan. Quisque luctus felis eu justo semper ultrices.\n\nNunc rhoncus leo cursus erat lacinia adipiscing. Sed a lectus magna. Praesent quam tellus, commodo a lobortis placerat, vulputate vel dolor.','2011-04-28 17:29:31'),
 	(1,-2,1,1,'Prnví ticket','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac risus a massa scelerisque accumsan. Quisque luctus felis eu justo semper ultrices.\n\nNunc rhoncus leo cursus erat lacinia adipiscing. Sed a lectus magna. Praesent quam tellus, commodo a lobortis placerat, vulputate vel dolor.','2011-04-27 13:58:11'),
 	(1,-1,1,NULL,'První ticket','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac risus a massa scelerisque accumsan. Quisque luctus felis eu justo semper ultrices.','2011-04-27 13:57:33'),
-	(1,4,1,NULL,'Bla bla ticket','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac risus a massa scelerisque accumsan. Quisque luctus felis eu justo semper ultrices.\n\nNunc rhoncus leo cursus erat lacinia adipiscing. Sed a lectus magna. Praesent quam tellus, commodo a lobortis placerat, vulputate vel dolor.','2011-04-28 17:29:23');
+	(1,4,1,NULL,'Bla bla ticket','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac risus a massa scelerisque accumsan. Quisque luctus felis eu justo semper ultrices.\n\nNunc rhoncus leo cursus erat lacinia adipiscing. Sed a lectus magna. Praesent quam tellus, commodo a lobortis placerat, vulputate vel dolor.','2011-04-28 17:30:23');
 
 /*!40000 ALTER TABLE `pm_tickets` ENABLE KEYS */;
 UNLOCK TABLES;
