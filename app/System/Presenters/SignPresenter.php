@@ -25,12 +25,9 @@ namespace vManager\Modules\System;
 
 use vManager,
 	 Nette,
-	 Nette\Mail\Mail,
-	 Nette\Mail\SendmailMailer,
+	 vManager\Mailer,
 	 vBuilder\Orm\Repository,
 	 Nette\Application\UI\Form,
-	 Nette\Templates\FileTemplate,
-	 Nette\Templates\LatteFilter,
 	 PavelMaca\Captcha\CaptchaControl;
 
 /**
@@ -165,20 +162,17 @@ class SignPresenter extends BasePresenter {
 			if($user != false && $user->email != '') {
 				$user->setPassword($newPassword);
 
-				$emailTemplate = new FileTemplate;
-				$emailTemplate->setFile(Nette\Environment::getVariable('appDir').'/System/Templates/Emails/pwdReset.latte');
-				$emailTemplate->registerFilter(new LatteFilter);
-				$emailTemplate->username = $user->username;
-				$emailTemplate->newPassword = $newPassword;
-
-				$mail = new Mail;
-				$mail->setFrom('vManagerTest@gmail.com', 'vManager'); //TODO: nacitat z globalniho nastaveni
-				$mail->addTo($user->email);
+				$tpl = Mailer::createMailTemplate(__DIR__ . '/../Templates/Emails/pwdReset.latte');
+				$tpl->username = $user->username;
+				$tpl->newPassword = $newPassword;
+		
+				$mail = Mailer::createMail();
 				$mail->setSubject(__('vManager - new password'));
-				$mail->setHtmlBody($emailTemplate);
-				$mailer = new SendmailMailer();
-				$mailer->send($mail);
+				$mail->addTo($user->email);
+				$mail->setHtmlBody($tpl);
 
+				Mailer::getMailer()->send($mail);
+				
 				$user->save();
 
 				$this->flashMessage(__('A new password has been sent to your e-mail address.'));

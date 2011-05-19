@@ -42,39 +42,7 @@
 		<div class="toggle_container">
 			<div id="tabs-1" class="block ui-tabs-panel ui-widget-content ui-corner-bottom">
 				<div class="content">
-					{if $form->hasErrors()}
-						<div n:foreach="$form->getErrors() as $error" class="alert alert_orange">
-							<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
-							{$error}
-						</div>
-					{/if}
-
-					<div style="width: 45%; float: left;">
-						<div>
-							{!$form['name']->label}
-							{!$form['name']->control}
-						</div>
-
-						<div n:if="isset($form['deadline'])">
-							{!$form['deadline']->label}
-							{!$form['deadline']->control}
-						</div>
-
-						<div n:if="isset($form['assignTo'])">
-							{!$form['assignTo']->label}
-							{!$form['assignTo']->control}
-						</div>
-					</div>
-					
-					<div style="width: 45%; float: right;">
-						<div n:if="isset($form['priority'])">
-							{!$form['priority']->label}
-							{!$form['priority']->control}
-						</div>
-					</div>
-					
-					
-					<div style="clear: both;">&nbsp;</div>
+					{include ticketDetailForm.inc.latte, form => $form}
 				</div>
 			</div>
 			<div id="tabs-2" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">

@@ -7,10 +7,263 @@ msgstr ""
 
 #: /Volumes/www/sp1/tools/./../app/Tickets/Module.php:63
 #: /Volumes/www/sp1/tools/../app/Tickets/Module.php:63
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:64
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:74
 msgid "Tasks"
 msgstr "Úkoly"
 
 #: /Volumes/www/sp1/tools/./../app/Tickets/Module.php:68
 #: /Volumes/www/sp1/tools/../app/Tickets/Module.php:68
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:69
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:79
 msgid "My tickets"
 msgstr "Moje úkoly"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:59
+msgid "ID"
+msgstr "ID"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:67
+msgid "Ticket name"
+msgstr "Úkol"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:75
+msgid "Last change"
+msgstr "Poslední změna"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:102
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:196
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:201
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:111
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:210
+msgid "Save"
+msgstr "Uložit"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:115
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:124
+msgid "Name:"
+msgstr "Název úkolu:"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:115
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:124
+msgid "Short task description. Please be concrete."
+msgstr "Krátký popis úkolu. Snažte se býti co nejvíce konkrétní."
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:116
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:125
+msgid "Name of ticket has to be filled."
+msgstr "Název úkolu musí být vyplněn."
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:119
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:128
+msgid "Deadline:"
+msgstr "Termín dokončení úkolu:"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:119
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:128
+msgid "When has to be task done?"
+msgstr "Do kdy musí být úkol hotov?"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:121
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:130
+msgid "Assign to:"
+msgstr "Řešitel:"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:123
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:132
+msgid "Who will resolve this issue?"
+msgstr "Komu má být úkol přiřazen?"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:128
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:137
+msgid "Responsible person does not exist."
+msgstr "Zadaný řešitel neexistuje."
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:174
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:183
+msgid "New ticket has been created."
+msgstr "Nový úkol byl úspěšně vytvořen."
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:208
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:213
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:222
+msgid "Change has been saved."
+msgstr "Změny byly uloženy."
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:210
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:215
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:224
+msgid "Nothing to change."
+msgstr "Žádné změny nebyly provedeny."
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:73
+#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:83
+msgid "Create new ticket"
+msgstr "Vytvořit nový úkol"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/default.latte:5
+msgid "Tickets"
+msgstr "Úkoly"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:16
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:27
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:37
+msgid "Add comment"
+msgstr "Přidat komentář"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:17
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:28
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:38
+msgid "Attach files"
+msgstr "Přiložit soubory"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:18
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:29
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:39
+msgid "Change ticket description"
+msgstr "Změnit popis úkolu"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:19
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:30
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:40
+msgid "Change ticket details"
+msgstr "Změnit atributy úkolu"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:29
+msgid "Create new task"
+msgstr "Vytvořit nový úkol"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:36
+msgid "Ticket summary"
+msgstr "Informace o úkolu"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:37
+msgid "Ticket description"
+msgstr "Popis úkolu"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:59
+msgid "Back"
+msgstr "Zpět"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:64
+msgid "Next"
+msgstr "Další"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:9
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:23
+msgid "nobody"
+msgstr "nikdo"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:28
+msgid "Reassigned to <span class=\"value\">nobody</span>"
+msgstr "Řešitel byl odebrán."
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:49
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:51
+msgid "No comment"
+msgstr "Žádný doplňující komentář nebyl zadán."
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:9
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:30
+#, php-format
+msgid "User n. %d"
+msgstr "Uživatel č. %d"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:30
+#, php-format
+msgid "Reassigned to <span class=\"value\">%s</span>"
+msgstr "Přeřadil řešení úkolu na uživatele <span class=\"value\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:35
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:37
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:39
+#, php-format
+msgid ""
+"Changed field <span class=\"field\">%s</span> to <span class=\"value\">%s</"
+"span>"
+msgstr ""
+"Změnil pole <span class=\"field\">%s</span> na <span class=\"value\">%s</"
+"span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:39
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:41
+#, php-format
+msgid "Changed field <span class=\"field\">%s</span>"
+msgstr "Změnil pole <span class=\"field\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:192
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:201
+msgid "Close ticket with this comment"
+msgstr "Označit úkol jako hotový"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:194
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:203
+msgid "Reopen this ticket"
+msgstr "Znovuotevřít tento úkol k řešení"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:37
+msgid "Reopened this ticket"
+msgstr "Znovuotevřel tento úkol"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:37
+msgid "Resolve this ticket as done"
+msgstr "Označil tento úkol jako splněný"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:77
+msgid "State"
+msgstr "Stav úkolu"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:79
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:25
+msgid "Closed"
+msgstr "Vyřešený"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:79
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:25
+msgid "Opened"
+msgstr "Otevřený"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Events/TicketChangeMailer.php:45
+#, php-format
+msgid "[NEW TASK] %s"
+msgstr "[NOVY UKOL] %s"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Events/TicketChangeMailer.php:60
+#, php-format
+msgid "[UPDATE] %s"
+msgstr "[ZMENA] %s"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:22
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:23
+#, php-format
+msgid "user n. %d"
+msgstr "uživatel č. %d"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:22
+msgid "anonymous"
+msgstr "anonym"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:22
+#, php-format
+msgid "Created by: <span class=\"value\">%s</span>"
+msgstr "Úkol vytvořen uživatelem: <span class=\"value\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:23
+#, php-format
+msgid "Assigned to: <span class=\"value\">%s</span>"
+msgstr "Úkol přiřazen uživateli: <span class=\"value\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:24
+#, php-format
+msgid "Deadline: <span class=\"value\">%s</span>"
+msgstr "Deadline: <span class=\"value\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:25
+#, php-format
+msgid "State: <span class=\"value\">%s</span>"
+msgstr "Stav: <span class=\"value\">%s</span>"
+
+#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:14
+#, php-format
+msgid "User <span>%s</span> changed ticket <span>%s</span>:"
+msgstr "Uživatel <span>%s</span> změnil ticket <span>%s</span>:"

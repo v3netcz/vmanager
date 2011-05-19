@@ -23,7 +23,7 @@
 DROP TABLE IF EXISTS `security_user_roles`;
 
 CREATE TABLE `security_user_roles` (
-  `user` int(11) NOT NULL,
+  `user` smallint(6) unsigned NOT NULL,
   `role` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
@@ -44,7 +44,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `security_users`;
 
 CREATE TABLE `security_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(254) COLLATE utf8_czech_ci NOT NULL,
   `password` char(40) COLLATE utf8_czech_ci NOT NULL,
   `registrationTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -91,7 +91,7 @@ CREATE TABLE `pm_projects` (
   `author` smallint(6) unsigned DEFAULT NULL,
   `commentId` int(11) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`projectId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -107,7 +107,10 @@ CREATE TABLE `pm_tickets` (
   `commentId` int(11) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `description` text,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deadline` date DEFAULT NULL,
+  `assignedTo` smallint(6) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `state` smallint(6) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ticketId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

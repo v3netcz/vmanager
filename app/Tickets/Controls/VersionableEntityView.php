@@ -42,6 +42,12 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	/** @var array of verisons of entity */
 	protected $data;
 	
+	const ASC = 1;
+	const DESC = 2;
+	
+	/** @var int method of ordering comments */
+	protected $order = VersionableEntityView::DESC;
+	
 	/**
 	 * Component constructor.
 	 * 
@@ -60,7 +66,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	protected function load() {
 		$fluent = Repository::findAll($this->entityName)
 				  ->where('[ticketId] = %i', $this->id)
-				  ->clause('ORDER BY ABS([revision])');
+				  ->clause('ORDER BY ABS([revision])' . ($this->order == self::DESC ? ' DESC' : ''));
 
 		$this->data = $fluent->fetchAll(); 
 	}
@@ -81,8 +87,10 @@ class VersionableEntityView extends Nette\Application\UI\Control {
       $texy->setOutputMode(\Texy::XHTML1_STRICT);
 		
 		$tpl->registerHelper('texy', callback($texy, 'process'));
+		$tpl->registerHelper('timeAgoInWords', 'vManager\Application\Helpers::timeAgoInWords');
 		
-		$tpl->data = end($this->data);
+		$tpl->order = $this->order;
+		$tpl->data = $this->order == self::DESC ? reset($this->data) : end($this->data);
 		$tpl->history = $this->data; 
 		
 		return $tpl;
@@ -92,7 +100,6 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	 * Renders control to standard output
 	 */
 	function render() {
-		
 		$this->getTemplate()->render();
 	}
 

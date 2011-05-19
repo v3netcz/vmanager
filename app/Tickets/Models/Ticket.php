@@ -41,9 +41,46 @@ use vManager, vBuilder, Nette;
  * @Column(comment, realName="commentId", type="OneToOne", entity="vManager\Modules\Tickets\Comment", joinOn="comment=id")
  * @Column(name, type="string")
  * @Column(description, type="string")
+ * @Column(deadline, type="DateTime")
+ * @Column(assignedTo, type="OneToOne", entity="vManager\Security\User", joinOn="assignedTo=id")
  * @Column(timestamp, type="DateTime")
+ * 
+ * TODO: Pak predelat na stavy dle analyzy
+ * @Column(state, type="integer")
  */
 class Ticket extends vBuilder\Orm\ActiveEntity {
 		
+	const STATE_OPENED = 1;
+	const STATE_CLOSED = 0;
+	
+	/** @var array of function(Ticket $t); event handlers for performing actions after new ticket creation */
+	public static $onTicketCreated = array();
+	
+	/** @var array of function(Ticket $t); event handlers for performing actions depending on ticket update */
+	public static $onTicketUpdated = array();
+	
+	/**
+	 * Overloaded constructor for setting event handlers
+	 * 
+	 * @param array data
+	 */
+	public function __construct(array $data = array()) {
+		call_user_func_array(array('parent', '__construct'), func_get_args());
+		
+		// Nastavim staticke eventy pro vsechny tickety
+		$this->onCreate[] = function (Ticket $t) {
+			if($t->revision == 1) Ticket::onTicketCreated($t);
+			else Ticket::onTicketUpdated($t);
+		};
+	}
+	
+	/**
+	 * Return true, if ticket is opened
+	 * 
+	 * @return bool
+	 */
+	function isOpened() {
+		return $this->state == self::STATE_OPENED;
+	}
 	
 }

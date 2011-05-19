@@ -1,17 +1,50 @@
+{block head}
+<style>
+	.changeStateCheckboxBlock {
+		width: 350px;
+		float: left;
+		line-height: 30px;
+		color: white;
+	}
+</style>
+{/block}
+
 {block content}
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
+	{var $data = $historyWidget->getTemplate()->data}
+	{var $firstRevision = vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->getTemplate()->history[0] : $historyWidget->getTemplate()->history[count($historyWidget->getTemplate()->history) - 1]}
+	
 	<div class="flat_area grid_16">
-		<h2>Ticket #{$historyWidget->getTemplate()->data->id} - {$historyWidget->getTemplate()->data->name}</h2>
-		<p>{!$historyWidget->getTemplate()->data->description|texy}</p>
+		<h2>Ticket #{$data->id} - {$data->name}</h2>
+		
+		<div class="ticketSummary">
+			<?php echo _x('Created by: <span class="value">%s</span>', array($firstRevision->author !== null ? ($firstRevision->author->exists() ? $firstRevision->author->username : _x('user n. %d', array($firstRevision->author->id))) : __('anonymous'))); ?><br />
+			<?php echo _x('Assigned to: <span class="value">%s</span>', array($firstRevision->assignedTo !== null ? ($firstRevision->assignedTo->exists() ? $firstRevision->assignedTo->username : _x('user n. %d', array($firstRevision->assignedTo->id))) : __('nobody'))); ?><br />
+			{if $data->deadline}<?php echo _x('Deadline: <span class="value">%s</span>', array($data->deadline->format('d. m. Y'))); ?><br />{/if}
+			<?php echo _x('State: <span class="value">%s</span>', array(!$data->isOpened() ? __('Closed') : __('Opened'))); ?>
+		</div>		
+		
+		<p>{!$data->description|texy}</p>
 	</div>
+	
+	{$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->render()}
 	
 	{control updateForm begin}
 	{var form => $control['updateForm']}
-	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
+	{if $form->hasErrors()}
+		<script type="text/javascript">
+			$(document).ready(function () {
+				var tabs = $('#ticketUpdateFormTabs');
+				tabs.tabs('select', 2);
+			});
+		</script>
+	{/if}
+	
+	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all" id="ticketUpdateFormTabs">
 		<ul class="tab_header grad_colour clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1"><?php echo __('Add comment'); ?></a></li>
-			<li class="ui-state-default ui-corner-top"><a href="#tabs-2"><?php echo __('Attach files'); ?></a></li>
+			<!-- <li class="ui-state-default ui-corner-top"><a href="#tabs-2"><?php echo __('Attach files'); ?></a></li> -->
 			<li class="ui-state-default ui-corner-top"><a href="#tabs-3"><?php echo __('Change ticket description'); ?></a></li>
 			<li class="ui-state-default ui-corner-top"><a href="#tabs-4"><?php echo __('Change ticket details'); ?></a></li>
 		</ul>
@@ -24,11 +57,11 @@
 					{$form['comment']->control}
 				</div>
 			</div>
-			<div id="tabs-2" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<!--<div id="tabs-2" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 				<div class="content">
 					<p>TODO: Upload form</p>
 				</div>
-			</div>
+			</div> -->
 			<div id="tabs-3" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 				<div class="content">
 					{$form['description']->control}
@@ -36,11 +69,21 @@
 			</div>
 			<div id="tabs-4" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 				<div class="content">
-					<p>TODO: Form for deadline, name and other fields</p>
+					{include ticketDetailForm.inc.latte, form => $form}
 				</div>
 			</div>
 			
 			<div class="grad_colour clearfix tab_footer">
+				<div n:if="isset($form['reopen'])" class="changeStateCheckboxBlock reopenCheckboxBlock">
+					{$form['reopen']->control}
+					{$form['reopen']->label}
+				</div>
+				
+				<div n:if="isset($form['close'])" class="changeStateCheckboxBlock closeCheckboxBlock">
+					{$form['close']->control}
+					{$form['close']->label}
+				</div>
+				
 				<button type="submit" class="round_all btnTabNext btnTabDirectSubmit">
 					<img height="24" width="24" alt="Next" src="{$basePath}/images/icons/small/grey/Create%20Write.png">
 					<span>{$form['send']->caption}</span>
@@ -51,6 +94,6 @@
 	</div>
 	{control updateForm end}
     
-   {$historyWidget->render()}
+   {$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::DESC ? $historyWidget->render()}
 
 {/block}

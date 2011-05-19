@@ -1,0 +1,14 @@
+{**
+ * New ticket creation
+ *
+ * @param vManager\Modules\Tickets\Ticket $ticket
+ *}
+
+{extends '../../../System/Templates/Emails/@layout.latte'}
+{block content}
+ 
+<h1 style="font-size: large;">{$ticket->name}</h1>
+
+<div n:if="!empty($ticket->description)">
+	{$ticket->description}
+</div>

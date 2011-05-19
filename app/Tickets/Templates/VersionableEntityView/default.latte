@@ -3,10 +3,10 @@
 {if count($history)}
 	<div class="history">
 		{foreach $history as $curr}
-			{if !$iterator->isFirst()}
+			{if ($order == vManager\Modules\Tickets\VersionableEntityView::DESC && !$iterator->isLast()) || ($order == vManager\Modules\Tickets\VersionableEntityView::ASC && !$iterator->isFirst())}
             <div class="revisionBlock box grid_16">
 					<h2 class="box_head grad_colour round_top"><img src="{=$curr->author->avatarUrl}" width="30" alt="Avatar" style="vertical-align:middle; padding-top:10px; padding-bottom:10px; padding-right:10px" />
-					{$curr->author->username} on {$curr->timestamp}</h2>
+					{if $curr->author !== null}{if $curr->author->exists()}{$curr->author->username}{else}<?php echo _x('User n. %d', array($curr->author->id)); ?>{/if}{else}<?php echo __('nobody'); ?>{/if} @ <abbr title="{$curr->timestamp}">{$curr->timestamp|timeAgoInWords}</abbr></h2>
 					<a href="#" class="toggle nograbber">&nbsp;</a>
 					<div class="toggle_container">					
 						<div class="block">
@@ -15,21 +15,33 @@
 			
 					<div class="changes">
 					<?php
-						$previousRevision = $history[$iterator->getCounter() - 2];
+						$previousRevision = $history[$order == vManager\Modules\Tickets\VersionableEntityView::DESC ? $iterator->getCounter() : $iterator->getCounter() - 2];
 						foreach($previousRevision->getMetadata()->getFields() as $field) {
 							if(in_array($field, array('timestamp', 'author', 'revision', 'comment')))
 								continue;
 							
-							if($history[$iterator->getCounter() - 2]->$field != $curr->$field) {
-								echo "<div class=\"change\">";
-									
-								if(strlen($curr->$field) < 40)
-									echo _x('Changed field <span class="field">%s</span> to <span class="value">%s</span>', array($field, $curr->$field));
+							$change = null;
+								
+							if($field == 'assignedTo') {
+								if($curr->$field === null) {
+										if($previousRevision->$field !== $curr->$field) 
+											$change =  __('Reassigned to <span class="value">nobody</span>');
+								} elseif($previousRevision->$field === null || $previousRevision->$field->id != $curr->$field->id) {
+										$change = _x('Reassigned to <span class="value">%s</span>', array($curr->$field->exists() ? $curr->$field->username : _x('User n. %d', array($curr->$field->id))));
+								}
+							
+							} else if($previousRevision->$field != $curr->$field) {
+								if(is_object($curr->$field) && $curr->$field instanceof vBuilder\Orm\DataTypes\DateTime)
+									$change = _x('Changed field <span class="field">%s</span> to <span class="value">%s</span>', array($field, $curr->$field->format("d. m. Y")));
+								elseif($field == 'state')
+									$change = $curr->isOpened() ? __('Reopened this ticket') : __('Resolve this ticket as done');
+								elseif(strlen($curr->$field) < 40)
+									$change = _x('Changed field <span class="field">%s</span> to <span class="value">%s</span>', array($field, $curr->$field));
 								else
-									echo _x('Changed field <span class="field">%s</span>', array($field));
-									
-								echo "</div>";
+									$change = _x('Changed field <span class="field">%s</span>', array($field));								
 							}
+							
+							if($change !== null) echo "<div class=\"change\">$change</div>";
 						}
 					?>
 					</div>

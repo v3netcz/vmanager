@@ -8,19 +8,18 @@ msgstr ""
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:49
 msgid "Username"
 msgstr "Uživatel. jméno"
- 
+
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:50
 msgid "Name"
 msgstr "Jméno"
- 
+
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:51
 msgid "Surname"
 msgstr "Příjmení"
- 
+
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:52
 msgid "E-mail"
 msgstr "E-mail"
-
 
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:62
 msgid "Users"
@@ -46,13 +45,71 @@ msgstr "Založit nový uživatelský účet"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:53
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:78
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:77
 msgid "Create user"
 msgstr "Vytvořit uživatele"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:68
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:67
 msgid "Password:"
 msgstr "Heslo:"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:72
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:71
 msgid "Confirm password:"
 msgstr "Heslo (znovu):"
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:47
+msgid "Name:"
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:48
+msgid "Name cannot be empty."
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:50
+msgid "Surname:"
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:51
+msgid "Surname cannot be empty."
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:53
+msgid "Username:"
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:54
+msgid "Username cannot be empty."
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:55
+msgid ""
+"Username have to contain alpha-numeric chars only (with exception for chars ."
+"_@-). Nor spaces or diacritic chars are allowed."
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:62
+msgid "Desired username is already taken. Please use something else."
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:65
+msgid "E-mail is not valid"
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:68
+msgid "Password have to be at least 6 chars long."
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:69
+msgid "Please provide password."
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:72
+msgid "Confirmation password have to be the same as password."
+msgstr ""
+
+#: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:101
+#, php-format
+msgid "User n. %d has been successfuly created."
+msgstr "Uživatel č. %d byl úspěšně vytvořen."

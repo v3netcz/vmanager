@@ -15,7 +15,7 @@ before proceeding.
 2) Download project source code by git (or any other method).
 	Make sure you init all modules if you using alternative method.
 
-		git clone git://github.com/v3lbloud/sp1.git myproject
+		git clone git://github.com/v3netcz/vmanager.git myproject
 		cd myproject
 		git submodule init
 		git submodule update
@@ -35,36 +35,36 @@ before proceeding.
 	Example vhost config for apache:
 		<VirtualHost *:80>
 			ServerAdmin webmaster@localhost.localdomain
-			DocumentRoot "/var/www/sp1/www"
-			ServerName myproject.localhost
-			ServerAlias *.myproject.localhost
+			DocumentRoot "/var/www/vmanager/www"
+			ServerName vmanager.localhost
+			ServerAlias *.vmanager.localhost
 
-			<Directory "/var/www/myproject/www">
+			<Directory "/var/www/vmanager/www">
 				Options Indexes MultiViews FollowSymlinks
 				AllowOverride All
 				Order allow,deny
 				Allow from all
 
 				# Path to temp or pear depends on your instalation
-				php_admin_value open_basedir /var/www/myproject/:/tmp/:/usr/share/pear/
+				php_admin_value open_basedir /var/www/vmanager/:/tmp/:/usr/share/pear/
 
 				# For developers only
-				php_admin_value xdebug.profiler_output_dir /var/www/myproject/temp
+				php_admin_value xdebug.profiler_output_dir /var/www/vmanager/temp
 			</Directory>
 		</VirtualHost>
 
 5) Make MySQL database and user for your installation.
-		CREATE DATABASE `vbuilder_myproject`;
-		CREATE USER 'vbuilder'@'%' IDENTIFIED BY 'g1Ut6NMogtyurkZnQRxcaL';
-		GRANT ALL ON `vbuilder_myproject`.* TO 'vbuilder'@'%';
+		CREATE DATABASE `vmanager_myproject`;
+		CREATE USER 'vmanager'@'%' IDENTIFIED BY 'g1Ut6NMogtyurkZnQRxcaL';
+		GRANT ALL ON `vmanager_myproject`.* TO 'vmanager'@'%';
 		FLUSH PRIVILEGES;
 
-	Note 1: Change `vbuilder_myproject` to your database name and 'vbuilder' to desired username
+	Note 1: Change `vmanager_myproject` to your database name and 'vmanager' to desired username
 	Note 2: '%' can be changed to localhost to allow only local connections to server.
 	Note 3: It's recommended to change your password for production environment.
 
 6) Import database structure for your project (dbdump.sql)
-		mysql -h 127.0.0.1 -u vbuilder --password=g1Ut6NMogtyurkZnQRxcaL vbuilder_myproject < dbdump.sql
+		mysql -h 127.0.0.1 -u vmanager --password=g1Ut6NMogtyurkZnQRxcaL vmanager_myproject < dbdump.sql
 
 7) Copy sample config file /app/config.neon.sample to /app/config.neon
 8) Set your config (/app/config.neon) to match your DB configuration and your needs
