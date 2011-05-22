@@ -67,6 +67,9 @@ class Mailer extends vBuilder\Object {
 		if($fromFile !== null)
 			$emailTemplate->setFile($fromFile);
 		
+		$emailTemplate->basePath = Modules\System::getBasePath(true);
+		$emailTemplate->control = Nette\Environment::getApplication()->getPresenter();
+		
 		$emailTemplate->registerFilter(new Nette\Latte\Engine);
 		return $emailTemplate;
 	}

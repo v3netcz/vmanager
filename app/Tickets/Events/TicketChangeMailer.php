@@ -38,7 +38,7 @@ class TicketChangeMailer {
 		if($t->assignedTo === null || !$t->assignedTo->exists() || empty($t->assignedTo->email)) return ;
 		
 		
-		$tpl = Mailer::createMailTemplate(__DIR__ . '/../Templates/Emails/ticketCreated.latte');
+		$tpl = self::createMailTemplate(__DIR__ . '/../Templates/Emails/ticketCreated.latte');
 		$tpl->ticket = $t;
 		
 		$mail = Mailer::createMail();
@@ -53,7 +53,7 @@ class TicketChangeMailer {
 		$recipients = self::getRecipients($t);
 		if(count($recipients) == 0) return ;
 		
-		$tpl = Mailer::createMailTemplate(__DIR__ . '/../Templates/Emails/ticketUpdated.latte');
+		$tpl = self::createMailTemplate(__DIR__ . '/../Templates/Emails/ticketUpdated.latte');
 		$tpl->ticket = $t;
 		
 		$mail = Mailer::createMail();
@@ -68,6 +68,25 @@ class TicketChangeMailer {
 
 			Mailer::getMailer()->send($mail2);
 		}
+	}
+	
+	/**
+	 * Sets up email template
+	 * 
+	 * @param string file path
+	 * @return FileTemplate
+	 */
+	protected static function createMailTemplate($filename) {
+		$tpl = Mailer::createMailTemplate($filename);
+		
+		$texy = new \Texy();
+		$texy->encoding = 'utf-8';
+		$texy->allowedTags = \Texy::NONE;
+		$texy->allowedStyles = \Texy::NONE;
+		$texy->setOutputMode(\Texy::XHTML1_STRICT);
+
+		$tpl->registerHelper('texy', callback($texy, 'process'));
+		return $tpl;
 	}
 	
 	/**

@@ -57,7 +57,8 @@ class System extends vManager\Application\Module implements vManager\Application
 		// Vsichni musi mit pristup k tomu cist uzivatele (login)
 		// Zaroven uzivatel musi mit opravneni k tomu, editovat vlastni profil
 		$acl->allow('guest', User::getParentResourceId(), Secure::ACL_PERMISSION_READ);
-		$acl->allow('User', User::getParentResourceId(), Secure::ACL_PERMISSION_UPDATE, array('vManager\Security\User', 'permissionOwnProfileAssert'));
+		$acl->allow('guest', User::getParentResourceId(), Secure::ACL_PERMISSION_UPDATE); // Password reset form, TODO: osetrit to
+		//$acl->allow('User', User::getParentResourceId(), Secure::ACL_PERMISSION_UPDATE, array('vManager\Security\User', 'permissionOwnProfileAssert'));
 		
 		$acl->allow('User', 'System', Nette\Security\Permission::ALL);
 	}
@@ -82,9 +83,9 @@ class System extends vManager\Application\Module implements vManager\Application
 	 * 
 	 * @return string
 	 */
-	public static function getBasePath() {
+	public static function getBasePath($absolute = false) {
 		$baseUri = rtrim(Nette\Environment::getVariable('baseUri', NULL), '/');
-		return preg_replace('#https?://[^/]+#A', '', $baseUri);
+		return $absolute ? $baseUri : preg_replace('#https?://[^/]+#A', '', $baseUri);
 	}
 	
 }

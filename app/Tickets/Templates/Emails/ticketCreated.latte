@@ -5,10 +5,18 @@
  *}
 
 {extends '../../../System/Templates/Emails/@layout.latte'}
+{block header}
+	<h1 style="font-size: large; margin: 0; padding: 0;"><?php echo _x('New task: <span style="color: #ff8000;">%s</span>', array($ticket->name)); ?></h1>
+{/block}
+
 {block content}
- 
-<h1 style="font-size: large;">{$ticket->name}</h1>
 
 <div n:if="!empty($ticket->description)">
-	{$ticket->description}
+	{!$ticket->description|texy}
 </div>
+
+{/block}
+
+{block footer}
+	<a href="{link //Ticket:detail, $ticket->id}" style="color: #06B;"><?php echo __('Show ticket in web browser'); ?></a>
+{/block}
