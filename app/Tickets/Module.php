@@ -23,7 +23,7 @@
 
 namespace vManager\Modules;
 
-use vManager, Nette,
+use vManager, vBuilder, Nette,
 	 vManager\Modules\System,
 	 vManager\Modules\Tickets\Ticket;
 
@@ -52,11 +52,17 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 	 */
 	public function initPermission(Nette\Security\Permission & $acl) {
 		$acl->addResource('Tickets');
+		
+		// Presentery
 		$acl->addResource('Tickets:Default', 'Tickets');
 		$acl->addResource('Tickets:Ticket', 'Tickets');
+				
+		// Uzivatel ticketovaciho systemu
 		$acl->addRole('Ticket user', 'User');
-		
-		$acl->allow('Ticket user', 'Tickets', Nette\Security\Permission::ALL);
+		$acl->allow('Ticket user', 'Tickets', Nette\Security\Permission::ALL);	// Presentery
+				
+		// Administrator ticketovaciho systemu		
+		$acl->addRole('Ticket admin', 'Ticket user');		
 	}
 	
 	

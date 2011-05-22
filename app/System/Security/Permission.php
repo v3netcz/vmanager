@@ -40,6 +40,8 @@ class Permission extends Nette\Security\Permission {
 	 * Initializes roles, resources, etc.
 	 */
 	private function init() {				
+		$this->addResource(User::getParentResourceId());
+		
 		// Anonymni (neprihlaseny) navstevnik
 		$this->addRole('guest');
 		
