@@ -51,7 +51,34 @@ class Helpers {
 		}
 
 		$delta = time() - $time;
-		
+
+		if($delta < 0) {
+			$delta = round(abs($delta) / 60);
+
+			if($delta == 0)
+				return __('few seconds left');
+			if($delta == 1)
+				return __('in a minute');
+			if($delta < 45)
+				return _x('in %d minutes', array($delta));
+			if($delta < 90)
+				return __('in one hour');
+			if($delta < 1440)
+				return _x('in %d hours', array(round($delta / 60)));
+			if($delta < 2880)
+				return __('tommorow');
+			if($delta < 43200)
+				return _x('in %d days', array(round($delta / 1440)));
+			if($delta < 86400)
+				return __('in a month');
+			if($delta < 525960)
+				return _x('in %d months', array(round($delta / 43200)));
+			if($delta < 1051920)
+				return __('in one year');
+
+			return _x('in %d years', array(round($delta / 525960)));
+		}
+
 		$delta = round($delta / 60);
 		if($delta == 0)
 			return __('few seconds ago');
@@ -73,8 +100,8 @@ class Helpers {
 			return _x('%d months ago', array(round($delta / 43200)));
 		if($delta < 1051920)
 			return __('a year ago');
-		
-		return _x('%d years ago', array(round($delta / 525960)));		
+
+		return _x('%d years ago', array(round($delta / 525960)));
 	}
 
 }
