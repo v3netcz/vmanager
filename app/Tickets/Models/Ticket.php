@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Tickets;
 
-use vManager, vBuilder, Nette;
+use vManager, vBuilder, Nette, vBuilder\Orm\Repository;
 
 /**
  * Project entity data class

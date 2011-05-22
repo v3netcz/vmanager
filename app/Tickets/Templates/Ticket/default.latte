@@ -1,3 +1,27 @@
+{block head}
+<style>
+	.ticketListingBlock TR.overdueTicket TD.deadline {
+		color: #ff0000;
+	}
+	
+	.ticketListingBlock TD.state {
+		color: #aa7300;
+		text-align: center;	
+	}
+	
+	.ticketListingBlock TR.closedTicket TD.state {
+		color: green;
+	}
+	
+	.ticketListingBlock TD.date {
+		text-align: center;		
+	}
+	
+	.ticketListingBlock TD.assignedTo {
+		text-align: center;		
+	}
+</style>
+{/block}
 {block content}
 {include ../../../System/Templates/Includes/flashes.latte}
 
@@ -5,7 +29,7 @@
 	<h2><?php echo __('Tickets'); ?></h2>
 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas posuere risus sit amet dolor imperdiet quis varius nulla porttitor. Maecenas malesuada iaculis luctus. Aenean vitae tortor lorem, ut sagittis metus. Donec hendrerit, enim ut malesuada mattis, nulla diam lacinia orci, sit amet malesuada turpis nunc placerat nibh.</p>
 </div>
-<div class="box grid_16 round_all">
+<div class="box grid_16 round_all ticketListingBlock">
 {control ticketListingGrid}
 </div>
 
