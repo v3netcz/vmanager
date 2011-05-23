@@ -37,6 +37,31 @@ use vManager,
  */
 class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 
+	/** @var vManager\Security\User instance for user editing */
+	private $user;
+	
+	public function actionEditUser($id) {
+		$this->user = Repository::get('vManager\Security\User', $id);
+		if(!$this->user->exists()) throw new \InvalidArgumentException('User not found');
+	}
+	
+	/**
+	 * Edit user form
+	 * 
+	 * @param int $id 
+	 */
+	public function renderEditUser($id) {				
+		$form = $this['userForm'];
+		$form->loadFromEntity($this->user);
+		
+		foreach($this->user->roles as $role) {
+			$key = 'grp'.Nette\Utils\Strings::replace($role, '/\\s/', '');
+			if(!isset($form[$key])) continue;
+			
+			$form[$key]->setDefaultValue(true);
+		}
+	}
+	
 	/**
 	 * Sign in form component factory.
 	 * @return Nette\Application\UI\Form
@@ -44,6 +69,9 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentUserForm() {
 		$form = new Form;
 
+		$action = $this->action;
+		$editedUser = &$this->user;
+		
 		$form->addText('name', __('Name:'))
 				  ->addRule(Form::FILLED, __('Name cannot be empty.'));
 
@@ -56,7 +84,9 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->addFilter(function ($value) {
 					  return Nette\Utils\Strings::lower($value);
 				  })
-				  ->addRule(function ($control) {
+				  ->addRule(function ($control) use ($action, $editedUser) {
+								 if($action == 'editUser' && $control->value == $editedUser->username) return true;
+						
 								 $users = Repository::findAll('vBuilder\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
 								 return ($users === false);
 							 }, __('Desired username is already taken. Please use something else.'));
@@ -64,15 +94,19 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addText('email', 'E-mail:')
 				  ->addRule(Form::EMAIL, __('E-mail is not valid'));
 
-		$form->addPassword('password', __('Password:'))
-				  ->addRule(Form::MIN_LENGTH, __('Password have to be at least 6 chars long.'), 6)
-				  ->addRule(Form::FILLED, __('Please provide password.'));
+		// TODO: Vyclenit to do specialniho formulare pri editu
+		if($this->action != 'editUser') {
+			$form->addPassword('password', __('Password:'))
+					  ->addRule(Form::MIN_LENGTH, __('Password have to be at least 6 chars long.'), 6)
+					  ->addRule(Form::FILLED, __('Please provide password.'));
 
-		$form->addPassword('password2', __('Confirm password:'))
-				  ->addRule(Form::EQUAL, __('Confirmation password have to be the same as password.'), $form['password']);
+			$form->addPassword('password2', __('Confirm password:'))
+					  ->addRule(Form::EQUAL, __('Confirmation password have to be the same as password.'), $form['password']);
+		}
 
 		foreach(Nette\Environment::getUser()->getAuthorizationHandler()->getAllRegistredRoles() as $role)
 			$form->addCheckbox('grp'.Nette\Utils\Strings::replace($role, '/\\s/', ''), $role);
+		
 
 		$form->addSubmit('send', __('Create user'));
 
@@ -82,8 +116,9 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 
 	public function userFormSubmitted($form) {
 		$values = $form->getValues();
-
-		$user = new vManager\Security\User;
+		$user = $this->action == 'editUser' ? $this->user : new vManager\Security\User;
+		
+		
 		foreach($values as $key => $value) {
 			if(isset($user->$key))
 				$user->$key = $value;
@@ -98,7 +133,7 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$user->save();
 
-		$this->flashMessage(_x('User n. %d has been successfuly created.', array($user->id)));
+		$this->flashMessage(_x($this->action == 'editUser' ? 'Profile for user n. %d has been sucessfuly saved.' : 'User n. %d has been successfuly created.', array($user->id)));
 	}
 
 }
