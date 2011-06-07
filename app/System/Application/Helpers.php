@@ -60,23 +60,23 @@ class Helpers {
 			if($delta == 1)
 				return __('in a minute');
 			if($delta < 45)
-				return _x('in %d minutes', array($delta));
+				return _nx('in %d minute', 'in %d minutes', $delta, array($delta));
 			if($delta < 90)
 				return __('in one hour');
 			if($delta < 1440)
-				return _x('in %d hours', array(round($delta / 60)));
+				return _nx('in %d hour', 'in %d hours', round($delta / 60), array(round($delta / 60)));
 			if($delta < 2880)
-				return __('tommorow');
+				return __('tomorrow');
 			if($delta < 43200)
-				return _x('in %d days', array(round($delta / 1440)));
+				return _nx('in %d day', 'in %d days', round($delta / 1440), array(round($delta / 1440)));
 			if($delta < 86400)
 				return __('in a month');
 			if($delta < 525960)
-				return _x('in %d months', array(round($delta / 43200)));
+				return _nx('in %d month', 'in %d months', round($delta / 43200), array(round($delta / 43200)));
 			if($delta < 1051920)
 				return __('in one year');
 
-			return _x('in %d years', array(round($delta / 525960)));
+			return _nx('in %d year', 'in %d years', round($delta / 525960), array(round($delta / 525960)));
 		}
 
 		$delta = round($delta / 60);
@@ -85,23 +85,23 @@ class Helpers {
 		if($delta == 1)
 			return __('1 minute ago');
 		if($delta < 45)
-			return _x('%d minutes ago', array($delta));
+			return _nx('%d minute ago', '%d minutes ago', $delta, array($delta));
 		if($delta < 90)
 			return __('about an hour ago');
 		if($delta < 1440)
-			return _x('about %d hours ago', array(round($delta / 60)));
+			return _nx('%d hour ago', '%d hours ago', round($delta / 60), array(round($delta / 60)));
 		if($delta < 2880)
 			return __('yesterday');
 		if($delta < 43200)
-			return _x('%d days ago', array(round($delta / 1440)));
+			return _nx('%d day ago', '%d days ago', round($delta / 1440), array(round($delta / 1440)));
 		if($delta < 86400)
 			return __('a month ago');
 		if($delta < 525960)
-			return _x('%d months ago', array(round($delta / 43200)));
+			return _nx('%d month ago', '%d months ago', round($delta / 43200), array(round($delta / 43200)));
 		if($delta < 1051920)
 			return __('a year ago');
 
-		return _x('%d years ago', array(round($delta / 525960)));
+		return _nx('%d year ago', '%d years ago', round($delta / 525960), array(round($delta / 525960)));
 	}
 
 }
