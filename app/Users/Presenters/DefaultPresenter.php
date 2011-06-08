@@ -23,7 +23,10 @@
 
 namespace vManager\Modules\Users;
 
-use vManager, vBuilder, Nette, Gridito,
+use vManager,
+	 vBuilder,
+	 Nette,
+	 Gridito,
 	 vBuilder\Orm\Repository;
 
 /**
@@ -33,17 +36,20 @@ use vManager, vBuilder, Nette, Gridito,
  * @since Apr 5, 2011
  */
 class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
-	
+
 	public function renderDefault() {
 		
 	}
-	
+
 	protected function createComponentUserGrid($name) {
 		$grid = new vManager\Grid($this, $name);
 
-		$grid->setModel(new Gridito\DibiFluentModel(Repository::findAll('vManager\Security\User')));
+		$model = new Gridito\DibiFluentModel(Repository::findAll('vManager\Security\User'), 'vManager\Security\User');
+		$model->setPrimaryKey('id');
+
+		$grid->setModel($model);
 		$grid->setItemsPerPage(10);
-		
+
 		// columns
 		$grid->addColumn("id", "ID")->setSortable(true);
 		$grid->addColumn("username", __('Username'))->setSortable(true);
@@ -55,14 +61,42 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 			 },
 			 "sortable" => true,
 		));
-			 
-		/*
+
 		$grid->addColumn("roles", __("User groups"), array(
 			 "renderer" => function ($row) {
-				echo count($row->roles) > 1 ? array_diff($row->roles, array('User')) : $row->roles;
+				 $roles = count($row->roles) > 1 ? array_diff($row->roles, array('User')) : $row->roles;
+				 echo implode($roles, ', ');
 			 },
 			 "sortable" => true,
-		)); */
+		));
+
+		$grid->addButton("btnEdit", __('Edit'), array(					  
+			"handler" => function ($row) use ($grid) {
+				if(!$row) Nette\Environment::getApplication()->getPresenter()->flashMessage(__('Record not found'), 'warn');
+				else {
+					Nette\Environment::getApplication()->getPresenter()->redirect('Edit:editUser', $row->id);
+				}
+
+				$grid->redirect("this");
+			}
+		));
+			 
+		$grid->addButton("btnRemove", __('Remove'), array(
+			"class" => "button_orange",
+			"confirmationQuestion" => function ($row) use ($grid) {
+				return _x('Are you sure you want to remove user %s?', array($row->username));
+			},
+					  
+			"handler" => function ($row) use ($grid) {
+				if(!$row) Nette\Environment::getApplication()->getPresenter()->flashMessage(__('Record not found'), 'warn');
+				else {
+					$row->delete();
+					Nette\Environment::getApplication()->getPresenter()->flashMessage(_x("User %s has been removed.", array($row->username)));
+				}
+
+				$grid->redirect("this");
+			}
+		));
 	}
-	
+
 }

@@ -13,7 +13,7 @@
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
 	{var $data = $historyWidget->getTemplate()->data}
-	{var $firstRevision = vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->getTemplate()->history[0] : $historyWidget->getTemplate()->history[count($historyWidget->getTemplate()->history) - 1]}
+	{var $firstRevision = $historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->getTemplate()->history[0] : $historyWidget->getTemplate()->history[count($historyWidget->getTemplate()->history) - 1]}
 	
 	<div class="flat_area grid_16">
 		<h2>Ticket #{$data->id} - {$data->name}</h2>

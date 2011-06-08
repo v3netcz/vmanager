@@ -1,3 +1,35 @@
-<div style="font-family: sans; font-size: small;">
-	{include #content}
+<html>
+<body style="padding: 0; margin: 0;">
+<div style="font-family: sans; font-size: 1em; padding: 20px; background: url({$basePath}/images/bg_dark_wood.jpg) #11161c; min-height: 100%;">
+	<table width="100%" cellspacing="0" style="width: 100%; background: white; min-width: 400px;">
+		<tr>
+			<td width="2%" style="width: 2%;">&nbsp;</td>
+			<td colspan="2" style="padding: 15px 20px 15px 20px; border-bottom: 1px solid #e6e6e6;">
+				{include #header}
+			</td>
+			{*<td style="padding: 10px 20px 10px 0px; border-bottom: 1px solid #e6e6e6; text-align: right;">
+				<a href="{$basePath}"><img src="{$basePath}/images/vmanager-logo-mail.png" width="165" height="44" /></a>
+			</td>*}
+			<td width="2%" style="width: 2%;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="padding: 20px 15px;">
+				{include #content}
+			</td>
+		</tr>
+		
+		<tr>
+			<td width="2%" style="width: 2%;">&nbsp;</td>
+			<td colspan="2" style="padding: 15px 20px 15px 20px; border-top: 1px solid #e6e6e6;">
+				{include #footer}
+			</td>
+			<td width="2%" style="width: 2%;">&nbsp;</td>
+		</tr>
+	</table>
+	
+	<div style="padding: 20px 10px; text-align: center;">
+		<a href="http://www.vmanager.cz{*$basePath*}"><img src="{$basePath}/images/vmanager-logo-w165.png" width="165" height="44" /></a>
+	</div>
 </div>
+</body>
+</html>

@@ -47,12 +47,13 @@ class User extends vBuilder\Security\User {
 	/**
 	 * Returns avatar picture URL
 	 * 
+	 * @param bool true if URL should be absolute URI (starts with http://)
 	 * @return string URL
 	 */
-	function getAvatarUrl() {
+	function getAvatarUrl($absolute = false) {
 		// TODO: dynamicke na zaklde upravy v profilu
 		
-		return vManager\Modules\System::getBasePath()
+		return vManager\Modules\System::getBasePath($absolute)
 				  . '/images/profile.jpg';
 	}
 	

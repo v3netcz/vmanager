@@ -32,7 +32,7 @@ $.widget("ui.gridito", {
 		initSortingIcons("ui-icon-triangle-1-n", "ui-icon-triangle-1-s");
 		initSortingIcons("ui-icon-triangle-1-s", "ui-icon-carat-2-n-s");
 
-		// buttons
+		// Tlacitka v paticce
 		this.element.find("TFOOT a.gridito-button").each(function () {
 			var el = $(this);
 			el.button({
@@ -42,6 +42,43 @@ $.widget("ui.gridito", {
 				text: !el.hasClass("gridito-hide-text"),
 				disabled: el.hasClass("disabled")
 			});
+			
+			// window button
+			if (el.hasClass("gridito-window-button")) {
+				el.click(function (e) {
+					e.stopImmediatePropagation();
+					e.preventDefault();
+			
+					var win = $('<div></div>').appendTo('body');
+					win.attr("title", $(this).attr("data-gridito-window-title"));
+					win.load(this.href, function () {
+						win.dialog({
+							modal: true
+						});
+						win.find("input:first").focus();
+					});
+				});
+			}
+			
+			if (el.attr("data-gridito-question")) {
+				el.click(function (e) {					
+					if (!confirm($(this).attr("data-gridito-question"))) {
+						e.stopImmediatePropagation();
+						e.preventDefault();
+					}
+				});
+			}
+		});
+		
+		this.element.find("a.gridito-button").each(function () {
+			var el = $(this);
+			/*el.button({
+				icons: {
+					primary: el.attr("data-gridito-icon")
+				},
+				text: !el.hasClass("gridito-hide-text"),
+				disabled: el.hasClass("disabled")
+			}); */
 			
 			// window button
 			if (el.hasClass("gridito-window-button")) {

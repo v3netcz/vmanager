@@ -1,9 +1,10 @@
 {block content}
 <div class="flat_area grid_16">
 	<h2><?php echo __('User administration'); ?></h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas posuere risus sit amet dolor imperdiet quis varius nulla porttitor. Maecenas malesuada iaculis luctus. Aenean vitae tortor lorem, ut sagittis metus. Donec hendrerit, enim ut malesuada mattis, nulla diam lacinia orci, sit amet malesuada turpis nunc placerat nibh.</p>
+	<p>V tabulce níže, jsou vypsány všechny uživatelské účty v systému. Pro založení nového úkolu klikněte na tlačítko "<?php echo __('Add new user'); ?>".</p>
+	<a href="{link create}" class="gridito-button"><?php echo __('Add new user'); ?></a>
 </div>
-<div class="box grid_16 round_all">
+<div class="box grid_16 round_all" style="margin-top: 20px;">
 {control userGrid}
 </div>
 {/block}

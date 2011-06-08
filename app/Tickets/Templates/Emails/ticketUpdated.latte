@@ -6,16 +6,30 @@
  *}
 
 {extends '../../../System/Templates/Emails/@layout.latte'}
+{block header}
+	<h1 style="font-size: large; margin: 0; padding: 0;"><?php echo _x('Notification on ticket change: <span style="color: #ff8000;">%s</span>', array($ticket->name)); ?></h1>
+{/block}
+
 {block content}
- 
-<h1 style="font-size: large;">{$ticket->name}</h1>
 
-<div n:if="$ticket->author !== null && $ticket->author->exists()">
-	<?php echo _x('User <span>%s</span> changed ticket <span>%s</span>:', array($ticket->author->username, $ticket->name)); ?>
+<table n:if="$ticket->author !== null && $ticket->author->exists()" style="margin-bottom: 10px;">
+	<tr>
+		<td><img src="{=$ticket->author->getAvatarUrl(true)}" width="30" alt="Avatar" style="" /></td>
+		<td style="vertical-align: center; padding-left: 20px;"><?php echo _x('<span style="font-weight: bold;">%s</span> changed ticket:', array($ticket->author->username, $ticket->name)); ?></td>
+	</tr>
+</table>
+
+{var $log = $ticket->diffLogAgainst()}
+<ul n:if="count($log) > 0" style="padding: 10px 15px 10px 50px; list-style: square;">
+	<li n:foreach="$log as $change">{!$change}</li>
+</ul>
+
+<div n:if="$ticket->comment != null && !empty($ticket->comment->text)">
+	{!$ticket->comment->text|texy}
 </div>
 
-{* TODO: log *}
+{/block}
 
-<div n:if="!empty($ticket->description)">
-	{$ticket->description}
-</div>
+{block footer}
+	<a href="{link //Ticket:detail, $ticket->id}" style="color: #06B;"><?php echo __('Show ticket in web browser'); ?></a>
+{/block}

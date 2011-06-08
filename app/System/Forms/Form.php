@@ -22,7 +22,7 @@
 
 namespace vManager;
 
-use Nette, Nette\Forms\Container;
+use vBuilder, Nette, Nette\Forms\Container;
 
 Container::extensionMethod('addDatePicker', function (Container $container, $name, $label = NULL) {
     return $container[$name] = new \JanTvrdik\Components\DatePicker($label);
@@ -45,6 +45,19 @@ class Form extends Nette\Application\UI\Form {
 		
 		$this->getElementPrototype()->novalidate = 'novalidate';
 		$this->setRenderer(new Forms\DefaultFormRenderer());
+	}
+	
+	/**
+	 * Loads values for form fields from entity
+	 * 
+	 * @param Entity $e
+	 */
+	public function loadFromEntity(vBuilder\Orm\Entity $e) {
+		$form = $this;
+		
+		foreach($e->getMetadata()->getFields() as $key) {
+			if(isset($form[$key])) $form[$key]->setDefaultValue($e->$key);
+		}
 	}
 	
 }

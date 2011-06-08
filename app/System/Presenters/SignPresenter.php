@@ -151,9 +151,9 @@ class SignPresenter extends BasePresenter {
 			$newPassword = $this->generatePwd(8);
 
 			if(!isset($email) || $email == '') {
-				$user = Repository::findAll('vBuilder\Security\User')->where('[username] = %s', $username)->fetch();
+				$user = Repository::findAll('vManager\Security\User')->where('[username] = %s', $username)->fetch();
 			} else if(!isset($username) || $username == '') {
-				$user = Repository::findAll('vBuilder\Security\User')->where('[email] = %s', $email)->fetch();
+				$user = Repository::findAll('vManager\Security\User')->where('[email] = %s', $email)->fetch();
 			} else {
 				$form->addError(__('Please provide your username or e-mail.'));
 				return;

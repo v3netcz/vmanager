@@ -23,7 +23,7 @@
 
 namespace vManager\Modules;
 
-use vManager, Nette;
+use vManager, vBuilder, Nette, vManager\Security\User, vBuilder\Orm\Behaviors\Secure;
 
 /**
  * Base vManager system module
@@ -53,6 +53,13 @@ class System extends vManager\Application\Module implements vManager\Application
 		$acl->addResource('System:Homepage', 'System');
 		$acl->addResource('System:Search', 'System');
 		$acl->addResource('System:UserSettings', 'System');
+		
+		// Vsichni musi mit pristup k tomu cist uzivatele (login)
+		// Zaroven uzivatel musi mit opravneni k tomu, editovat vlastni profil
+		$acl->allow('guest', User::getParentResourceId(), Secure::ACL_PERMISSION_READ);
+		$acl->allow('guest', User::getParentResourceId(), Secure::ACL_PERMISSION_UPDATE); // Password reset form, TODO: osetrit to
+		//$acl->allow('User', User::getParentResourceId(), Secure::ACL_PERMISSION_UPDATE, array('vManager\Security\User', 'permissionOwnProfileAssert'));
+		
 		$acl->allow('User', 'System', Nette\Security\Permission::ALL);
 	}
 	
@@ -76,9 +83,9 @@ class System extends vManager\Application\Module implements vManager\Application
 	 * 
 	 * @return string
 	 */
-	public static function getBasePath() {
+	public static function getBasePath($absolute = false) {
 		$baseUri = rtrim(Nette\Environment::getVariable('baseUri', NULL), '/');
-		return preg_replace('#https?://[^/]+#A', '', $baseUri);
+		return $absolute ? $baseUri : preg_replace('#https?://[^/]+#A', '', $baseUri);
 	}
 	
 }

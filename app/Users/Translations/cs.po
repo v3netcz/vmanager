@@ -3,109 +3,133 @@ msgstr ""
 "POT-Creation-Date: 2011-04-11 17:09+0200\n"
 "Language: cs\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:49
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:55
 msgid "Username"
 msgstr "Uživatel. jméno"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:50
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:56
 msgid "Name"
 msgstr "Jméno"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:51
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:57
 msgid "Surname"
 msgstr "Příjmení"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/DefaultPresenter.php:52
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:58
 msgid "E-mail"
 msgstr "E-mail"
 
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:62
+#: /Volumes/www/vmanager/tools/../app/Users/Module.php:65
 msgid "Users"
 msgstr "Uživatelé"
 
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:67
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:71
+#: /Volumes/www/vmanager/tools/../app/Users/Module.php:74
 msgid "Add new user"
 msgstr "Přidat nového uživatele"
 
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:67
+#: /Volumes/www/vmanager/tools/../app/Users/Module.php:70
 msgid "Show users"
 msgstr "Zobrazit seznam uživatelů"
 
 #: /Volumes/www/sp1/tools/../app/Users/Templates/Default/default.latte:2
 #: /Volumes/www/sp1/tools/../app/Users/Templates/Default/default.latte:3
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Default/default.latte:3
 msgid "User administration"
 msgstr "Správa uživatelů"
 
 #: /Volumes/www/sp1/tools/../app/Users/Templates/Edit/addNewUser.latte:5
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Edit/addNewUser.latte:5
 msgid "Create new user"
 msgstr "Založit nový uživatelský účet"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:53
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:78
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:77
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:111
 msgid "Create user"
 msgstr "Vytvořit uživatele"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:68
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:67
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:99
 msgid "Password:"
 msgstr "Heslo:"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:72
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:71
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:103
 msgid "Confirm password:"
 msgstr "Heslo (znovu):"
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:47
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:75
 msgid "Name:"
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:48
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:76
 msgid "Name cannot be empty."
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:50
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:78
 msgid "Surname:"
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:51
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:79
 msgid "Surname cannot be empty."
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:53
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:81
 msgid "Username:"
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:54
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:82
 msgid "Username cannot be empty."
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:55
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:83
 msgid ""
 "Username have to contain alpha-numeric chars only (with exception for chars ."
 "_@-). Nor spaces or diacritic chars are allowed."
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:62
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:92
 msgid "Desired username is already taken. Please use something else."
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:65
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:95
 msgid "E-mail is not valid"
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:68
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:100
 msgid "Password have to be at least 6 chars long."
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:69
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:101
 msgid "Please provide password."
 msgstr ""
 
 #: /Volumes/www/sp1/tools/../app/Users/Presenters/EditPresenter.php:72
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:104
 msgid "Confirmation password have to be the same as password."
 msgstr ""
 
@@ -113,3 +137,38 @@ msgstr ""
 #, php-format
 msgid "User n. %d has been successfuly created."
 msgstr "Uživatel č. %d byl úspěšně vytvořen."
+
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:65
+msgid "User groups"
+msgstr "Uživatelské skupiny"
+
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:73
+msgid "Edit"
+msgstr "Upravit"
+
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:75
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:91
+msgid "Record not found"
+msgstr "Záznam nenalezen"
+
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:84
+msgid "Remove"
+msgstr "Odebrat"
+
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:87
+#, php-format
+msgid "Are you sure you want to remove user %s?"
+msgstr "Jste si jistý/á, že chcete odstranit uživatele %s?"
+
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/DefaultPresenter.php:94
+#, php-format
+msgid "User %s has been removed."
+msgstr "Uživatel %s byl odstraněn."
+
+#: /Volumes/www/vmanager/tools/../app/Users/Presenters/EditPresenter.php:136
+msgid "editUser"
+msgstr "editUser"
+
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Edit/editUser.latte:5
+msgid "Edit user"
+msgstr "Editace uživatelského profilu"

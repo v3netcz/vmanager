@@ -6,11 +6,22 @@
  *}
 
 {extends '@layout.latte'}
+{block header}
+	<h1 style="font-size: large; margin: 0; padding: 0;"><?php echo __('Password reset request'); ?></h1>
+{/block}
+
 {block content}
+
+Dear <strong>{$username}</strong>,<br />
+<br />
+Your new password is set to: <strong>{$newPassword}</strong><br />
+Please change it in user settings after you first log in.<br />
+<br />
+vManager Administrator
+
+{/block}
+
+{block footer}
+	<a href="{link //:System:Sign:in}" style="color: #06B;"><?php echo __('Sign in with new credentials'); ?></a>
+{/block}
  
-Hello {$username},<br />
-<br />
-Your new password is set to: {$newPassword}<br />
-Please change it in user settings.<br />
-<br />
-vManager

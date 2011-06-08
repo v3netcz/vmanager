@@ -24,7 +24,7 @@
 namespace vManager\Modules;
 
 use vManager, Nette,
-	 vManager\Modules\System;
+	 vManager\Modules\System, vManager\Security\User, vBuilder\Orm\Behaviors\Secure;
 
 /**
  * Ticketing system module
@@ -44,7 +44,10 @@ class Users extends vManager\Application\Module implements vManager\Application\
 		$acl->addResource('Users');
 		$acl->addResource('Users:Default', 'Users');
 		$acl->addResource('Users:Edit', 'Users');
-		$acl->addRole('User manager', 'User');
+		$acl->addRole('User manager', 'User');		
+		
+		// Manazeri uzivatelu nesmeji editovat uzivatele s vyssimi opravnenimi nez maji samy
+		$acl->allow('User manager', User::getParentResourceId(), Secure::ACL_PERMISSION_UPDATE, array('vManager\Security\User', 'permissionNoHigherUserAssert'));
 		
 		$acl->allow('User manager', 'Users', Nette\Security\Permission::ALL);
 	}
