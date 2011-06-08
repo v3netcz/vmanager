@@ -54,11 +54,15 @@ class Accounting extends vManager\Application\Module implements vManager\Applica
 	 */
 	public function getMenuItems() {
 		$menu = array();
-		$menu[] = array(
-			 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Invoice:default'),
-			 'label' => __('Invoices'),
-			 'icon' => System::getBasePath() . '/images/icons/small/grey/Money.png'
-		);
+		
+		if(Nette\Environment::getUser()->isAllowed('Accounting:Invoice', 'default')) {		
+			$menu[] = array(
+				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Invoice:default'),
+				'label' => __('Invoices'),
+				'icon' => System::getBasePath() . '/images/icons/small/grey/Money.png'
+			);
+		}
+		
 		return $menu;
 	}
 	
