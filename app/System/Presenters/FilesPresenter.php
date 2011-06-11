@@ -32,22 +32,28 @@ use vManager, vBuilder,
  * Presenter for providing files outside of document root through user authorization.
  * 
  * Presenter offers universal access based on registred handlers. Handlers are simple functions
- * returning matching Nette\Application\IResponse for filename. If handler doesn't return
- * anything, script will fallback to another handler. Finally if no handler responded, #404
- * error will be thrown.
+ * returning matching Nette\Application\IResponse for a filename. If handler doesn't return
+ * anything, script fallbacks to another handler. Finally if no handler responded, #404
+ * error would be thrown.
  * 
  * <code>
- *		vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) {
+ * vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) {
  *			
- *			// !! Secure file id to filepath translation
- *			// Be aware, that given filename is non-escaped string, wchich can contain special sequences (such as ../, //, etc.)
- *			if($filename == '/myfile.txt') {
- *				$filepath = FILES_DIR . $filename;
+ *		// !! Secure file id to filepath translation
+ *		// Be aware, that given filename is non-escaped string,
+ *		// which can contain special sequences (such as ../, //, \, etc.)
+ *		if($filename == '/myfile.txt') {
+ *			$filepath = FILES_DIR . $filename;
  *				
- *				if(file_exists($filepath))
- *					return new vBuilder\Application\Responses\FileResponse($filepath);
- *			}
- *		};
+ *			if(file_exists($filepath))
+ *				return new vBuilder\Application\Responses\FileResponse($filepath);
+ *		}
+ * };
+ * </code>
+ * 
+ * Don't make links for those files by fixed strings, use getLink() instead.
+ * <code>
+ * $url = FilesPresenter::getLink('/myfile.txt');
  * </code>
  *
  * @author Adam Staněk (V3lbloud)
