@@ -44,6 +44,9 @@ use vManager, vBuilder, Nette;
  */
 class User extends vBuilder\Security\User {
 	
+	/** avatars directory name */
+	const AVATAR_DIR = 'avatars';
+	
 	/**
 	 * Returns avatar picture URL
 	 * 
@@ -51,10 +54,32 @@ class User extends vBuilder\Security\User {
 	 * @return string URL
 	 */
 	function getAvatarUrl($absolute = false) {
-		// TODO: dynamicke na zaklde upravy v profilu
-		
+		foreach(array('jpg', 'png', 'gif') as $ext) {
+			$filepath = '/'. self::AVATAR_DIR .'/'. $this->getId() . '.' . $ext;
+			if(file_exists(FILES_DIR . $filepath))
+				return vManager\Modules\System\FilesPresenter::getLink($filepath);
+		}
+				
 		return vManager\Modules\System::getBasePath($absolute)
 				  . '/images/profile.jpg';
+	}
+	
+	/**
+	 * Registers URL file handler for avatars
+	 * 
+	 * @return void
+	 */
+	static function registerAvatarFileHandler() {
+		vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) {
+			
+			// Filtering exact match, for security reasons
+			if(Nette\Utils\Strings::match($filename, '/^\/'.User::AVATAR_DIR.'\/[0-9]+\.(png|jpg|gif)$/')) {
+				$filepath = FILES_DIR . $filename;
+				
+				if(file_exists($filepath))
+					return new vBuilder\Application\Responses\FileResponse($filepath);
+			}
+		};
 	}
 	
 }
