@@ -520,6 +520,10 @@ border-radius: 4px;
 border-top-left-radius: 4px;
 } 
 
+div.exception_container {
+	margin: 20% auto;
+	width: 60%;
+}
 
 div.main_container a{
 color:#555;

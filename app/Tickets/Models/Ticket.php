@@ -47,6 +47,7 @@ use vManager,
  * @Column(deadline, type="DateTime")
  * @Column(assignedTo, type="OneToOne", entity="vManager\Security\User", joinOn="assignedTo=id")
  * @Column(timestamp, type="DateTime")
+ * @Column(priority, type="OneToOne", entity="vManager\Modules\Tickets\Priority", joinOn="priority=id")
  * 
  * TODO: Pak predelat na stavy dle analyzy
  * @Column(state, type="integer")
@@ -118,7 +119,14 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 					$change = _x('Reassigned to <strong class="value">%s</strong>', array($t1->$field->exists()
 										? $t1->$field->username : _x('User n. %d', array($t1->$field->id))));
 				}
-			} else if($t2->$field != $t1->$field) {
+				
+			} elseif($field == 'priority' && $t1->$field !== null) {
+				if($t2->$field === null || $t2->$field->id != $t1->$field->id) {
+					$change = _x('Changed priority to <strong class="value">%s</strong>', array($t1->$field->exists()
+										? $t1->$field->label : __('unknown priority') ));
+				}	
+				
+			} elseif($t2->$field != $t1->$field) {
 				if(is_object($t1->$field) && $t1->$field instanceof vBuilder\Orm\DataTypes\DateTime)
 					$change = _x('Changed field <strong class="field">%s</strong> to <strong class="value">%s</strong>', array($field, $t1->$field->format("d. m. Y")));
 				elseif($field == 'state')

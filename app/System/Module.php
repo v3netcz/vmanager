@@ -34,6 +34,10 @@ use vManager, vBuilder, Nette, vManager\Security\User, vBuilder\Orm\Behaviors\Se
 class System extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
 	vManager\Application\IAclEnabledModule {
 	
+	public function __construct() {
+		vManager\Security\User::registerAvatarFileHandler();
+	}
+	
 	/**
 	 * Returns true if this module is enabled in current configuration
 	 * 

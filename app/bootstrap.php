@@ -48,9 +48,10 @@ $application->catchExceptions = Environment::isProduction();
 
 
 // Setup router
+$application->onStartup[] = array('vManager\Modules\System\FilesPresenter', 'setupRoutes');
 $application->onStartup[] = function() use ($application) {
-	$router = $application->getRouter();
-
+	$router = $application->getRouter();	
+	
 	$router[] = new Route('index.php', 'System:Homepage:default', Route::ONE_WAY);
 
 	$router[] = new Route('<presenter>/<action>[/<id>]', 'System:Homepage:default');
