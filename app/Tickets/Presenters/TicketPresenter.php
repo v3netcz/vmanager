@@ -89,10 +89,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		// Pokud to neni spravce ticketu, zobrazuju jen tickety, ktere uzivatel zalozil
 		// nebo kterym je prirazen
-		if(!Nette\Environment::getUser()->isInRole('Ticket admin'))
+		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Ticket admin'))
 			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [ticketId] = [d.ticketId])))", $uid, $uid, $uid);
 
-		$ds->orderBy('[state] DESC, IF([deadline] IS NULL, 0, 1) DESC, [deadline], [ticketId]');
+		$ds->orderBy('[state] DESC, IF([deadline] IS NULL, 0, 1) DESC, [deadline], [assignedTo], [ticketId]');
 
 		// =======================================================================
 		
@@ -130,7 +130,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		));
 
 		// Resitel ukolu
-		if(Nette\Environment::getUser()->isInRole('Ticket admin')) {
+		//if(Nette\Environment::getUser()->getIdentity()->isInRole('Ticket admin')) {
 			$grid->addColumn("assignedTo", __('Assigned to'), array(
 				 "renderer" => function ($ticket) {
 					 echo $ticket->assignedTo !== null ? ($ticket->assignedTo->exists() ? $ticket->assignedTo->username
@@ -138,7 +138,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				 },
 				 "sortable" => true
 			))->setCellClass('assignedTo');
-		}
+		//}
 
 		// Datum posledni zmeny
 		$grid->addColumn("timestamp", __("Last change"), array(
