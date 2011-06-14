@@ -43,7 +43,6 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	/** @var array of suggestions to Assign form field */
 	protected $assignToSuggestions = array();
 
-
 	/**
 	 * Authorization of ticket render request before performing any action
 	 * 
@@ -85,6 +84,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$ds = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
 				  ->as('d')
+				  ->leftJoin(Priority::getMetadata()->getTableName())->as('p')->on('[priority] = [p.id]')
 				  ->where('[revision] > 0');
 
 		// Pokud to neni spravce ticketu, zobrazuju jen tickety, ktere uzivatel zalozil
@@ -92,10 +92,9 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Ticket admin'))
 			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [ticketId] = [d.ticketId])))", $uid, $uid, $uid);
 
-		$ds->orderBy('[state] DESC, IF([deadline] IS NULL, 0, 1) DESC, [deadline], [assignedTo], [ticketId]');
 
-		// =======================================================================
-		
+		$ds->orderBy('[state] DESC, IF([deadline] IS NULL, 0, 1) DESC, [deadline], [p.weight] DESC, [assignedTo], [ticketId]');
+
 		$grid->setModel(new Gridito\DibiFluentModel($ds, 'vManager\\Modules\\Tickets\\Ticket'));
 		$grid->setItemsPerPage(20);
 
@@ -106,6 +105,13 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 						  $classes[] = 'closedTicket';
 					  elseif($ticket->deadline != null && $ticket->deadline->format("U") < time())
 						  $classes[] = 'overdueTicket';
+
+					  if($ticket->priority !== null && $ticket->priority->exists()) {
+						  if($ticket->priority->weight == Priority::getMaxPriorityWeight())
+							  $classes[] = 'criticalTicket';
+						  elseif($ticket->priority->weight == Priority::getMaxPriorityWeight() - 1)
+							  $classes[] = 'highPriorityTicket';
+					  }
 
 					  return empty($classes) ? null : implode(" ", $classes);
 				  });
@@ -161,6 +167,19 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			 "sortable" => true
 		))->setCellClass("date deadline");
 
+		// Priorita
+		$grid->addColumn("priority", __('Priority'), array(
+			 "renderer" => function ($ticket) {
+				 if($ticket->priority == null) {
+					 echo "-";
+					 return;
+				 }
+
+				 echo Nette\Templating\DefaultHelpers::escapeHtml($ticket->priority->label);
+			 },
+			 "sortable" => true
+		))->setCellClass("priority");
+
 		// Stav ticketu
 		$grid->addColumn("state", __('State'), array(
 			 "renderer" => function ($ticket) {
@@ -212,10 +231,17 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 							 }, __('Responsible person does not exist.'));
 
 
-		/*
-		  $form->addSelect('priority', __('Priority:'), array(
-		  __('Low'), __('Normal'), __('High')
-		  )); */
+		$prioritiesDs = Repository::findAll('vManager\\Modules\\Tickets\\Priority');
+		$priorities = array();
+		$defaultValue = null;
+		foreach($prioritiesDs as $curr) {
+			if($curr->getWeight() == 1 && $defaultValue === null)
+				$defaultValue = $curr->getId();
+			$priorities[$curr->getId()] = __($curr->getLabel());
+		}
+
+		$form->addSelect('priority', __('Priority:'), $priorities)
+				  ->setDefaultValue($defaultValue);
 	}
 
 	/**
@@ -285,6 +311,9 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if($ticket->assignedTo !== null && $ticket->assignedTo->exists())
 			$form['assignTo']->setValue($ticket->assignedTo->username);
 
+		if($ticket->priority !== null && $ticket->priority->exists())
+			$form['priority']->setValue($ticket->priority->id);
+
 		$form->addSubmit('send', __('Save'));
 
 		$form->onSubmit[] = callback($this, 'updateFormSubmitted');
@@ -337,6 +366,12 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				$changed = $newAssignedTo === null ? ($ticket->assignedTo !== null) : ($ticket->assignedTo === null || $newAssignedTo->id != $ticket->assignedTo->id);
 
 			$ticket->assignedTo = $newAssignedTo;
+		}
+
+		if(isset($values['priority'])) {
+			$priority = Repository::get('vManager\\Modules\\Tickets\\Priority', $values['priority']);
+			$ticket->priority = $priority->exists() ? $priority : null;
+			$changed = true;
 		}
 
 		foreach(array('name', 'description', 'deadline') as $curr) {

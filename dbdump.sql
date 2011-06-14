@@ -107,12 +107,32 @@ CREATE TABLE `pm_tickets` (
   `commentId` int(11) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `description` text,
+  `priority` tinyint(3) unsigned DEFAULT NULL,
   `deadline` date DEFAULT NULL,
   `assignedTo` smallint(6) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `state` smallint(6) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ticketId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Dump of table pm_priorities
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `pm_priorities`;
+
+CREATE TABLE `pm_priorities` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `weight` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+INSERT INTO `pm_priorities` (`id`,`name`,`weight`)
+VALUES
+	(1,'Low', 0),
+	(2,'Normal',1),
+	(3,'High', 2),
+	(4,'Critical', 3);
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

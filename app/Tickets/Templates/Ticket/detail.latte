@@ -22,6 +22,7 @@
 			<?php echo _x('Created by: <span class="value">%s</span>', array($firstRevision->author !== null ? ($firstRevision->author->exists() ? $firstRevision->author->username : _x('user n. %d', array($firstRevision->author->id))) : __('anonymous'))); ?><br />
 			<?php echo _x('Assigned to: <span class="value">%s</span>', array($firstRevision->assignedTo !== null ? ($firstRevision->assignedTo->exists() ? $firstRevision->assignedTo->username : _x('user n. %d', array($firstRevision->assignedTo->id))) : __('nobody'))); ?><br />
 			{if $data->deadline}<?php echo _x('Deadline: <span class="value">%s</span>', array($data->deadline->format('d. m. Y'))); ?><br />{/if}
+			{if $data->priority}<?php echo _x('Priority: <span class="value">%s</span>', array($data->priority->label)); ?><br />{/if}
 			<?php echo _x('State: <span class="value">%s</span>', array(!$data->isOpened() ? __('Closed') : __('Opened'))); ?>
 		</div>		
 		
