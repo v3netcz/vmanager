@@ -122,12 +122,12 @@ DROP TABLE IF EXISTS `pm_priorities`;
 
 CREATE TABLE `pm_priorities` (
   `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL,
+  `priorityName` varchar(64) NOT NULL,
   `weight` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-INSERT INTO `pm_priorities` (`id`,`name`,`weight`)
+INSERT INTO `pm_priorities` (`id`,`priorityName`,`weight`)
 VALUES
 	(1,'Low', 0),
 	(2,'Normal',1),
