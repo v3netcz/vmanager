@@ -1,24 +1,26 @@
 {block content}
-<div class="flat_area grid_16">
-	<h2><?php echo __('Welcome'); ?></h2>
-	
-	<p>Nacházíte se v demoverzi aplikace vManager. Aplikace je navržena pro usnadnění projektovéhho řízení a týmové komunikace.</p>
-	
-	<p>Tato aplikace je v současné době ve fázi vývoje - je tedy určena <span style="color: #aa0000">pouze pro testovací a demonstrační účely</span>. Jakékoliv připomínky prosím zasílejte na adresu <a href="mailto:info@v3net.cz">info@v3net.cz</a>.</p>
+	{include ../Includes/flashes.latte}
+
+	<div class="flat_area grid_16">
+		<h2><!--<?php echo __('Dashboard'); ?>-->Úvodní stránka</h2>
 		
-	<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas posuere risus sit amet dolor imperdiet quis varius nulla porttitor. Maecenas malesuada iaculis luctus. Aenean vitae tortor lorem, ut sagittis metus. Donec hendrerit, enim ut malesuada mattis, nulla diam lacinia orci, sit amet malesuada turpis nunc placerat nibh.</p>
-	
-	<ul id="environment">
-		<li>PHP {=PHP_VERSION}</li>
-		<li n:ifset="$_SERVER['SERVER_SOFTWARE']">Server {$_SERVER['SERVER_SOFTWARE']}</li>
-		<li>Nette Framework {=Nette\Framework::VERSION}</li>
-		<li>vBuilder Framework {=vBuilder\Framework::getVersionString()}</li>
-	</ul>
-	
-	<ul id="modules">
-		{foreach vManager\Application\ModuleManager::getModules() as $module}
-			<li>{=$module->getName()} {=vBuilder\Framework::getVersionString($module->getVersion(), '')}{if !$module->isEnabled()} (disabled){/if}</li>
-		{/foreach}
-	</ul> -->
-</div>
+		<p>Nacházíte se v demoverzi aplikace vManager. Aplikace je navržena pro usnadnění projektovéhho řízení a týmové komunikace.</p>
+
+		<p>Tato aplikace je v současné době ve fázi vývoje - je tedy určena <span style="color: #aa0000">pouze pro testovací a demonstrační účely</span>. Jakékoliv připomínky prosím zasílejte na adresu <a href="mailto:info@v3net.cz">info@v3net.cz</a>.</p>
+
+		<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas posuere risus sit amet dolor imperdiet quis varius nulla porttitor. Maecenas malesuada iaculis luctus. Aenean vitae tortor lorem, ut sagittis metus. Donec hendrerit, enim ut malesuada mattis, nulla diam lacinia orci, sit amet malesuada turpis nunc placerat nibh.</p>
+
+		<ul id="environment">
+			<li>PHP {=PHP_VERSION}</li>
+			<li n:ifset="$_SERVER['SERVER_SOFTWARE']">Server {$_SERVER['SERVER_SOFTWARE']}</li>
+			<li>Nette Framework {=Nette\Framework::VERSION}</li>
+			<li>vBuilder Framework {=vBuilder\Framework::getVersionString()}</li>
+		</ul>
+
+		<ul id="modules">
+			{foreach vManager\Application\ModuleManager::getModules() as $module}
+				<li>{=$module->getName()} {=vBuilder\Framework::getVersionString($module->getVersion(), '')}{if !$module->isEnabled()} (disabled){/if}</li>
+			{/foreach}
+		</ul> -->
+	</div>
 {/block}

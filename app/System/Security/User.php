@@ -38,6 +38,7 @@ use vManager, vBuilder, Nette;
  * @Column(email, type="string")
  * @Column(registrationTime, type="DateTime")
  * @Column(roles, type="OneToMany", table="security_user_roles", joinOn="id=user")
+ * @Column(lastLoginInfo, type="OneToOne", entity="vBuilder\Security\LastLoginInfo", joinOn="id=userId")
  * 
  * @author Adam Staněk (V3lbloud)
  * @since Apr 28, 2011
@@ -46,6 +47,15 @@ class User extends vBuilder\Security\User {
 	
 	/** avatars directory name */
 	const AVATAR_DIR = 'avatars';
+	
+	/**
+	 * Returns user salutation
+	 * 
+	 * @return string
+	 */
+	function getSalutation() {
+		return _x('Hi %s', array($this->getName()));
+	}
 	
 	/**
 	 * Returns avatar picture URL
