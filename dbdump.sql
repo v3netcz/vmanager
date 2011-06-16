@@ -17,25 +17,25 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Dump of table security_user_roles
+# Dump of table security_userRoles
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `security_user_roles`;
+DROP TABLE IF EXISTS `security_userRoles`;
 
-CREATE TABLE `security_user_roles` (
+CREATE TABLE `security_userRoles` (
   `user` smallint(6) unsigned NOT NULL,
   `role` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
-LOCK TABLES `security_user_roles` WRITE;
-/*!40000 ALTER TABLE `security_user_roles` DISABLE KEYS */;
-INSERT INTO `security_user_roles` (`user`,`role`)
+LOCK TABLES `security_userRoles` WRITE;
+/*!40000 ALTER TABLE `security_userRoles` DISABLE KEYS */;
+INSERT INTO `security_userRoles` (`user`,`role`)
 VALUES
 	(1,'Administrator'),
 	(2,'Ticket user');
 
-/*!40000 ALTER TABLE `security_user_roles` ENABLE KEYS */;
+/*!40000 ALTER TABLE `security_userRoles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 # Dump of table security_users
@@ -64,6 +64,21 @@ VALUES
 
 /*!40000 ALTER TABLE `security_users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+
+# Dump of table security_lastLoginInfo
+# ------------------------------------------------------------
+
+CREATE TABLE `security_lastLoginInfo` (
+  `userId` int(11) NOT NULL DEFAULT '0',
+  `time` datetime DEFAULT NULL,
+  `ip` varchar(15) COLLATE utf8_czech_ci DEFAULT NULL,
+  `time2` datetime DEFAULT NULL,
+  `ip2` varchar(15) COLLATE utf8_czech_ci DEFAULT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
 
 
 # Dump of table pm_comments
