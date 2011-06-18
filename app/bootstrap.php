@@ -14,6 +14,7 @@ use Nette\Application\Routers\Route;
 // this allows load Nette Framework classes automatically so that
 // you don't have to litter your code with 'require' statements
 require LIBS_DIR . '/nette/Nette/loader.php';
+require LIBS_DIR . '/vBuilderFw/vBuilderFw/bootstrap.php';
 require LIBS_DIR . '/NetteTranslator/shortcuts.php';
 
 // Enables debuging mode
