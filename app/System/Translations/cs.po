@@ -14,12 +14,14 @@ msgstr ""
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:200
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:194
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:194
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:216
 msgid "You have been signed out."
 msgstr "Byl jste úspěšně odhlášen."
 
 #: /Volumes/www/sp1/tools/./../app/System/Module.php:68
 #: /Volumes/www/sp1/tools/../app/System/Module.php:68
 #: /Volumes/www/vmanager/tools/../app/System/Module.php:75
+#: /Volumes/www/vmanager/tools/../app/System/Module.php:79
 msgid "Homepage"
 msgstr "Úvod"
 
@@ -312,6 +314,7 @@ msgstr "E-mail:"
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:105
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:108
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:158
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:180
 msgid "Please provide your username or e-mail."
 msgstr "Prosím zadejte vaše uživatelské jméno nebo e-mail."
 
@@ -330,6 +333,7 @@ msgstr "Zaslat nové heslo"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:177
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:170
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:170
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:192
 msgid "vManager - new password"
 msgstr "vManager - nové heslo"
 
@@ -340,6 +344,7 @@ msgstr "vManager - nové heslo"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:184
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:178
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:178
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:200
 msgid "A new password has been sent to your e-mail address."
 msgstr "Nové heslo bylo zasláno na Vaši e-mailovou adresu."
 
@@ -359,6 +364,7 @@ msgstr "Zpět na přihlašovací formulář"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:187
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:181
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:181
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:203
 msgid "User not found."
 msgstr "Uživatel nenalezen."
 
@@ -609,3 +615,27 @@ msgstr "Požadavek na změnu hesla"
 #: /Volumes/www/vmanager/tools/../app/System/Templates/Emails/pwdReset.latte:25
 msgid "Sign in with new credentials"
 msgstr "Přihlásit se s novým heslem"
+
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:143
+#, php-format
+msgid "%s. Welcome back. Last time you logged in %s from %s."
+msgstr "%s. Poslední přihlášení proběhlo %s z počítače %s."
+
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:151
+#, php-format
+msgid ""
+"%s. Since this is the first time you have logged in it is recommended to "
+"change your password."
+msgstr ""
+"%s. Jelikož tohle je Vaše první přihlášení, je doporučeno, abyste upravil/a "
+"Váš profil a změnil/a heslo. Pokračujte kliknutím na 'nastavení' vlevo pod "
+"vaším avatarem."
+
+#: /Volumes/www/vmanager/tools/../app/System/Templates/Homepage/default.latte:5
+msgid "Dashboard"
+msgstr "Nástěnka"
+
+#: /Volumes/www/vmanager/tools/../app/System/Security/User.php:57
+#, php-format
+msgid "Hi %s"
+msgstr "Dobrý den %s"

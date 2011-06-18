@@ -46,6 +46,10 @@ class UserSettingsPresenter extends SecuredPresenter {
 
 		$form = new Form;
 
+		$form->addText('salutation', __('Salutation: '))
+				  ->addRule(Form::FILLED, __('Salutation cannot be empty.'))
+				  ->setValue($user->getSalutation());
+		
 		// $form->addFile('icon', 'Avatar:'); TODO: pridat podporu v db
 		$form->addText('name', __('Name:'))
 				  ->addRule(Form::FILLED, __('Name cannot be empty.'))
@@ -85,7 +89,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 	 * @param Form
 	 */
 	public function userProfileFormSubmitted($form) {
-		try {
+		//try {
 			$values = $form->getValues();
 			$user = Nette\Environment::getUser()->getIdentity();
 
@@ -93,13 +97,20 @@ class UserSettingsPresenter extends SecuredPresenter {
 			$user->surname = $values->surname;
 			$user->username = $values->username;
 			$user->email = $values->email;
+				
+			// Nechci ukladat defaultni osloveni, protoze zavisi na prekladu			
+			if($values->salutation != $user->getSalutation()) {
+				$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+				$config->set('system.salutation', $values->salutation); 
+				$config->save();
+			}
 
 			$user->save();
 			$this->flashMessage(__('All changes are saved.'));
 			$this->redirect('default');
-		} catch(Nette\Security\AuthenticationException $e) {
+		/*} catch(\Exception $e) {
 			$form->addError($e->getMessage());
-		}
+		} */
 	}
 
 	/**
