@@ -4,10 +4,16 @@
 		color: #ff0000;
 	}
 	
+	.ticketListingBlock TD.id {
+		width: 40px;
+		text-align: right;
+	}
+	
 	.ticketListingBlock TD.state {
 		color: #aa7300;
-		text-align: center;	
-	}
+		text-align: center;
+		width: 70px;
+	}	
 	
 	.ticketListingBlock TR.closedTicket TD.state {
 		color: green;
@@ -15,14 +21,17 @@
 	
 	.ticketListingBlock TD.date {
 		text-align: center;		
+		width: 110px;
 	}
 	
 	.ticketListingBlock TD.assignedTo {
 		text-align: center;		
+		width: 120px;
 	}
 	
 	.ticketListingBlock TD.priority {
-		text-align: center;		
+		text-align: center;
+		width: 70px;
 	}
 	
 	.ticketListingBlock TR.highPriorityTicket TD.priority {
@@ -41,7 +50,7 @@
 <div class="flat_area grid_16">
 	<h2><?php echo __('Tickets'); ?></h2>
 	<p>Následující stránka obsahuje všechny úkoly k plnění. Pro založení nového úkolu klikněte na tlačítko "<?php echo __('Create new ticket'); ?>".</p>
-	<a href="{link create}" class="gridito-button"><?php echo __('Create new ticket'); ?></a>
+	<a href="{link create}" class="color-button"><?php echo __('Create new ticket'); ?></a>
 </div>
 <div class="box grid_16 round_all ticketListingBlock" style="margin-top: 20px; border: none;">	
 {control ticketListingGrid}

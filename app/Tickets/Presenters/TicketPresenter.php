@@ -125,7 +125,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				 echo Nette\Utils\Html::el("a")->href($link)->setText('#'.$ticket->id);
 			 },
 			 "sortable" => true,
-		));
+		))->setCellClass('id');;
 
 		// Nazev ticketu
 		$grid->addColumn("name", __('Ticket name'), array(
