@@ -19,7 +19,61 @@
 		<a href="#" class="toggle">&nbsp;</a>
 		<div class="toggle_container">
 			<div class="block">
-				{control userPasswordForm}
+				{control userPasswordForm begin}
+				{var form => $control['userPasswordForm']}
+				
+				{if $form->hasErrors()}
+					<div n:foreach="$form->getErrors() as $error" class="alert alert_orange">
+						<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+						{$error}
+					</div>
+				{/if}
+				
+				<table>
+					<tr>
+						<td>
+							<div>
+								{!$form['oldPassword']->label}
+								{!$form['oldPassword']->control}
+							</div>
+						</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>
+							{!$form['password']->label}
+							{!$form['password']->control}
+						</td>
+						<td style="padding-left: 40px;">
+							{!$form['password2']->label}
+							{!$form['password2']->control}
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2">
+							<button class="button_colour round_all">
+								<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
+								<span>{$form['send']->caption}</span>
+							</button>
+						</td>
+					</tr>
+				</table>
+				{control userPasswordForm end}
+				
+				{*control userPasswordForm*}
+			</div>
+		</div>
+	</div>
+	
+	<div class="box grid_8 round_all">
+		<h2 class="box_head grad_colour"><?php echo __('Environment'); ?></h2>
+		<a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>
+		<div class="toggle_container">
+			<div class="block">
+				{control environmentForm}
 			</div>
 		</div>
 	</div>

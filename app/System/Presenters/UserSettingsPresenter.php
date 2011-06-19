@@ -112,6 +112,43 @@ class UserSettingsPresenter extends SecuredPresenter {
 			$form->addError($e->getMessage());
 		} */
 	}
+	
+	/**
+	 * Environment settings form component factory.
+	 *
+	 * @return Form
+	 */
+	protected function createComponentEnvironmentForm() {
+		$user = Nette\Environment::getUser()->getIdentity();
+
+		$form = new Form;
+
+		$selLanguages = array(null => __('Auto'));
+		$languages = (array) Nette\Environment::getConfig('languages', array('en'));
+		foreach($languages as $curr) {
+			$selLanguages[$curr] = $curr;
+		}
+		
+		$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+		$lang = $config->get('system.language'); 
+		
+		$form->addSelect('language', __('Language:'), $selLanguages)->setValue($lang);
+		
+		$form->addSubmit('send', __('Save'));
+
+		$form->onSubmit[] = callback($this, 'environmentFormSubmitted');
+		return $form;
+	}
+	
+	public function environmentFormSubmitted($form) {
+		$values = $form->getValues();
+		$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+		$config->set('system.language', empty($values->language) ? null : $values->language); 
+		$config->save();
+
+		$this->flashMessage(__('All changes are saved.'));
+		$this->redirect('default');
+	}
 
 	/**
 	 * User profile form component factory.
