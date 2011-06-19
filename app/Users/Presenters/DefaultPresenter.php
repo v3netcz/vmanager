@@ -67,7 +67,7 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 				 $roles = count($row->roles) > 1 ? array_diff($row->roles, array('User')) : $row->roles;
 				 echo implode($roles, ', ');
 			 },
-			 "sortable" => true,
+			 "sortable" => false,
 		));
 
 		$grid->addButton("btnEdit", __('Edit'), array(					  
