@@ -92,8 +92,9 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Ticket admin'))
 			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [ticketId] = [d.ticketId])))", $uid, $uid, $uid);
 
-
-		$ds->orderBy('[state] DESC, IF([deadline] IS NULL, 0, 1) DESC, [deadline], [p.weight] DESC, [assignedTo], [ticketId]');
+		
+		if($grid->sortColumn === null)
+			$ds->orderBy('[state] DESC, IF([deadline] IS NULL, 0, 1) DESC, [deadline], [p.weight] DESC, [assignedTo], [ticketId]');
 
 		$grid->setModel(new Gridito\DibiFluentModel($ds, 'vManager\\Modules\\Tickets\\Ticket'));
 		$grid->setItemsPerPage(20);
