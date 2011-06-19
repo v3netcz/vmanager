@@ -57,6 +57,7 @@ div.gridito-flash .ui-icon {
 	padding: 8px 15px;
 	border-left: none !important;
 	border-right: none !important;
+	line-height: 16px;
 }
  
 .gridito-table .ui-state-hover .gridito-cell,
