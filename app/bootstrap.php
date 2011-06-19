@@ -38,8 +38,11 @@ PavelMaca\Captcha\CaptchaControl::register();
 vManager\Application\ModuleManager::getModules();
 
 // Translator
-// TODO: Chtelo by to ukladat v nejakych uzivatelskych settings a detekci az jako fallback
-Environment::setVariable('lang', Environment::getHttpRequest()->detectLanguage((array) Environment::getConfig('languages', array('en'))));
+$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+$lang = $config->get('system.language'); 
+if($lang === null) $lang = Environment::getHttpRequest()->detectLanguage((array) Environment::getConfig('languages', array('en')));
+
+Environment::setVariable('lang', $lang);
 //NetteTranslator\Panel::register();
 
 // Configure application

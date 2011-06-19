@@ -23,6 +23,11 @@ $controls = $form->getComponents(TRUE, 'Nette\Forms\IControl');
 	{elseif $control instanceof Nette\Forms\Controls\TextArea}
 		{!$control->label}
 		{!$control->control}
+	{elseif $control instanceof Nette\Forms\Controls\SelectBox}
+		<div>
+			{!$control->label}
+			{!$control->control}
+		</div>
 	{elseif $control instanceof Nette\Forms\Controls\Checkbox}
 		<div>{!$control->control} {$control->caption}</div>
    {elseif $control instanceof Nette\Forms\Controls\UploadControl}

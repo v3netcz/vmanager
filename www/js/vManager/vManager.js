@@ -22,9 +22,10 @@ $(function () {
 	$.texyla({
 		buttonType: "button"
 	});
-			
+	
+	//$("select, input:checkbox, input:radio, input:file").uniform();
 });
-		
+
 $(document).ready(function () {
 	$("input").each(function () {
 		var el = $(this);

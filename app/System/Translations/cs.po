@@ -49,6 +49,7 @@ msgstr "Nemáte dostatečné oprávnění k provedení této akce."
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:56
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:50
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:85
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:60
 msgid "Username:"
 msgstr "Login:"
 
@@ -115,6 +116,7 @@ msgstr "Přístup zamítnut."
 #: /Volumes/www/sp1/tools/../app/System/Templates/Emails/@layout.latte:140
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:140
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:140
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
 msgid "Administrator"
 msgstr "Administrátor"
 
@@ -124,6 +126,7 @@ msgstr "Administrátor"
 #: /Volumes/www/sp1/tools/../app/System/Templates/Emails/@layout.latte:140
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:140
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:140
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
 msgid "User"
 msgstr "Uživatel"
 
@@ -133,6 +136,7 @@ msgstr "Uživatel"
 #: /Volumes/www/sp1/tools/../app/System/Templates/Emails/@layout.latte:143
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:143
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:143
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:147
 msgid "settings"
 msgstr "nastavení"
 
@@ -142,6 +146,7 @@ msgstr "nastavení"
 #: /Volumes/www/sp1/tools/../app/System/Templates/Emails/@layout.latte:144
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:144
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:148
 msgid "logout"
 msgstr "odhlásit"
 
@@ -151,6 +156,7 @@ msgstr "odhlásit"
 #: /Volumes/www/sp1/tools/../app/System/Templates/Emails/@layout.latte:168
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:168
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:168
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:172
 msgid "Search..."
 msgstr "Hledat..."
 
@@ -208,12 +214,14 @@ msgstr "Poslední"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:48
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:50
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:50
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:54
 msgid "Name:"
 msgstr "Jméno:"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserPresenter.php:50
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:53
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:53
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:57
 msgid "Surname:"
 msgstr "Příjmení:"
 
@@ -226,6 +234,7 @@ msgstr "Příjmení:"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/SignPresenter.php:93
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:74
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:93
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:78
 msgid "E-mail is not valid"
 msgstr "Zadaná e-mailová adresa není platná"
 
@@ -234,6 +243,7 @@ msgstr "Zadaná e-mailová adresa není platná"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:116
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:115
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:115
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:163
 msgid "Old password:"
 msgstr "Vaše staré heslo:"
 
@@ -242,6 +252,7 @@ msgstr "Vaše staré heslo:"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:122
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:121
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:121
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:169
 msgid "New password:"
 msgstr "Nové heslo:"
 
@@ -250,6 +261,7 @@ msgstr "Nové heslo:"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:125
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:126
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:125
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:173
 msgid "Confirm new password:"
 msgstr "Nové heslo (znovu):"
 
@@ -265,6 +277,9 @@ msgstr "Zadaná hesla se neshodují."
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:149
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:98
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:148
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:109
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:149
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:195
 msgid "All changes are saved."
 msgstr "Všechny změny byly úspěšně uloženy."
 
@@ -284,6 +299,7 @@ msgstr ""
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:126
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:127
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:126
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:174
 msgid "Confirmation password have to be the same as password."
 msgstr "Políčka 'Heslo' a 'Heslo (znovu)' musí být shodné."
 
@@ -370,22 +386,26 @@ msgstr "Uživatel nenalezen."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:51
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:51
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:55
 msgid "Name cannot be empty."
 msgstr "Vaše jméno nemůže být prázdné."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:54
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:54
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:58
 msgid "Surname cannot be empty."
 msgstr "Příjmení nemůže být prázdné."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:58
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:58
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:62
 msgid "Username cannot be empty."
 msgstr "Uživatelské jméno nemůže být prázdné."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:66
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:70
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:70
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:74
 msgid "Desired username is already taken. Please use something else."
 msgstr "Zvolené uživatelské jméno je již obsazeno. Zvolte prosím jiné."
 
@@ -393,6 +413,7 @@ msgstr "Zvolené uživatelské jméno je již obsazeno. Zvolte prosím jiné."
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:120
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:119
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:119
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:167
 msgid "Invalid password. Access denied."
 msgstr "Špatné heslo. Přístup zamítnut."
 
@@ -400,6 +421,7 @@ msgstr "Špatné heslo. Přístup zamítnut."
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:123
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:124
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:123
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:171
 msgid "Please provide password."
 msgstr "Prosím zadejte heslo."
 
@@ -414,23 +436,28 @@ msgstr "Osobní údaje"
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:129
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:128
 #: /Volumes/www/vmanager/tools/../app/System/Templates/UserSettings/default.latte:17
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:176
 msgid "Change password"
 msgstr "Změnit heslo"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:73
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:76
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:76
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:80
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:137
 msgid "Save"
 msgstr "Uložit"
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:123
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:122
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:122
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:170
 msgid "Password have to be at least 6 chars long."
 msgstr "Heslo musí být dlouhé alespoň 6 znaků."
 
 #: /Volumes/www/sp1/tools/../app/System/Presenters/UserSettingsPresenter.php:59
 #: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:59
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:63
 msgid ""
 "Username have to contain alpha-numeric chars only (with exception for chars ."
 "_@-). Nor spaces or diacritic chars are allowed."
@@ -636,6 +663,27 @@ msgid "Dashboard"
 msgstr "Nástěnka"
 
 #: /Volumes/www/vmanager/tools/../app/System/Security/User.php:57
+#: /Volumes/www/vmanager/tools/../app/System/Security/User.php:58
 #, php-format
 msgid "Hi %s"
 msgstr "Dobrý den %s"
+
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:49
+msgid "Salutation: "
+msgstr "Oslovení: "
+
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:50
+msgid "Salutation cannot be empty."
+msgstr "Oslovení nemůže být prázdné."
+
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:126
+msgid "Auto"
+msgstr "Automaticky"
+
+#: /Volumes/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:135
+msgid "Language:"
+msgstr "Jazyk:"
+
+#: /Volumes/www/vmanager/tools/../app/System/Templates/UserSettings/default.latte:71
+msgid "Environment"
+msgstr "Prostředí"

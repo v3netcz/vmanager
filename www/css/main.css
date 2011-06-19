@@ -659,18 +659,23 @@ div.main_container .box .no_padding{
 	font-size:0.9em;
 	color:#666;
 }
+.box .block input,
+.box .block select {
+	margin-bottom:15px;
+}
+
+/*****/
 
 .box .block input{
 	/*display:block;*/
 	border:1px solid #b5b8bb;
 	background-color:#e7edef;
 	height:1.8em;
-	margin-bottom:15px;
 	
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
-	text-indent:5px;
+	text-indent:5px; 
 }
 
 
@@ -682,6 +687,9 @@ div.main_container .box .no_padding{
 .box .block textarea:focus{
 	border-color:#444;
 }
+
+/*****/
+
 
 .box .block input.small{
 	width:20%;
