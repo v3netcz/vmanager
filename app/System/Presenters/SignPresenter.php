@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\System;
 
-use vManager,
+use vManager, vBuilder,
 	 Nette,
 	 vManager\Mailer,
 	 vBuilder\Orm\Repository,
@@ -135,6 +135,10 @@ class SignPresenter extends BasePresenter {
 				$this->getPresenter()->getApplication()->restoreRequest($values->backlink);
 			} else {
 				$u = $this->getUser()->getIdentity();
+				
+				$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+				$userLang = $config->get('system.language');
+				if($userLang !== null) Nette\Environment::getService('Nette\ITranslator')->setLang($userLang);
 				
 				if($u->getLastLoginInfo()->exists() && $u->getLastLoginInfo()->getTime() !== null) {
 					$host = gethostbyaddr($u->getLastLoginInfo()->getIp());
