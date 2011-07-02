@@ -17,6 +17,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+# Dump of table config
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `config`;
+
+CREATE TABLE `config` (
+  `key` varchar(128) NOT NULL,
+  `scope` varchar(64) NOT NULL DEFAULT 'global',
+  `value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`key`,`scope`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 # Dump of table security_userRoles
 # ------------------------------------------------------------
 
