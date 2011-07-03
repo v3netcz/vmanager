@@ -144,20 +144,11 @@ $(document).ready(function () {
 			
 		});
 	});
-	
-// Uprava velikosti u Texyly v tabech
-/*
-	$('.tabs').each(function () {
-		var tabs = $(this);
-		tabs.bind('tabsshow', function(event, ui) {
-			var texyla = $('TEXTAREA.texyla', ui.panel);
-			if(texyla) {				
-				texyla.texyla({
-					width: '100%'
-				}); 
-			}
-		});
+	$('textarea.texyla').each(function () {
+		var $this = $(this);
+		$this.addClass('expand');
+		$this.resizable('destroy');
+
 	});
-	*/
-	
+	$('textarea[class*=expand]').TextAreaExpander(150);
 });
