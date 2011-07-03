@@ -65,6 +65,7 @@
 		<script type="text/javascript" src="{$basePath}/js/jquery.livequery.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/jquery.nette.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/jquery.ui.gridito.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/jquery.textarea-expander.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/jquery.ui.gridito.js"></script>
 				
 		<!-- Texyla core -->
@@ -97,20 +98,19 @@
 		
 		<script type="text/javascript">
 		//<![CDATA[
-		
-		$.texyla.setDefaults({	
-			texyCfg: "admin",
-			baseDir: '/texyla',
-			previewPath: "preview.php",
-			filesPath: "filesplugin/files.php",
-			filesThumbPath: "filesplugin/thumbnail.php?image=%var%",
-			filesUploadPath: "filesplugin/files/upload.php",
-			bottomLeftToolbar: [],
-			bottomRightEditToolbar: [],
-			toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol'],
-			width: 500
-			// Je tu problem s taby, nejspise by bylo potreba znovunastavit sirku pri prepnuti tabu
-			//width: '100%' 
+		$(function () {
+			$.texyla.setDefaults({	
+				texyCfg: "admin",
+				baseDir: '/texyla',
+				previewPath: "preview.php",
+				filesPath: "filesplugin/files.php",
+				filesThumbPath: "filesplugin/thumbnail.php?image=%var%",
+				filesUploadPath: "filesplugin/files/upload.php",
+				bottomLeftToolbar: [],
+				bottomRightEditToolbar: [],
+				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol'],
+				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width()
+			});
 		});
 		</script>
 		
