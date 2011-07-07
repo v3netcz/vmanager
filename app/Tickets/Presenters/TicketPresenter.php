@@ -69,11 +69,14 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [ticketId] = [d.ticketId])))", $uid, $uid, $uid);
 
 		// Filtery		
-		if($this->getParam('state') == Ticket::STATE_CLOSED || $this->getParam('state') == Ticket::STATE_OPENED)
-			$ds->and("[state] = %i", $this->getParam('state'));
+		if($this->getParam('state', -1) == Ticket::STATE_CLOSED || $this->getParam('state', -1) == Ticket::STATE_OPENED)
+			$ds->and("[state] = %i", $this->getParam('state')); 
 		
 		if($this->getParam('assignedTo') > 0)
 			$ds->and("[assignedTo] = %i", $this->getParam('assignedTo'));
+		
+		if($this->getParam('projectId') > 0)
+			$ds->and("[projectId] = %i", $this->getParam('projectId'));
 		
 		// Konec filteru
 		
@@ -187,6 +190,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if(Nette\Environment::getUser()->getIdentity()->isInRole('Ticket admin')) {
 			$form->addSelect('assignedTo', __('Assigned to'), array_merge(array(-1 => __('Anyone')), $this->getAllAvailableUsernames(true)));
 		}
+		
+		$projects = $this->getAllAvailableProjects();
+		if(count($projects) > 1) 
+			$form->addSelect('projectId', __('Project'), array_merge(array(-1 => __('Any')), $projects));	
 		
 		$form->setValues($this->getParam());
 		$form->addSubmit('send', __('Filter'));
@@ -363,6 +370,24 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$data = array();
 		foreach($users as $curr) {
 			$data[$curr->getId()] = $realNames ? $curr->getDisplayName() : $curr->getUsername();
+		}
+		
+		return $data;
+	}
+	
+	private function getAllAvailableProjects($filterTerm = '', $limit = -1) {
+		$ds = Repository::findAll('vManager\\Modules\\Tickets\\Project')
+				  ->where('[revision] > 0');
+		
+		if($filterTerm != '')
+			$ds->and('[name] LIKE %s', $filterTerm.'%');
+		
+		if($limit > 0)
+			$ds->limit($limit);				  
+
+		$data = array();
+		foreach($ds as $curr) {
+			$data[$curr->getId()] = $curr->getName();
 		}
 		
 		return $data;

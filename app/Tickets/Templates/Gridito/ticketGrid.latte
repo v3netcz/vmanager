@@ -15,6 +15,11 @@
 					{$form['assignedTo']->control}
 				</div>
 				
+				<div class="filterInputGroup" n:if="isset($form['projectId'])">
+					{$form['projectId']->label}
+					{$form['projectId']->control}
+				</div>
+				
 				{$form['send']->control}
 				<div class="clear"></div>
 			</div> 						 
