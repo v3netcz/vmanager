@@ -130,6 +130,7 @@ DROP TABLE IF EXISTS `pm_tickets`;
 
 CREATE TABLE `pm_tickets` (
   `ticketId` smallint(6) unsigned NOT NULL,
+  `projectId` smallint(6) DEFAULT NULL,
   `revision` smallint(6) NOT NULL DEFAULT '1',
   `author` smallint(6) unsigned DEFAULT NULL,
   `commentId` int(11) unsigned DEFAULT NULL,

@@ -48,6 +48,7 @@ use vManager,
  * @Column(assignedTo, type="OneToOne", entity="vManager\Security\User", joinOn="assignedTo=id")
  * @Column(timestamp, type="DateTime")
  * @Column(priority, type="OneToOne", entity="vManager\Modules\Tickets\Priority", joinOn="priority=id")
+ * @Column(project, type="OneToOne", entity="vManager\Modules\Tickets\Project", joinUsing="projectId")  
  * 
  * TODO: Pak predelat na stavy dle analyzy
  * @Column(state, type="integer")
