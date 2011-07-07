@@ -48,7 +48,7 @@ use vManager,
  * @Column(assignedTo, type="OneToOne", entity="vManager\Security\User", joinOn="assignedTo=id")
  * @Column(timestamp, type="DateTime")
  * @Column(priority, type="OneToOne", entity="vManager\Modules\Tickets\Priority", joinOn="priority=id")
- * @Column(project, type="OneToOne", entity="vManager\Modules\Tickets\Project", joinUsing="projectId")  
+ * @Column(project, realName="projectId", type="OneToOne", entity="vManager\Modules\Tickets\Project", joinOn="project=id")  
  * 
  * TODO: Pak predelat na stavy dle analyzy
  * @Column(state, type="integer")
@@ -89,6 +89,23 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 	}
 
 	/**
+	 * Custom project getter because of Versionable
+	 *  (have only one PK => ID, don't know the revision)
+	 */
+	function getProject() {
+		// Pokud byl predtim promo naassignovanej projekt
+		if(is_object($this->data->project)) return $this->data->project;
+		
+		if(($cached = $this->fieldCache("project")) !== null) return $cached;
+		
+		$value = Repository::findAll('vManager\Modules\Tickets\Project')
+			->where('[revision] > 0 AND [projectId] = %i', $this->data->project)->fetch();
+		
+		if(!$value) return null;		
+		return $this->fieldCache("project", $value);
+	}
+	
+	/**
 	 * Returns array with changes from $t2
 	 * 
 	 * @param Ticket $t2 
@@ -119,6 +136,15 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 				} elseif($t2->$field === null || $t2->$field->id != $t1->$field->id) {
 					$change = _x('Reassigned to <strong class="value">%s</strong>', array($t1->$field->exists()
 										? $t1->$field->username : _x('User n. %d', array($t1->$field->id))));
+				}
+				
+			} elseif($field == 'project') {
+				if($t1->$field === null) {
+					if($t2->$field !== $t1->$field)
+						$change = _x('Removed task from project <strong class="value">%s</strong>', array($t2->$field->name));
+				} elseif($t2->$field === null || $t2->$field->id != $t1->$field->id) {
+					$change = _x('Moved task under project <strong class="value">%s</strong>', array($t1->$field->exists()
+										? $t1->$field->name : _x('Project n. %d', array($t1->$field->id))));
 				}
 				
 			} elseif($field == 'priority' && $t1->$field !== null) {

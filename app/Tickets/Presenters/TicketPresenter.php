@@ -263,6 +263,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 							 }, __('Responsible person does not exist.'));
 
 
+		$form->addText('project', __('Project:'))
+				  ->setAttribute('autocomplete-src', $this->link('suggestProject'))
+				  ->setAttribute('title', __('Is this task part of greater project?'));
+							 
 		$prioritiesDs = Repository::findAll('vManager\\Modules\\Tickets\\Priority');
 		$priorities = array();
 		$defaultValue = null;
@@ -308,6 +312,24 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				$changed = $newAssignedTo === null ? ($ticket->assignedTo !== null) : ($ticket->assignedTo === null || $newAssignedTo->id != $ticket->assignedTo->id);
 
 			$ticket->assignedTo = $newAssignedTo;
+		}
+		
+		if(isset($values['project'])) {
+			if(!empty($values['project'])) {
+				$newProject = Repository::findAll('vManager\\Modules\\Tickets\\Project')
+					  ->where('[revision] > 0 AND [name] = %s', $values['project'])->fetch();
+				
+				if(!$newProject) {
+					$newProject = new Project;
+					$newProject->name = $values['project'];
+					$newProject->author = Nette\Environment::getUser()->getIdentity();
+				}
+				
+			} else
+				$newProject = null;
+
+			if(!$changed) $changed = $newProject === null ? ($ticket->project !== null) : ($ticket->project === null || $newProject->id != $ticket->project->id);
+			$ticket->project = $newProject;
 		}
 
 		if(isset($values['priority'])) {
@@ -373,6 +395,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		}
 		
 		return $data;
+	}
+	
+	public function renderSuggestProject() {
+		$projectSuggestions = $this->getAllAvailableProjects($this->getParam('term', ''), 10);
+		$this->sendResponse(new Nette\Application\Responses\JsonResponse($projectSuggestions));
 	}
 	
 	private function getAllAvailableProjects($filterTerm = '', $limit = -1) {
@@ -458,6 +485,9 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		if($ticket->priority !== null && $ticket->priority->exists())
 			$form['priority']->setValue($ticket->priority->id);
+		
+		if($ticket->project !== null && $ticket->project->exists())
+			$form['project']->setValue($ticket->project->name);
 
 		$form->addSubmit('send', __('Save'));
 

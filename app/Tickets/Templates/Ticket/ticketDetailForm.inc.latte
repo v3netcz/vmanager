@@ -23,6 +23,11 @@
 </div>
 
 <div style="width: 45%; float: right;">
+	<div n:if="isset($form['project'])">
+		{!$form['project']->label}
+		{!$form['project']->control}
+	</div>
+	
 	<div n:if="isset($form['priority'])">
 		{!$form['priority']->label}
 		{!$form['priority']->control}
