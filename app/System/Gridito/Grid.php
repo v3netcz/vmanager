@@ -23,7 +23,9 @@
 
 namespace vManager;
 
-use vManager, Nette, Gridito;
+use vManager,
+	 Nette,
+	 Gridito;
 
 /**
  * Extended Gridito implementation
@@ -32,14 +34,26 @@ use vManager, Nette, Gridito;
  * @since Apr 5, 2011
  */
 class Grid extends Gridito\Grid {
-	
+
+	/** @var string template file path */
+	private $tplFile;
+
+	/**
+	 * Sets absolute filename for template to render
+	 * 
+	 * @param string file apth
+	 */
+	public function setTemplateFile($filepath) {
+		$this->tplFile = $filepath;
+	}
+
 	/**
 	 * Create template
 	 * @return Template
 	 */
-	protected function createTemplate()
-	{
-		return parent::createTemplate()->setFile(__DIR__ . "/Templates/grid.latte");
+	protected function createTemplate() {
+		return parent::createTemplate()->setFile(isset($this->tplFile) ? $this->tplFile
+								 : __DIR__."/Templates/grid.latte");
 	}
-	
+
 }
