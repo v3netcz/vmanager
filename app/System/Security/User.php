@@ -59,6 +59,19 @@ class User extends vBuilder\Security\User {
 	}
 	
 	/**
+	 * Returns user's display name
+	 * 
+	 * @return string
+	 */
+	function getDisplayName() {
+		$name = $this->name;
+		if($name != '') $name .= ' ';
+		$name .= $this->surname;
+		
+		return $name != '' ? $name : $this->username;
+	}
+	
+	/**
 	 * Returns avatar picture URL
 	 * 
 	 * @param bool true if URL should be absolute URI (starts with http://)

@@ -85,16 +85,16 @@
 
 		<!-- plugins -->
 		<script src="{$basePath}/texyla/plugins/keys/keys.js" type="text/javascript"></script>
-		<script src="{$basePath}/texyla/plugins/resizableTextarea/resizableTextarea.js" type="text/javascript"></script>
+		<!-- <script src="{$basePath}/texyla/plugins/resizableTextarea/resizableTextarea.js" type="text/javascript"></script> -->
 		<script src="{$basePath}/texyla/plugins/img/img.js" type="text/javascript"></script>
 		<script src="{$basePath}/texyla/plugins/table/table.js" type="text/javascript"></script>
 		<script src="{$basePath}/texyla/plugins/link/link.js" type="text/javascript"></script>
 		<script src="{$basePath}/texyla/plugins/emoticon/emoticon.js" type="text/javascript"></script>
 		<script src="{$basePath}/texyla/plugins/symbol/symbol.js" type="text/javascript"></script>
-		<script src="{$basePath}/texyla/plugins/files/files.js" type="text/javascript"></script>
+		<!-- <script src="{$basePath}/texyla/plugins/files/files.js" type="text/javascript"></script>
 		<script src="{$basePath}/texyla/plugins/color/color.js" type="text/javascript"></script>
 		<script src="{$basePath}/texyla/plugins/textTransform/textTransform.js" type="text/javascript"></script>
-		<script src="{$basePath}/texyla/plugins/youtube/youtube.js" type="text/javascript"></script>
+		<script src="{$basePath}/texyla/plugins/youtube/youtube.js" type="text/javascript"></script> -->
 		
 		<script type="text/javascript">
 		//<![CDATA[
@@ -108,8 +108,9 @@
 				filesUploadPath: "filesplugin/files/upload.php",
 				bottomLeftToolbar: [],
 				bottomRightEditToolbar: [],
-				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol'],
-				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width()
+				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy'{if Nette\Environment::getService('vBuilder\Config\IConfig')->get('texyla.developerFunctions')}, ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}],
+				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width(),
+				useFshl: true
 			});
 		});
 		</script>

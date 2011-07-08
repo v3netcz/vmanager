@@ -37,8 +37,10 @@ use vManager, vBuilder, Nette;
  * 
  * @Column(id, realName="projectId", pk, type="integer")
  * @Column(revision, pk, type="integer")
+ * @Column(author, type="OneToOne", entity="vManager\Security\User", joinOn="author=id")
  * @Column(comment, realName="commentId", type="OneToOne", entity="vManager\Modules\Tickets\Comment", joinOn="comment=id")
  * @Column(name, type="string")
+ * @Column(timestamp, type="DateTime")
  */
 class Project extends vBuilder\Orm\ActiveEntity {
 		

@@ -24,3 +24,8 @@
 .history .revisionBlock .changes .change .field {
 	color: #000000;
 }
+
+#ticketCreateFormTabs INPUT.text,
+#ticketUpdateFormTabs INPUT.text{
+	width: 350px;
+}

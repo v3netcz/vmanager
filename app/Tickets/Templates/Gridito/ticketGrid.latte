@@ -1,0 +1,29 @@
+{extends '../../../System/Gridito/Templates/grid.latte'}
+{var $form = $presenter['ticketFilter']}
+{block tableHead}
+	<tr>
+		<td colspan="{=count($control['columns']->getComponents())}" class="ui-widget-header">
+			{control $form begin}
+			<div class="filterHeader">
+				<div class="filterInputGroup" n:if="isset($form['state'])">
+					{$form['state']->label}
+					{$form['state']->control}
+				</div>
+				
+				<div class="filterInputGroup" n:if="isset($form['assignedTo'])">
+					{$form['assignedTo']->label}
+					{$form['assignedTo']->control}
+				</div>
+				
+				<div class="filterInputGroup" n:if="isset($form['projectId'])">
+					{$form['projectId']->label}
+					{$form['projectId']->control}
+				</div>
+				
+				{$form['send']->control}
+				<div class="clear"></div>
+			</div> 						 
+			{control $form end}
+		</td>
+	</tr>
+{/block}

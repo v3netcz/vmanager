@@ -25,13 +25,15 @@
         {* table or empty message *}
         {block data}
 
-        {if $control->getModel()->count() > 0}
+        {*if $control->getModel()->count() > 0*}
 
             {* grid table *}
             {block table}
 	        <table class="gridito-table">
                 <thead>
-						 <!-- <tr>
+						 {block tableHead}
+						 {/block}
+						 <!--<tr>
 							 <td colspan="{=count($control['columns']->getComponents())}" class="ui-widget-header">
 								<div class="tableheader">
 									<div class="dataTables_length">
@@ -49,7 +51,7 @@
 									</div>
 								</div> 						 
 							 </td>
-						 </tr> -->	
+						 </tr> -->
 						 <tr n:if="$control->hasToolbar()">
 							 <td colspan="{=count($control['columns']->getComponents())}" class="globalHeader">
 								 {* top toolbar *}
@@ -82,6 +84,7 @@
                     </tr>
                 </thead>
                 <tbody>
+							{if $control->getPaginator()->getItemCount() > 0}
                     {block tablebody}
                     <tr n:foreach="$control->getModel() as $item" n:class="$control->getRowClass($iterator, $item)">
                         <td n:class="gridito-cell, $column->getCellClass($iterator, item), $control->getHighlightOrderedColumn() && $column->getSorting() ? ui-state-highlight" n:foreach="$control['columns']->getComponents() as $column">
@@ -92,6 +95,15 @@
                         </td>
                     </tr>
                     {/block}
+						  {else}
+							{block emptyTableBody}
+								<tr>
+									<td colspan="{=count($control['columns']->getComponents())+$control->hasActions()}" class="noResultsCell">
+										<?php echo __('No results has been found matching your criteria.'); ?>
+									</td>
+								</tr>
+							{/block}
+						  {/if}
                 </tbody>
 					 
 					 <tfoot n:if="$control->getPaginator()->getItemCount() > 0">
@@ -130,9 +142,9 @@
             </table>
             {/block}
 
-        {else}
+        {*else}
             {block emptyResult}{/block}
-        {/if}
+        {/if*}
 
         {/block}
 
