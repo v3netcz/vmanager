@@ -247,8 +247,8 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	 * @param vManager\Form reference to form
 	 */
 	protected function setupTicketDetailForm(Form & $form) {
-		$form->addText('name', __('Name:'))->setAttribute('title', __('Short task description. Please be concrete.'))
-				  ->addRule(Form::FILLED, __('Name of ticket has to be filled.'));
+		$form->addText('name', __('Task title:'))->setAttribute('title', __('Short task description. Please be concrete.'))
+				  ->addRule(Form::FILLED, __('Task title has to be filled.'));
 
 
 		$form->addDatePicker('deadline', __('Deadline:'))->setAttribute('title', __('When has to be task done?'));

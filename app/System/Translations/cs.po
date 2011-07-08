@@ -118,6 +118,7 @@ msgstr "Přístup zamítnut."
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:140
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:140
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:150
 msgid "Administrator"
 msgstr "Administrátor"
 
@@ -128,6 +129,7 @@ msgstr "Administrátor"
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:140
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:140
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:150
 msgid "User"
 msgstr "Uživatel"
 
@@ -138,6 +140,7 @@ msgstr "Uživatel"
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:143
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:143
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:147
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:153
 msgid "settings"
 msgstr "nastavení"
 
@@ -148,6 +151,7 @@ msgstr "nastavení"
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:144
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:148
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:154
 msgid "logout"
 msgstr "odhlásit"
 
@@ -158,6 +162,7 @@ msgstr "odhlásit"
 #: /Volumes/www/sp1/tools/../app/System/Templates/@layout.latte:168
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:168
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:172
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:178
 msgid "Search..."
 msgstr "Hledat..."
 
