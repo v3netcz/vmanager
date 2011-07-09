@@ -141,8 +141,7 @@ $(document).ready(function () {
 		$this.texyla();
 		$this.addClass('expand');
 		$this.resizable('destroy');
-
+		$this.autogrow();
 	});
-	
-	$('textarea[class*=expand]').TextAreaExpander(150);
+
 });
