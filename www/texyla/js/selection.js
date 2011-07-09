@@ -46,7 +46,7 @@ Selection.prototype = {
 			this.select(this.start, firstText.length + this.length() + secondText.length);
 		}
 		
-		
+		$.autogrow.update.call(this.textarea);
 	},
 	
 	// nahradí výběr proměnnou replacement

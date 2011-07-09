@@ -1,32 +1,23 @@
-// gridito init
-$("div.gridito").livequery(function () {
-	$(this).gridito_custom();
-});
+$(document).ready(function () {
+	// gridito init
+	$("div.gridito").livequery(function () {
+		$(this).gridito_custom();
+	});
 
-// nette ajax init
-$("a.ajax").live("click", function (event) {
-	event.preventDefault();
-	$.get(this.href);
-});
-
-$.texyla.setDefaults({
-	//texyCfg: "admin",
-	baseDir: '/texyla',
-	previewPath: "/texyla/preview.php",
-	filesPath: "/texyla/filesplugin/files.php",
-	filesThumbPath: "/texyla/filesplugin/thumbnail.php?image=%var%",
-	filesUploadPath: "/texyla/filesplugin/files/upload.php"
-});
-		
-$(function () {			
-	$.texyla({
-		buttonType: "button"
+	// nette ajax init
+	$("a.ajax").live("click", function (event) {
+		event.preventDefault();
+		$.get(this.href);
 	});
 	
 	//$("select, input:checkbox, input:radio, input:file").uniform();
-});
-
-$(document).ready(function () {
+	
+	$("pre.php").snippet("php",{style:"ide-eclipse", clipboard:"/snippet-shjs/ZeroClipboard.swf",showNum:false});	
+	$("pre.js").snippet("javascript",{style:"ide-eclipse", clipboard:"/snippet-shjs/ZeroClipboard.swf",showNum:false});	
+	$("pre.css").snippet("css",{style:"ide-eclipse", clipboard:"/snippet-shjs/ZeroClipboard.swf",showNum:false});	
+	$("pre.html").snippet("html",{style:"ide-eclipse", clipboard:"/snippet-shjs/ZeroClipboard.swf",showNum:false});	
+	$("pre.sql").snippet("sql",{style:"ide-eclipse", clipboard:"/snippet-shjs/ZeroClipboard.swf",showNum:false});	
+	
 	$("input").each(function () {
 		var el = $(this);
 		
@@ -144,11 +135,13 @@ $(document).ready(function () {
 			
 		});
 	});
+	
 	$('textarea.texyla').each(function () {
 		var $this = $(this);
+		$this.texyla();
 		$this.addClass('expand');
 		$this.resizable('destroy');
-
+		$this.autogrow();
 	});
-	$('textarea[class*=expand]').TextAreaExpander(150);
+
 });

@@ -33,6 +33,8 @@ msgstr "Uživatelé"
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:67
 #: /Volumes/www/sp1/tools/../app/Users/Module.php:71
 #: /Volumes/www/vmanager/tools/../app/Users/Module.php:74
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Default/default.latte:6
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Default/default.latte:7
 msgid "Add new user"
 msgstr "Přidat nového uživatele"
 
@@ -44,11 +46,13 @@ msgstr "Zobrazit seznam uživatelů"
 #: /Volumes/www/sp1/tools/../app/Users/Templates/Default/default.latte:2
 #: /Volumes/www/sp1/tools/../app/Users/Templates/Default/default.latte:3
 #: /Volumes/www/vmanager/tools/../app/Users/Templates/Default/default.latte:3
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Default/default.latte:5
 msgid "User administration"
 msgstr "Správa uživatelů"
 
 #: /Volumes/www/sp1/tools/../app/Users/Templates/Edit/addNewUser.latte:5
 #: /Volumes/www/vmanager/tools/../app/Users/Templates/Edit/addNewUser.latte:5
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Edit/addNewUser.latte:7
 msgid "Create new user"
 msgstr "Založit nový uživatelský účet"
 
@@ -170,5 +174,18 @@ msgid "editUser"
 msgstr "editUser"
 
 #: /Volumes/www/vmanager/tools/../app/Users/Templates/Edit/editUser.latte:5
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Edit/editUser.latte:7
 msgid "Edit user"
 msgstr "Editace uživatelského profilu"
+
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Edit/addNewUser.latte:1
+msgid "New user - vManager"
+msgstr "Nový uživatel - vManager"
+
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Edit/editUser.latte:1
+msgid "User edit - vManager"
+msgstr "Editace uživatele - vManager"
+
+#: /Volumes/www/vmanager/tools/../app/Users/Templates/Default/default.latte:1
+msgid "Users - vManager"
+msgstr "Uživatelé - vManager"
