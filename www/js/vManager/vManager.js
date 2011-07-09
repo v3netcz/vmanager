@@ -148,5 +148,4 @@ $(document).ready(function () {
 		var $this = $(this);
 		$this.addClass('expand').resizable('destroy').autogrow();
 	});
-	//$('textarea[class*=expand]').autogrow();
 });

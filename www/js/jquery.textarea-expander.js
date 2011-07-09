@@ -38,6 +38,7 @@
                                     .replace(/\n$/, '<br/>&nbsp;')
                                     .replace(/\n/g, '<br/>')
                                     .replace(/ {2,}/g, function(space) { return times('&nbsp;', space.length -1) + ' ' });
+
                 
                 shadow.html(val);
 				//alert(shadow.height());
@@ -45,6 +46,10 @@
                 $(this).css('height', Math.max(($.browser.msie?height*18:height) + 20, minHeight));
             
             }
+			
+			$.autogrow = {
+				update: update
+			};
             
             $(this).change(update).keyup(update).keydown(update);
             
