@@ -1,0 +1,80 @@
+{control articleForm begin}
+{var form => $control['articleForm']}
+{if $presenter->action == 'editArticle'}
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var tabs = $('#articleFormTabs');
+			tabs.tabs('select', 1);
+		});
+	</script>
+{/if}
+
+<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all" id="articleFormTabs">
+	<ul class="tab_header grad_colour clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1"><?php echo __('Article summary'); ?></a></li>
+		<!-- <li class="ui-state-default ui-corner-top"><a href="#tabs-2"><?php echo __('Attach files'); ?></a></li> -->
+		<li class="ui-state-default ui-corner-top"><a href="#tabs-3"><?php echo __('Content'); ?></a></li>
+	</ul>
+
+	<!-- <a href="#" class="grabber">&nbsp;</a>
+	<a href="#" class="toggle">&nbsp;</a> -->
+	<div class="toggle_container">
+		<div id="tabs-1" class="block ui-tabs-panel ui-widget-content ui-corner-bottom">
+			<div class="content">
+				<div>
+					<div>
+						{!$form['title']->label}
+						{!$form['title']->control}
+					</div>
+
+					<div n:if="isset($form['url'])">
+						{!$form['url']->label}
+						{!$form['url']->control}
+					</div>
+					
+					<div n:if="$presenter->action == 'createArticle'">
+						{$form['active']->label}
+						{$form['active']->control}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div id="tabs-2" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+				<div class="content">
+					<p>TODO: Upload form</p>
+				</div>
+			</div> -->
+		<div id="tabs-3" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+			<div class="content">
+					{$form['text']->control}
+			</div>
+		</div>
+
+		<div class="grad_colour clearfix tab_footer">
+			{if $presenter->action == 'editArticle'}
+			<div n:if="isset($form['active'])" class="checkboxBlock">
+					{$form['active']->control}
+					{$form['active']->label}
+			</div>
+
+			<button type="submit" class="round_all btnTabNext btnTabDirectSubmit">
+				<img height="24" width="24" alt="Next" src="{$basePath}/images/icons/small/grey/Create%20Write.png">
+				<span>{$form['send']->caption}</span>
+			</button>
+			{else}
+				<button class="round_all btnTabPrev">
+					<img height="24" width="24" alt="Next" src="{$basePath}/images/icons/small/grey/Bended%20Arrow%20Left.png">
+					<span><?php echo __('Back'); ?></span>
+				</button>
+
+				<button type="submit" class="round_all btnTabNext">
+					<img height="24" width="24" alt="Next" src="{$basePath}/images/icons/small/grey/Bended%20Arrow%20Right.png">
+					<span><?php echo __('Next'); ?></span>
+					<span class="submit hidden">{$form['send']->caption}</span>
+				</button>
+			{/if}
+		</div>
+	</div>
+
+</div>
+{control articleForm end}

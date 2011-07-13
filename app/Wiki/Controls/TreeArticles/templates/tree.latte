@@ -1,0 +1,51 @@
+<style>
+	.articleListing ul {
+		margin: 0 0 0 20px;
+	}
+	.articleListing li {
+		padding: 0 !important;
+	}
+</style>
+<div class="articleListing">
+	<ul>
+	{if count($tree) === 1}
+		<a href="{plink default $tree[0]->url}">{$tree[0]->title}</a> <?php echo __('has no descendants.'); ?>
+	{else}
+		{foreach $tree as $item}
+			{* TODO: capture kvuli DRY, ale co kdyz pak bude el. <script> uvnitr $item->title ? *}
+			{capture $view}<li><a href="{plink default $item->url}">{$item->title}</a>{/capture}
+
+
+			{var $currentLevel = \substr_count($item->url, '/')}
+			{var $followingLevel = isset($tree[$iterator->getCounter()]) ? \substr_count($tree[$iterator->getCounter()]->url, '/') : 1}
+			{if $currentLevel < $followingLevel}
+				{!$view}
+				{for $i=$currentLevel; $i<$followingLevel-1;$i++}
+					<ul><li>
+				{/for}
+				<ul>
+			{elseif $currentLevel === $followingLevel}
+				{!$view}</li>
+			{else}
+				{if $iterator->isLast()}
+					{var $repetition = $currentLevel-1}
+				{else}
+					{var $i = 0}
+					{var $currentSlashes = preg_split('~/~',substr($item->url,1))}
+					{var $followingSlashes = preg_split('~/~',substr($tree[$iterator->getCounter()]->url,1))}
+					{foreach $followingSlashes as $key => $val}
+						{breakIf $currentSlashes[$key] !== $val}
+						{var $i++;}
+					{/foreach}
+					{var $repetition = $followingLevel-$i}
+				{/if}
+					{!$view}
+					{for $m=0; $m<$repetition; $m++}
+						</li></ul>
+					{/for}
+					</li>
+			{/if}					
+		{/foreach}
+	{/if}
+	</ul>
+</div>

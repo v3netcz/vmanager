@@ -35,6 +35,10 @@ common:
 	mailer:
 		sender: info@vmanager.cz
 		senderName: vManager
+	
+	upload:
+		saveWithExtension: true
+		dir: %appDir%/../files/
 
 	security:
 		user:
@@ -58,7 +62,13 @@ common:
 	Users:
 		enabled: true
 
-	# Dummy module (for test purposes only)
+	# Wiki
+	Wiki:
+		enabled: true
+		comments:
+			enabled: true
+
+	# Dummy module (fot test purposes only)
 	Dummy:
 		enabled: false
 

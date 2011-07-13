@@ -1,0 +1,45 @@
+<style>
+#commentsTree li {
+	margin-left: 20px;
+	padding: 0;
+}
+#commentsTree ul, p {
+	margin-bottom: 0;
+}
+</style>
+
+<div id="commentsTree">
+{snippet commentsTree}
+	{var $level = -1}
+	{foreach $treeData as $item}
+		{if $level < $item['level']}
+			<ul>
+		{else}
+			{for $i=0; $i<$level-$item['level']; $i++}
+				</li></ul>
+			{/for}
+			</li>
+		{/if}
+			<li><span id="subject{$item['id']}">{$item['subject']}</span><br>
+		{$item['text']}
+			<a href="{link react! $item['id']}#comments-add-form" class="reactLink" data-nodeId="{$item['id']}"><?php echo __('React'); ?></a>
+		{var $level = $item['level']}
+	{/foreach}
+	{for $i=0; $i<$level+1; $i++}
+		</li></ul>
+	{/for}
+{/snippet}
+</div>
+<script>
+	$(function () {
+		$('#commentsTree .reactLink').live('click', function (e) {
+			$('#frmaddForm-parentId').val($(this).attr('data-nodeId'));
+			$('#frmaddForm-subject').val('Re: '+$('#subject'+$(this).attr('data-nodeId')).html());
+			$('html, body').animate({
+				scrollTop: $('#frm-treeComments-addForm').offset().top
+			}, 500);
+			e.preventDefault();
+		});
+	});
+</script>
+	
