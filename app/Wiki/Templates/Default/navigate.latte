@@ -1,0 +1,43 @@
+<style>
+#navigated #toc {
+	width: 250px;
+	float: right;
+	display: none;
+}
+#navigated #toc a {
+	cursor: pointer;
+}
+</style>
+<div id="navigated">
+	<div id="toc">
+		<h3><?php echo __('Navigation'); ?></h3>
+		<ul></ul>
+	</div>
+{!$html}
+</div>
+<script type="text/javascript">
+	$(function () {
+		var navigation = [],
+			navigated = $('#navigated');
+		navigated.find('h2').each(function () {
+			var $this = $(this),
+				id = 'toc-'+$this.html().replace(/[ ]/,'');
+			$this.attr('id', id);
+			navigation.push([id, $this.html()]);
+		});
+		if (navigation.length !== 0) {
+			var $toc = $('#toc').show().find('ul');
+			for (var i=0;i<navigation.length;i++) {
+				$toc.append($('<li>').append($('<a>').html(navigation[i][1]).click(function () {
+					var nav = navigation[i];
+					return function (e) {
+						$('body, html').animate({
+							scrollTop: $('#'+nav[0]).offset().top
+						}, 500);
+					};
+				}())));
+
+			}
+		}
+	});
+</script>

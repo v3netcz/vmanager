@@ -2032,3 +2032,10 @@ ABBR {
 	text-underline-style: dotted;
 	*/
 }
+
+.tabs .checkboxBlock {
+	width: 350px;
+	float: left;
+	line-height: 30px;
+	color: white;
+}

@@ -46,6 +46,7 @@ $controls = $form->getComponents(TRUE, 'Nette\Forms\IControl');
         {!$control->label}
 		{!$control->control}
       </div>
+	{elseif $control instanceof Nette\Forms\Controls\HiddenField}
 	{else}
 		{? dump($control);}
 		{!$control->label}

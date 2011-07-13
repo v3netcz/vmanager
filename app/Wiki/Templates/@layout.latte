@@ -1,0 +1,26 @@
+{extends '../../System/Templates/@layout.latte'}
+{block head}
+	<link rel="stylesheet" type="text/css" href="{$basePath}/css/wiki.css" media="screen">
+{/block}
+
+{block content}
+	<div id="nav_top" class="clearfix  round_top">
+		<ul class="clearfix">
+			<li n:class="$presenter->getAction() == 'default' && $presenter->getParam('wikiId') == '/' ? current"><a href="{link default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->getAction() == 'default' ? 'white' : 'grey'}/Sign%20Post.png"/><?php echo __('Homepage'); ?></a></li>
+			<li n:class="$presenter->getAction() == 'tree' ? current"><a href="{link tree}"><img src="{$basePath}/images/icons/small/{? echo $presenter->getAction() == 'tree' ? 'white' : 'grey'}/Documents.png"/><?php echo __('All articles'); ?></a></li>
+
+			{* Bacha ty opravneni u akci jsou blbe -> vyresit az to bude hotovy *}
+			{if !in_array($presenter->getAction(), array('tree', 'createArticle', 'editArticle'))}
+			<li n:if="$user->isAllowed('Wiki:EditArticle') && $presenter->getAction() != 'nonExistentArticle'"><a href="{link editArticle $presenter->getParam('wikiId')}"><img src="{$basePath}/images/icons/small/grey/Create%20Write.png"/><?php echo __('Edit this article'); ?></a></li>
+
+			<li n:if="$user->isAllowed('Wiki:CreateArticle') && $presenter->getAction() != 'default'"><a href="{link createArticle $presenter->getParam('wikiId')}"><img src="{$basePath}/images/icons/small/grey/Create%20Write.png"/><?php echo __('Create this article'); ?></a></li>
+			{elseif $presenter->getAction() == 'editArticle'}
+				<li><a href="{link default $presenter->getParam('wikiId')}"><img src="{$basePath}/images/icons/small/grey/Bended%20Arrow%20Left.png"/><?php echo __('Back to article'); ?></a></li>
+			{/if}
+		</ul>	
+	</div>
+
+	{include ../../System/Templates/Includes/flashes.latte}
+	
+	{include #wiki}
+{/block}

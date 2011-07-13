@@ -1,0 +1,10 @@
+<ul id="treeCommentFlashes">
+	<li n:foreach="$flashes as $flash" class="$flash->type">{$flash->message}</li>
+</ul>
+<script n:if="!empty($flashes)">
+	$(function () {
+		setTimeout(function () {
+			$('#treeCommentFlashes').slideUp();
+		}, 2500);
+	});
+</script>
