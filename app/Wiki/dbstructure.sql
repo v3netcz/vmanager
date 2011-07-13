@@ -22,14 +22,14 @@ CREATE TABLE `wiki_articles` (
 
 DROP TABLE IF EXISTS `wiki_discussion`;
 CREATE TABLE `wiki_discussion` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `id` int(6) NOT NULL auto_increment,
   `associated_id` int(6) NOT NULL,
   `user_id` int(6) NOT NULL,
   `lft` int(9) NOT NULL,
   `rgt` int(9) NOT NULL,
   `level` int(5) NOT NULL,
-  `text` text COLLATE utf8_czech_ci NOT NULL,
-  `subject` varchar(128) COLLATE utf8_czech_ci NOT NULL,
+  `text` text collate utf8_czech_ci NOT NULL,
+  `subject` varchar(128) collate utf8_czech_ci NOT NULL,
   `date` int(15) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
