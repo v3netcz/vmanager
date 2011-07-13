@@ -36,6 +36,8 @@ class Wiki extends vManager\Application\Module implements vManager\Application\I
 	vManager\Application\IAclEnabledModule {
 		
 	public function __construct() {
+		if(!$this->isEnabled()) return ;
+		
 		$application = \Nette\Environment::getApplication();
 		$application->onStartup[] = function() use ($application) {
 			$router = $application->getRouter();
