@@ -94,7 +94,7 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 	 */
 	function getProject() {
 		// Pokud byl predtim promo naassignovanej projekt
-		if(is_object($this->data->project)) return $this->data->project;
+		if(is_object($this->data->project) || $this->data->project === null) return $this->data->project;
 		
 		if(($cached = $this->fieldCache("project")) !== null) return $cached;
 		
