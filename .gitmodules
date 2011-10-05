@@ -7,3 +7,6 @@
 [submodule "libs/dibi"]
 	path = libs/dibi
 	url = git://github.com/v3netcz/dibi.git
+[submodule "libs/vStore"]
+	path = libs/vStore
+	url = git://github.com/v3netcz/vstore.git

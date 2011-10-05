@@ -3,3 +3,4 @@ Disallow: dibi/examples
 Disallow: nette/client-side
 Disallow: nette/tests
 Disallow: vBuilderFw/tests
+Disallow: vStore/tests
