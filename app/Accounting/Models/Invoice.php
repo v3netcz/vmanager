@@ -64,6 +64,10 @@ class Invoice extends Nette\Object {
 		}
 	}
 	
+	public function getFile() {
+		return $this->filename;
+	}
+	
 	public function getId() {
 		return $this->data['id'];
 	}

@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Accounting;
 
-use vManager, vBuilder, Nette, vManager\Form;
+use vManager, vBuilder, Nette, vManager\Form, vStore;
 
 /**
  * Presenter for listing and viewing invoices
@@ -133,7 +133,7 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 		
 		$grid->addButton("btnCancel", __('Cancel'), array(
 			//"icon" => "icon-tick",
-			"class" => "button_orange",
+			"class" => "button_orange btnCancel",
 			"handler" => function ($row) use ($grid) {
 				if(!$row) Nette\Environment::getApplication()->getPresenter()->flashMessage(__('Record not found'), 'warn');
 				else {
@@ -146,6 +146,7 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 		));
 		
 		$grid->addButton("btnPay", __('Pay'), array(
+			"class" => "button_orange btnPay",
 			"handler" => function ($row) use ($grid) {
 				if(!$row) Nette\Environment::getApplication()->getPresenter()->flashMessage(__('Record not found'), 'warn');
 				else {
@@ -153,6 +154,100 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 				}
 			} 
 		));
+		
+		$presenter = $this;
+		$grid->addButton("btnView", __('View'), array(
+			"class" => "button_black btnView",
+			"handler" => function ($row) use ($grid, $presenter) {
+				if(!$row) Nette\Environment::getApplication()->getPresenter()->flashMessage(__('Record not found'), 'warn');
+				else {
+					$mask = $presenter->getFilenamePrefix($row->formatedId) . "*.pdf";
+					
+					foreach(Nette\Utils\Finder::findFiles($mask)->from(InvoicePresenter::getInvoiceDirPath()) as $curr) {
+						 $filepath = substr($curr->getRealPath(), strlen('/var/www/vmanager/files'));
+						 
+						 Nette\Environment::getApplication()->getPresenter()->redirect(':System:Files:default', array(
+								 vManager\Modules\System\FilesPresenter::PARAM_NAME => $filepath
+						 ));
+						return ;
+					}
+					
+					Nette\Environment::getApplication()->getPresenter()->flashMessage(__('File not found'), 'warn');
+				}
+			} 
+		));
+		
+		
+		
+		
+	}
+	
+	// New invoice --------------------------------------------------------------
+	
+	public function renderNewInvoice() {
+		
+	}
+	
+	public function createComponentNewInvoiceForm() {
+		$form = new Form;
+		
+		$form->addCheckbox('replace', __('Replace?'))->controlPrototype->class('hidden');
+		$form->addTextArea('xml');
+		
+		$form->addSubmit('save', __('Save'));
+
+		$form->onSuccess[] = callback($this, 'processNewInvoiceForm');
+
+		return $form;
+	}
+	
+	public function getFilenamePrefix($invoiceId) {
+		$id = trim(preg_replace('/[^0-9]+/', '-', $invoiceId), '-');
+		return "V3Net.cz_${id}_";
+	}
+	
+	public function processNewInvoiceForm($form) {
+		$values = $form->getValues();
+    
+		try {
+			libxml_use_internal_errors(true);
+			$invoice = vStore\Invoicing\XmlInvoice::fromString($values->xml);
+		} catch(\Exception $e) {
+			$this->flashMessage(__('Malformed XML data.'), 'warn');
+			
+			foreach(libxml_get_errors() as $curr) {
+				$this->flashMessage($curr->message . 'on line ' . $curr->line, 'warn');
+			}
+			
+			return ;
+		}
+                
+		$prefix = $this->getFilenamePrefix($id);
+		
+		$filename = iconv('UTF-8', 'ASCII//TRANSLIT', $invoice->customer->invoiceAddress->name);
+    $filename = preg_replace('/ s\\.? *r\\. *o\\.?| spol\\.|[^A-Za-z0-9 \\.:\\-]/', '', $filename);
+    $filename = trim(preg_replace('/[\\s\\-\\.:]+/', '_', $filename), '_');
+    $filename = $prefix . $filename;
+				
+		foreach(Nette\Utils\Finder::findFiles("${prefix}*")->from(self::getInvoiceDirPath()) as $curr) {
+			if(isset($values->replace) && $values->replace) {
+				if(@unlink($curr->getRealPath()) === false)
+						throw new Nette\IOException("Cannot delete file '".$curr->getRealPath()."'");
+			} else {
+				$form['replace']->controlPrototype->class('');
+				$this->flashMessage(_x('Invoice with ID %s already exists.', array($invoice->id)), 'warn');
+				return;
+			}
+		} 
+		
+		file_put_contents(self::getInvoiceDirPath() . '/' . $filename . '.xml', $values->xml);
+		
+		$renderer = new vStore\Invoicing\InvoicePdfRenderer($this->context);
+		$renderer->renderToFile($invoice, self::getInvoiceDirPath() . '/' . $filename . '.pdf');
+		
+		$this->flashMessage(_x('Invoice with ID %s has been successfuly created.', array($invoice->id)));
+                
+		$this->redirect('Invoice:default');
 	}
 	
 	// Payment form -------------------------------------------------------------
@@ -187,6 +282,14 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 		
 		
 		$this->redirect('Invoice:default');
+	}
+	
+	public static function getInvoiceDirPath() {
+		$config = \vManager\Modules\Accounting::getInstance()->getConfig();
+		if(!isset($config['invoiceDir']))
+			throw new \InvalidArgumentException("Missing 'Accounting.invoiceDir' configuration directive");
+		
+		return $config['invoiceDir'];
 	}
 	
 }

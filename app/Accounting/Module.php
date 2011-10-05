@@ -23,7 +23,7 @@
 
 namespace vManager\Modules;
 
-use vManager, Nette;
+use vBuilder, vManager, Nette, Nette\Utils\Strings;
 
 /**
  * Module for listing and creating invoices
@@ -33,7 +33,32 @@ use vManager, Nette;
  */
 class Accounting extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
 	vManager\Application\IAclEnabledModule {
-		
+	
+	public function __construct() {
+		vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) {
+						
+			// Filtering exact match, for security reasons
+			if(Nette\Utils\Strings::match($filename, '/^\/invoices\/[A-Za-z0-9\\.\\-_]+\.(pdf|xml)$/')) {
+				if(!Nette\Environment::getUser()->isAllowed('Accounting:Invoice', 'default')) {
+					
+					$context = Nette\Environment::getContext();
+					$context->application->getPresenter()->flashMessage(__('You don\'t have enough privileges to perform this action.'), 'warning');
+					$backlink = $context->application->storeRequest();
+					$context->application->getPresenter()->redirect(':System:Sign:in', array('backlink' => $backlink));
+				}				
+				
+				$filepath = FILES_DIR . $filename;
+				
+				if(file_exists($filepath))
+					return new vBuilder\Application\Responses\FileResponse(
+									$filepath,
+									null, 
+									Strings::endsWith($filename, '.pdf') ? 'application/pdf' : 'text/xml'
+					);
+			}
+		};
+	}
+	
 	/**
 	 * Initializes permission resources/roles/etc.
 	 * 

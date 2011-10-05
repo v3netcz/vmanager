@@ -1,0 +1,27 @@
+{block head}
+	<style>
+		TEXTAREA {
+			width: 100% !important;
+			min-height: 500px;
+		}
+		
+		.hidden {
+			display: none !important;
+		}
+	</style>
+{/block}
+
+{block content}
+	{include ../../../System/Templates/Includes/flashes.latte}
+	
+	<div class="box grid_16 round_all">
+		<h2 class="box_head grad_colour"><?php echo __('New invoice'); ?></h2>
+		<!-- <a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>  -->
+		<div class="toggle_container">
+			<div class="block">
+				{control newInvoiceForm}
+			</div>
+		</div>
+	</div>
+{/block}

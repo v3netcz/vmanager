@@ -17,8 +17,10 @@
 			color: brown;
 		}
 		
-		.invoiceListing .paidInvoice A.gridito-button,
-		.invoiceListing .canceledInvoice A.gridito-button{
+		.invoiceListing .paidInvoice A.btnCancel,
+		.invoiceListing .paidInvoice A.btnPay,
+		.invoiceListing .canceledInvoice A.btnCancel,
+		.invoiceListing .canceledInvoice A.btnPay {
 			display: none;
 		}
 
@@ -34,8 +36,9 @@
 {/block}
 
 {block content}
-	<div class="flat_area grid_16">
+	<div class="flat_area grid_16" style="margin-bottom: 20px;">
 		<h2><?php echo __('Invoices'); ?></h2>
+		<a href="{link Invoice:newInvoice}" class="color-button"><?php echo __('Create new invoice'); ?></a>
 		
 		{*if isset($years)}
 			<div class="yearSelectionBox">
@@ -48,7 +51,7 @@
 	</div>
 	
 	{include ../../../System/Templates/Includes/flashes.latte}
-
+	
 	<div class="box grid_16 round_all">
 		<div class="invoiceListing">
 			{control invoiceGrid}
