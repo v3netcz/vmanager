@@ -101,7 +101,7 @@ class InvoiceManager {
 	}
 	
 	public static function cancelInvoice($id) {
-		dibi::insert("accounting_invoicePayments", array(
+		Nette\Environment::getContext()->connection->insert("accounting_invoicePayments", array(
 			 "invoiceId" => $id,
 			 "date" => 'cancel'
 		))->execute();
@@ -110,7 +110,7 @@ class InvoiceManager {
 	public static function payInvoice($id, \DateTime $date = null) {
 		if($date === null) $date = new DateTime('now');
 		
-		dibi::insert("accounting_invoicePayments", array(
+		Nette\Environment::getContext()->connection->insert("accounting_invoicePayments", array(
 			 "invoiceId" => $id,
 			 "date" => $date->format("Y-m-d")
 		))->execute();

@@ -150,7 +150,7 @@ class Invoice extends Nette\Object {
 	}
 	
 	protected function loadPaymentRecord() {
-		$this->paymentDate = dibi::query("SELECT [date] FROM [accounting_invoicePayments] WHERE [invoiceId] = %i", $this->getId())->fetchSingle();
+		$this->paymentDate = Nette\Environment::getContext()->connection->query("SELECT [date] FROM [accounting_invoicePayments] WHERE [invoiceId] = %i", $this->getId())->fetchSingle();
 	}
 	
 	protected function & getCache() {

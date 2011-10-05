@@ -172,20 +172,19 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addSubmit('save', __('Save'));
 		//$form->addSubmit('back', 'Zpět')->setValidationScope(NULL);
 
-		$form->onSubmit[] = callback($this, 'processPayForm');
+		$form->onSuccess[] = callback($this, 'processPayForm');
 
 		return $form;
 	}
 	
 	public function processPayForm($form) {
-		if($form['save']->isSubmittedBy()) {
-			$id = (int) $this->getParam('id');
-			
-			$this->flashMessage(__('Payment has been recorded.'));
-			$values = $form->getValues();
+		$id = (int) $this->getParam('id');
 
-			InvoiceManager::payInvoice($id, $values["date"]);
-		}
+		$this->flashMessage(__('Payment has been recorded.'));
+		$values = $form->getValues();
+
+		InvoiceManager::payInvoice($id, $values["date"]);
+		
 		
 		$this->redirect('Invoice:default');
 	}
