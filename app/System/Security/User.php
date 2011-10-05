@@ -54,7 +54,9 @@ class User extends vBuilder\Security\User {
 	 * @return string
 	 */
 	function getSalutation() {
-		$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+		global $context;
+		
+		$config = $context->config;
 		return $config->get('system.salutation', _x('Hi %s', array($this->getName())));
 	}
 	

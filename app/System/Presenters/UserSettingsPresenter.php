@@ -79,7 +79,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 
 		$form->addSubmit('send', __('Save'));
 
-		$form->onSubmit[] = callback($this, 'userProfileFormSubmitted');
+		$form->onSuccess[] = callback($this, 'userProfileFormSubmitted');
 		return $form;
 	}
 
@@ -100,7 +100,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 				
 			// Nechci ukladat defaultni osloveni, protoze zavisi na prekladu			
 			if($values->salutation != $user->getSalutation()) {
-				$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+				$config = $this->context->config;
 				$config->set('system.salutation', $values->salutation); 
 				$config->save();
 			}
@@ -129,20 +129,20 @@ class UserSettingsPresenter extends SecuredPresenter {
 			$selLanguages[$curr] = $curr;
 		}
 		
-		$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+		$config = $this->context->config;
 		$lang = $config->get('system.language'); 
 		
 		$form->addSelect('language', __('Language:'), $selLanguages)->setValue($lang);
 		
 		$form->addSubmit('send', __('Save'));
 
-		$form->onSubmit[] = callback($this, 'environmentFormSubmitted');
+		$form->onSuccess[] = callback($this, 'environmentFormSubmitted');
 		return $form;
 	}
 	
 	public function environmentFormSubmitted($form) {
 		$values = $form->getValues();
-		$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+		$config = $this->context->config;
 		$config->set('system.language', empty($values->language) ? null : $values->language); 
 		$config->save();
 
@@ -175,7 +175,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 
 		$form->addSubmit('send', __('Change password'));
 
-		$form->onSubmit[] = callback($this, 'userPasswordFormSubmitted');
+		$form->onSuccess[] = callback($this, 'userPasswordFormSubmitted');
 		return $form;
 	}
 

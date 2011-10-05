@@ -67,7 +67,7 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 	 * 
 	 * @param array data
 	 */
-	public function __construct(array $data = array()) {
+	public function __construct($data = array()) {
 		call_user_func_array(array('parent', '__construct'), func_get_args());
 
 		// Nastavim staticke eventy pro vsechny tickety
@@ -94,11 +94,11 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 	 */
 	function getProject() {
 		// Pokud byl predtim promo naassignovanej projekt
-		if(is_object($this->data->project)) return $this->data->project;
+		if(is_object($this->data->project) || $this->data->project === null) return $this->data->project;
 		
 		if(($cached = $this->fieldCache("project")) !== null) return $cached;
 		
-		$value = Repository::findAll('vManager\Modules\Tickets\Project')
+		$value = $this->context->repository->findAll('vManager\Modules\Tickets\Project')
 			->where('[revision] > 0 AND [projectId] = %i', $this->data->project)->fetch();
 		
 		if(!$value) return null;		
@@ -116,7 +116,7 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 		if($t1->revision < 2) return array();
 		
 		if($t2 === null) {
-			$t2 = new self(array('ticketId' => $t1->id, 'revision' => 0 - ($t1->revision - 1)));
+			$t2 = $this->context->repository->get('vManager\Modules\Tickets\Comment', array('ticketId' => $t1->id, 'revision' => 0 - ($t1->revision - 1)));
 			if(!$t2->exists()) return array();
 		}
 		

@@ -41,7 +41,10 @@ class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @param  string
 	 * @return array
 	 */
-	public function formatTemplateFiles($presenter, $view) {
+	public function formatTemplateFiles() {
+		$presenter = $this->getName();
+		//$presenter = substr($name, strrpos(':' . $name, ':'));
+		
 		if(($path = Nette\Utils\Strings::replace($presenter, "/^([^\\:]+)\\:(.+)$/", '/${1}/${2}')) === NULL)
 			throw new \LogicException('Something wrong with presenter name');
 
@@ -49,11 +52,11 @@ class BasePresenter extends Nette\Application\UI\Presenter {
 		$pathP = substr_replace($path, '/Templates', strrpos($path, '/'), 0);
 		$path = substr_replace($path, '/Templates', strrpos($path, '/'));
 		return array(
-			 "$appDir$pathP/$view.latte",
-			 "$appDir$pathP.$view.latte",
-			 "$appDir$pathP/$view.phtml",
-			 "$appDir$pathP.$view.phtml",
-			 "$appDir$path/@global.$view.phtml", // deprecated
+			 "$appDir$pathP/$this->view.latte",
+			 "$appDir$pathP.$this->view.latte",
+			 "$appDir$pathP/$this->view.phtml",
+			 "$appDir$pathP.$this->view.phtml",
+			 "$appDir$path/@global.$this->view.phtml", // deprecated
 		);
 	}
 
@@ -63,8 +66,11 @@ class BasePresenter extends Nette\Application\UI\Presenter {
 	 * @param  string
 	 * @return array
 	 */
-	public function formatLayoutTemplateFiles($presenter, $layout) {
+	public function formatLayoutTemplateFiles() {		
 		$list = array();
+		$name = $this->getName();
+		$presenter = substr($name, strrpos(':' . $name, ':'));
+		$layout = $this->layout ? $this->layout : 'layout';
 		
 		foreach(array($presenter, "System:Default") as $curr) {
 			if(($path = Nette\Utils\Strings::replace($curr, "/^([^\\:]+)\\:(.+)$/", '/${1}/${2}')) === NULL)

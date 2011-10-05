@@ -21,39 +21,20 @@
  * along with vManager. If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 namespace vManager;
 
-use vManager,
-	 Nette,
-	 Gridito;
+use vBuilder,
+		Nette;
+
+require_once LIBS_DIR . '/vBuilderFw/vBuilderFw/Configurator.php';
 
 /**
- * Extended Gridito implementation
+ * Configurator for vManager
  *
  * @author Adam Staněk (V3lbloud)
- * @since Apr 5, 2011
+ * @since Oct 5, 2011
  */
-class Grid extends Gridito\Grid {
-
-	/** @var string template file path */
-	private $tplFile;
-
-	/**
-	 * Sets absolute filename for template to render
-	 * 
-	 * @param string file apth
-	 */
-	public function setTemplateFile($filepath) {
-		$this->tplFile = $filepath;
-	}
-
-	/**
-	 * Create template
-	 * @return Template
-	 */
-	protected function createTemplate($class = NULL) {
-		return parent::createTemplate()->setFile(isset($this->tplFile) ? $this->tplFile
-								 : __DIR__."/Templates/grid.latte");
-	}
-
+class Configurator extends vBuilder\Configurator {
+	
 }

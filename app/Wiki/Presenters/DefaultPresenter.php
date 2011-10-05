@@ -51,7 +51,7 @@ class DefaultPresenter extends BasePresenter {
 				}
 				$urls[] = $temp;
 			}
-			$this->template->navigation = Repository::findAll('vManager\Modules\Wiki\Article')
+			$this->template->navigation = $this->context->repository->findAll('vManager\Modules\Wiki\Article')
 								->where('[url] IN %in', $urls, "\n AND [revision] > 0")
 								->orderBy('[url]')
 								->fetchAll();
@@ -102,7 +102,7 @@ class DefaultPresenter extends BasePresenter {
 		
 		$presenter = $this;
 		
-		$form->onSubmit[] = function ($form) use ($presenter) {
+		$form->onSuccess[] = function ($form) use ($presenter) {
 			$values = $form->values;
 			
 			try {
@@ -178,7 +178,7 @@ class DefaultPresenter extends BasePresenter {
 	
 	public function getArticle($url = null) {
 		$url = $url === null ? $this->getParam('wikiId') : $url;
-		return Repository::findAll('vManager\Modules\Wiki\Article')
+		return $this->context->repository->findAll('vManager\Modules\Wiki\Article')
 			->where('[revision] > 0 AND [url] = %s', $url)->fetch();
 	}
 }

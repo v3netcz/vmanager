@@ -41,7 +41,7 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 	private $user;
 	
 	public function actionEditUser($id) {
-		$this->user = Repository::get('vManager\Security\User', $id);
+		$this->user = $this->context->repository->get('vManager\Security\User', $id);
 		if(!$this->user->exists()) throw new \InvalidArgumentException('User not found');
 	}
 	
@@ -69,6 +69,7 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentUserForm() {
 		$form = new Form;
 
+		$repository = $this->context->repository;
 		$action = $this->action;
 		$editedUser = &$this->user;
 		
@@ -84,10 +85,10 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->addFilter(function ($value) {
 					  return Nette\Utils\Strings::lower($value);
 				  })
-				  ->addRule(function ($control) use ($action, $editedUser) {
+				  ->addRule(function ($control) use ($action, $editedUser, $repository) {
 								 if($action == 'editUser' && $control->value == $editedUser->username) return true;
 						
-								 $users = Repository::findAll('vBuilder\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
+								 $users = $repository->findAll('vBuilder\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
 								 return ($users === false);
 							 }, __('Desired username is already taken. Please use something else.'));
 
@@ -104,19 +105,19 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 					  ->addRule(Form::EQUAL, __('Confirmation password have to be the same as password.'), $form['password']);
 		}
 
-		foreach(Nette\Environment::getUser()->getAuthorizationHandler()->getAllRegistredRoles() as $role)
+		foreach($this->context->authorizator->getAllRegistredRoles() as $role)
 			$form->addCheckbox('grp'.Nette\Utils\Strings::replace($role, '/\\s/', ''), $role);
 		
 
 		$form->addSubmit('send', __('Create user'));
 
-		$form->onSubmit[] = callback($this, 'userFormSubmitted');
+		$form->onSuccess[] = callback($this, 'userFormSubmitted');
 		return $form;
 	}
 
 	public function userFormSubmitted($form) {
 		$values = $form->getValues();
-		$user = $this->action == 'editUser' ? $this->user : new vManager\Security\User;
+		$user = $this->action == 'editUser' ? $this->user : $this->context->repository->create('vManager\Security\User');
 		
 		
 		foreach($values as $key => $value) {
@@ -125,7 +126,7 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 		}
 
 		$roles = array();
-		foreach(Nette\Environment::getUser()->getAuthorizationHandler()->getAllRegistredRoles() as $role)
+		foreach($this->context->authorizator->getAllRegistredRoles() as $role)
 			if($values['grp'.Nette\Utils\Strings::replace($role, '/\\s/', '')])
 				$roles[] = $role;
 

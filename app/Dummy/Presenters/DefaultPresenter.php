@@ -59,7 +59,7 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 		
 		$form->addSubmit('send', 'Send');
 
-		$form->onSubmit[] = callback($this, 'dummyFormSubmitted');
+		$form->onSuccess[] = callback($this, 'dummyFormSubmitted');
 		
 		return $form;
 	}

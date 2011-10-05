@@ -57,7 +57,7 @@ class SignPresenter extends BasePresenter {
 
 		$form->addSubmit('send', __('Sign in'));
 
-		$form->onSubmit[] = callback($this, 'signInFormSubmitted');
+		$form->onSuccess[] = callback($this, 'signInFormSubmitted');
 
 		$request = $this->getHttpRequest();
 		$value = $request->getCookie('vManagerLastLoggedUser');
@@ -110,7 +110,7 @@ class SignPresenter extends BasePresenter {
 		$form->addSubmit('back', 'Back');
 		$form->addSubmit('send', __('Send new password'));
 
-		$form->onSubmit[] = callback($this, 'pwdResetFormSubmitted');
+		$form->onSuccess[] = callback($this, 'pwdResetFormSubmitted');
 		return $form;
 	}
 
@@ -136,7 +136,7 @@ class SignPresenter extends BasePresenter {
 			} else {
 				$u = $this->getUser()->getIdentity();
 				
-				$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+				$config = $this->context->config;
 				$userLang = $config->get('system.language');
 				if($userLang !== null) Nette\Environment::getService('Nette\ITranslator')->setLang($userLang);
 				
@@ -177,9 +177,9 @@ class SignPresenter extends BasePresenter {
 			$newPassword = $this->generatePwd(8);
 
 			if(!isset($email) || $email == '') {
-				$user = Repository::findAll('vManager\Security\User')->where('[username] = %s', $username)->fetch();
+				$user = $this->context->repository->findAll('vManager\Security\User')->where('[username] = %s', $username)->fetch();
 			} else if(!isset($username) || $username == '') {
-				$user = Repository::findAll('vManager\Security\User')->where('[email] = %s', $email)->fetch();
+				$user = $this->context->repository->findAll('vManager\Security\User')->where('[email] = %s', $email)->fetch();
 			} else {
 				$form->addError(__('Please provide your username or e-mail.'));
 				return;

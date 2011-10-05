@@ -49,9 +49,9 @@ class TreeComments extends \Nette\Application\UI\Control {
 		echo $this->getRenderer()->render($this, $what);
 	}
 	
-	public function createTemplate()
+	public function createTemplate($class = NULL)
 	{
-		return parent::createTemplate();
+		return parent::createTemplate($class);
 	}
 	
 	
@@ -59,7 +59,7 @@ class TreeComments extends \Nette\Application\UI\Control {
 		$form = new Form;
 		
 		$control = $this;
-		$form->onSubmit[] = function ($form) use ($control) {
+		$form->onSuccess[] = function ($form) use ($control) {
 			if ($control['model']->addReaction($form->values)) {
 				$control->flashMessage(__('Your reaction was successfully saved'));
 				

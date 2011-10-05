@@ -27,7 +27,7 @@ use vManager;
 
 class BasePresenter extends vManager\Modules\System\SecuredPresenter {
 
-	public function createTemplate() {
+	public function createTemplate($class = NULL) {
 		$template = parent::createTemplate();
 		$template->registerHelper('texy', function ($text) {
 			$texy = new \Texy();

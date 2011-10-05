@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Wiki\Controls;
 
-use vBuilder\Orm\Repository;
+use vBuilder\Orm\Repository, Nette;
 /**
  * 
  *
@@ -41,7 +41,7 @@ class TreeArticles extends \Nette\Application\UI\Control {
 		
 		// TODO: Escapovat $slashes a $depth!!!
 		$slashes = \substr_count($this->getWikiId(), '/');
-		$tree = Repository::findAll('vManager\Modules\Wiki\Article')
+		$tree = Nette\Environment::getContext()->repository->findAll('vManager\Modules\Wiki\Article')
 								->where('[url] LIKE %s',$this->getWikiId().'%', 'AND [revision] > 0', 
 										'%if', $depth, ' AND [url] RLIKE %s', '^(/[a-z\-]+){'.$slashes.','.($slashes+$depth-1).'}$', '%end')
 								->orderBy('[url]')

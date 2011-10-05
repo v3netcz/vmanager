@@ -23,7 +23,10 @@
 
 namespace vManager\Modules\Tickets;
 
-use vManager, vManager\Mailer, vBuilder\Orm\Repository;
+use vManager,
+		vManager\Mailer,
+		vBuilder\Orm\Repository,
+		Nette;
 
 /**
  * Event handler for ticket update and ticket creation.
@@ -104,7 +107,7 @@ class TicketChangeMailer {
 			}
 		}				  
 		
-		$allRevisions = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
+		$allRevisions = Nette\Environment::getContext()->repository->findAll('vManager\\Modules\\Tickets\\Ticket')
 				  ->where('[ticketId] = %i', $t->id)->fetchAll();		
 		
 		foreach($allRevisions as $curr) {
