@@ -61,7 +61,7 @@ class Priority extends vBuilder\Orm\ActiveEntity {
 	static function getMaxPriorityWeight() {
 		if(self::$maxPriorityHeight !== null) return self::$maxPriorityHeight;
 		
-		self::$maxPriorityHeight = (int) dibi::query('SELECT MAX([weight]) FROM ['.self::getMetadata()->getTableName().']')->fetchSingle();
+		self::$maxPriorityHeight = (int) Nette\Environment::getContext()->connection->query('SELECT MAX([weight]) FROM ['.self::getMetadata()->getTableName().']')->fetchSingle();
 		return self::$maxPriorityHeight;
 	}
 	

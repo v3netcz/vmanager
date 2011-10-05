@@ -44,7 +44,7 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentUserGrid($name) {
 		$grid = new vManager\Grid($this, $name);
 
-		$model = new Gridito\DibiFluentModel(Repository::findAll('vManager\Security\User'), 'vManager\Security\User');
+		$model = new Gridito\DibiFluentModel($this->context->repository->findAll('vManager\Security\User'), 'vManager\Security\User');
 		$model->setPrimaryKey('id');
 
 		$grid->setModel($model);

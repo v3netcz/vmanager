@@ -80,7 +80,7 @@ class Mailer extends vBuilder\Object {
 	 * @return Nette\Mail\IMailer mailer
 	 */
 	static function getMailer() {
-		return Nette\Environment::getService('Nette\Mail\IMailer');
+		return Nette\Environment::getService('mailer');
 	}
 	
 	/**

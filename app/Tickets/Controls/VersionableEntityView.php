@@ -48,6 +48,8 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	/** @var int method of ordering comments */
 	protected $order = VersionableEntityView::DESC;
 	
+	protected $context;
+	
 	/**
 	 * Component constructor.
 	 * 
@@ -57,6 +59,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	function __construct($entityName, $id) {
 		$this->entityName = $entityName;
 		$this->id = $id;
+		$this->context = Nette\Environment::getContext();
 		$this->load();
 	}
 	
@@ -64,7 +67,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	 * Loads data from DB
 	 */
 	protected function load() {
-		$fluent = Repository::findAll($this->entityName)
+		$fluent = $this->context->repository->findAll($this->entityName)
 				  ->where('[ticketId] = %i', $this->id)
 				  ->clause('ORDER BY ABS([revision])' . ($this->order == self::DESC ? ' DESC' : ''));
 
@@ -76,7 +79,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	 * 
 	 * @return Nette\Templates\ITemplate
 	 */
-	function createTemplate() {
+	function createTemplate($class = NULL) {
 		$tpl = parent::createTemplate();
 		$tpl->setFile(__DIR__ . '/../Templates/VersionableEntityView/default.latte');
 		

@@ -119,7 +119,7 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 		$presenter = $this->form->getParent()->getPresenter(FALSE);
 		$template->onPrepareFilters[] = array("vManager\Forms\DefaultFormRenderer", 'templatePrepareFilters');
 		$template->presenter = $presenter;
-		$template->baseUri = Nette\Environment::getVariable('baseUri');
+		$template->baseUri = Nette\Environment::getContext()->httpRequest->getUrl()->getBaseUrl();
 		$template->basePath = rtrim($template->baseUri, '/');
 		return $template;
 	}

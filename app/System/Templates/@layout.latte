@@ -113,7 +113,7 @@
 				filesUploadPath: "filesplugin/files/upload.php",
 				bottomLeftToolbar: [],
 				bottomRightEditToolbar: [],
-				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy'{if Nette\Environment::getService('vBuilder\Config\IConfig')->get('texyla.developerFunctions')}, ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}],
+				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy'{if $presenter->context->config->get('texyla.developerFunctions')}, ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}],
 				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width(),
 				buttonType: "button"
 			});

@@ -58,7 +58,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$uid = Nette\Environment::getUser()->getId();
 		$table = Ticket::getMetadata()->getTableName();
 
-		$ds = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
+		$ds = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Ticket')
 				  ->as('d')
 				  ->leftJoin(Priority::getMetadata()->getTableName())->as('p')->on('[priority] = [p.id]')
 				  ->where('[revision] > 0');
@@ -199,7 +199,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addSubmit('send', __('Filter'));
 		
 		$presenter = $this;
-		$form->onSubmit[] = function () use ($presenter, $form) {
+		$form->onSuccess[] = function () use ($presenter, $form) {
 			$presenter->redirect("default", (array) $form->getValues());
 		}; 
 		
@@ -253,12 +253,14 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$form->addDatePicker('deadline', __('Deadline:'))->setAttribute('title', __('When has to be task done?'));
 
+		$context = $this->context;
+		
 		$form->addText('assignTo', __('Assign to:'))
 				  ->setAttribute('autocomplete-src', $this->link('suggestAssignTo'))
 				  ->setAttribute('title', __('Who will resolve this issue?'))
 				  ->addCondition(Form::FILLED)
-				  ->addRule(function ($control) {
-								 $users = Repository::findAll('vManager\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
+				  ->addRule(function ($control) use($context) {
+								 $users = $context->repository->findAll('vManager\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
 								 return ($users !== false);
 							 }, __('Responsible person does not exist.'));
 
@@ -267,7 +269,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->setAttribute('autocomplete-src', $this->link('suggestProject'))
 				  ->setAttribute('title', __('Is this task part of greater project?'));
 							 
-		$prioritiesDs = Repository::findAll('vManager\\Modules\\Tickets\\Priority');
+		$prioritiesDs = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Priority');
 		$priorities = array();
 		$defaultValue = null;
 		foreach($prioritiesDs as $curr) {
@@ -294,7 +296,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		}
 
 		if(isset($values['comment']) && !empty($values['comment'])) {
-			$ticket->comment = new Comment();
+			$ticket->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
 			$ticket->comment->text = $values['comment'];
 			$changed = true;
 		} else {
@@ -303,7 +305,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		if(isset($values['assignTo'])) {
 			if(!empty($values['assignTo'])) {
-				$user = Repository::findAll('vManager\Security\User')->where('[username] = %s', $values['assignTo'])->fetch();
+				$user = $this->context->repository->findAll('vManager\Security\User')->where('[username] = %s', $values['assignTo'])->fetch();
 				$newAssignedTo = $user !== false ? $user : null;
 			} else
 				$newAssignedTo = null;
@@ -316,11 +318,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		
 		if(isset($values['project'])) {
 			if(!empty($values['project'])) {
-				$newProject = Repository::findAll('vManager\\Modules\\Tickets\\Project')
+				$newProject = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Project')
 					  ->where('[revision] > 0 AND [name] = %s', $values['project'])->fetch();
 				
 				if(!$newProject) {
-					$newProject = new Project;
+					$newProject = $this->context->repository->create('vManager\Modules\Tickets\Project');
 					$newProject->name = $values['project'];
 					$newProject->author = Nette\Environment::getUser()->getIdentity();
 				}
@@ -333,7 +335,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		}
 
 		if(isset($values['priority'])) {
-			$priority = Repository::get('vManager\\Modules\\Tickets\\Priority', $values['priority']);
+			$priority = $this->context->repository->get('vManager\\Modules\\Tickets\\Priority', $values['priority']);
 			$ticket->priority = $priority->exists() ? $priority : null;
 			$changed = true;
 		}
@@ -381,7 +383,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	}
 	
 	private function getAllAvailableUsernames($realNames = false, $filterTerm = '', $limit = -1) {
-		$users = Repository::findAll('vManager\\Security\\User');
+		$users = $this->context->repository->findAll('vManager\\Security\\User');
 		
 		if($filterTerm != '')
 			$users->where('[username] LIKE %s', $filterTerm.'%');
@@ -403,7 +405,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	}
 	
 	private function getAllAvailableProjects($filterTerm = '', $limit = -1) {
-		$ds = Repository::findAll('vManager\\Modules\\Tickets\\Project')
+		$ds = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Project')
 				  ->where('[revision] > 0');
 		
 		if($filterTerm != '')
@@ -438,14 +440,14 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$form->addSubmit('send', __('Save'));
 
-		$form->onSubmit[] = callback($this, 'createFormSubmitted');
+		$form->onSuccess[] = callback($this, 'createFormSubmitted');
 
 		return $form;
 	}
 	
 	public function createFormSubmitted(Form $form) {
 		$values = $form->getValues();
-		$ticket = new Ticket();
+		$ticket = $this->context->repository->create('vManager\Modules\Tickets\Ticket');
 
 		$values['reopen'] = true;
 
@@ -491,7 +493,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$form->addSubmit('send', __('Save'));
 
-		$form->onSubmit[] = callback($this, 'updateFormSubmitted');
+		$form->onSuccess[] = callback($this, 'updateFormSubmitted');
 
 		return $form;
 	}
@@ -517,7 +519,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if($this->ticket !== null)
 			return $this->ticket;
 
-		$this->ticket = Repository::findAll('vManager\\Modules\\Tickets\\Ticket')
+		$this->ticket = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Ticket')
 							 ->where('[revision] > 0 AND [ticketId] = %i', $this->getParam('id'))->fetch();
 
 		return $this->ticket;

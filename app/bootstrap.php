@@ -1,55 +1,47 @@
 <?php
 
-/**
- * My Application bootstrap file.
- */
-
-
-use Nette\Diagnostics\Debugger;
-use Nette\Environment;
-use Nette\Application\Routers\Route;
-
+use Nette\Diagnostics\Debugger as Debug,
+		Nette\Environment,
+		Nette\Application\Routers\Route;
 
 // Load Nette Framework
 // this allows load Nette Framework classes automatically so that
 // you don't have to litter your code with 'require' statements
-require LIBS_DIR . '/nette/Nette/loader.php';
-require LIBS_DIR . '/vBuilderFw/vBuilderFw/bootstrap.php';
-require LIBS_DIR . '/NetteTranslator/shortcuts.php';
-
-// Enables debuging mode
-// !!! Comment line bellow when going to production environment !!!
-//Environment::setMode('production', false);
+require LIBS_DIR.'/nette/Nette/loader.php';
+require APP_DIR.'/System/Configurator.php';
 
 // Enable Nette\Debug for error visualisation & logging
-Debugger::$strictMode = TRUE;
-Debugger::enable();
+Debug::$strictMode = TRUE;
+Debug::enable();
+
+$configurator = new vManager\Configurator;
+Environment::setConfigurator($configurator);
+$context = $configurator->container;
 
 // Load configuration from config.neon file
 Environment::loadConfig();
 
-// Dibi
-dibi::connect(Environment::getConfig('database'));
+// Configure application
+$application = $context->application;
+$application->errorPresenter = 'System:Error';
+$application->catchExceptions = Debug::$productionMode;
 
-// Captcha (https://github.com/PavelMaca/CaptchaControl)
-PavelMaca\Captcha\CaptchaControl::register();
-
-// Load vManager modules
-vManager\Application\ModuleManager::getModules();
+require LIBS_DIR . '/vBuilderFw/vBuilderFw/bootstrap.php';
+require LIBS_DIR . '/NetteTranslator/shortcuts.php';
 
 // Translator
-$config = Nette\Environment::getService('vBuilder\Config\IConfig');
+$config = $context->config;
 $lang = $config->get('system.language'); 
-if($lang === null) $lang = Environment::getHttpRequest()->detectLanguage((array) Environment::getConfig('languages', array('en')));
+if($lang === null) $lang = $context->httpRequest->detectLanguage((array) Environment::getConfig('languages', array('en')));
 
 Environment::setVariable('lang', $lang);
 //NetteTranslator\Panel::register();
 
-// Configure application
-$application = Environment::getApplication();
-$application->errorPresenter = 'System:Error';
-$application->catchExceptions = Environment::isProduction();
+// Load vManager modules
+vManager\Application\ModuleManager::getModules();
 
+// Captcha (https://github.com/PavelMaca/CaptchaControl)
+PavelMaca\Captcha\CaptchaControl::register();
 
 // Setup router
 $application->onStartup[] = array('vManager\Modules\System\FilesPresenter', 'setupRoutes');
