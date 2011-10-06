@@ -11,15 +11,13 @@ common:
 		# zlib.output_compression: yes
 		# default_charset: "UTF-8"
 
-	service:
-		Nette\Security\IAuthenticator: vBuilder\Security\Authenticator
-		Nette\Security\IAuthorizator: vManager\Security\Permission
+	services:
+		authorizator: vManager\Security\Permission
 		vBuilder\Security\IPasswordHashProvider: vBuilder\Security\Sha1SaltedHashProvider
-		Nette\Application\IPresenterFactory: vManager\Application\PresenterFactory
+		presenterFactory: vManager\Application\PresenterFactory
 		Nette\ITranslator: vManager\Application\Translator::getTranslator
-		Nette\Mail\IMailer: Nette\Mail\SendmailMailer
 
-		Nette\Loaders\RobotLoader:
+		robotLoader:
 			option:
 				directory: [%appDir%, %libsDir%]
 			run: true
