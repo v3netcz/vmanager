@@ -39,7 +39,7 @@ class PresenterFactory extends Nette\Application\PresenterFactory {
 	/**
 	 * @param  string
 	 */
-	public function __construct($baseDir = "", Nette\IContext $context = null) {
+	public function __construct($baseDir = "", Nette\DI\IContainer $context = null) {
 		if($context == null)
 			$context = Nette\Environment::getContext();
 
