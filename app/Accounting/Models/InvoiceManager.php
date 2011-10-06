@@ -55,6 +55,16 @@ class InvoiceManager {
 		return $invoices;
 	}
 	
+	public static function getNextId() {
+		$invoices = array_reverse(self::getOrderedInvoices());
+		if(count($invoices)) {
+			$lastInvoice = reset($invoices);
+			return $lastInvoice->getIdPrefix() . '/' . str_pad(((int) $lastInvoice->getIdSulfix()) + 1, 4, '0', STR_PAD_LEFT);
+		}
+		
+		return date('Y').'/0001';
+	}
+	
 	public static function getOrderedInvoices($invoices = null) {
 		if($invoices === null) $invoices = self::getInvoices();
 		

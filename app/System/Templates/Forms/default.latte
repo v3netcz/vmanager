@@ -29,7 +29,7 @@ $controls = $form->getComponents(TRUE, 'Nette\Forms\IControl');
 			{!$control->control}
 		</div>
 	{elseif $control instanceof Nette\Forms\Controls\Checkbox}
-		<div>{!$control->control} {$control->caption}</div>
+		<div>{!$control->control} <span n:class="$control->label->class ? $control->label->class">{$control->caption}</span></div>
    {elseif $control instanceof Nette\Forms\Controls\UploadControl}
 		<div class="uploader">
 			<input type="file" style="opacity: 0; " name="{$control->name}" id="frm{$control->parent->name}-{$control->name}">

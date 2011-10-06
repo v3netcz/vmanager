@@ -4,10 +4,6 @@
 			width: 100% !important;
 			min-height: 500px;
 		}
-		
-		.hidden {
-			display: none !important;
-		}
 	</style>
 {/block}
 
@@ -15,14 +11,13 @@
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
 	<div class="box grid_16 round_all">
-		<h2 class="box_head grad_colour"><?php echo __('New invoice'); ?></h2>
+		<h2 class="box_head grad_colour"><?php echo __('Send by e-mail'); ?></h2>
 		<!-- <a href="#" class="grabber">&nbsp;</a>
 		<a href="#" class="toggle">&nbsp;</a>  -->
 		<div class="toggle_container">
 			<div class="block">
-				<h3 style="float: right; line-height: 135%;">Next ID: {$nextId}<br />Today: {? echo date('j.m.Y')}<br />Deadline: {? echo date('j.m.Y', time() + 3 * 7 * 24 * 60 * 60)}</h3>
-			
-				{control newInvoiceForm}
+				
+				{control emailForm}
 			</div>
 		</div>
 	</div>

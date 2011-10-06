@@ -35,28 +35,33 @@ class Accounting extends vManager\Application\Module implements vManager\Applica
 	vManager\Application\IAclEnabledModule {
 	
 	public function __construct() {
-		vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) {
-						
-			// Filtering exact match, for security reasons
-			if(Nette\Utils\Strings::match($filename, '/^\/invoices\/[A-Za-z0-9\\.\\-_]+\.(pdf|xml)$/')) {
-				if(!Nette\Environment::getUser()->isAllowed('Accounting:Invoice', 'default')) {
-					
-					$context = Nette\Environment::getContext();
-					$context->application->getPresenter()->flashMessage(__('You don\'t have enough privileges to perform this action.'), 'warning');
-					$backlink = $context->application->storeRequest();
-					$context->application->getPresenter()->redirect(':System:Sign:in', array('backlink' => $backlink));
-				}				
-				
-				$filepath = FILES_DIR . $filename;
-				
-				if(file_exists($filepath))
-					return new vBuilder\Application\Responses\FileResponse(
-									$filepath,
-									null, 
-									Strings::endsWith($filename, '.pdf') ? 'application/pdf' : 'text/xml'
-					);
-			}
-		};
+		$config = $this->getConfig();
+		if(isset($config['invoiceDir'])) {
+	
+		  vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) use($config) {
+						  
+			  // Filtering exact match, for security reasons
+			  if(($matches = Nette\Utils\Strings::match($filename, '/^\/invoices\/([A-Za-z0-9\\.\\-_]+\.(pdf|xml))$/')) != null) {
+				  if(!Nette\Environment::getUser()->isAllowed('Accounting:Invoice', 'default')) {
+					  
+					  $context = Nette\Environment::getContext();
+					  $context->application->getPresenter()->flashMessage(__('You don\'t have enough privileges to perform this action.'), 'warning');
+					  $backlink = $context->application->storeRequest();
+					  $context->application->getPresenter()->redirect(':System:Sign:in', array('backlink' => $backlink));
+				  }				
+				  
+				  $filepath = $config['invoiceDir'] . '/' . $matches[1];
+				  
+				  if(file_exists($filepath))
+					  return new vBuilder\Application\Responses\FileResponse(
+									  $filepath,
+									  null, 
+									  Strings::endsWith($filename, '.pdf') ? 'application/pdf' : 'text/xml'
+					  );
+			  }
+		  };
+		  
+		}
 	}
 	
 	/**
