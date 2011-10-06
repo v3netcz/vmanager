@@ -37,4 +37,14 @@ require_once LIBS_DIR . '/vBuilderFw/vBuilderFw/Configurator.php';
  */
 class Configurator extends vBuilder\Configurator {
 	
+	/**
+	 * @return Nette\Application\IPresenterFactory
+	 */
+	public static function createServicePresenterFactory(Nette\DI\Container $container) {
+		return new Application\PresenterFactory(
+				  isset($container->params['appDir']) ? $container->params['appDir'] : NULL,
+				  $container
+		);
+	}
+	
 }

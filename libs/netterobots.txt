@@ -4,4 +4,6 @@ Disallow: nette/client-side
 Disallow: nette/tests
 Disallow: vBuilderFw/tests
 Disallow: vStore/tests
+Disallow: vStore/vStore/Application/UI
+Disallow: vStore/vStore/Redaction
 Disallow: mPDF
