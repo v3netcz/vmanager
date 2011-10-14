@@ -118,6 +118,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->addColumn("name", __('Ticket name'), array(
 			 "renderer" => function ($ticket) {
 				 $link = Nette\Environment::getApplication()->getPresenter()->link('detail', $ticket->id);
+				 if($ticket->project)
+						echo Nette\Utils\Html::el("span")->class('project')->setText('[' . $ticket->project->name .  ']');
+				 
+				 echo ' ';
 				 echo Nette\Utils\Html::el("a")->href($link)->setText($ticket->name);
 			 },
 			 "sortable" => true,
@@ -370,7 +374,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	public function actionSuggestAssignTo() {
 		$typedText = $this->getParam('term', '');
 
-		$this->assignToSuggestions = $this->getAvailableUsernames(false, $typedText, 10);
+		$this->assignToSuggestions = $this->getAllAvailableUsernames(false, $typedText, 10);
 	}
 	
 	/**

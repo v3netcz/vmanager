@@ -31,8 +31,30 @@ $(document).ready(function () {
 		}
 		
 		if(el.hasClass('text') && el.attr('autocomplete-src') != undefined) {
+			var cache = {}, lastXhr;
+			
 			el.autocomplete({
-				source: el.attr('autocomplete-src')
+				source: function( request, response ) {
+					var term = request.term;
+					if ( term in cache ) {
+						response( cache[ term ] );
+						return;
+					}
+
+					lastXhr = $.getJSON( el.attr('autocomplete-src'), request, function( data, status, xhr ) {
+						// Nemame radi asociativni pole
+						parsedData = [];
+						for(var item in data) {
+								parsedData[parsedData.length] = data[item];
+						}
+						
+						cache[ term ] = parsedData;
+						if ( xhr === lastXhr ) {
+							response( parsedData );
+						}
+					});
+				}
+				
 			}); 
 		}
 	});

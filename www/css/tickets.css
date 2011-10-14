@@ -29,3 +29,38 @@
 #ticketUpdateFormTabs INPUT.text{
 	width: 350px;
 }
+
+.ticketDescription {
+	padding-top: 20px;
+}
+
+.ticketDescription TABLE,
+.history .revisionBlock TABLE {
+		border-collapse: collapse;
+}
+
+.ticketDescription TABLE TD,
+.history .revisionBlock TABLE TD {
+		background: white;
+		border: 1px solid #eeeeee;
+		padding: 8px 20px;
+}
+
+.ticketDescription LI,
+.history .revisionBlock LI {
+	padding: 5px 0 2px 25px !important;
+	border: none !important;
+}
+
+.ticketDescription A,
+.history .revisionBlock A {
+	color: #0a4e98 !important;
+	font-weight: normal !important;
+	text-decoration: underline;
+}
+
+.ticketDescription A:hover,
+.history .revisionBlock A:hover {
+	text-decoration: none;
+}
+
