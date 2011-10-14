@@ -29,7 +29,7 @@
 			<?php echo _x('State: <span class="value">%s</span>', array(!$data->isOpened() ? __('Closed') : __('Opened'))); ?>
 		</div>		
 		
-		<p>{!$data->description|texy}</p>
+		<div class="ticketDescription">{!$data->description|texy}</div>
 	</div>
 	
 	{$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->render()}
