@@ -40,9 +40,11 @@ use vManager, vBuilder, Nette;
  * @Column(author, type="OneToOne", entity="vManager\Security\User", joinOn="author=id")
  * @Column(comment, realName="commentId", type="OneToOne", entity="vManager\Modules\Tickets\Comment", joinOn="comment=id")
  * @Column(name, type="string")
+ * @Column(deadline, type="DateTime")
+ * @Column(assignedTo, type="OneToOne", entity="vManager\Security\User", joinOn="assignedTo=id")
  * @Column(timestamp, type="DateTime")
+ * @Column(description, type="string")
  */
 class Project extends vBuilder\Orm\ActiveEntity {
 		
-	
 }

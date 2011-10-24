@@ -1,0 +1,71 @@
+{block pageTitle}<?php echo __('Projects - vManager'); ?>{/block}
+
+{block head}
+<style>
+	.projectListingBlock TR.overdueTicket TD.deadline {
+		color: #ff0000;
+	}
+	
+	.projectListingBlock TD.id {
+		width: 40px;
+		text-align: right;
+	}
+	
+	.projectListingBlock TD.state {
+		color: #aa7300;
+		text-align: center;
+		width: 70px;
+	}	
+	
+	.projectListingBlock TR.closedTicket TD.state {
+		color: green;
+	}
+	
+	.projectListingBlock TD.date {
+		text-align: center;		
+		width: 110px;
+	}
+	
+	.projectListingBlock TD.lastChange {
+		width: 130px;
+	}
+	
+	.projectListingBlock TD.assignedTo {
+		text-align: center;		
+		width: 120px;
+	}
+	
+	.projectListingBlock TD.priority {
+		text-align: center;
+		width: 70px;
+	}
+	
+	.projectListingBlock TR.highPriorityTicket TD.priority {
+		color: #aa7300;
+	}
+	
+	.projectListingBlock TR.criticalTicket TD.priority {
+		color: #ff0000;
+	}
+	
+	.projectListingBlock SPAN.project {
+		color: brown;
+		font-size: 0.9em;
+		padding-right: 4px;
+	}
+	
+</style>
+{/block}
+{block content}
+{include ../../../System/Templates/Includes/flashes.latte}
+
+<div class="flat_area grid_16">
+	<h2><?php echo __('Tickets'); ?></h2>
+	<p>Následující stránka obsahuje všechny projekty. Pro založení nového projektu klikněte na tlačítko "<?php echo __('Create new project'); ?>".</p>
+	<a href="{link create}" class="color-button"><?php echo __('Create new project'); ?></a>
+</div>
+<div class="box grid_16 round_all projectListingBlock" style="margin-top: 20px; border: none;">	
+{control projectListingGrid}
+</div>
+
+{/block}

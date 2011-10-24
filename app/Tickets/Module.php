@@ -56,13 +56,22 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 		// Presentery
 		$acl->addResource('Tickets:Default', 'Tickets');
 		$acl->addResource('Tickets:Ticket', 'Tickets');
+		$acl->addResource('Tickets:Project', 'Tickets');
 				
 		// Uzivatel ticketovaciho systemu
 		$acl->addRole('Ticket user', 'User');
 		$acl->allow('Ticket user', 'Tickets', Nette\Security\Permission::ALL);	// Presentery
 				
 		// Administrator ticketovaciho systemu		
-		$acl->addRole('Ticket admin', 'Ticket user');		
+		$acl->addRole('Ticket admin', 'Ticket user');				
+				
+		// Uzivatel systemu projektu
+		$acl->addRole('Project user', 'User');
+		$acl->allow('Project user', 'Tickets', Nette\Security\Permission::ALL);	// Presentery
+				
+		// Administrator systemu projektu
+		$acl->addRole('Project admin', 'Project user');		
+		
 	}
 	
 	
@@ -87,6 +96,24 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 					  array(
 							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:create'),
 							'label' => __('Create new ticket')
+					  )
+				 )
+			);
+		}
+
+		if(Nette\Environment::getUser()->isAllowed('Tickets:Default', 'default')) {
+			$menu[] = array(
+				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:default'),
+				 'label' => __('Projects'),
+				 'icon' => System::getBasePath() . '/images/icons/small/grey/Flag.png',
+				 'children' => array(
+					  array(
+							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:default'),
+							'label' => __('My proojects')
+					  ),
+					  array(
+							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:create'),
+							'label' => __('Create new project')
 					  )
 				 )
 			);

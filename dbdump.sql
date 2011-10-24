@@ -46,7 +46,8 @@ LOCK TABLES `security_userRoles` WRITE;
 INSERT INTO `security_userRoles` (`user`,`role`)
 VALUES
 	(1,'Administrator'),
-	(2,'Ticket user');
+	(2,'Ticket user'),
+	(3,'Project user');
 
 /*!40000 ALTER TABLE `security_userRoles` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -118,8 +119,12 @@ CREATE TABLE `pm_projects` (
   `revision` smallint(6) NOT NULL DEFAULT '1',
   `author` smallint(6) unsigned DEFAULT NULL,
   `commentId` int(11) unsigned DEFAULT NULL,
+  `description` text,  
   `name` varchar(255) NOT NULL,
+  `deadline` date DEFAULT NULL,    
+  `assignedTo` smallint(6) DEFAULT NULL,  
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `state` smallint(6) NOT NULL DEFAULT '1',  
   PRIMARY KEY (`projectId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
