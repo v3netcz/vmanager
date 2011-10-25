@@ -118,8 +118,10 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		// Datum posledni zmeny
 		$grid->addColumn("timestamp", __("Last change"), array(
-			 "renderer" => function ($project) {
-				 echo Nette\Utils\Html::el("abbr")->title($project->timestamp->format("d. m. Y"))->setText(vManager\Application\Helpers::timeAgoInWords($project->timestamp));
+			 "renderer" => function ($project) {			 
+				 echo Nette\Utils\Html::el("abbr")
+          ->title($project->timestamp->format("d. m. Y"))
+          ->setText(vManager\Application\Helpers::timeAgoInWords($project->timestamp));
 			 },
 			 "sortable" => true
 		))->setCellClass("date lastChange");
@@ -132,23 +134,23 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 					 return;
 				 }
 
-				 echo Nette\Utils\Html::el("abbr")->title($project->deadline->format("d. m. Y"))->setText(vManager\Application\Helpers::timeAgoInWords($project->deadline));
+				 echo Nette\Utils\Html::el("abbr")
+          ->title($project->deadline->format("d. m. Y"))
+          ->setText(vManager\Application\Helpers::timeAgoInWords($project->deadline));
 			 },
 			 "sortable" => true
 		))->setCellClass("date deadline");
 
 		// Stav projectu
-		$grid->addColumn("state", __('State'), array(
-        //TODO: link na seznam ticketu prirazenych k tomuto procesu
+		$grid->addColumn("state", __('State'), array(        
 			 "renderer" => function ($project) {
-			   /*$count = count($this->context->repository->findAll('vManager\\Modules\\Tickets\\Project')
-				  ->where('[projectId] = ' . $project->projectId));
+         $count = $project->getTicketCount();
+         $link = Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:default', array('projectId' => $project->id));
 				 if ($count>0) {
-            echo Nette\Utils\Html::el("span")->setText($count);
+            echo Nette\Utils\Html::el("a")->href($link)->setText($count);
 				 } else {          
 				    echo Nette\Utils\Html::el("span")->setText(__("None"));
-         }*/
-         echo Nette\Utils\Html::el("span")->setText(__("None"));
+         }
 			 },
 			 "sortable" => true,
 		))->setCellClass("state");
