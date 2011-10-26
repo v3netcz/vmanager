@@ -47,16 +47,69 @@ use vManager, vBuilder, Nette;
  */
 class Project extends vBuilder\Orm\ActiveEntity {
 
+	private $_resolvedTicketCount;
+	private $_ticketCount;
+	private $_lastTicketModificationTime;
+	
 	/**
-	 * Returns count of assignet tickets
+	 * Returns true if project has some unresolved tasks
+	 * 
+	 * @return bool
+	 */
+	function isInProgress() {
+		return $this->ticketCount > 0 && $this->ticketCount != $this->resolvedTicketCount;
+	}
+	
+	/**
+	 * Returns count of project tickets
 	 * 
 	 * @return int
 	 */
-   function getTicketCount () {
-		$tickets = $this->context->repository->findAll('vManager\Modules\Tickets\Ticket')
-			->where('[revision] > 0 AND [projectId] = %i', $this->data->id)->fetchAll();
-    return count ($tickets);
+   function getTicketCount($closedOnly = false) {
+		 if($this->_ticketCount === null) {
+			 $tickets = $this->context->repository->findAll('vManager\Modules\Tickets\Ticket')
+					->where('[revision] > 0 AND [projectId] = %i', $this->data->id);
+			 
+			 $this->_ticketCount = count($tickets);
+		 }
+		 
+		
+    return $this->_ticketCount;
    }
+	 
+	 /**
+	  * Returns number of project tickets which has been resolved already
+	  * 
+	  * @return int 
+	  */
+	 function getResolvedTicketCount() {
+		 if($this->_resolvedTicketCount === null) {
+			 $tickets = $this->context->repository->findAll('vManager\Modules\Tickets\Ticket')
+					->where('[revision] > 0 AND [projectId] = %i', $this->data->id)->and('[state] = %i', Ticket::STATE_CLOSED);
+			 
+			 $this->_resolvedTicketCount = count($tickets);
+		 }
+		 
+		
+    return $this->_resolvedTicketCount;
+	 }
+	 
+	 /**
+	  * Returns time of last modification of any project ticket
+	  * 
+	  * @return \DateTime
+	  */
+	 function getLastTicketModificationTime() {
+		 if($this->_lastTicketModificationTime === null) {
+			 $lastTicketRevision = $this->context->repository->findAll('vManager\Modules\Tickets\Ticket')
+					->where('[revision] > 0 AND [projectId] = %i', $this->data->id)->orderBy('[timestamp] DESC')->fetch();
+			 
+			 if($lastTicketRevision)
+				$this->_lastTicketModificationTime = $lastTicketRevision->timestamp;
+		 }
+		 
+		 return $this->_lastTicketModificationTime;
+	 }
    
 	/**
 	 * Returns array with changes from $t2

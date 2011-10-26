@@ -26,20 +26,25 @@
 }
 
 #ticketCreateFormTabs INPUT.text,
-#ticketUpdateFormTabs INPUT.text{
+#ticketUpdateFormTabs INPUT.text,
+#projectCreateFormTabs INPUT.text,
+#projectUpdateFormTabs INPUT.text {
 	width: 350px;
 }
 
-.ticketDescription {
+.ticketDescription,
+.projectDescription {
 	padding-top: 20px;
 }
 
 .ticketDescription TABLE,
+.projectDescription TABLE,
 .history .revisionBlock TABLE {
 		border-collapse: collapse;
 }
 
 .ticketDescription TABLE TD,
+.projectDescription TABLE TD,
 .history .revisionBlock TABLE TD {
 		background: white;
 		border: 1px solid #eeeeee;
@@ -47,19 +52,26 @@
 }
 
 .ticketDescription LI,
+.projectDescription LI,
 .history .revisionBlock LI {
 	padding: 5px 0 2px 25px !important;
 	border: none !important;
 }
 
+.ticketSummary A,
+.projectSummary A,
 .ticketDescription A,
+.projectDescription A,
 .history .revisionBlock A {
 	color: #0a4e98 !important;
 	font-weight: normal !important;
 	text-decoration: underline;
 }
 
+.ticketSummary A:hover,
+.projectSummary A:hover,
 .ticketDescription A:hover,
+.projectDescription A:hover,
 .history .revisionBlock A:hover {
 	text-decoration: none;
 }

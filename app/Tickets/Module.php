@@ -95,7 +95,7 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 					  ),
 					  array(
 							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:create'),
-							'label' => __('Create new ticket')
+							'label' => __('Create a new ticket')
 					  )
 				 )
 			);
@@ -105,15 +105,15 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 			$menu[] = array(
 				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:default'),
 				 'label' => __('Projects'),
-				 'icon' => System::getBasePath() . '/images/icons/small/grey/Flag.png',
+				 'icon' => System::getBasePath() . '/images/icons/small/grey/PowerPoint%20Documents.png',
 				 'children' => array(
 					  array(
 							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:default'),
-							'label' => __('My proojects')
+							'label' => __('Show projects')
 					  ),
 					  array(
 							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:create'),
-							'label' => __('Create new project')
+							'label' => __('Create a new project')
 					  )
 				 )
 			);

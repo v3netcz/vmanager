@@ -192,7 +192,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		));
 		
 		if(Nette\Environment::getUser()->getIdentity()->isInRole('Ticket admin')) {
-			$form->addSelect('assignedTo', __('Assigned to'), array(-1 => __('Anyone')) + $this->getAllAvailableUsernames(true));
+			$form->addSelect('assignedTo', __('Assigned to'), array(-1 => __('To anybody')) + $this->getAllAvailableUsernames(true));
 		}
 		
 		$projects = $this->getAllAvailableProjects();

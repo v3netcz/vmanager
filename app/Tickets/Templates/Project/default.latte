@@ -2,23 +2,23 @@
 
 {block head}
 <style>
-	.projectListingBlock TR.overdueTicket TD.deadline {
-		color: #ff0000;
-	}
-	
 	.projectListingBlock TD.id {
 		width: 40px;
 		text-align: right;
 	}
 	
 	.projectListingBlock TD.state {
-		color: #aa7300;
+		color: green;
 		text-align: center;
 		width: 70px;
 	}	
 	
-	.projectListingBlock TR.closedTicket TD.state {
-		color: green;
+	.projectListingBlock TR.currentProject TD.state {
+		color: #000000;;
+	}
+	
+	.projectListingBlock TR.overdueProject TD.deadline {
+		color: #ff0000;
 	}
 	
 	.projectListingBlock TD.date {
@@ -32,20 +32,12 @@
 	
 	.projectListingBlock TD.assignedTo {
 		text-align: center;		
-		width: 120px;
+		width: 180px;
 	}
 	
 	.projectListingBlock TD.priority {
 		text-align: center;
 		width: 70px;
-	}
-	
-	.projectListingBlock TR.highPriorityTicket TD.priority {
-		color: #aa7300;
-	}
-	
-	.projectListingBlock TR.criticalTicket TD.priority {
-		color: #ff0000;
 	}
 	
 	.projectListingBlock SPAN.project {

@@ -75,25 +75,36 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 		
 		if($grid->sortColumn === null)
 			$ds->orderBy('[name] DESC, [projectId]');
+
 		
-		$grid->setModel(new Gridito\DibiFluentModel($ds, 'vManager\\Modules\\Tickets\\Project'));
+		$model = new vManager\Grid\OrmModel($ds);
+		
+		$grid->setModel($model);
 		$grid->setItemsPerPage(20);
 
 		$grid->setRowClass(function ($iterator, $project) {
 					  $classes = array();
 
+						if($project->isInProgress()) {
+							$classes[] = 'currentProject';
+							
+							$today = new \DateTime;
+							if($project->deadline && $project->deadline < $today)
+								$classes[] = 'overdueProject';
+						}
+						
 					  return empty($classes) ? null : implode(" ", $classes);
 				  });
 
 		// =======================================================================
 		// ID Projektu
-		$grid->addColumn("id", __('ID'), array(
+		/* $grid->addColumn("id", __('ID'), array(
 			 "renderer" => function ($project) {
 				 $link = Nette\Environment::getApplication()->getPresenter()->link('detail', $project->id);
 				 echo Nette\Utils\Html::el("a")->href($link)->setText('#'.$project->id);
 			 },
 			 "sortable" => true,
-		))->setCellClass('id');;
+		))->setCellClass('id');; */
 
 		// Nazev projektu
 		$grid->addColumn("name", __('Project name'), array(
@@ -107,7 +118,7 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		// zodpovedna osoba
 		//if(Nette\Environment::getUser()->getIdentity()->isInRole('Project admin')) {
-			$grid->addColumn("assignedTo", __('Assigned to'), array(
+			$grid->addColumn("assignedTo", __('Supervised by'), array(
 				 "renderer" => function ($project) {
 					 echo $project->assignedTo !== null ? ($project->assignedTo->exists() ? $project->assignedTo->username
 											  : _x('User n. %d', array($project->assignedTo->id))) : __('nobody');
@@ -118,10 +129,13 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		// Datum posledni zmeny
 		$grid->addColumn("timestamp", __("Last change"), array(
-			 "renderer" => function ($project) {			 
+			 "renderer" => function ($project) {		
+			
+					$time = max($project->timestamp, $project->lastTicketModificationTime);
+			
 				 echo Nette\Utils\Html::el("abbr")
           ->title($project->timestamp->format("d. m. Y"))
-          ->setText(vManager\Application\Helpers::timeAgoInWords($project->timestamp));
+          ->setText(vManager\Application\Helpers::timeAgoInWords($time));
 			 },
 			 "sortable" => true
 		))->setCellClass("date lastChange");
@@ -145,23 +159,42 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->addColumn("state", __('State'), array(        
 			 "renderer" => function ($project) {
          $count = $project->getTicketCount();
+				 
          $link = Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:default', array('projectId' => $project->id));
-				 if ($count>0) {
-            echo Nette\Utils\Html::el("a")->href($link)->setText($count);
+				 if($count > 0) {
+					 $resolvedCount = $project->getResolvedTicketCount();
+					 
+					 if($count == $resolvedCount)
+						 echo Nette\Utils\Html::el("span")->setText(__('Done'));
+					 else
+						 echo Nette\Utils\Html::el("a")->href($link)->setText(_x('%d / %d', array($resolvedCount, $count)));
 				 } else {          
-				    echo Nette\Utils\Html::el("span")->setText(__("None"));
+				    echo '-';
          }
 			 },
 			 "sortable" => true,
 		))->setCellClass("state");
 
+					 
+		$grid->addButton("btnShowTickets", __('Show associated tasks'), array(					  
+			"handler" => function ($project) use ($grid) {
+				if(!$project) Nette\Environment::getApplication()->getPresenter()->flashMessage(__('Record not found'), 'warn');
+				else {
+					Nette\Environment::getApplication()->getPresenter()->redirect(':Tickets:Ticket:default', array('projectId' => $project->id));
+				}
+
+				$grid->redirect("this");
+			}
+		));
+			 
+			 
 	}
 	
 	protected function createComponentProjectFilter() {
 		$form = new Form;
 						
 		if(Nette\Environment::getUser()->getIdentity()->isInRole('Project admin')) {
-			$form->addSelect('assignedTo', __('Assigned to'), array(-1 => __('Anyone')) + $this->getAllAvailableUsernames(true));
+			$form->addSelect('assignedTo', __('Supervisor'), array(-1 => __('Anybody')) + $this->getAllAvailableUsernames(true));
 		}
 		
 		$projects = $this->getAllAvailableProjects();
@@ -220,17 +253,17 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 	 * @param vManager\Form reference to form
 	 */
 	protected function setupProjectDetailForm(Form & $form) {
-		$form->addText('name', __('Task title:'))->setAttribute('title', __('Short task description. Please be concrete.'))
+		$form->addText('name', __('Project title:'))->setAttribute('title', __('Short project description. Please be concrete.'))
 				  ->addRule(Form::FILLED, __('Task title has to be filled.'));
 
 
-		$form->addDatePicker('deadline', __('Deadline:'))->setAttribute('title', __('When has to be task done?'));
+		$form->addDatePicker('deadline', __('Deadline:'))->setAttribute('title', __('When has to be project done?'));
 
 		$context = $this->context;
 		
-		$form->addText('assignTo', __('Assign to:'))
+		$form->addText('assignTo', __('Supervisor:'))
 				  ->setAttribute('autocomplete-src', $this->link('suggestAssignTo'))
-				  ->setAttribute('title', __('Who will resolve this issue?'))
+				  ->setAttribute('title', __('Who will supervise over this project?'))
 				  ->addCondition(Form::FILLED)
 				  ->addRule(function ($control) use($context) {
 								 $users = $context->repository->findAll('vManager\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
