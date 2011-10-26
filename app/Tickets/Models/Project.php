@@ -111,6 +111,43 @@ class Project extends vBuilder\Orm\ActiveEntity {
 		 return $this->_lastTicketModificationTime;
 	 }
    
+	 /**
+	 * Returns true, if current user is allowed to view detail of this project
+	 * 
+	 * @return bool 
+	 */
+	function userIsAllowedToView() {
+		$user = $this->context->user;
+
+		if (!$user->isLoggedIn())
+			return false;
+		if ($user->isInRole('Project manager'))
+			return true;
+		if (!$user->isInRole('Ticket user'))
+			return false;
+		if ($user->getId() == $this->data->assignedTo)
+			return true;
+
+		$db = $this->context->connection;
+		$ticketTable = Ticket::getMetadata()->getTableName();
+		return $db->query("SELECT 1 FROM [$ticketTable] WHERE [revision] > 0 AND [projectId] = %i AND ([author] = %i OR [assignedTo] = %i) LIMIT 1", $this->data->id, $user->getId(), $user->getId())->fetch() !== false;
+	}
+
+	/**
+	 * Returns true, if current user is allowed to change attributes of this project
+	 * 
+	 * @return bool
+	 */
+	function userIsAllowedToChange() {
+		$user = $this->context->user;
+
+		if ($user->isInRole('Project manager'))
+			return true;
+		if (!$user->isInRole('Ticket user'))
+			return false;
+		return $user->getId() == $this->data->assignedTo;
+	}
+	 
 	/**
 	 * Returns array with changes from $t2
 	 * 

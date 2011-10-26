@@ -51,27 +51,21 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 	 * @param Nette\Security\Permission reference to permission class
 	 */
 	public function initPermission(Nette\Security\Permission & $acl) {
-		$acl->addResource('Tickets');
+		$acl->addResource('TaskManagement');
 		
 		// Presentery
-		$acl->addResource('Tickets:Default', 'Tickets');
-		$acl->addResource('Tickets:Ticket', 'Tickets');
-		$acl->addResource('Tickets:Project', 'Tickets');
+		$acl->addResource('Tickets:Ticket', 'TaskManagement');
+		$acl->addResource('Tickets:Project', 'TaskManagement');
 				
 		// Uzivatel ticketovaciho systemu
 		$acl->addRole('Ticket user', 'User');
-		$acl->allow('Ticket user', 'Tickets', Nette\Security\Permission::ALL);	// Presentery
+		$acl->allow('Ticket user', 'Tickets:Ticket', Nette\Security\Permission::ALL);
+		$acl->allow('Ticket user', 'Tickets:Project', 'default');	
+		$acl->allow('Ticket user', 'Tickets:Project', 'detail');
 				
 		// Administrator ticketovaciho systemu		
-		$acl->addRole('Ticket admin', 'Ticket user');				
-				
-		// Uzivatel systemu projektu
-		$acl->addRole('Project user', 'User');
-		$acl->allow('Project user', 'Tickets', Nette\Security\Permission::ALL);	// Presentery
-				
-		// Administrator systemu projektu
-		$acl->addRole('Project admin', 'Project user');		
-		
+		$acl->addRole('Project manager', 'Ticket user');			
+		$acl->allow('Project manager', 'TaskManagement', Nette\Security\Permission::ALL);						
 	}
 	
 	
@@ -83,7 +77,9 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 	public function getMenuItems() {
 		$menu = array();
 		
-		if(Nette\Environment::getUser()->isAllowed('Tickets:Default', 'default')) {
+		$user = Nette\Environment::getUser();
+		
+		if($user->isAllowed('Tickets:Ticket', 'default')) {
 			$menu[] = array(
 				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Ticket:default'),
 				 'label' => __('Tasks'),
@@ -99,24 +95,30 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 					  )
 				 )
 			);
-		}
 
-		if(Nette\Environment::getUser()->isAllowed('Tickets:Default', 'default')) {
-			$menu[] = array(
-				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:default'),
-				 'label' => __('Projects'),
-				 'icon' => System::getBasePath() . '/images/icons/small/grey/PowerPoint%20Documents.png',
-				 'children' => array(
-					  array(
-							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:default'),
-							'label' => __('Show projects')
-					  ),
-					  array(
-							'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:create'),
-							'label' => __('Create a new project')
-					  )
-				 )
-			);
+			if($user->isAllowed('Tickets:Project', 'create')) {
+				$menu[] = array(
+					 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:default'),
+					 'label' => __('Projects'),
+					 'icon' => System::getBasePath() . '/images/icons/small/grey/PowerPoint%20Documents.png',
+					 'children' => array(
+							array(
+								'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:default'),
+								'label' => __('Show projects')
+							),
+							array(
+								'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:create'),
+								'label' => __('Create a new project')
+							)
+					 )
+				);
+			} else {
+				$menu[] = array(
+					 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Tickets:Project:default'),
+					 'label' => __('Projects'),
+					 'icon' => System::getBasePath() . '/images/icons/small/grey/PowerPoint%20Documents.png'
+				);
+			}
 		}
 		
 		return $menu;

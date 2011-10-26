@@ -31,6 +31,7 @@
 	
 	{$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->render()}
 	
+	{if $project->userIsAllowedToChange()}
 	{control updateForm begin}
 	{var form => $control['updateForm']}
 	{if $form->hasErrors()}
@@ -94,6 +95,7 @@
 
 	</div>
 	{control updateForm end}
+	{/if}
     
    {$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::DESC ? $historyWidget->render()}
 

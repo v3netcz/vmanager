@@ -62,10 +62,12 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->as('d')
 				  ->where('[revision] > 0');
 
-		// Pokud to neni spravce projektu, zobrazuju jen projekty, ktere uzivatel zalozil
-		// nebo kterym je prirazen
-		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Project admin'))
-			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [projectId] = [d.projectId])))", $uid, $uid, $uid);
+		// Pokud se nejedna o spravce, tak zobrazuji jen projekty, ke kterym uzivatel 
+		// vlastni nejaky ticket nebo, ktere jsou explicitne prirazeny uzivately (zodpovedna osoba)
+		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
+			$ticketTable = Ticket::getMetadata()->getTableName();
+			$ds->and('([assignedTo] = %i OR [author] = %i OR EXISTS (SELECT * FROM ['.$ticketTable.'] WHERE [projectId] = [d.projectId] AND [revision] > 0 AND ([author] = %i OR [assignedTo] = %i)))', $uid, $uid, $uid, $uid);
+		}
 
 		// Filtery		
 		if($this->getParam('assignedTo') > 0)
@@ -117,7 +119,7 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 		));
 
 		// zodpovedna osoba
-		//if(Nette\Environment::getUser()->getIdentity()->isInRole('Project admin')) {
+		//if(Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
 			$grid->addColumn("assignedTo", __('Supervised by'), array(
 				 "renderer" => function ($project) {
 					 echo $project->assignedTo !== null ? ($project->assignedTo->exists() ? $project->assignedTo->username
@@ -193,7 +195,7 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentProjectFilter() {
 		$form = new Form;
 						
-		if(Nette\Environment::getUser()->getIdentity()->isInRole('Project admin')) {
+		if(Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
 			$form->addSelect('assignedTo', __('Supervisor'), array(-1 => __('Anybody')) + $this->getAllAvailableUsernames(true));
 		}
 		
@@ -222,8 +224,10 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 	 * @param int $id 
 	 */
 	public function actionDetail($id) {
-		// TODO: Autorizace prav uzivatele pro zobrazeni/pridani apod. projektu
-		// pripadne to povesit do entity na event handlery (u verzovanych nemuze byt Secured)
+		$project = $this->getProject();
+		
+		if($project && !$project->userIsAllowedToView())
+			throw new Nette\Application\ForbiddenRequestException("Access denied");
 	}
 
 	/**
@@ -239,7 +243,7 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 		$texy->setOutputMode(\Texy::XHTML1_STRICT);
 
 		$this->template->registerHelper('texy', callback($texy, 'process'));
-
+		$this->template->project = $this->getProject();
 		$this->template->historyWidget = new VersionableEntityView('vManager\\Modules\\Tickets\\Project', $id);
 	}
 	
@@ -274,6 +278,9 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function saveProject(Project $project, $values) {
 		$changed = false;
 
+		if(!$project->userIsAllowedToChange())
+			throw new Nette\Application\ForbiddenRequestException('Access denied');
+		
 		if(isset($values['comment']) && !empty($values['comment'])) {
 			$project->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
 			$project->comment->text = $values['comment'];
@@ -463,5 +470,6 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		return $this->project;
 	}
-
+	
+	
 }

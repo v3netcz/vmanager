@@ -21,9 +21,13 @@
 					{$form['state']->control}
 				</div>				
 				
-				{$form['send']->control}
+				{if isset($form['assignedTo'])}
+					{$form['send']->control}
+				{/if}
+				
 				<div class="clear"></div>
-			</div> 						 
+			</div>
+			
 			{control $form end}
 		</td>
 	</tr>

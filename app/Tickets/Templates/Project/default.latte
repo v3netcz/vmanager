@@ -53,8 +53,11 @@
 
 <div class="flat_area grid_16">
 	<h2><?php echo __('Projects'); ?></h2>
-	<p>Následující stránka obsahuje všechny projekty. Pro založení nového projektu klikněte na tlačítko "<?php echo __('Create new project'); ?>".</p>
-	<a href="{link create}" class="color-button"><?php echo __('Create new project'); ?></a>
+	
+	{if $user->isAllowed('Tickets:Project', 'create')}
+		<p>Následující stránka obsahuje všechny projekty. Pro založení nového projektu klikněte na tlačítko "<?php echo __('Create new project'); ?>".</p>
+		<a href="{link create}" class="color-button"><?php echo __('Create new project'); ?></a>
+	{/if}
 </div>
 <div class="box grid_16 round_all projectListingBlock" style="margin-top: 20px; border: none;">	
 {control projectListingGrid}

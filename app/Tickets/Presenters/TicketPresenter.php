@@ -65,8 +65,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		// Pokud to neni spravce ticketu, zobrazuju jen tickety, ktere uzivatel zalozil
 		// nebo kterym je prirazen
-		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Ticket admin'))
-			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [ticketId] = [d.ticketId])))", $uid, $uid, $uid);
+		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
+			$projectTable = Project::getMetadata()->getTableName();
+			$owningProjectCondition = "[projectId] IS NOT NULL AND EXISTS (SELECT * FROM [$projectTable] WHERE [projectId] = [d.projectId] AND [revision] > 0 AND ([author] = %i OR [assignedTo] = %i))";
+			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [ticketId] = [d.ticketId])) OR ($owningProjectCondition))", $uid, $uid, $uid, $uid, $uid);
+		}
 
 		// Filtery		
 		if($this->getParam('state', -1) == Ticket::STATE_CLOSED || $this->getParam('state', -1) == Ticket::STATE_OPENED)
@@ -128,7 +131,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		));
 
 		// Resitel ukolu
-		//if(Nette\Environment::getUser()->getIdentity()->isInRole('Ticket admin')) {
+		//if(Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
 			$grid->addColumn("assignedTo", __('Assigned to'), array(
 				 "renderer" => function ($ticket) {
 					 echo $ticket->assignedTo !== null ? ($ticket->assignedTo->exists() ? $ticket->assignedTo->username
@@ -191,7 +194,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			 Ticket::STATE_CLOSED => __('Closed')
 		));
 		
-		if(Nette\Environment::getUser()->getIdentity()->isInRole('Ticket admin')) {
+		if(Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
 			$form->addSelect('assignedTo', __('Assigned to'), array(-1 => __('To anybody')) + $this->getAllAvailableUsernames(true));
 		}
 		
