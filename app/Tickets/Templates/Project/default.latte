@@ -1,0 +1,66 @@
+{block pageTitle}<?php echo __('Projects - vManager'); ?>{/block}
+
+{block head}
+<style>
+	.projectListingBlock TD.id {
+		width: 40px;
+		text-align: right;
+	}
+	
+	.projectListingBlock TD.state {
+		color: green;
+		text-align: center;
+		width: 70px;
+	}	
+	
+	.projectListingBlock TR.currentProject TD.state {
+		color: #000000;;
+	}
+	
+	.projectListingBlock TR.overdueProject TD.deadline {
+		color: #ff0000;
+	}
+	
+	.projectListingBlock TD.date {
+		text-align: center;		
+		width: 110px;
+	}
+	
+	.projectListingBlock TD.lastChange {
+		width: 130px;
+	}
+	
+	.projectListingBlock TD.assignedTo {
+		text-align: center;		
+		width: 180px;
+	}
+	
+	.projectListingBlock TD.priority {
+		text-align: center;
+		width: 70px;
+	}
+	
+	.projectListingBlock SPAN.project {
+		color: brown;
+		font-size: 0.9em;
+		padding-right: 4px;
+	}
+	
+</style>
+{/block}
+{block content}
+{include ../../../System/Templates/Includes/flashes.latte}
+
+<div class="flat_area grid_16">
+	<h2><?php echo __('Projects'); ?></h2>
+	
+	{if $user->isAllowed('Tickets:Project', 'create')}
+		<p>Následující stránka obsahuje všechny projekty. Pro založení nového projektu klikněte na tlačítko "<?php echo __('Create new project'); ?>".</p>
+		<a href="{link create}" class="color-button"><?php echo __('Create new project'); ?></a>
+	{/if}
+</div>
+<div class="box grid_16 round_all projectListingBlock" style="margin-top: 20px; border: none;">	
+{control projectListingGrid}
+</div>
+
+{/block}

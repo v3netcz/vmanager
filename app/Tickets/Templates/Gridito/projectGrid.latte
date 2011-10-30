@@ -1,0 +1,34 @@
+{extends '../../../System/Gridito/Templates/grid.latte'}
+{var $form = $presenter['projectFilter']}
+{block tableHead}
+	<tr>
+		<td colspan="{=count($control['columns']->getComponents()) + 1}" class="ui-widget-header">
+			{control $form begin}
+			<div class="filterHeader">
+				
+				<div class="filterInputGroup" n:if="isset($form['name'])">
+					{$form['name']->label}
+					{$form['name']->control}
+				</div>
+				
+				<div class="filterInputGroup" n:if="isset($form['assignedTo'])">
+					{$form['assignedTo']->label}
+					{$form['assignedTo']->control}
+				</div>				
+
+				<div class="filterInputGroup" n:if="isset($form['state'])">
+					{$form['state']->label}
+					{$form['state']->control}
+				</div>				
+				
+				{if isset($form['assignedTo'])}
+					{$form['send']->control}
+				{/if}
+				
+				<div class="clear"></div>
+			</div>
+			
+			{control $form end}
+		</td>
+	</tr>
+{/block}

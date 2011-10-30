@@ -53,7 +53,7 @@ class SecuredPresenter extends BasePresenter {
 			$backlink = $this->getApplication()->storeRequest();
 			$this->redirect(':System:Sign:in', array('backlink' => $backlink));
 		} elseif(!$user->isAllowed($this->name, $this->action)) {	
-			Nette\Diagnostics\Debugger::log('Access denied for UID:'. $user->getId().' when accessing resource "'. $this->name .'": "'. $this->action .'"', Nette\Debug::WARNING);
+			Nette\Diagnostics\Debugger::log('Access denied for UID:'. $user->getId().' when accessing resource "'. $this->name .'": "'. $this->action .'"', Nette\Diagnostics\Debugger::WARNING);
 			$this->flashMessage(__('You don\'t have enough privileges to perform this action.'), 'warning');
 			
 			$backlink = $this->getApplication()->storeRequest();

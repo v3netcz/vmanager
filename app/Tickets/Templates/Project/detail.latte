@@ -18,39 +18,37 @@
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
 	<div class="flat_area grid_16">
-		<h2>Ticket #{$data->id} - {$data->name}</h2>
+		<h2>Project #{$data->id} - {$data->name}</h2>
 		
-		<div class="ticketSummary">
-			{if $data->project}<?php echo __('Project:'); ?> <span class="value"><a n:href="Project:detail $data->project->id">{$data->project->name}</a></span><br />{/if}
+		<div class="projectSummary">			
 			<?php echo _x('Created by: <span class="value">%s</span>', array($firstRevision->author !== null ? ($firstRevision->author->exists() ? $firstRevision->author->username : _x('user n. %d', array($firstRevision->author->id))) : __('anonymous'))); ?><br />
 			<?php echo _x('Assigned to: <span class="value">%s</span>', array($data->assignedTo !== null ? ($data->assignedTo->exists() ? $data->assignedTo->username : _x('user n. %d', array($data->assignedTo->id))) : __('nobody'))); ?><br />
 			{if $data->deadline}<?php echo _x('Deadline: <span class="value">%s</span>', array($data->deadline->format('d. m. Y'))); ?><br />{/if}
-			{if $data->priority}<?php echo _x('Priority: <span class="value">%s</span>', array($data->priority->label)); ?><br />{/if}
-			<?php echo _x('State: <span class="value">%s</span>', array(!$data->isOpened() ? __('Closed') : __('Opened'))); ?>
 		</div>		
 		
-		<div class="ticketDescription">{!$data->description|texy}</div>
+		<div class="projectDescription">{!$data->description|texy}</div>
 	</div>
 	
 	{$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->render()}
 	
+	{if $project->userIsAllowedToChange()}
 	{control updateForm begin}
 	{var form => $control['updateForm']}
 	{if $form->hasErrors()}
 		<script type="text/javascript">
 			$(document).ready(function () {
-				var tabs = $('#ticketUpdateFormTabs');
+				var tabs = $('#projectUpdateFormTabs');
 				tabs.tabs('select', 2);
 			});
 		</script>
 	{/if}
 	
-	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all" id="ticketUpdateFormTabs">
+	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all" id="projectUpdateFormTabs">
 		<ul class="tab_header grad_colour clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1"><?php echo __('Add comment'); ?></a></li>
 			<!-- <li class="ui-state-default ui-corner-top"><a href="#tabs-2"><?php echo __('Attach files'); ?></a></li> -->
-			<li class="ui-state-default ui-corner-top"><a href="#tabs-3"><?php echo __('Change ticket description'); ?></a></li>
-			<li class="ui-state-default ui-corner-top"><a href="#tabs-4"><?php echo __('Change ticket details'); ?></a></li>
+			<li class="ui-state-default ui-corner-top"><a href="#tabs-3"><?php echo __('Change project description'); ?></a></li>
+			<li class="ui-state-default ui-corner-top"><a href="#tabs-4"><?php echo __('Change project details'); ?></a></li>
 		</ul>
 
 		<a href="#" class="grabber">&nbsp;</a>
@@ -73,7 +71,7 @@
 			</div>
 			<div id="tabs-4" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 				<div class="content">
-					{include ticketDetailForm.inc.latte, form => $form}
+					{include projectDetailForm.inc.latte, form => $form}
 				</div>
 			</div>
 			
@@ -97,6 +95,7 @@
 
 	</div>
 	{control updateForm end}
+	{/if}
     
    {$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::DESC ? $historyWidget->render()}
 

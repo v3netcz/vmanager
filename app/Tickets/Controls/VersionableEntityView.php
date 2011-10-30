@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Tickets;
 
-use vManager, Nette, vBuilder\Orm\Repository;
+use vManager, Nette, vBuilder\Orm\Repository, vBuilder\Orm\Entity;
 
 /**
  * Visual component for rendering comment list
@@ -38,6 +38,9 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	
 	/** @var int PK ID of entity */
 	protected $id;
+
+	/** @var string name id column */
+	protected $idField;
 	
 	/** @var array of verisons of entity */
 	protected $data;
@@ -50,11 +53,13 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	
 	protected $context;
 	
+	
 	/**
 	 * Component constructor.
 	 * 
 	 * @param string $entityName
 	 * @param int $id 
+	 * @param string $idField
 	 */
 	function __construct($entityName, $id) {
 		$this->entityName = $entityName;
@@ -65,13 +70,17 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	
 	/**
 	 * Loads data from DB
+	 *
 	 */
-	protected function load() {
+	protected function load() {           
+		$entity = self::getEntityClass($this->entityName);		
+    $metadata = $entity::getMetadata();
+    $idFields = $metadata->getIdFields();
 		$fluent = $this->context->repository->findAll($this->entityName)
-				  ->where('[ticketId] = %i', $this->id)
+				  ->where('[' . $metadata->getFieldColumn($idFields[0]) . '] = %i', $this->id)
 				  ->clause('ORDER BY ABS([revision])' . ($this->order == self::DESC ? ' DESC' : ''));
 
-		$this->data = $fluent->fetchAll(); 
+		$this->data = $fluent->fetchAll();
 	}
 	
 	/**
@@ -105,5 +114,18 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	function render() {
 		$this->getTemplate()->render();
 	}
-
+	
+	/**
+	 * Helper function for getting class from entity name
+	 * 
+	 * @param string entity name
+	 * @return string|bool return false, if no such class has been found 
+	 */
+	protected function getEntityClass($entity) {
+		if(class_exists($entity)) {
+			return $entity;
+		}
+		
+		return false;
+	}	
 }
