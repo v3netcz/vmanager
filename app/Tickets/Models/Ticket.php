@@ -170,5 +170,15 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 		
 		return $log;
 	}
-
+	
+  public function isResponsibleUser($user) {
+      if ($this->data->assignedTo !== null) {
+        if ($this->data->assignedTo == $user->id) 
+          return true;
+      }
+      if ($this->data->project !== null) {
+        return $this->getProject->isResponsibleUsers($user);
+      }    
+      return false;
+  }
 }
