@@ -152,16 +152,21 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		// Deadline
 		$grid->addColumn("deadline", __('Deadline'), array(
 			 "renderer" => function ($ticket) {
-				 if($ticket->deadline == null) {
-					 echo "-";
-					 return;
-				 }
-
-				 echo Nette\Utils\Html::el("abbr")->title($ticket->deadline->format("d. m. Y"))->setText(vManager\Application\Helpers::timeAgoInWords($ticket->deadline));
+			   if ($ticket->deadline == null) {
+            if ($ticket->getProject()->deadline == null) {
+              echo "-";
+              return;
+            } 
+            echo Nette\Utils\Html::el("abbr")
+              ->title($ticket->getProject()->deadline->format("d. m. Y"))
+                ->setText(vManager\Application\Helpers::timeAgoInWords($ticket->getProject()->deadline));
+            return;
+			   }
+				 echo Nette\Utils\Html::el("abbr")->title($ticket->deadline->format("d. m. Y"))->setText(vManager\Application\Helpers::timeAgoInWords($ticket->deadline->format("d. m. Y")));
 			 },
 			 "sortable" => true
 		))->setCellClass("date deadline");
-
+		
 		// Priorita
 		$grid->addColumn("priority", __('Priority'), array(
 			 "renderer" => function ($ticket) {
