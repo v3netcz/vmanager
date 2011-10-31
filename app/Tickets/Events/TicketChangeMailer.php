@@ -107,7 +107,7 @@ class TicketChangeMailer {
 			}
 		}	  
 		
-		if ($t->projectId !== null) {
+		if ($t->project !== null) {
       $project = $t->getProject();
       if($project->assignedTo !== null && $project->assignedTo->exists() && !empty($project->assignedTo->email)) {
         $recipients[$project->assignedTo->email] = $project->assignedTo;
