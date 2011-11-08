@@ -153,7 +153,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->addColumn("deadline", __('Deadline'), array(
 			 "renderer" => function ($ticket) {
 			   if ($ticket->deadline == null) {
-            if ($ticket->getProject()->deadline == null) {
+            if ($ticket->getProject() == null) {
               echo "-";
               return;
             } 
@@ -281,6 +281,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->setAttribute('autocomplete-src', $this->link('suggestProject'))
 				  ->setAttribute('title', __('Is this task part of greater project?'))
 				  ->addRule(function ($control) use($context) {
+                 if ($control->value == null || $control->value == '') return true;                 
 								 $projects = $context->repository->findAll('vManager\\Modules\\Tickets\\Project')->where('[name] = %s', $control->value)->fetchSingle();
 								 return ($projects !== false);
 							 }, __('This project does not exist.'));				  
@@ -322,7 +323,6 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$changed = true;
 		} else {
 			$ticket->comment = null;
-			$ticket->public = false;
 		}
 
 		if(isset($values['assignTo'])) {

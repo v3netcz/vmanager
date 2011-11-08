@@ -26,9 +26,11 @@
 			<?php echo _x('Assigned to: <span class="value">%s</span>', array($data->assignedTo !== null ? ($data->assignedTo->exists() ? $data->assignedTo->username : _x('user n. %d', array($data->assignedTo->id))) : __('nobody'))); ?><br />
 			{if $data->deadline}
         <?php echo _x('Deadline: <span class="value">%s</span>', array($data->deadline->format('d. m. Y'))); ?><br />
-			{else if $data->getProject()->deadline}
-        <?php echo _x('Deadline: <span class="value">%s</span>', array($data->getProject()->deadline->format('d. m. Y'))); ?><br />
-			{/if}
+			{else} 
+        {if $data->getProject()}
+          <?php echo _x('Deadline: <span class="value">%s</span>', array($data->getProject()->deadline->format('d. m. Y'))); ?><br />
+        {/if}
+      {/if} 
 			{if $data->priority}<?php echo _x('Priority: <span class="value">%s</span>', array($data->priority->label)); ?><br />{/if}
 			<?php echo _x('State: <span class="value">%s</span>', array(!$data->isOpened() ? __('Closed') : __('Opened'))); ?>
 		</div>		
