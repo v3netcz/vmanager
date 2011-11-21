@@ -63,7 +63,7 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->where('[revision] > 0');
 
 		// Pokud se nejedna o spravce, tak zobrazuji jen projekty, ke kterym uzivatel 
-		// vlastni nejaky ticket nebo, ktere jsou explicitne prirazeny uzivately (zodpovedna osoba)
+		// vlastni nejaky ticket nebo, ktere jsou explicitne prirazeny uzivateli (zodpovedna osoba)
 		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
 			$ticketTable = Ticket::getMetadata()->getTableName();
 			$ds->and('([assignedTo] = %i OR [author] = %i OR EXISTS (SELECT * FROM ['.$ticketTable.'] WHERE [projectId] = [d.projectId] AND [revision] > 0 AND ([author] = %i OR [assignedTo] = %i)))', $uid, $uid, $uid, $uid);
