@@ -379,7 +379,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		}
 
 		foreach(array('name', 'description', 'deadline') as $curr) {
-			if(isset($values[$curr]) && $ticket->{$curr} != $values[$curr]) {
+			if($ticket->{$curr} != $values[$curr]) {
 				$ticket->{$curr} = $values[$curr];
 				$changed = true;
 			}

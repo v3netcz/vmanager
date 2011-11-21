@@ -211,7 +211,9 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 					else
 							$change = _x('Changed ticket state to <strong class="field">%s</strong>', array($t1->state->name));
 
-				} elseif(strlen($t1->$field) < 40)
+				} elseif($t1->$field == "") 
+					$change = _x('Unset field <strong class="field">%s</strong>', array($field));
+				elseif(strlen($t1->$field) < 40)
 					$change = _x('Changed field <strong class="field">%s</strong> to <strong class="value">%s</strong>', array($field, $t1->$field));
 				else
 					$change = _x('Changed field <strong class="field">%s</strong>', array($field));
