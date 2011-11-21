@@ -59,6 +59,16 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$table = Ticket::getMetadata()->getTableName();
 
 		$ds = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Ticket')
+				  ->removeClause('select')
+				  
+				  // Deadline s project fallbackem
+				  ->select('IFNULL([deadline], IF([projectId] IS NULL, NULL, (SELECT [deadline] FROM ['.
+				  	Project::getMetadata()->getTableName().'] WHERE [revision] > 0 AND [projectId] = [d.projectId]) )) AS [deadline2]')
+				  
+				  ->select('[ticketId], [projectId], [revision], [author], [commentId], [name], [description], [priority], [assignedTo], [timestamp], [state],  [deadline]')
+				  
+				  ->removeClause('from')
+				  ->from(Ticket::getMetadata()->getTableName())
 				  ->as('d')
 				  ->leftJoin(Priority::getMetadata()->getTableName())->as('p')->on('[priority] = [p.id]')
 				  ->where('[revision] > 0');
@@ -87,7 +97,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		// Konec filteru
 		
 		if($grid->sortColumn === null)
-			$ds->orderBy('IF([state] IN %in, 1, 0)', $finalStateIds,', IF([deadline] IS NULL, 0, 1) DESC, [deadline], [p.weight] DESC, [assignedTo], [ticketId]');
+			$ds->orderBy('IF([state] IN %in, 1, 0)', $finalStateIds,', IF([deadline2] IS NULL, 0, 1) DESC, [deadline2], [p.weight] DESC, [assignedTo], [ticketId]');
 		
 		$grid->setModel(new Gridito\DibiFluentModel($ds, 'vManager\\Modules\\Tickets\\Ticket'));
 		$grid->setItemsPerPage(20);
@@ -155,17 +165,21 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		// Deadline
 		$grid->addColumn("deadline", __('Deadline'), array(
 			 "renderer" => function ($ticket) {
-			   if ($ticket->deadline == null) {
-            if ($ticket->getProject() == null) {
-              echo "-";
-              return;
-            } 
-            echo Nette\Utils\Html::el("abbr")
-              ->title($ticket->getProject()->deadline->format("d. m. Y"))
-                ->setText(vManager\Application\Helpers::timeAgoInWords($ticket->getProject()->deadline));
-            return;
+			   if($ticket->deadline == null) {
+       			if ($ticket->getProject() == null || $ticket->project->deadline == null) {
+              		echo "-";
+              		return;
+            	} 
+            
+            	echo Nette\Utils\Html::el("abbr")
+              		->title($ticket->getProject()->deadline->format("d. m. Y"))
+                	->setText(vManager\Application\Helpers::timeAgoInWords($ticket->getProject()->deadline));
+           		return;
 			   }
-				 echo Nette\Utils\Html::el("abbr")->title($ticket->deadline->format("d. m. Y"))->setText(vManager\Application\Helpers::timeAgoInWords($ticket->deadline->format("d. m. Y")));
+			   
+				echo Nette\Utils\Html::el("abbr")
+				 	->title($ticket->deadline->format("d. m. Y"))
+				 	->setText(vManager\Application\Helpers::timeAgoInWords($ticket->deadline));
 			 },
 			 "sortable" => true
 		))->setCellClass("date deadline");
