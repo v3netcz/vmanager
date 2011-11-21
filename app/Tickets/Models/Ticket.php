@@ -49,13 +49,9 @@ use vManager,
  * @Column(timestamp, type="DateTime")
  * @Column(priority, type="OneToOne", entity="vManager\Modules\Tickets\Priority", joinOn="priority=id")
  * @Column(project, realName="projectId", type="OneToOne", entity="vManager\Modules\Tickets\Project", joinOn="project=id")  
- * 
- * TODO: Pak predelat na stavy dle analyzy
- * @Column(state, type="integer")
+ * @Column(state)
  */
 class Ticket extends vBuilder\Orm\ActiveEntity {
-	const STATE_OPENED = 1;
-	const STATE_CLOSED = 0;
 
 	/** @var array of function(Ticket $t); event handlers for performing actions after new ticket creation */
 	public static $onTicketCreated = array();
@@ -80,14 +76,63 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 	}
 
 	/**
-	 * Return true, if ticket is opened
+	 * Returns ticket state
 	 * 
-	 * @return bool
+	 * @return ITicketState 
 	 */
-	function isOpened() {
-		return $this->state == self::STATE_OPENED;
+	function getState() {
+			return vManager\Modules\Tickets::getInstance()
+							->getTicketState($this->data->state);
 	}
+	
+	/**
+	 * Sets ticket state
+	 * 
+	 * @param ITicketState|string ticket state (instance or id)
+	 */
+	function setState($state) {
+			// Kvuli overeni ze stav existuje
+			if(!($state instanceof ITicketState))
+				$state = vManager\Modules\Tickets::getInstance()
+						->getTicketState($state);
+			
+			// Pokud se nejedna o prvotni nastaveni stavu musim overit,
+			// jestli novy stav je validnim naslednikem
+			if($this->data->state != "") {
 
+				// Odkudkoliv muzeme zmenit stav ticketu na pocatecni stav
+				if(!$state->isInitial()) {
+					$found = false;
+					
+					foreach($this->state->successorIds as $succId) {
+						if($succId == $state->id) {
+							$found = true;
+							break;
+						}
+					}
+					
+				if(!$found)
+					throw new Nette\InvalidStateException("Cannot change ticket state from '".$this->state->id."' to '".$state->id."'");
+				}	
+				
+			} elseif(!$state->isInitial()) {
+					throw new Nette\InvalidStateException("State '".$state->id."' is not valid initial state of ticket");
+			}
+			
+			$this->data->state = $state->id;
+	}
+	
+	/**
+	 * Returns array of posibnle succeeding states
+	 * 
+	 * @return array of ITicketState
+	 */
+	function getPossibleStates() {
+		return $this->state->isFinal()
+						? vManager\Modules\Tickets::getInstance()->initialTicketStates
+						: $this->state->successors;;
+	}
+	
 	/**
 	 * Custom project getter because of Versionable
 	 *  (have only one PK => ID, don't know the revision)
@@ -156,9 +201,17 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 			} elseif($t2->$field != $t1->$field) {
 				if(is_object($t1->$field) && $t1->$field instanceof vBuilder\Orm\DataTypes\DateTime)
 					$change = _x('Changed field <strong class="field">%s</strong> to <strong class="value">%s</strong>', array($field, $t1->$field->format("d. m. Y")));
-				elseif($field == 'state')
-					$change = $t1->isOpened() ? __('Reopened this ticket') : __('Resolve this ticket as done');
-				elseif(strlen($t1->$field) < 40)
+				elseif($field == 'state') {
+					$module = vManager\Modules\Tickets::getInstance();
+					
+					if(!$t1->state->isFinal() && $t2->state->isFinal() && count($module->initialTicketStates) < 2)
+							$change = __('Reopened this ticket');
+					elseif($t1->state->isFinal())
+							$change = _x('Resolved this ticket as <strong class="field">%s</strong>', array($t1->state->name));
+					else
+							$change = _x('Changed ticket state to <strong class="field">%s</strong>', array($t1->state->name));
+
+				} elseif(strlen($t1->$field) < 40)
 					$change = _x('Changed field <strong class="field">%s</strong> to <strong class="value">%s</strong>', array($field, $t1->$field));
 				else
 					$change = _x('Changed field <strong class="field">%s</strong>', array($field));

@@ -70,10 +70,13 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$owningProjectCondition = "[projectId] IS NOT NULL AND EXISTS (SELECT * FROM [$projectTable] WHERE [projectId] = [d.projectId] AND [revision] > 0 AND ([author] = %i OR [assignedTo] = %i))";
 			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [ticketId] = [d.ticketId])) OR ($owningProjectCondition))", $uid, $uid, $uid, $uid, $uid);
 		}
-
+		
+		$finalStateIds = array();
+		foreach($this->module->finalTicketStates as $curr) $finalStateIds[] = $curr->id;
+		
 		// Filtery		
-		if($this->getParam('state', -1) == Ticket::STATE_CLOSED || $this->getParam('state', -1) == Ticket::STATE_OPENED)
-			$ds->and("[state] = %i", $this->getParam('state')); 
+		if(($stateFilter = $this->getParam('state', -1)) != -1)
+			$ds->and("[state] = %s", $this->getParam('state'));
 		
 		if($this->getParam('assignedTo') > 0)
 			$ds->and("[assignedTo] = %i", $this->getParam('assignedTo'));
@@ -84,7 +87,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		// Konec filteru
 		
 		if($grid->sortColumn === null)
-			$ds->orderBy('[state] DESC, IF([deadline] IS NULL, 0, 1) DESC, [deadline], [p.weight] DESC, [assignedTo], [ticketId]');
+			$ds->orderBy('IF([state] IN %in, 1, 0)', $finalStateIds,', IF([deadline] IS NULL, 0, 1) DESC, [deadline], [p.weight] DESC, [assignedTo], [ticketId]');
 		
 		$grid->setModel(new Gridito\DibiFluentModel($ds, 'vManager\\Modules\\Tickets\\Ticket'));
 		$grid->setItemsPerPage(20);
@@ -92,7 +95,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->setRowClass(function ($iterator, $ticket) {
 					  $classes = array();
 
-					  if(!$ticket->isOpened())
+					  if($ticket->state->isFinal())
 						  $classes[] = 'closedTicket';
 					  elseif($ticket->deadline != null && $ticket->deadline->format("U") < time())
 						  $classes[] = 'overdueTicket';
@@ -183,8 +186,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		// Stav ticketu
 		$grid->addColumn("state", __('State'), array(
 			 "renderer" => function ($ticket) {
-				 echo Nette\Utils\Html::el("span")->setText(!$ticket->isOpened() ? __('Closed')
-										  : __('Opened'));
+				 echo Nette\Utils\Html::el("span")->setText($ticket->state->name);
 			 },
 			 "sortable" => true,
 		))->setCellClass("state");
@@ -192,12 +194,12 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	
 	protected function createComponentTicketFilter() {
 		$form = new Form;
-				
-		$form->addSelect('state', __('State'), array(
-			 -1 => __('Any'),
-			 Ticket::STATE_OPENED => __('Opened'),
-			 Ticket::STATE_CLOSED => __('Closed')
-		));
+		
+		$states = array(-1 => __('Any'));
+		foreach($this->module->availableTicketStates as $curr)
+			$states[$curr->id] = $curr->name;
+		
+		$form->addSelect('state', __('State'), $states);
 		
 		if(Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
 			$form->addSelect('assignedTo', __('Assigned to'), array(-1 => __('To anybody')) + $this->getAllAvailableUsernames(true));
@@ -302,13 +304,13 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function saveTicket(Ticket $ticket, $values) {
 		$changed = false;
 
-		if(isset($values['reopen']) && $values['reopen'] && !$ticket->isOpened()) {
-			$ticket->state = Ticket::STATE_OPENED;
-			$changed = true;
-		}
-
-		if(isset($values['close']) && $values['close'] && $ticket->isOpened()) {
-			$ticket->state = Ticket::STATE_CLOSED;
+		if($values['newState']) {
+			if($values['newState'] === true)
+				list($state) = $ticket->possibleStates;
+			else
+				$state = $this->module->getTicketState($values['newState']);
+			
+			$ticket->state = $state;
 			$changed = true;
 		}
 
@@ -471,7 +473,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$values = $form->getValues();
 		$ticket = $this->context->repository->create('vManager\Modules\Tickets\Ticket');
 
-		$values['reopen'] = true;
+		$values['newState'] = $this->module->defaultTicketState->id;
 
 		$this->saveTicket($ticket, $values);
 
@@ -497,10 +499,29 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addCheckbox('public', __('Make this comment private'));
 		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
 
-		if($ticket->isOpened())
-			$form->addCheckbox('close', __('Close ticket with this comment'));
-		else
-			$form->addCheckbox('reopen', __('Reopen this ticket'));
+		
+		$possibleStates = $ticket->possibleStates;
+				
+		if(count($possibleStates) > 1) {
+			$states = array();
+			foreach($possibleStates as $curr)
+				$states[$curr->id] = $curr->isFinal()
+						? _x('resolve as %s', array($curr->name))
+						: _x('change to %s', array($curr->name));
+			
+			$form->addSelect('newState', __('State:'), $states)
+							->setPrompt('do not change');
+			
+		} elseif(count($possibleStates) > 0) {
+			list($nextState) = $possibleStates;
+			
+			if($ticket->state->isFinal() && !$nextState->isFinal())
+				$label = __('Reopen this ticket');
+			else
+				$label = _x('Change state to \'%s\'', array($nextState->name));
+				
+			$form->addCheckbox('newState', $label);
+		}
 
 		$this->setupTicketDetailForm($form);
 		$form['name']->setValue($ticket->name);
@@ -548,4 +569,12 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		return $this->ticket;
 	}
 
+	/**
+	 * Returns instance of ticketing system module
+	 * @return vManager\Modules\Tickets
+	 */
+	public function getModule() {
+		return vManager\Modules\Tickets::getInstance();
+	}
+	
 }
