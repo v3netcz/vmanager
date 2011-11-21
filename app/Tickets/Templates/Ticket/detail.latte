@@ -26,7 +26,7 @@
 			<?php echo _x('Assigned to: <span class="value">%s</span>', array($data->assignedTo !== null ? ($data->assignedTo->exists() ? $data->assignedTo->username : _x('user n. %d', array($data->assignedTo->id))) : __('nobody'))); ?><br />
 			{if $data->deadline}<?php echo _x('Deadline: <span class="value">%s</span>', array($data->deadline->format('d. m. Y'))); ?><br />{/if}
 			{if $data->priority}<?php echo _x('Priority: <span class="value">%s</span>', array($data->priority->label)); ?><br />{/if}
-			<?php echo _x('State: <span class="value">%s</span>', array(!$data->isOpened() ? __('Closed') : __('Opened'))); ?>
+			<?php echo _x('State: <span class="value">%s</span>', array($data->state->name)); ?>
 		</div>		
 		
 		<div class="ticketDescription">{!$data->description|texy}</div>
@@ -78,14 +78,15 @@
 			</div>
 			
 			<div class="grad_colour clearfix tab_footer">
-				<div n:if="isset($form['reopen'])" class="changeStateCheckboxBlock reopenCheckboxBlock">
-					{$form['reopen']->control}
-					{$form['reopen']->label}
+				
+				<div n:if="isset($form['newState']) && $form['newState'] instanceof Nette\Forms\Controls\Checkbox" class="changeStateCheckboxBlock reopenCheckboxBlock">
+					{$form['newState']->control}
+					{$form['newState']->label}
 				</div>
 				
-				<div n:if="isset($form['close'])" class="changeStateCheckboxBlock closeCheckboxBlock">
-					{$form['close']->control}
-					{$form['close']->label}
+				<div n:if="isset($form['newState']) && $form['newState'] instanceof Nette\Forms\Controls\SelectBox" class="changeStateCheckboxBlock reopenCheckboxBlock">
+					{$form['newState']->label}
+					{$form['newState']->control}
 				</div>
 				
 				<button type="submit" class="round_all btnTabNext btnTabDirectSubmit">

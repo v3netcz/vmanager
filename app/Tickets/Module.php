@@ -36,6 +36,10 @@ use vManager, vBuilder, Nette,
 class Tickets extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
 	vManager\Application\IAclEnabledModule {
 	
+	protected $_availableTicketStates;
+	protected $_finalTicketStates;
+	protected $_initialTicketStates;
+	
 	/**
 	 * Constructor. Initializes module and registers event handlers
 	 */
@@ -122,6 +126,93 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 		}
 		
 		return $menu;
+	}
+	
+	/**
+	 * Returns ticket state object
+	 * 
+	 * @param string id of method
+	 * @return ITicketState 
+	 */
+	public function getTicketState($id) {
+		if($id === null) return null;
+		
+		if(!isset($this->availableTicketStates[$id]))
+			throw new Nette\InvalidArgumentException("Ticket state '$id' is not defined");
+		
+		return $this->availableTicketStates[$id];
+	}
+	
+	/**
+	 * Returns default ticket state
+	 * 
+	 * @return ITicketState
+	 */
+	public function getDefaultTicketState() {
+		$s = $this->availableTicketStates;
+		
+		return reset($s);
+	}
+	
+	/**
+	 * Returns all available ticket states
+	 * 
+	 * @return array of ITicketState
+	 */
+	public function getAvailableTicketStates() {
+		if(!isset($this->_availableTicketStates)) {
+			$this->_availableTicketStates = array();
+			
+			if(isset($this->config['ticketStates'])) {
+				foreach($this->config['ticketStates'] as $id => $stateConfig) {
+										
+					if(isset($stateConfig['type'])) {
+						$class = 'vManager\\Modules\\Tickets' . ucfirst($class) . 'TicketState';
+					} else
+						$class = 'vManager\\Modules\\Tickets\\TicketState';
+					
+					$this->_availableTicketStates[$id] = $class::fromConfig($id, $stateConfig, $this);
+				}
+			}
+						
+			if(count($this->_availableTicketStates) == 0) throw new Nette\InvalidStateException('No ticket states defined');
+		}
+		
+		return $this->_availableTicketStates;
+	}
+	
+	/**
+	 * Returns all final (resolved) ticket states
+	 * 
+	 * @return array of ITicketState
+	 */
+	public function getFinalTicketStates() {
+		if(!$this->_finalTicketStates) {
+			$this->_finalTicketStates = array();
+			
+			foreach($this->availableTicketStates as $curr) {
+				if($curr->isFinal()) $this->_finalTicketStates[] = $curr;
+			}
+		}
+		
+		return $this->_finalTicketStates;
+	}
+	
+	/**
+	 * Returns all initial ticket states
+	 * 
+	 * @return array of ITicketState
+	 */
+	public function getInitialTicketStates() {
+		if(!$this->_initialTicketStates) {
+			$this->_initialTicketStates = array();
+			
+			foreach($this->availableTicketStates as $curr) {
+				if($curr->isInitial()) $this->_initialTicketStates[] = $curr;
+			}
+		}
+		
+		return $this->_initialTicketStates;
 	}
 
 }
