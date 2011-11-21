@@ -84,8 +84,12 @@ class Project extends vBuilder\Orm\ActiveEntity {
 	  */
 	 function getResolvedTicketCount() {
 		 if($this->_resolvedTicketCount === null) {
+			 $stateIds = array();
+			 foreach(vManager\Modules\Tickets::getInstance()->finalTicketStates as $curr)
+				 $stateIds[] = $curr->id;
+			 
 			 $tickets = $this->context->repository->findAll('vManager\Modules\Tickets\Ticket')
-					->where('[revision] > 0 AND [projectId] = %i', $this->data->id)->and('[state] = %i', Ticket::STATE_CLOSED);
+					->where('[revision] > 0 AND [projectId] = %i', $this->data->id)->and('[state] IN %in', $stateIds);
 			 
 			 $this->_resolvedTicketCount = count($tickets);
 		 }
