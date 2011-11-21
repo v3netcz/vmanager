@@ -105,7 +105,14 @@ class TicketChangeMailer {
 			if($t->author === null || $t->author->id != $t->assignedTo->id) {
 				$recipients[$t->assignedTo->email] = $t->assignedTo;
 			}
-		}				  
+		}	  
+		
+		if ($t->project !== null) {
+      $project = $t->getProject();
+      if($project->assignedTo !== null && $project->assignedTo->exists() && !empty($project->assignedTo->email)) {
+        $recipients[$project->assignedTo->email] = $project->assignedTo;
+      }
+		}
 		
 		$allRevisions = Nette\Environment::getContext()->repository->findAll('vManager\\Modules\\Tickets\\Ticket')
 				  ->where('[ticketId] = %i', $t->id)->fetchAll();		

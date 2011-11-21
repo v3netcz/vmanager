@@ -22,8 +22,14 @@
 					</div>
 				
 					<div class="comment">
-						{if $curr->comment}{!$curr->comment->text|texy}
-						{*else}<?php echo __('No comment'); ?>*}{/if}
+						{if $curr->comment}
+              {if ($curr->author->id == Nette\Environment::getUser()->id) || ($curr->isResponsibleUser(Nette\Environment::getUser()))}
+                  {!$curr->comment->text|texy}
+              {else}
+                <?php echo __('You have no permisson to view this comment'); ?>
+              {/if}
+						{*else}<?php echo __('No comment'); ?>*}
+						{/if}
 					</div>
 				</div>
                 </div>
