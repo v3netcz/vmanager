@@ -1,3 +1,45 @@
+body .main_container .history .revisionBlock .grad_colour {
+	
+	background: #2b4356; /* old browsers */
+	
+	background: -moz-linear-gradient(top, #2b4356 0%, #122b45 99%); /* firefox */
+	
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2b4356), color-stop(99%,#122b45)); /* webkit */
+	
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b4356', endColorstr='#122b45',GradientType=0 ); /* ie */
+		
+	border: 1px solid #122b45;
+	
+}
+
+body .main_container .history .mineRevisionBlock .grad_colour {
+	
+	background: #3d8336; /* old browsers */
+	
+	background: -moz-linear-gradient(top, #3d8336 0%, #277423 99%); /* firefox */
+	
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3d8336), color-stop(99%,#277423)); /* webkit */
+	
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3d8336', endColorstr='#277423',GradientType=0 ); /* ie */
+		
+	border: 1px solid #277423;
+	
+	background-color: #9e253b; /* old browsers */
+	
+}
+
+body .main_container .history .privateCommentRevisionBlock .grad_colour {
+
+	background: -moz-linear-gradient(top, #9e253b 0%, #7C1F30 99%); /* firefox */
+
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9e253b), color-stop(99%,#7C1F30)); /* webkit */
+
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9e253b', endColorstr='#7C1F30',GradientType=0 ); /* ie */
+
+	border:1px solid #7C1F30;
+
+}
+
 .history .revisionBlock {
 	border-top: 1px solid gray;
 	margin: 20px 0px;
@@ -76,3 +118,6 @@
 	text-decoration: none;
 }
 
+.privateCheckboxBlock {
+	padding-left: 30px;
+}

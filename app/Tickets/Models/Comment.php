@@ -34,7 +34,7 @@ use vManager, vBuilder, Nette;
  * @Table(name="pm_comments")
  * @Column(id, realName="commentId", pk, type="integer", generatedValue)
  * @Column(text, realName="comment", type="string")
- * @Column(public, type="boolean")
+ * @Column(private, type="boolean")
  */
 class Comment extends vBuilder\Orm\ActiveEntity {
 	

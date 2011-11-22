@@ -756,13 +756,12 @@ padding-bottom:0px;}
 	background-color:#e7edef;
 	margin-bottom:15px;
 	height:100px;
-	padding:5px 0;
+	padding: 5px;
 	width:70%;
 	
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
-	text-indent:5px;
 }
 
 .box .block ul.full_width{
@@ -1957,7 +1956,7 @@ body .round_right{
 }
 
 input[type="checkbox"] {
-	display:inline;
+	display: inline;
 }
 
 /*----- ------------------- -------*/
@@ -2038,4 +2037,34 @@ ABBR {
 	float: left;
 	line-height: 30px;
 	color: white;
+}
+
+.tabs .checkboxBlock INPUT {
+	margin: 0 6px 0 0 !important;
+	display: inline-block;
+	height: auto;
+}
+
+.tabs .checkboxBlock LABEL {
+	display: inline;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.boxHeadButton {
+	display: block;
+	float: right;
+	position: relative !important;
+	
+	margin: 0 0px 0 0;
+	line-height: 65px;
+	height: 65px;
+}
+
+.box_head {
+	padding-right: 38px !important;
+}
+
+.boxHeadButtonToggle {
+	top: 17px !important;
 }

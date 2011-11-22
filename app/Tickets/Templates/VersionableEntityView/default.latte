@@ -4,10 +4,24 @@
 	<div class="history">
 		{foreach $history as $curr}
 			{if ($order == vManager\Modules\Tickets\VersionableEntityView::DESC && !$iterator->isLast()) || ($order == vManager\Modules\Tickets\VersionableEntityView::ASC && !$iterator->isFirst())}
-            <div class="revisionBlock box grid_16">
-					<h2 class="box_head grad_colour round_top"><img src="{=$curr->author->avatarUrl}" width="30" alt="Avatar" style="vertical-align:middle; padding-top:10px; padding-bottom:10px; padding-right:10px" />
-					{if $curr->author !== null}{if $curr->author->exists()}{$curr->author->username}{else}<?php echo _x('User n. %d', array($curr->author->id)); ?>{/if}{else}<?php echo __('nobody'); ?>{/if} @ <abbr title="{$curr->timestamp}">{$curr->timestamp|timeAgoInWords}</abbr></h2>
-					<a href="#" class="toggle nograbber">&nbsp;</a>
+            <div n:class="revisionBlock, box, $curr->author->id == Nette\Environment::getUser()->id ? mineRevisionBlock, $curr->comment && $curr->comment->private ? privateCommentRevisionBlock">
+					
+					<h2 class="box_head grad_colour round_top">
+							<img src="{=$curr->author->avatarUrl}" width="30" alt="Avatar" style="vertical-align:middle; padding-top:10px; padding-bottom:10px; padding-right:10px" />
+							{if $curr->author !== null}{if $curr->author->exists()}{$curr->author->username}{else}<?php echo _x('User n. %d', array($curr->author->id)); ?>{/if}{else}<?php echo __('nobody'); ?>{/if}
+							@ <abbr title="{$curr->timestamp}">{$curr->timestamp|timeAgoInWords}</abbr>
+							
+							{if $curr->author->id == Nette\Environment::getUser()->id}
+								{if $curr->comment && $curr->comment->private}
+									<a href="#" class="boxHeadButton privateToggle" title="<?php echo __('Make this comment public'); ?>"><img src="/images/icons/small/white/User%20Comment.png" /></a>
+								{else}
+									<a href="#" class="boxHeadButton privateToggle" title="<?php echo __('Make this comment private'); ?>"><img src="/images/icons/small/white/User%20Comment%20Crossed.png" /></a>
+								{/if}
+							{/if}
+							<a href="#" class="toggle nograbber boxHeadButtonToggle"></a>
+					</h2>
+					
+					
 					<div class="toggle_container">					
 						<div class="block">
 				
@@ -23,10 +37,10 @@
 				
 					<div class="comment">
 						{if $curr->comment}
-              {if ($curr->author->id == Nette\Environment::getUser()->id) || ($curr->isResponsibleUser(Nette\Environment::getUser()))}
+              {if !$curr->comment->private || ($curr->author->id == Nette\Environment::getUser()->id) || ($curr->isResponsibleUser(Nette\Environment::getUser())) || Nette\Environment::getUser()->identity->isInRole('Project manager')}
                   {!$curr->comment->text|texy}
               {else}
-                <?php echo __('You have no permisson to view this comment'); ?>
+                <p><?php echo __('You have no permisson to view this comment'); ?></p>
               {/if}
 						{*else}<?php echo __('No comment'); ?>*}
 						{/if}

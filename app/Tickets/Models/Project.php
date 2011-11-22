@@ -203,7 +203,7 @@ class Project extends vBuilder\Orm\ActiveEntity {
 		return $log;
 	}   
 	
-  public function isResponsibleUser($user) {
+  public function isResponsibleUser(vBuilder\Security\User $user) {
       if ($this->data->assignedTo !== null) {
         if ($this->data->assignedTo == $user->id) 
           return true;

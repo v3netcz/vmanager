@@ -331,10 +331,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if(isset($values['comment']) && !empty($values['comment'])) {
 			$ticket->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
 			$ticket->comment->text = $values['comment'];
-			if (isset($values['public']) && !empty($values['public'])) {
-        $ticket->comment->public = $values['public'];
+			if (isset($values['private']) && !empty($values['private'])) {
+        $ticket->comment->private = $values['private'];
 			} else {
-        $ticket->comment->public = false;
+        $ticket->comment->private = false;
 			}
 			$changed = true;
 		} else {
@@ -510,7 +510,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$ticket = $this->getTicket();
 
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
-		$form->addCheckbox('public', __('Make this comment private'));
+		$form->addCheckbox('private', __('Make this comment private'));
 		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
 
 		
