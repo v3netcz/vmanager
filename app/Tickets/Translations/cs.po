@@ -890,11 +890,6 @@ msgstr "Název projektu"
 msgid "Supervised by"
 msgstr "Zodpovědná osoba"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:173
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:170
-msgid "Done"
-msgstr "Hotovo"
-
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:175
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:172
 #, php-format
@@ -1061,3 +1056,15 @@ msgstr "Nemáte oprávnění k zobrazení tohoto komentáře"
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:29
 msgid "Comment is private"
 msgstr "Komentář je soukromý"
+
+# Stavy
+msgid "do not change"
+msgstr "neměnit"
+msgid "New"
+msgstr "Nový"
+msgid "Accepted"
+msgstr "Potvrzeno"
+msgid "Done"
+msgstr "Hotovo"
+msgid "Canceled"
+msgstr "Zrušeno"

@@ -161,8 +161,9 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 		if($t1->revision < 2) return array();
 		
 		if($t2 === null) {
-			$t2 = $this->context->repository->get('vManager\Modules\Tickets\Comment', array('ticketId' => $t1->id, 'revision' => 0 - ($t1->revision - 1)));
-			if(!$t2->exists()) return array();
+			$t2 = $this->context->repository->get('vManager\Modules\Tickets\Ticket', array('ticketId' => $t1->id, 'revision' => 0 - ($t1->revision - 1)));
+			
+			if(!$t2 || !$t2->exists()) return array();
 		}
 		
 		

@@ -524,7 +524,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 						: _x('change to %s', array($curr->name));
 			
 			$form->addSelect('newState', __('State:'), $states)
-							->setPrompt('do not change');
+							->setPrompt(__('do not change'));
 			
 		} elseif(count($possibleStates) > 0) {
 			list($nextState) = $possibleStates;
