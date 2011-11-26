@@ -88,7 +88,7 @@ class System extends vManager\Application\Module implements vManager\Application
 	 * @return string
 	 */
 	public static function getBasePath($absolute = false) {
-		$baseUri = rtrim(Nette\Environment::getVariable('baseUri', NULL), '/');
+		$baseUri = rtrim(Nette\Environment::getContext()->httpRequest->getUrl()->getBaseUrl(), '/');		
 		return $absolute ? $baseUri : preg_replace('#https?://[^/]+#A', '', $baseUri);
 	}
 	

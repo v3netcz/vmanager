@@ -37,11 +37,13 @@
 		<link rel="stylesheet" href="{$basePath}/texyla/css/style.css" type="text/css">
 		<link rel="stylesheet" href="{$basePath}/texyla/themes/default/theme.css" type="text/css">
 
-		<!-- Load JQuery -->		
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+		<!-- Load JQuery -->
+		{var $googleApis = 'googleapis.bilahora.v3net.cz'}
+		{*var $googleApis = 'ajax.googleapis.com'*}
+		<script type="text/javascript" src="http://{$googleApis}/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
 		<!-- Load JQuery UI -->
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://{$googleApis}/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		
 		<!-- SHJS (Snippet) -->
 		{* <link rel="stylesheet" href="{$basePath}/snippet-shjs/jquery.snippet.min.css" type="text/css"> *}
@@ -136,7 +138,7 @@
 	</head>
 	<body>
 		{if !isset($baseLayoutOnly) || !$baseLayoutOnly}
-			
+		
 			<!-- SIDEBAR -->
 			<div id="sidebar">
 				<div class="cog">+</div>

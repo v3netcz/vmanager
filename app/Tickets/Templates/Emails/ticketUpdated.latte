@@ -25,7 +25,11 @@
 </ul>
 
 <div n:if="$ticket->comment != null && !empty($ticket->comment->text)">
-	{!$ticket->comment->text|texy}
+	{if $ticket->comment->private}
+		<?php echo __('Comment is private'); ?>
+	{else}
+		{!$ticket->comment->text|texy}
+	{/if}
 </div>
 
 {/block}
