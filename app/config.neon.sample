@@ -55,6 +55,21 @@ common:
 	# Ticketing system
 	Tickets:
 		enabled: true
+		
+		ticketStates:
+			new:
+				name: New
+				succ: [accepted, solved, canceled]
+
+			accepted:
+				name: Accepted
+				succ: [solved, canceled]
+
+			solved:
+				name: Done
+
+			canceled:
+				name: Canceled
 
 	# User administration module
 	Users:
