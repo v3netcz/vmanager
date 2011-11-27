@@ -84,17 +84,13 @@ class Project extends vBuilder\Orm\ActiveEntity {
 	  */
 	 function getResolvedTicketCount() {
 		 if($this->_resolvedTicketCount === null) {
-<<<<<<< HEAD
-			 $tickets = $this->context->repository->findAll('vManager\Modules\Tickets\Ticket')
-					->where('[revision] > 0 AND [projectId] = %i', $this->data->id)->and('[state] = %i', Ticket::STATE_CLOSED);
-=======
+
 			 $stateIds = array();
 			 foreach(vManager\Modules\Tickets::getInstance()->finalTicketStates as $curr)
 				 $stateIds[] = $curr->id;
 			 
 			 $tickets = $this->context->repository->findAll('vManager\Modules\Tickets\Ticket')
 					->where('[revision] > 0 AND [projectId] = %i', $this->data->id)->and('[state] IN %in', $stateIds);
->>>>>>> bi-sp2
 			 
 			 $this->_resolvedTicketCount = count($tickets);
 		 }
@@ -208,11 +204,7 @@ class Project extends vBuilder\Orm\ActiveEntity {
 		return $log;
 	}   
 	
-<<<<<<< HEAD
-  public function isResponsibleUser($user) {
-=======
   public function isResponsibleUser(vBuilder\Security\User $user) {
->>>>>>> bi-sp2
       if ($this->data->assignedTo !== null) {
         if ($this->data->assignedTo == $user->id) 
           return true;

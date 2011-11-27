@@ -63,11 +63,7 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->where('[revision] > 0');
 
 		// Pokud se nejedna o spravce, tak zobrazuji jen projekty, ke kterym uzivatel 
-<<<<<<< HEAD
-		// vlastni nejaky ticket nebo, ktere jsou explicitne prirazeny uzivately (zodpovedna osoba)
-=======
 		// vlastni nejaky ticket nebo, ktere jsou explicitne prirazeny uzivateli (zodpovedna osoba)
->>>>>>> bi-sp2
 		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
 			$ticketTable = Ticket::getMetadata()->getTableName();
 			$ds->and('([assignedTo] = %i OR [author] = %i OR EXISTS (SELECT * FROM ['.$ticketTable.'] WHERE [projectId] = [d.projectId] AND [revision] > 0 AND ([author] = %i OR [assignedTo] = %i)))', $uid, $uid, $uid, $uid);
@@ -288,14 +284,13 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 		if(isset($values['comment']) && !empty($values['comment'])) {
 			$project->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
 			$project->comment->text = $values['comment'];
-<<<<<<< HEAD
-=======
+
 			if (isset($values['private']) && !empty($values['private'])) {
         $project->comment->private = $values['private'];
 			} else {
         $project->comment->private = false;
 			}
->>>>>>> bi-sp2
+
 			$changed = true;
 		} else {
 			$project->comment = null;
@@ -440,10 +435,9 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 		$project = $this->getProject();
 
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
-<<<<<<< HEAD
-=======
-    $form->addCheckbox('private', __('Make this comment private'));		
->>>>>>> bi-sp2
+
+    	$form->addCheckbox('private', __('Make this comment private'));		
+
 		$form->addTextArea('description')->setValue($project->description)->setAttribute('class', 'texyla');
 
 

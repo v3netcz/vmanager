@@ -80,11 +80,7 @@ class TicketState extends vBuilder\Object implements ITicketState {
 	 * @return string 
 	 */
 	public function getName() {
-<<<<<<< HEAD
-		return $this->_name != '' ? $this->_name : $this->_id;
-=======
 		return $this->_name != '' ? __($this->_name) : $this->_id;
->>>>>>> bi-sp2
 	}
 	
 	/**

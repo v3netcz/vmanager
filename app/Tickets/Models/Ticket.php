@@ -212,13 +212,9 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 					else
 							$change = _x('Changed ticket state to <strong class="field">%s</strong>', array($t1->state->name));
 
-<<<<<<< HEAD
-				} elseif(strlen($t1->$field) < 40)
-=======
 				} elseif($t1->$field == "") 
 					$change = _x('Unset field <strong class="field">%s</strong>', array($field));
 				elseif(strlen($t1->$field) < 40)
->>>>>>> bi-sp2
 					$change = _x('Changed field <strong class="field">%s</strong> to <strong class="value">%s</strong>', array($field, $t1->$field));
 				else
 					$change = _x('Changed field <strong class="field">%s</strong>', array($field));
@@ -231,21 +227,14 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 		return $log;
 	}
 	
-<<<<<<< HEAD
-  public function isResponsibleUser($user) {
-=======
+
   public function isResponsibleUser(vBuilder\Security\User $user) {
->>>>>>> bi-sp2
       if ($this->data->assignedTo !== null) {
         if ($this->data->assignedTo == $user->id) 
           return true;
       }
       if ($this->data->project !== null) {
-<<<<<<< HEAD
-        return $this->getProject->isResponsibleUsers($user);
-=======
         return $this->project->isResponsibleUser($user);
->>>>>>> bi-sp2
       }    
       return false;
   }
