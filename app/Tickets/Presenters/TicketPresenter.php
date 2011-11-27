@@ -59,6 +59,16 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$table = Ticket::getMetadata()->getTableName();
 
 		$ds = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Ticket')
+				  ->removeClause('select')
+				  
+				  // Deadline s project fallbackem
+				  ->select('IFNULL([deadline], IF([projectId] IS NULL, NULL, (SELECT [deadline] FROM ['.
+				  	Project::getMetadata()->getTableName().'] WHERE [revision] > 0 AND [projectId] = [d.projectId]) )) AS [deadline2]')
+				  
+				  ->select('[ticketId], [projectId], [revision], [author], [commentId], [name], [description], [priority], [assignedTo], [timestamp], [state],  [deadline]')
+				  
+				  ->removeClause('from')
+				  ->from(Ticket::getMetadata()->getTableName())
 				  ->as('d')
 				  ->leftJoin(Priority::getMetadata()->getTableName())->as('p')->on('[priority] = [p.id]')
 				  ->where('[revision] > 0');
@@ -87,7 +97,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		// Konec filteru
 		
 		if($grid->sortColumn === null)
+<<<<<<< HEAD
 			$ds->orderBy('IF([state] IN %in, 1, 0)', $finalStateIds,', IF([deadline] IS NULL, 0, 1) DESC, [deadline], [p.weight] DESC, [assignedTo], [ticketId]');
+=======
+			$ds->orderBy('IF([state] IN %in, 1, 0)', $finalStateIds,', IF([deadline2] IS NULL, 0, 1) DESC, [deadline2], [p.weight] DESC, [assignedTo], [ticketId]');
+>>>>>>> bi-sp2
 		
 		$grid->setModel(new Gridito\DibiFluentModel($ds, 'vManager\\Modules\\Tickets\\Ticket'));
 		$grid->setItemsPerPage(20);
@@ -155,6 +169,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		// Deadline
 		$grid->addColumn("deadline", __('Deadline'), array(
 			 "renderer" => function ($ticket) {
+<<<<<<< HEAD
 			   if ($ticket->deadline == null) {
             if ($ticket->getProject() == null) {
               echo "-";
@@ -166,6 +181,23 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
             return;
 			   }
 				 echo Nette\Utils\Html::el("abbr")->title($ticket->deadline->format("d. m. Y"))->setText(vManager\Application\Helpers::timeAgoInWords($ticket->deadline->format("d. m. Y")));
+=======
+			   if($ticket->deadline == null) {
+       			if ($ticket->getProject() == null || $ticket->project->deadline == null) {
+              		echo "-";
+              		return;
+            	} 
+            
+            	echo Nette\Utils\Html::el("abbr")
+              		->title($ticket->getProject()->deadline->format("d. m. Y"))
+                	->setText(vManager\Application\Helpers::timeAgoInWords($ticket->getProject()->deadline));
+           		return;
+			   }
+			   
+				echo Nette\Utils\Html::el("abbr")
+				 	->title($ticket->deadline->format("d. m. Y"))
+				 	->setText(vManager\Application\Helpers::timeAgoInWords($ticket->deadline));
+>>>>>>> bi-sp2
 			 },
 			 "sortable" => true
 		))->setCellClass("date deadline");
@@ -317,10 +349,17 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if(isset($values['comment']) && !empty($values['comment'])) {
 			$ticket->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
 			$ticket->comment->text = $values['comment'];
+<<<<<<< HEAD
 			if (isset($values['public']) && !empty($values['public'])) {
         $ticket->comment->public = $values['public'];
 			} else {
         $ticket->comment->public = false;
+=======
+			if (isset($values['private']) && !empty($values['private'])) {
+        $ticket->comment->private = $values['private'];
+			} else {
+        $ticket->comment->private = false;
+>>>>>>> bi-sp2
 			}
 			$changed = true;
 		} else {
@@ -365,7 +404,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		}
 
 		foreach(array('name', 'description', 'deadline') as $curr) {
-			if(isset($values[$curr]) && $ticket->{$curr} != $values[$curr]) {
+			if($ticket->{$curr} != $values[$curr]) {
 				$ticket->{$curr} = $values[$curr];
 				$changed = true;
 			}
@@ -496,7 +535,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$ticket = $this->getTicket();
 
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
+<<<<<<< HEAD
 		$form->addCheckbox('public', __('Make this comment private'));
+=======
+		$form->addCheckbox('private', __('Make this comment private'));
+>>>>>>> bi-sp2
 		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
 
 		
@@ -510,7 +553,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 						: _x('change to %s', array($curr->name));
 			
 			$form->addSelect('newState', __('State:'), $states)
+<<<<<<< HEAD
 							->setPrompt('do not change');
+=======
+							->setPrompt(__('do not change'));
+>>>>>>> bi-sp2
 			
 		} elseif(count($possibleStates) > 0) {
 			list($nextState) = $possibleStates;

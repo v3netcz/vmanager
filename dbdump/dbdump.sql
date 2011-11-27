@@ -102,10 +102,9 @@ DROP TABLE IF EXISTS `pm_comments`;
 CREATE TABLE `pm_comments` (
   `commentId` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `comment` text NOT NULL,
-  `public` tinyint(1) NOT NULL DEFAULT '0',
+  `private` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
 
 # Dump of table pm_projects
@@ -143,7 +142,7 @@ CREATE TABLE `pm_tickets` (
   `deadline` date DEFAULT NULL,
   `assignedTo` smallint(6) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `state` smallint(6) NOT NULL DEFAULT '1',
+  `state` varchar(64) NOT NULL DEFAULT '',
   PRIMARY KEY (`ticketId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

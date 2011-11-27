@@ -27,7 +27,11 @@
 			{if $data->deadline}
         <?php echo _x('Deadline: <span class="value">%s</span>', array($data->deadline->format('d. m. Y'))); ?><br />
 			{else} 
+<<<<<<< HEAD
         {if $data->getProject()}
+=======
+        {if $data->getProject() && $data->getProject()->deadline}
+>>>>>>> bi-sp2
           <?php echo _x('Deadline: <span class="value">%s</span>', array($data->getProject()->deadline->format('d. m. Y'))); ?><br />
         {/if}
       {/if} 
@@ -65,9 +69,15 @@
 			<div id="tabs-1" class="block ui-tabs-panel ui-widget-content ui-corner-bottom">
 				<div class="content">
 					{$form['comment']->control}
+<<<<<<< HEAD
           <div n:if="isset($form['public'])" class="publiCheckboxBlock publicCheckboxBlock">
             {$form['public']->control}	
             {$form['public']->label}				
+=======
+          <div n:if="isset($form['private'])" class="checkboxBlock privateCheckboxBlock">
+            {$form['private']->control}	
+            {$form['private']->label}				
+>>>>>>> bi-sp2
           </div>					
 				</div>
 			</div>
