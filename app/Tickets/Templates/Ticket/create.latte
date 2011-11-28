@@ -27,10 +27,19 @@
 	
 	{control createForm begin}
 	{var form => $control['createForm']}
+	{if isset($form['attachments']) && $form['attachments']->hasErrors()}
+		<script type="text/javascript">
+			$(document).ready(function () {
+				var tabs = $('#ticketCreateFormTabs');
+				tabs.tabs('select', 2);
+			});
+		</script>
+	{/if}
 	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all" id="ticketCreateFormTabs">
 		<ul class="tab_header grad_colour clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 			<li class="ui-state-default ui-corner-top"><a href="#tabs-1"><?php echo __('Ticket summary'); ?></a></li>
 			<li class="ui-state-default ui-corner-top"><a href="#tabs-2"><?php echo __('Ticket description'); ?></a></li>
+			<li class="ui-state-default ui-corner-top" n:if="isset($form['attachments'])"><a href="#tabs-3"><?php echo __('Attach files'); ?></a></li>
 		</ul>
 
 		<!-- <a href="#" class="grabber">&nbsp;</a>
@@ -46,7 +55,11 @@
 					{$form['description']->control}
 				</div>
 			</div>
-			
+			<div id="tabs-3" class="block ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" n:if="isset($form['attachments'])">
+				<div class="content" style="min-height: 120px;">
+					{include ticketAttachmentForm.inc.latte, form => $form}
+				</div>
+			</div>
 		</div>
 		
 		<div class="grad_colour clearfix tab_footer">

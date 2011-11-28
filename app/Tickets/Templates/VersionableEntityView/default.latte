@@ -34,6 +34,12 @@
 						foreach($log as $change) echo $change;
 					?>
 					</div>
+							
+					<div class="attachments" n:if="$curr->comment && $curr->comment->attachments->count()">
+						<div class="attachment attachment-{? echo Nette\Utils\Strings::webalize($curr2->type)}" n:foreach="$curr->comment->attachments as $curr2">
+							<a href="{$curr2->getUrl()}">{$curr2->name}</a>
+						</div>
+					</div>
 				
 					<div class="comment">
 						{if $curr->comment}

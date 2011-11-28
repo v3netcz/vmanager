@@ -1,0 +1,7 @@
+<div n:foreach="$form['attachments']->getErrors() as $error" class="alert alert_orange">
+	<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+	{$error}
+</div>
+
+{$form['attachments']->label}
+{$form['attachments']->control}

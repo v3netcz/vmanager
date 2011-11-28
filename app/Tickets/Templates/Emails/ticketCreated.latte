@@ -11,6 +11,14 @@
 
 {block content}
 
+<table n:if="$ticket->comment && $ticket->comment->attachments->count()" style="margin: 0px 0px 20px 0px; padding: 0px 50px 8px 0px;{if !empty($ticket->description)} border-bottom: 1px solid #f0f0f0;{/if}">
+	<tr n:foreach="$ticket->comment->attachments as $curr">
+		<td width="110" style="color: #1A7E1E;">{if $iterator->isFirst()}<?php echo __('Attached files:'); ?>{/if}</td>
+		<td width="22"><img src="{$basePath}/images/icons/mimetypes/small/file.png" width="16" height="16" alt="File" /></td>
+		<td><a href="{$curr->getUrl()}" style="color: #06B;">{$curr->name}</a></td>
+	</tr>
+</table>
+
 <div n:if="!empty($ticket->description)">
 	{!$ticket->description|texy}
 </div>

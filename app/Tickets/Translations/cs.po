@@ -1068,3 +1068,8 @@ msgid "Done"
 msgstr "Hotovo"
 msgid "Canceled"
 msgstr "Zrušeno"
+
+msgid "Select any file to attach"
+msgstr "Vyberte soubor/y k přiložení"
+msgid "Attached files:"
+msgstr "Přiložené soubory:"

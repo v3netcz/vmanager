@@ -67,6 +67,42 @@ body .main_container .history .privateCommentRevisionBlock .grad_colour {
 	color: #000000;
 }
 
+.history .revisionBlock .attachments {
+	padding: 0px 0 10px 0;	
+}
+
+.ticketAttachments .attachment,
+.history .revisionBlock .attachments .attachment {
+	background: url('/images/icons/mimetypes/small/file.png') no-repeat left center;
+	line-height: 20px;
+	padding-left: 22px;
+}
+
+.attachment-jpg,
+.attachment-png,
+.attachment-gif {
+	background-image: url('/images/icons/mimetypes/small/image.png') !important;
+}
+
+.attachment-xls,
+.attachment-xlsx {
+	background-image: url('/images/icons/mimetypes/small/spreadsheet.png') !important;
+}
+
+.attachment-doc,
+.attachment-docx {
+	background-image: url('/images/icons/mimetypes/small/word.png') !important;
+}
+
+.attachment-ppt,
+.attachment-pptx {
+	background-image: url('/images/icons/mimetypes/small/presentation.png') !important;
+}
+
+
+.attachment-pdf {
+	background-image: url('/images/icons/mimetypes/small/pdf.png') !important;
+
 #ticketCreateFormTabs INPUT.text,
 #ticketUpdateFormTabs INPUT.text,
 #projectCreateFormTabs INPUT.text,

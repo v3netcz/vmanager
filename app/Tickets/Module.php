@@ -25,7 +25,8 @@ namespace vManager\Modules;
 
 use vManager, vBuilder, Nette,
 	 vManager\Modules\System,
-	 vManager\Modules\Tickets\Ticket;
+	 vManager\Modules\Tickets\Ticket,
+	 vManager\Modules\Tickets\Attachment;
 
 /**
  * Ticketing system module
@@ -47,6 +48,8 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 		// TODO: udelat to konfigurovatelny
 		Ticket::$onTicketCreated[] = callback(__CLASS__ . '\\TicketChangeMailer::ticketCreated');
 		Ticket::$onTicketUpdated[] = callback(__CLASS__ . '\\TicketChangeMailer::ticketUpdated');
+		
+		Attachment::registerAttachmentFileHandler();
 	}
 	
 	/**
