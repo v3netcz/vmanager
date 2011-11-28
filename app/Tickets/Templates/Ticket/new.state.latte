@@ -14,7 +14,20 @@
 </style>
 {/block}
 
-{block #content}
+{block content}
+  <script language="JavaScript" src="{$basePath}/js/countdown/countdown.js"></script>
+  <script type="text/javascript">
+  window.onload = function()
+  {  
+    elapseMe({l}
+      year: {$data->deadline->format('Y')}, 
+      month: {$data->deadline->format('m')},
+      day: {$data->deadline->format('d')},
+      targetId:"countdown"{r});  
+  }
+  </script>
+  
+
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
 	<div class="flat_area grid_16">
@@ -25,7 +38,7 @@
 			<?php echo _x('Created by: <span class="value">%s</span>', array($firstRevision->author !== null ? ($firstRevision->author->exists() ? $firstRevision->author->username : _x('user n. %d', array($firstRevision->author->id))) : __('anonymous'))); ?><br />
 			<?php echo _x('Assigned to: <span class="value">%s</span>', array($data->assignedTo !== null ? ($data->assignedTo->exists() ? $data->assignedTo->username : _x('user n. %d', array($data->assignedTo->id))) : __('nobody'))); ?><br />
 			{if $data->deadline}
-        <?php echo _x('Deadline: <span class="value">%s</span>', array($data->deadline->format('d. m. Y'))); ?><br />
+        <?php echo _x('Deadline: <span class="value" id="countdown"></span>', array()); ?><br />
 			{else} 
         {if $data->getProject() && $data->getProject()->deadline}
           <?php echo _x('Deadline: <span class="value">%s</span>', array($data->getProject()->deadline->format('d. m. Y'))); ?><br />
@@ -65,7 +78,7 @@
 			<div id="tabs-1" class="block ui-tabs-panel ui-widget-content ui-corner-bottom">
 				<div class="content">
 					{$form['comment']->control}
-          <div n:if="isset($form['private'])" class="checkboxblock privateCheckboxBlock">
+          <div n:if="isset($form['private'])" class="checkboxBlock privateCheckboxBlock">
             {$form['private']->control}	
             {$form['private']->label}				
           </div>					
@@ -89,12 +102,12 @@
 			
 			<div class="grad_colour clearfix tab_footer">
 				
-				<div n:if="isset($form['newState']) && $form['newState'] instanceof Nette\Forms\Controls\Checkbox" class="changeStateCheckboxblock reopenCheckboxBlock">
+				<div n:if="isset($form['newState']) && $form['newState'] instanceof Nette\Forms\Controls\Checkbox" class="changeStateCheckboxBlock reopenCheckboxBlock">
 					{$form['newState']->control}
 					{$form['newState']->label}
 				</div>
 				
-				<div n:if="isset($form['newState']) && $form['newState'] instanceof Nette\Forms\Controls\SelectBox" class="changeStateCheckboxblock reopenCheckboxBlock">
+				<div n:if="isset($form['newState']) && $form['newState'] instanceof Nette\Forms\Controls\SelectBox" class="changeStateCheckboxBlock reopenCheckboxBlock">
 					{$form['newState']->label}
 					{$form['newState']->control}
 				</div>
@@ -110,5 +123,4 @@
 	{control updateForm end}
     
    {$historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::DESC ? $historyWidget->render()}
-
 {/block}
