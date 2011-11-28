@@ -293,11 +293,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 								 return ($users !== false);
 							 }, __('Responsible person does not exist.'));
 		
-		
-		if (Nette\Environment::getService('vBuilder\Config\IConfig')->get('forms.multipleFileUpload')) {
+		if(isset($this->module->config['attachments']['enabled']) && $this->module->config['attachments']['enabled']) {
 			$form->addMultipleFileUpload('attachments', __('Select any file to attach'))
 				->addRule(MultipleFileUploadControl::VALID, '', MultipleFileUploadControl::ALL);
 		}
+
 		$form->addText('project', __('Project:'))
 				  ->setAttribute('autocomplete-src', $this->link('suggestProject'))
 				  ->setAttribute('title', __('Is this task part of greater project?'))
@@ -347,10 +347,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		}
 
 		if(isset($values['attachments']) && count($values['attachments'])) {
-			if(!$ticket->comment) $ticket->comment = new Comment();
+			if(!$ticket->comment) $ticket->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
 			
 			foreach($values['attachments'] as $uploadedFile) {
-				$attachment = new Attachment;
+				$attachment = $this->context->repository->create('vManager\Modules\Tickets\Attachment');
 				
 				$attachment->name = $uploadedFile->getFilename();
 				$attachment->type = $uploadedFile->getMimeType();
@@ -540,10 +540,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->setRenderer(new Nette\Forms\Rendering\DefaultFormRenderer());
 
 		$ticket = $this->getTicket();
+		if(!$ticket) throw new Nette\InvalidStateException('No such ticket');
 
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
 		$form->addCheckbox('private', __('Make this comment private'));
-		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
+		$form->addTextArea('description')->setAttribute('class', 'texyla');
 
 		
 		$possibleStates = $ticket->possibleStates;
@@ -574,6 +575,8 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if(!$form->isSubmitted()) {
 			$form['name']->setValue($ticket->name);
 			$form['deadline']->setValue($ticket->deadline);
+			$form['description']->setValue($ticket->description);
+			
 			if($ticket->assignedTo !== null && $ticket->assignedTo->exists())
 				$form['assignTo']->setValue($ticket->assignedTo->username);
 

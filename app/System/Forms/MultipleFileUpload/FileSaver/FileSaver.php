@@ -76,7 +76,7 @@ class FileSaver extends Nette\Object
 		$withExtension = self::saveWithExtension();
 		$webalized = Strings::webalize(self::getFilenamePrefix().$this->getFile()->getName(),'.');
 		$parts = \pathinfo($webalized);
-		$extension = $parts['extension'];
+		$extension = isset($parts['extension']) ? $parts['extension'] : null;
 		if (!$withExtension) {
 			$webalized = $parts['filename'];
 			$extension = null;

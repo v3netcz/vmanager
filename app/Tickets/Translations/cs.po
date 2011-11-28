@@ -5,417 +5,165 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: /Volumes/www/sp1/tools/./../app/Tickets/Module.php:63
-#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:63
-#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:64
-#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:74
-#: /Volumes/www/vmanager/tools/../app/Tickets/Module.php:80
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Module.php:80
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:89
+#: /var/www/vmanager/tools/../app/Tickets/Module.php:92
 msgid "Tasks"
 msgstr "Úkoly"
 
-#: /Volumes/www/sp1/tools/./../app/Tickets/Module.php:68
-#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:68
-#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:69
-#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:79
-#: /Volumes/www/vmanager/tools/../app/Tickets/Module.php:85
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Module.php:85
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:94
+#: /var/www/vmanager/tools/../app/Tickets/Module.php:97
 msgid "My tickets"
 msgstr "Moje úkoly"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:59
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:115
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:122
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:122
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:109
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:109
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:125
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:126
 msgid "ID"
 msgstr "ID"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:67
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:124
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:131
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:131
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:118
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:118
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:134
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:135
 msgid "Ticket name"
 msgstr "Úkol"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:75
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:144
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:151
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:151
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:138
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:136
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:142
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:133
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:158
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:159
 msgid "Last change"
 msgstr "Poslední změna"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:102
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:196
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:201
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:111
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:210
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:186
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:288
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:206
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:319
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:206
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:318
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:439
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:492
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:397
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:438
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:445
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:498
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:399
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:440
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:479
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:552
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:404
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:446
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:510
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:587
 msgid "Save"
 msgstr "Uložit"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:115
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:124
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:199
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:219
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:219
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:250
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:254
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:278
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:279
 msgid "Task title:"
 msgstr "Název úkolu:"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:115
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:124
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:199
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:219
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:219
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:250
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:254
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:278
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:279
 msgid "Short task description. Please be concrete."
 msgstr "Krátký popis úkolu. Snažte se býti co nejvíce konkrétní."
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:116
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:125
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:200
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:220
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:220
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:251
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:262
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:255
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:261
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:279
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:280
 msgid "Task title has to be filled."
 msgstr "Název úkolu musí být vyplněn."
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:119
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:128
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:203
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:223
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:223
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:254
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:265
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:258
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:264
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:282
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:283
 msgid "Deadline:"
 msgstr "Termín dokončení úkolu:"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:119
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:128
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:203
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:223
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:223
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:254
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:258
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:282
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:283
 msgid "When has to be task done?"
 msgstr "Do kdy musí být úkol hotov?"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:121
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:130
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:205
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:225
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:225
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:256
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:262
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:286
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:287
 msgid "Assign to:"
 msgstr "Řešitel:"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:123
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:132
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:207
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:227
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:227
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:258
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:264
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:288
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:289
 msgid "Who will resolve this issue?"
 msgstr "Komu má být úkol přiřazen?"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:128
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:137
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:212
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:232
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:232
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:263
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:276
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:269
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:275
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:293
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:294
 msgid "Responsible person does not exist."
 msgstr "Zadaný řešitel neexistuje."
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:174
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:183
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:260
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:288
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:287
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:454
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:460
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:494
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:525
 msgid "New ticket has been created."
 msgstr "Nový úkol byl úspěšně vytvořen."
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:208
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:213
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:222
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:300
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:331
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:330
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:504
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:450
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:510
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:452
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:564
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:458
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:599
 msgid "Change has been saved."
 msgstr "Změny byly uloženy."
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:210
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:215
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:224
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:302
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:333
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:332
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:506
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:452
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:512
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:454
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:566
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:460
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:601
 msgid "Nothing to change."
 msgstr "Žádné změny nebyly provedeny."
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:73
-#: /Volumes/www/sp1/tools/../app/Tickets/Module.php:83
-#: /Volumes/www/vmanager/tools/../app/Tickets/Module.php:89
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:30
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:31
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Module.php:89
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/default.latte:43
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/default.latte:44
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:52
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:53
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:56
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:57
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:58
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:59
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:98
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:64
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:65
 msgid "Create new ticket"
 msgstr "Vytvořit nový úkol"
 
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:98
+#: /var/www/vmanager/tools/../app/Tickets/Module.php:101
 msgid "Create a new ticket"
 msgstr "Vytvořit nový úkol"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/default.latte:5
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:29
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/default.latte:42
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:51
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:55
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:57
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:63
 msgid "Tickets"
 msgstr "Úkoly"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:16
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:27
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:37
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:46
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:47
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:47
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:48
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:50
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:50
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:47
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:56
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:70
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:48
 msgid "Add comment"
 msgstr "Přidat komentář"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:17
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:28
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:38
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:47
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:48
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:48
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:49
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:51
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:51
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:48
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:57
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:71
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:42
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:49
 msgid "Attach files"
 msgstr "Přiložit soubory"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:18
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:29
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:39
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:48
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:49
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:49
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:50
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:52
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:52
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:58
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:72
 msgid "Change ticket description"
 msgstr "Změnit popis úkolu"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:19
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:30
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:40
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:49
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:50
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:50
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:51
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:53
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:53
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:59
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:73
 msgid "Change ticket details"
 msgstr "Změnit atributy úkolu"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:29
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:29
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/create.latte:29
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:25
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:25
 msgid "Create new task"
 msgstr "Vytvořit nový úkol"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:36
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:36
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/create.latte:36
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:32
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:32
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:40
 msgid "Ticket summary"
 msgstr "Informace o úkolu"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:37
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:37
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/create.latte:37
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:33
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:33
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:41
 msgid "Ticket description"
 msgstr "Popis úkolu"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:59
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:59
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/create.latte:59
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:55
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:55
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:68
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/create.latte:55
 msgid "Back"
 msgstr "Zpět"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/create.latte:64
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:64
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/create.latte:64
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:60
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:60
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:73
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/create.latte:60
 msgid "Next"
 msgstr "Další"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:9
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:137
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:9
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:144
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/VersionableEntityView/default.latte:9
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:144
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:24
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:131
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:129
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:135
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
-#: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:9
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:25
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:126
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:151
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:152
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:30
 #: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:11
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:25
 msgid "nobody"
 msgstr "nikdo"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:28
 msgid "Reassigned to <span class=\"value\">nobody</span>"
 msgstr "Řešitel byl odebrán."
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:49
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:51
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:26
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/VersionableEntityView/default.latte:26
-#: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:26
-#: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:45
+#: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:51
 msgid "No comment"
 msgstr "Žádný doplňující komentář nebyl zadán."
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:9
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:30
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:137
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:119
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:9
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:144
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:120
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/VersionableEntityView/default.latte:9
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:144
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:120
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:138
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:131
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:129
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:135
-#: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:144
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:138
-#: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:9
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:126
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:151
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:152
 #: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:185
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:183
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:184
 #: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:11
 #, php-format
 msgid "User n. %d"
 msgstr "Uživatel č. %d"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:30
 #, php-format
 msgid "Reassigned to <span class=\"value\">%s</span>"
 msgstr "Přeřadil řešení úkolu na uživatele <span class=\"value\">%s</span>"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:35
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:37
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:39
 #, php-format
 msgid ""
 "Changed field <span class=\"field\">%s</span> to <span class=\"value\">%s</"
@@ -424,263 +172,114 @@ msgstr ""
 "Změnil pole <span class=\"field\">%s</span> na <span class=\"value\">%s</"
 "span>"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:39
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:41
 #, php-format
 msgid "Changed field <span class=\"field\">%s</span>"
 msgstr "Změnil pole <span class=\"field\">%s</span>"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:192
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:201
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:278
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:306
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:305
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:476
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:482
 msgid "Close ticket with this comment"
 msgstr "Označit úkol jako hotový"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:194
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:203
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:280
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:308
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:307
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:478
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:484
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:533
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:565
 msgid "Reopen this ticket"
 msgstr "Znovuotevřít tento úkol k řešení"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:37
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:125
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:133
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:133
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:160
-#: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:151
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:160
 #: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:192
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:208
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:209
 msgid "Reopened this ticket"
 msgstr "Znovuotevřel tento úkol"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:37
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:125
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:133
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:133
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:160
-#: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:151
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:160
 #: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:192
 msgid "Resolve this ticket as done"
 msgstr "Označil tento úkol jako splněný"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:77
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:165
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:185
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:185
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:172
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:184
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:164
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:176
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:188
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:161
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:201
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:216
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:202
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:217
 msgid "State"
 msgstr "Stav"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:79
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:167
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:187
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:26
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:187
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:27
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:174
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:29
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:178
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:191
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:29
 msgid "Closed"
 msgstr "Vyřešený"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Presenters/TicketPresenter.php:79
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:168
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:188
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:26
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:188
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:27
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:175
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:186
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:29
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:179
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:190
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:29
 msgid "Opened"
 msgstr "Otevřený"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Events/TicketChangeMailer.php:45
-#: /Volumes/www/vmanager/tools/../app/Tickets/Events/TicketChangeMailer.php:45
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Events/TicketChangeMailer.php:45
 #: /var/www/vmanager/tools/../app/Tickets/Events/TicketChangeMailer.php:48
 #, php-format
 msgid "[NEW TASK] %s"
 msgstr "[NOVY UKOL] %s"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Events/TicketChangeMailer.php:60
-#: /Volumes/www/vmanager/tools/../app/Tickets/Events/TicketChangeMailer.php:60
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Events/TicketChangeMailer.php:60
 #: /var/www/vmanager/tools/../app/Tickets/Events/TicketChangeMailer.php:63
 #, php-format
 msgid "[UPDATE] %s"
 msgstr "[ZMENA] %s"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:24
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:29
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:30
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:24
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:25
 #, php-format
 msgid "user n. %d"
 msgstr "uživatel č. %d"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:29
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:24
 msgid "anonymous"
 msgstr "anonym"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:29
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:24
 #, php-format
 msgid "Created by: <span class=\"value\">%s</span>"
 msgstr "Úkol vytvořen uživatelem: <span class=\"value\">%s</span>"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:23
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:24
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:30
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:25
 #, php-format
 msgid "Assigned to: <span class=\"value\">%s</span>"
 msgstr "Úkol přiřazen uživateli: <span class=\"value\">%s</span>"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:24
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:24
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:24
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:27
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:27
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:32
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:35
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:26
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:28
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:31
 #, php-format
 msgid "Deadline: <span class=\"value\">%s</span>"
 msgstr "Deadline: <span class=\"value\">%s</span>"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:26
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:27
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:29
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:29
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:35
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:39
 #, php-format
 msgid "State: <span class=\"value\">%s</span>"
 msgstr "Stav: <span class=\"value\">%s</span>"
 
-#: /Volumes/www/sp1/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:14
 #, php-format
 msgid "User <span>%s</span> changed ticket <span>%s</span>:"
 msgstr "Uživatel <span>%s</span> změnil ticket <span>%s</span>:"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:134
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:141
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:141
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:128
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:191
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:132
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:195
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:148
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:219
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:149
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:220
 msgid "Assigned to"
 msgstr "Přiřazen"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:152
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:159
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:159
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:146
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:149
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:150
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:146
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:166
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:167
 msgid "Deadline"
 msgstr "Deadline"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:116
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:117
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:117
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:135
-#: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:141
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:135
 #: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:182
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:180
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:181
 msgid "Reassigned to <strong class=\"value\">nobody</strong>"
 msgstr "Odebral řešitele úkolu"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:118
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:119
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:119
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:137
-#: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:143
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:137
 #: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:184
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:182
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:183
 #, php-format
 msgid "Reassigned to <strong class=\"value\">%s</strong>"
 msgstr "Změnil řešitele úkolu na <strong class=\"value\">%s</strong>"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:123
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:127
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:131
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:135
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:131
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:135
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:158
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:162
-#: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:149
-#: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:153
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:158
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:162
 #: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:190
 #: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:194
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:203
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:217
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:204
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:218
 #, php-format
 msgid ""
 "Changed field <strong class=\"field\">%s</strong> to <strong class=\"value\">"
@@ -689,45 +288,28 @@ msgstr ""
 "Změnil položku <strong class=\"field\">%s</strong> na <strong class=\"value"
 "\">%s</strong>"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:129
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:137
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:137
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:164
-#: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:155
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:164
 #: /var/www/vmanager/tools/../app/Tickets/Models/Project.php:196
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:219
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:220
 #, php-format
 msgid "Changed field <strong class=\"field\">%s</strong>"
 msgstr "Změnil položku <strong class=\"field\">%s</strong>"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketCreated.latte:9
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Emails/ticketCreated.latte:9
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketCreated.latte:9
 #, php-format
 msgid "New task: <span style=\"color: #ff8000;\">%s</span>"
 msgstr "Nový úkol: <span style=\"color: #ff8000;\">%s</span>"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketCreated.latte:21
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:34
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Emails/ticketCreated.latte:21
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Emails/ticketUpdated.latte:34
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketCreated.latte:21
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:34
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:38
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketCreated.latte:29
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:46
 msgid "Show ticket in web browser"
 msgstr "Zobrazit ticket v prohlížeči"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:10
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Emails/ticketUpdated.latte:10
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:10
 #, php-format
 msgid ""
 "Notification on ticket change: <span style=\"color: #ff8000;\">%s</span>"
 msgstr "Upozornění na změnu úkolu: <span style=\"color: #ff8000;\">%s</span>"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:18
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Emails/ticketUpdated.latte:18
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:18
 #, php-format
 msgid "<span style=\"font-weight: bold;\">%s</span> changed ticket:"
@@ -745,206 +327,141 @@ msgstr "Vysoká"
 msgid "Critical"
 msgstr "Kritická"
 
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:172
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:172
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:159
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:163
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:188
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:189
 msgid "Priority"
 msgstr "Priorita"
 
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Presenters/TicketPresenter.php:245
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:244
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:279
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:285
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:314
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:319
 msgid "Priority:"
 msgstr "Priorita:"
 
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:126
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:126
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:153
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:153
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:198
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:199
 msgid "unknown priority"
 msgstr "neznámá priorita"
 
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Models/Ticket.php:125
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:125
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:152
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:152
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:197
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:198
 #, php-format
 msgid "Changed priority to <strong class=\"value\">%s</strong>"
 msgstr "Změnil prioritu úkolu na <strong class=\"value\">%s</strong>"
 
-#: /Volumes/www/vmanager/tools/./../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:25
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:26
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:28
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:28
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:34
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:38
 #, php-format
 msgid "Priority: <span class=\"value\">%s</span>"
 msgstr "Priorita: <span class=\"value\">%s</span>"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:22
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:24
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:24
 #, php-format
 msgid "Project: <span class=\"value\">%s</span>"
 msgstr "Projekt: <span class=\"value\">%s</span>"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:144
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:144
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:189
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:190
 #, php-format
 msgid "Removed task from project <strong class=\"value\">%s</strong>"
 msgstr "Odebral úkol z projektu <strong class=\"value\">%s</strong>"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:147
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:147
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:192
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:193
 #, php-format
 msgid "Project n. %d"
 msgstr "Projekt č. %d"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Models/Ticket.php:146
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:146
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:191
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:192
 #, php-format
 msgid "Moved task under project <strong class=\"value\">%s</strong>"
 msgstr "Přesunul úkol pod projekt <strong class=\"value\">%s</strong>"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:185
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:196
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:207
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:189
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:200
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:204
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:212
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:224
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:213
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:225
 msgid "Any"
 msgstr "Jakýkoliv"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:191
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:202
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:195
 msgid "Anyone"
 msgstr "Komukoliv"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:196
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:207
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:200
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:204
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:224
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:225
 msgid "Project"
 msgstr "Projekt"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:199
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:210
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:203
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:207
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:227
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:228
 msgid "Filter"
 msgstr "Filtrovat"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:266
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:272
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:296
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:24
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:301
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:28
 msgid "Project:"
 msgstr "Projekt:"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:268
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:274
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:298
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:303
 msgid "Is this task part of greater project?"
 msgstr "Je tento úkol součástí nějakého většího projektu?"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:1
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/default.latte:1
 msgid "Tasks - vManager"
 msgstr "Úkoly - vManager"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:1
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/create.latte:1
 msgid "New task - vManager"
 msgstr "Nový úkol - vManager"
 
-#: /Volumes/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:4
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:4
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:5
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:4
 #, php-format
 msgid "#%d %s - vManager"
 msgstr "#%d %s - vManager"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:115
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:112
 msgid "Project name"
 msgstr "Název projektu"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:126
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:202
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:123
 msgid "Supervised by"
 msgstr "Zodpovědná osoba"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:175
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:172
 #, php-format
 msgid "%d / %d"
 msgstr "%d / %d"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:184
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:181
 msgid "Show associated tasks"
 msgstr "Zobrazit úkoly"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:186
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:183
 msgid "Record not found"
 msgstr "Záznam nenalezen"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:261
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:260
 msgid "Project title:"
 msgstr "Název projektu"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:261
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:260
 msgid "Short project description. Please be concrete."
 msgstr "Krátký popis projektu. Snažte se býti co nejvíce konkrétní."
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:265
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:264
 msgid "When has to be project done?"
 msgstr "Do kdy má být projekt hotov?"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:269
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:268
 msgid "Supervisor:"
 msgstr "Zodpovědná osoba:"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:271
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:270
 msgid "Who will supervise over this project?"
 msgstr "Kdo bude dohlížet na vývoj projektu?"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:410
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:412
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:417
 msgid "New project has been created."
 msgstr "Nový projekt byl založen."
 
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:107
+#: /var/www/vmanager/tools/../app/Tickets/Module.php:109
+#: /var/www/vmanager/tools/../app/Tickets/Module.php:125
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/default.latte:55
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:106
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:122
 msgid "Projects"
 msgstr "Projekty"
 
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:112
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:111
+#: /var/www/vmanager/tools/../app/Tickets/Module.php:114
 msgid "Show projects"
 msgstr "Zobrazit projekty"
 
@@ -952,12 +469,10 @@ msgstr "Zobrazit projekty"
 msgid "Projects - vManager"
 msgstr "Projekty - vManager"
 
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:49
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:50
 msgid "Change project description"
 msgstr "Změnit popis projektu"
 
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:50
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/detail.latte:51
 msgid "Change project details"
 msgstr "Změnit atributy projektu"
@@ -966,9 +481,8 @@ msgstr "Změnit atributy projektu"
 msgid "New project - vManager"
 msgstr "Nový projekt - vManager"
 
+#: /var/www/vmanager/tools/../app/Tickets/Module.php:118
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/create.latte:25
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:116
-#: /var/www/vmanager/tools/../app/Tickets/Module.php:115
 msgid "Create a new project"
 msgstr "Založit nový projekt"
 
@@ -980,67 +494,63 @@ msgstr "Informace o projektu"
 msgid "Project description"
 msgstr "Popis projektu"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:202
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:199
 msgid "Supervisor"
 msgstr "Zodpovědná osoba"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:195
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:219
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:220
 msgid "To anybody"
 msgstr "Komukoliv"
 
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Project/default.latte:56
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Project/default.latte:57
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/default.latte:58
 #: /var/www/vmanager/tools/../app/Tickets/Templates/Project/default.latte:59
 msgid "Create new project"
 msgstr "Vytvořit nový projekt"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:202
 #: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:199
 msgid "Anybody"
 msgstr "Kdokoliv"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:303
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:308
 msgid "This project does not exist."
 msgstr "Zadaný projekt neexistuje"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:513
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:436
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:545
 #: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:18
 msgid "Make this comment private"
 msgstr "Označit komentář jako soukromý"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:523
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:555
 #, php-format
 msgid "resolve as %s"
 msgstr "vyřešit úkol jako %s"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:524
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:556
 #, php-format
 msgid "change to %s"
 msgstr "změnit na %s"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:526
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:558
 msgid "State:"
 msgstr "Stav:"
 
-#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:535
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:567
 #, php-format
 msgid "Change state to '%s'"
 msgstr "Změnit stav úkolu na '%s'"
 
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:210
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:211
 #, php-format
 msgid "Resolved this ticket as <strong class=\"field\">%s</strong>"
 msgstr "Vyřešil/a úkol jako <strong class=\"field\">%s</strong>"
 
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:212
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:213
 #, php-format
 msgid "Changed ticket state to <strong class=\"field\">%s</strong>"
 msgstr "Změnil/a stav úkolu na <strong class=\"field\">%s</strong>"
 
-#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:215
+#: /var/www/vmanager/tools/../app/Tickets/Models/Ticket.php:216
 #, php-format
 msgid "Unset field <strong class=\"field\">%s</strong>"
 msgstr "Odebral <strong class=\"field\">%s</strong>"
@@ -1049,27 +559,37 @@ msgstr "Odebral <strong class=\"field\">%s</strong>"
 msgid "Make this comment public"
 msgstr "Změnit komentář na veřejný"
 
-#: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:43
+#: /var/www/vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:49
 msgid "You have no permisson to view this comment"
 msgstr "Nemáte oprávnění k zobrazení tohoto komentáře"
 
-#: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:29
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:37
 msgid "Comment is private"
 msgstr "Komentář je soukromý"
 
 # Stavy
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:559
 msgid "do not change"
 msgstr "neměnit"
+
 msgid "New"
 msgstr "Nový"
+
 msgid "Accepted"
 msgstr "Potvrzeno"
+
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:170
 msgid "Done"
 msgstr "Hotovo"
+
 msgid "Canceled"
 msgstr "Zrušeno"
 
+#: /var/www/vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:297
 msgid "Select any file to attach"
 msgstr "Vyberte soubor/y k přiložení"
+
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketCreated.latte:16
+#: /var/www/vmanager/tools/../app/Tickets/Templates/Emails/ticketUpdated.latte:29
 msgid "Attached files:"
 msgstr "Přiložené soubory:"

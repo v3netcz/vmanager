@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Tickets;
 
-use vManager, Nette, vBuilder\Orm\Repository, vBuilder\Orm\Entity;
+use vManager, Nette, vBuilder\Orm\Entity;
 
 /**
  * Visual component for rendering comment list
@@ -87,7 +87,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 			if($curr->comment !== null)
 				$commentIds[] = $curr->comment->id;
 		if(count($commentIds))
-			Repository::findAll('vManager\Modules\Tickets\Comment')->where('[commentId] IN %in', $commentIds)->orderBy('[commentId] DESC')->fetchAll();
+			$this->context->repository->findAll('vManager\Modules\Tickets\Comment')->where('[commentId] IN %in', $commentIds)->orderBy('[commentId] DESC')->fetchAll();
 
 		// Vsechny soubory (nesmim prochazet data z predchoziho dotazu, protoze to jsou jine objekty, nez davaji revize -> 2 dotazy)
 		$this->attachments = array();

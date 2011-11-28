@@ -47,9 +47,7 @@ class Form extends Nette\Application\UI\Form {
 		$this->setRenderer(new Forms\DefaultFormRenderer());
 		
 		// Multiple file uploader
-		if (Nette\Environment::getService('vBuilder\Config\IConfig')->get('forms.multipleFileUpload')) {
-			MultipleFileUploadControl::register();
-		}
+		MultipleFileUploadControl::register();
 	}
 	
 	/**

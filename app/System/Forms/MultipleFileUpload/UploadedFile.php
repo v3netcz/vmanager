@@ -50,7 +50,7 @@ class UploadedFile extends Nette\Object
 		$parts = \pathinfo($file->getName());
 		$this->errorCode = $file->getError();
 		$this->filename = $parts['filename'];
-		$this->extension = $parts['extension'];
+		$this->extension = isset($parts['extension']) ? $parts['extension'] : null;
 		$this->mimeType = $file->getContentType();
 	}
 	

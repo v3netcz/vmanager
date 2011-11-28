@@ -55,7 +55,7 @@ class Attachment extends vBuilder\Orm\ActiveEntity {
 		vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) {
 			if(!Nette\Utils\Strings::startsWith($filename, '/attachments/')) return ;
 			
-			if($attachment = Repository::findAll(__NAMESPACE__ . '\\Attachment')->where('[path] = %s', $filename)->fetch()) {
+			if($attachment = Nette\Environment::getContext()->repository->findAll(__NAMESPACE__ . '\\Attachment')->where('[path] = %s', $filename)->fetch()) {
 				if(!file_exists($attachment->getAbsolutePath())) return ;
 				
 				// TODO: Overeni opravneni
