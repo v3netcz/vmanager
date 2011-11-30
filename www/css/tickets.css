@@ -102,6 +102,7 @@ body .main_container .history .privateCommentRevisionBlock .grad_colour {
 
 .attachment-pdf {
 	background-image: url('/images/icons/mimetypes/small/pdf.png') !important;
+}
 
 #ticketCreateFormTabs INPUT.text,
 #ticketUpdateFormTabs INPUT.text,
