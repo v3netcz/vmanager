@@ -8,7 +8,6 @@
 				if (el.val() == data[item]) return;
 			}
       $('#dialog').dialog('open');
-      el.preventDefault();      
       return false;      
     });      
     return;
@@ -45,6 +44,8 @@
     $('#frmcreateForm-project').blur(function(){
       if ($("#frmcreateForm-project").val() != null && $("#frmcreateForm-project").val() != '') {
         checkProjectExist($("#frmcreateForm-project")); 
+        el.preventDefault();      
+        return false;
       }   
     });
             
