@@ -300,12 +300,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$form->addText('project', __('Project:'))
 				  ->setAttribute('autocomplete-src', $this->link('suggestProject'))
-				  ->setAttribute('title', __('Is this task part of greater project?'))
-				  ->addRule(function ($control) use($context) {
-                 if ($control->value == null || $control->value == '') return true;                 
-								 $projects = $context->repository->findAll('vManager\\Modules\\Tickets\\Project')->where('[name] = %s', $control->value)->fetchSingle();
-								 return ($projects !== false);
-							 }, __('This project does not exist.'));				  
+				  ->setAttribute('title', __('Is this task part of greater project?'));				  
 							 
 		$prioritiesDs = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Priority');
 		$priorities = array();

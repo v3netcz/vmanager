@@ -8,6 +8,8 @@
 				if (el.val() == data[item]) return;
 			}
       $('#dialog').dialog('open');
+      el.preventDefault();      
+      return false;      
     });      
     return;
   }
@@ -28,6 +30,7 @@
         width: 400,
         modal: true,
         resizable: false,
+        title: '<?php echo __('Unknown project'); ?>',
         buttons: {
             "<?php echo __('Create new project'); ?>": function() {
                 $(this).dialog("close");
@@ -42,7 +45,7 @@
     $('#frmcreateForm-project').blur(function(){
       if ($("#frmcreateForm-project").val() != null && $("#frmcreateForm-project").val() != '') {
         checkProjectExist($("#frmcreateForm-project")); 
-      }
+      }   
     });
             
     $('#frmcreateForm-name').focus();      
