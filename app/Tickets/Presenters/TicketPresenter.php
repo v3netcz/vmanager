@@ -630,7 +630,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	}
 
   /**
-   * Create specific teplate according to ticket state
+   * Create specific template according to ticket state
    * @return
    */   
   protected function createTemplate($class = NULL) {    
@@ -639,13 +639,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
     $ticket = $this->getTicket();
     
     if ($ticket != NULL) {
-      $stateName = $ticket->state->getName();            
+      $stateName = $ticket->state->id;            
       
-      $defaultTemplate = __DIR__ . '/../Templates/Ticket/detail.latte';            
-      $extendedTemplate = __DIR__ . '/../Templates/Ticket/' . strtolower($stateName) . '.state.latte';
+      $extendedTemplate = __DIR__ . '/../Templates/Ticket/detail.' . strtolower($stateName) . '.latte';
       if (file_exists($extendedTemplate)) {     
-          $template->setFile($extendedTemplate);   
-          $template->_extends = $defaultTemplate;        
+          $template->setFile($extendedTemplate);       
       }		
     }
     return $template;

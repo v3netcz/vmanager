@@ -1,3 +1,5 @@
+{extends APP_DIR . '/System/Templates/@layout.latte'}
+
 {block #pageTitle}<?php echo _x('#%d %s - vManager', array($data->id, $data->name)); ?>{/block}
 
 {var $data = $historyWidget->getTemplate()->data}
@@ -19,11 +21,15 @@
 </style>
 {/block}
 
-{block #content}
+{block content}
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
 	<div class="flat_area grid_16">
+		{block ticketHeader}
 		<h2>Ticket #{$data->id} - {$data->name}</h2>
+		
+		{block beforeTicketSummary}{/block}
+		
 		<div class="ticketSummary">
 			{if $data->project}<?php echo __('Project:'); ?> <span class="value"><a n:href="Project:detail $data->project->id">{$data->project->name}</a></span><br />{/if}
 			<?php echo _x('Created by: <span class="value">%s</span>', array($firstRevision->author !== null ? ($firstRevision->author->exists() ? $firstRevision->author->username : _x('user n. %d', array($firstRevision->author->id))) : __('anonymous'))); ?><br />
@@ -37,7 +43,8 @@
       {/if} 
 			{if $data->priority}<?php echo _x('Priority: <span class="value">%s</span>', array($data->priority->label)); ?><br />{/if}
 			<?php echo _x('State: <span class="value">%s</span>', array($data->state->name)); ?>
-		</div>		
+		</div>
+		{/block}		
 		
 		<div class="ticketDescription">{!$data->description|texy}</div>
 		
