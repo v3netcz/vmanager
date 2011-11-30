@@ -8,15 +8,21 @@
 	{/if}
 	
 	{if isset($deadline)}
-		<script type="text/javascript" src="{$basePath}/js/countdown/countdown.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/countdown/jquery.countdown.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/countdown/jquery.countdown-cs.js"></script>
 		<script type="text/javascript">
-			window.onload = function() {  
-				elapseMe({l}
-				year: {!$data->deadline->format('Y')}, 
-				month: {!$data->deadline->format('m')},
-				day: {!$data->deadline->format('j')},
-				targetId:"countdown"{r});  
-			}
+		jQuery(document).ready(function() {l}
+      var deadline = new Date(
+        {!$data->deadline->format('Y')}, 
+        {!$data->deadline->format('m')}-1, 
+        {!$data->deadline->format('j')});
+      var now = new Date();
+      if (deadline > now) {
+        $('#countdown').countdown({l}until: deadline{r}); 
+      } else {
+        $('#countdown').countdown({l}since: deadline{r}); 
+      }
+    {r});
 		</script>
 		
 		<style>
@@ -33,7 +39,7 @@
 				color: green !important;
 			}
 		</style>
-
+    
 		<span n:class="$data->deadline > (new \DateTime) ? countDownBeforeDeadline : countDownPassedDeadline" id="countdown" n:if="$data->deadline"></span>
 	{/if}
 {/block}
