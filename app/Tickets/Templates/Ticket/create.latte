@@ -2,6 +2,16 @@
 
 {block head}
 <script type="text/javascript">
+  function checkProjectExist(el) {            
+    $.getJSON( el.attr('autocomplete-src'), function( data ) {
+      for(var item in data) {
+				if (el.val() == data[item]) return;
+			}
+      $('#dialog').dialog('open');
+    });      
+    return;
+  }
+
 	$(document).ready(function () {
 		var tabs = $('#ticketCreateFormTabs');
 		
@@ -11,15 +21,39 @@
 			} else if(ui.panel.id == 'tabs-1') {
 				$('#frmcreateForm-name').focus();
 			}
-		});
-						
-		$('#frmcreateForm-name').focus();
+		});					
+		  
+    $('#dialog').dialog({
+        autoOpen: false,
+        width: 400,
+        modal: true,
+        resizable: false,
+        buttons: {
+            "<?php echo __('Create new project'); ?>": function() {
+                $(this).dialog("close");
+            },
+            "<?php echo __('Correct project name'); ?>": function() {
+                $(this).dialog("close");
+                $('#frmcreateForm-project').focus();
+            }
+        }
+    });   
+    
+    $('#frmcreateForm-project').blur(function(){
+      if ($("#frmcreateForm-project").val() != null && $("#frmcreateForm-project").val() != '') {
+        checkProjectExist($("#frmcreateForm-project")); 
+      }
+    });
+            
+    $('#frmcreateForm-name').focus();      
 	});
 </script>
 {/block}
 
 {block content}
 	{include ../../../System/Templates/Includes/flashes.latte}
+	
+	<div id="dialog" title="Dialog Title"><?php echo __('Entered project doesnt exist, create new?'); ?></div>
 	
 	<div class="flat_area grid_16">
 		<h2><?php echo __('Create new task'); ?></h2>
