@@ -261,9 +261,9 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$texy->allowedStyles = \Texy::NONE;
 		$texy->setOutputMode(\Texy::XHTML1_STRICT);
 
-		$this->template->registerHelper('texy', callback($texy, 'process'));
-
+		$this->template->registerHelper('texy', callback($texy, 'process'));    
 		$this->template->historyWidget = new VersionableEntityView('vManager\\Modules\\Tickets\\Ticket', $id);
+		
 	}
 	
 	// </editor-fold>
@@ -628,5 +628,24 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	public function getModule() {
 		return vManager\Modules\Tickets::getInstance();
 	}
-	
+
+  /**
+   * Create specific template according to ticket state
+   * @return
+   */   
+  protected function createTemplate($class = NULL) {    
+    $template = parent::createTemplate($class);
+
+    $ticket = $this->getTicket();
+    
+    if ($ticket != NULL) {
+      $stateName = $ticket->state->id;            
+      
+      $extendedTemplate = __DIR__ . '/../Templates/Ticket/detail.' . strtolower($stateName) . '.latte';
+      if (file_exists($extendedTemplate)) {     
+          $template->setFile($extendedTemplate);       
+      }		
+    }
+    return $template;
+  }
 }
