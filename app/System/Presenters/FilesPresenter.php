@@ -91,7 +91,7 @@ class FilesPresenter extends BasePresenter {
 	 * @return string URL 
 	 */
 	static public function getLink($file) {
-		return Nette\Environment::getApplication()->getPresenter()->link(":System:Files:default", array(
+		return vManager\Modules\System::getBasePath(true) . Nette\Environment::getApplication()->getPresenter()->link(":System:Files:default", array(
 			 self::PARAM_NAME => $file
 		));
 	}

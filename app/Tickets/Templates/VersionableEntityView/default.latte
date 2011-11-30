@@ -34,10 +34,16 @@
 						foreach($log as $change) echo $change;
 					?>
 					</div>
+							
+					<div class="attachments" n:if="$curr->comment && $curr->comment->attachments->count()">
+						<div class="attachment attachment-{? echo Nette\Utils\Strings::webalize($curr2->type)}" n:foreach="$curr->comment->attachments as $curr2">
+							<a href="{$curr2->getUrl()}">{$curr2->name}</a>
+						</div>
+					</div>
 				
 					<div class="comment">
 						{if $curr->comment}
-              {if !$curr->comment->private || ($curr->author->id == Nette\Environment::getUser()->id) || ($curr->isResponsibleUser(Nette\Environment::getUser())) || Nette\Environment::getUser()->identity->isInRole('Project manager')}
+              {if !$curr->comment->private || ($curr->author->id == Nette\Environment::getUser()->id) || ($curr->isResponsibleUser(Nette\Environment::getUser()->identity)) || Nette\Environment::getUser()->identity->isInRole('Project manager')}
                   {!$curr->comment->text|texy}
               {else}
                 <p><?php echo __('You have no permisson to view this comment'); ?></p>

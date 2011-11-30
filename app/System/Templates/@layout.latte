@@ -37,11 +37,13 @@
 		<link rel="stylesheet" href="{$basePath}/texyla/css/style.css" type="text/css">
 		<link rel="stylesheet" href="{$basePath}/texyla/themes/default/theme.css" type="text/css">
 
-		<!-- Load JQuery -->		
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+		<!-- Load JQuery -->
+		{var $googleApis = 'googleapis.bilahora.v3net.cz'}
+		{*var $googleApis = 'ajax.googleapis.com'*}
+		<script type="text/javascript" src="http://{$googleApis}/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
 		<!-- Load JQuery UI -->
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://{$googleApis}/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		
 		<!-- SHJS (Snippet) -->
 		{* <link rel="stylesheet" href="{$basePath}/snippet-shjs/jquery.snippet.min.css" type="text/css"> *}
@@ -130,13 +132,28 @@
 		
 		<!-- This file configures the various jQuery plugins for Adminica. Contains links to help pages for each plugin. -->
 		<script type="text/javascript" src="{$basePath}/js/adminica/adminica_ui.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/vManager/multipleFileUpload.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/vManager.js"></script>
+		
+		<!-- Inicializace zavisla na prostredi (preklady, config, apod.) -->
+		<script type="text/javascript">
+		//<![CDATA[
+		$(document).ready(function () {
+			$('input:file').vMultipleFileUpload({
+				//linkText: 'Add another',
+				//containerClass: 'vMultipleFileUpload',
+				//linkClass: 'vMultipleFileUploadClicker',
+				fileBtnText: '<?php echo __('Choose File'); ?>',
+				fileDefaultText: '<?php echo __('No file selected'); ?>'
+			});
+		}); 
+		</script>
 	
 		{block head}{/block}						
 	</head>
 	<body>
 		{if !isset($baseLayoutOnly) || !$baseLayoutOnly}
-			
+		
 			<!-- SIDEBAR -->
 			<div id="sidebar">
 				<div class="cog">+</div>

@@ -102,10 +102,24 @@ DROP TABLE IF EXISTS `pm_comments`;
 CREATE TABLE `pm_comments` (
   `commentId` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `comment` text NOT NULL,
-  `public` tinyint(1) NOT NULL DEFAULT '0',
+  `private` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
+# Dump of table pm_attachments
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `pm_attachments`;
+
+CREATE TABLE `pm_attachments` (
+  `attachmentId` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `commentId` int(10) unsigned NOT NULL,
+  `name` varchar(64) NOT NULL DEFAULT '',
+  `type` varchar(64) NOT NULL DEFAULT '',
+  `path` varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (`attachmentId`),
+  KEY `commentId` (`commentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 # Dump of table pm_projects
@@ -138,12 +152,12 @@ CREATE TABLE `pm_tickets` (
   `author` smallint(6) unsigned DEFAULT NULL,
   `commentId` int(11) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `description` text,
   `priority` tinyint(3) unsigned DEFAULT NULL,
   `deadline` date DEFAULT NULL,
   `assignedTo` smallint(6) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `state` smallint(6) NOT NULL DEFAULT '1',
+  `state` varchar(64) NOT NULL DEFAULT '',
   PRIMARY KEY (`ticketId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -119,6 +119,7 @@ msgstr "Přístup zamítnut."
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:140
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:150
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:165
 msgid "Administrator"
 msgstr "Administrátor"
 
@@ -130,6 +131,7 @@ msgstr "Administrátor"
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:140
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:150
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:165
 msgid "User"
 msgstr "Uživatel"
 
@@ -141,6 +143,7 @@ msgstr "Uživatel"
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:143
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:147
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:153
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:168
 msgid "settings"
 msgstr "nastavení"
 
@@ -152,6 +155,7 @@ msgstr "nastavení"
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:148
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:154
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:169
 msgid "logout"
 msgstr "odhlásit"
 
@@ -163,6 +167,7 @@ msgstr "odhlásit"
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:168
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:172
 #: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:178
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:193
 msgid "Search..."
 msgstr "Hledat..."
 
@@ -710,3 +715,11 @@ msgstr "Prostředí"
 #: /Volumes/www/vmanager/tools/../app/System/Gridito/Templates/grid.latte:102
 msgid "No results has been found matching your criteria."
 msgstr "Pro zadané parametry nebyly nalezeny žádné výsledky k zobrazení."
+
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:144
+msgid "Choose File"
+msgstr "Vybrat"
+
+#: /Volumes/www/vmanager/tools/../app/System/Templates/@layout.latte:145
+msgid "No file selected"
+msgstr "Žádný soubor nebyl vybrán"

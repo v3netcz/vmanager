@@ -35,8 +35,10 @@ use vManager, vBuilder, Nette;
  * @Column(id, realName="commentId", pk, type="integer", generatedValue)
  * @Column(text, realName="comment", type="string")
  * @Column(private, type="boolean")
+ * @Column(attachments, type="OneToMany", entity="vManager\Modules\Tickets\Attachment", joinOn="id=commentId")
  */
 class Comment extends vBuilder\Orm\ActiveEntity {
+	
 	
 	
 }

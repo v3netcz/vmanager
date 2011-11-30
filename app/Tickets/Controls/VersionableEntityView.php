@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Tickets;
 
-use vManager, Nette, vBuilder\Orm\Repository, vBuilder\Orm\Entity;
+use vManager, Nette, vBuilder\Orm\Entity;
 
 /**
  * Visual component for rendering comment list
@@ -32,27 +32,26 @@ use vManager, Nette, vBuilder\Orm\Repository, vBuilder\Orm\Entity;
  * @since Apr 27, 2011
  */
 class VersionableEntityView extends Nette\Application\UI\Control {
-	
+
 	/** @var string name of ORM entity */
 	protected $entityName;
-	
 	/** @var int PK ID of entity */
 	protected $id;
-
 	/** @var string name id column */
 	protected $idField;
-	
+
 	/** @var array of verisons of entity */
 	protected $data;
-	
+	/** @var array of file attachments */
+	protected $attachments;
+
 	const ASC = 1;
 	const DESC = 2;
-	
+
 	/** @var int method of ordering comments */
 	protected $order = VersionableEntityView::DESC;
-	
+
 	protected $context;
-	
 	
 	/**
 	 * Component constructor.
@@ -67,22 +66,48 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 		$this->context = Nette\Environment::getContext();
 		$this->load();
 	}
-	
+
 	/**
 	 * Loads data from DB
 	 *
 	 */
 	protected function load() {           
 		$entity = self::getEntityClass($this->entityName);		
-    $metadata = $entity::getMetadata();
-    $idFields = $metadata->getIdFields();
+	    $metadata = $entity::getMetadata();
+    	$idFields = $metadata->getIdFields();
 		$fluent = $this->context->repository->findAll($this->entityName)
 				  ->where('[' . $metadata->getFieldColumn($idFields[0]) . '] = %i', $this->id)
 				  ->clause('ORDER BY ABS([revision])' . ($this->order == self::DESC ? ' DESC' : ''));
 
 		$this->data = $fluent->fetchAll();
+
+		// Docasne reseni, dokud nejsou joiny (prednacteni)
+		$commentIds = array();
+		foreach($this->data as $curr)
+			if($curr->comment !== null)
+				$commentIds[] = $curr->comment->id;
+		if(count($commentIds))
+			$this->context->repository->findAll('vManager\Modules\Tickets\Comment')->where('[commentId] IN %in', $commentIds)->orderBy('[commentId] DESC')->fetchAll();
+
+		// Vsechny soubory (nesmim prochazet data z predchoziho dotazu, protoze to jsou jine objekty, nez davaji revize -> 2 dotazy)
+		$this->attachments = array();
+		foreach($this->data as $revision) {
+			if(!$revision->comment) continue;
+			
+			foreach($revision->comment->attachments as $curr) {
+				$key = $curr->getName().'@'.$curr->getType();
+
+				if(array_key_exists($key, $this->attachments)) {
+					if(is_array($this->attachments[$key]))
+						$this->attachments[$key][] = $curr;
+					else
+						$this->attachments[$key] = array($this->attachments[$key], $curr);
+				} else
+					$this->attachments[$key] = $curr;
+			}
+		}
 	}
-	
+
 	/**
 	 * Returns template
 	 * 
@@ -90,24 +115,25 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 	 */
 	function createTemplate($class = NULL) {
 		$tpl = parent::createTemplate();
-		$tpl->setFile(__DIR__ . '/../Templates/VersionableEntityView/default.latte');
-		
+		$tpl->setFile(__DIR__.'/../Templates/VersionableEntityView/default.latte');
+
 		$texy = new \Texy();
-      $texy->encoding = 'utf-8';
-      $texy->allowedTags = \Texy::NONE;
-      $texy->allowedStyles = \Texy::NONE;
-      $texy->setOutputMode(\Texy::XHTML1_STRICT);
-		
+		$texy->encoding = 'utf-8';
+		$texy->allowedTags = \Texy::NONE;
+		$texy->allowedStyles = \Texy::NONE;
+		$texy->setOutputMode(\Texy::XHTML1_STRICT);
+
 		$tpl->registerHelper('texy', callback($texy, 'process'));
 		$tpl->registerHelper('timeAgoInWords', 'vManager\Application\Helpers::timeAgoInWords');
-		
+
 		$tpl->order = $this->order;
 		$tpl->data = $this->order == self::DESC ? reset($this->data) : end($this->data);
-		$tpl->history = $this->data; 
-		
+		$tpl->history = $this->data;
+		$tpl->attachments = $this->attachments;
+
 		return $tpl;
 	}
-	
+
 	/**
 	 * Renders control to standard output
 	 */

@@ -39,6 +39,9 @@ for MODULE in "$APP_DIR"/*; do
 				echo >> "$MODULE/Translations/$LANG.po"
 			fi
 
+			# Jelikoz uchovaveme komentare, tak musime ty soucasne smazat, pred tim nez tam zapiseme nove
+			sed 's/^#:.*//g' -i "$MODULE/Translations/$LANG.po"
+
 			find "$MODULE" -name *.php -or -name *.latte | xargs xgettext $ARGS --output="$MODULE/Translations/$LANG.po"
 		fi
 	fi

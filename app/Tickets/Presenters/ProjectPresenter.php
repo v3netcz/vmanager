@@ -282,16 +282,16 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 			throw new Nette\Application\ForbiddenRequestException('Access denied');
 		
 		if(isset($values['comment']) && !empty($values['comment'])) {
-			$ticket->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
-			$ticket->comment->text = $values['comment'];
+			$project->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
+			$project->comment->text = $values['comment'];
 			if (isset($values['private']) && !empty($values['private'])) {
-        $ticket->comment->private = $values['private'];
+        $project->comment->private = $values['private'];
 			} else {
-        $ticket->comment->private = false;
+        $project->comment->private = false;
 			}
 			$changed = true;
 		} else {
-			$ticket->comment = null;
+			$project->comment = null;
 		}
 
 		if(isset($values['assignTo'])) {

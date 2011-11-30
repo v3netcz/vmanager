@@ -28,7 +28,8 @@ use vManager,
 	 Nette,
 	 vBuilder\Orm\Repository,
 	 Gridito,
-	 vManager\Form;
+	 vManager\Form,
+	 vManager\MultipleFileUploadControl;
 
 /**
  * Presenter for viewing tickets
@@ -291,7 +292,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 								 $users = $context->repository->findAll('vManager\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
 								 return ($users !== false);
 							 }, __('Responsible person does not exist.'));
-
+		
+		if(isset($this->module->config['attachments']['enabled']) && $this->module->config['attachments']['enabled']) {
+			$form->addMultipleFileUpload('attachments', __('Select any file to attach'))
+				->addRule(MultipleFileUploadControl::VALID, '', MultipleFileUploadControl::ALL);
+		}
 
 		$form->addText('project', __('Project:'))
 				  ->setAttribute('autocomplete-src', $this->link('suggestProject'))
@@ -341,6 +346,29 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$ticket->comment = null;
 		}
 
+		if(isset($values['attachments']) && count($values['attachments'])) {
+			if(!$ticket->comment) $ticket->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
+			
+			foreach($values['attachments'] as $uploadedFile) {
+				$attachment = $this->context->repository->create('vManager\Modules\Tickets\Attachment');
+				
+				$attachment->name = $uploadedFile->getFilename();
+				$attachment->type = $uploadedFile->getMimeType();
+				
+				// Pre save se vola az v okamziku, kdy znam ID nadrizene entity (komentare/ticketu),
+				// zaroven je uzavreny v transakci, takze pokud se neco stane pri ukladani souboru
+				// tak to zrusi zapis do DB.
+				$attachment->onPreSave[] = function ($attachment) use ($uploadedFile, $ticket) {
+					$filePath = '/attachments/tickets/' . $ticket->id;
+					$attachment->path = $uploadedFile->save($filePath);
+				};				
+				
+				$ticket->comment->attachments->add($attachment);
+			}
+			
+			$changed = true;
+		}
+		
 		if(isset($values['assignTo'])) {
 			if(!empty($values['assignTo'])) {
 				$user = $this->context->repository->findAll('vManager\Security\User')->where('[username] = %s', $values['assignTo'])->fetch();
@@ -429,6 +457,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if($limit > 0)
 			$users->limit($limit);				  
 
+
 		$data = array();
 		foreach($users as $curr) {
 			$data[$curr->getId()] = $realNames ? $curr->getDisplayName() : $curr->getUsername();
@@ -453,6 +482,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$ds->limit($limit);				  
 
 		$data = array();
+
 		foreach($ds as $curr) {
 			$data[$curr->getId()] = $curr->getName();
 		}
@@ -468,8 +498,9 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	 * Create form
 	 * @return vManager\Form
 	 */
-	protected function createComponentCreateForm() {
-		$form = new Form;
+	protected function createComponentCreateForm($name) {
+		// attached early because of MFU
+		$form = new Form($this, $name);
 
 		$this->setupTicketDetailForm($form);
 
@@ -503,15 +534,17 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	 * Update form
 	 * @return vManager\Form
 	 */
-	protected function createComponentUpdateForm() {
-		$form = new Form;
+	protected function createComponentUpdateForm($name) {
+		// attached early because of MFU
+		$form = new Form($this, $name);
 		$form->setRenderer(new Nette\Forms\Rendering\DefaultFormRenderer());
 
 		$ticket = $this->getTicket();
+		if(!$ticket) throw new Nette\InvalidStateException('No such ticket');
 
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
 		$form->addCheckbox('private', __('Make this comment private'));
-		$form->addTextArea('description')->setValue($ticket->description)->setAttribute('class', 'texyla');
+		$form->addTextArea('description')->setAttribute('class', 'texyla');
 
 		
 		$possibleStates = $ticket->possibleStates;
@@ -524,7 +557,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 						: _x('change to %s', array($curr->name));
 			
 			$form->addSelect('newState', __('State:'), $states)
-							->setPrompt('do not change');
+							->setPrompt(__('do not change'));
 			
 		} elseif(count($possibleStates) > 0) {
 			list($nextState) = $possibleStates;
@@ -538,16 +571,21 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		}
 
 		$this->setupTicketDetailForm($form);
-		$form['name']->setValue($ticket->name);
-		$form['deadline']->setValue($ticket->deadline);
-		if($ticket->assignedTo !== null && $ticket->assignedTo->exists())
-			$form['assignTo']->setValue($ticket->assignedTo->username);
-
-		if($ticket->priority !== null && $ticket->priority->exists())
-			$form['priority']->setValue($ticket->priority->id);
 		
-		if($ticket->project !== null && $ticket->project->exists())
-			$form['project']->setValue($ticket->project->name);
+		if(!$form->isSubmitted()) {
+			$form['name']->setValue($ticket->name);
+			$form['deadline']->setValue($ticket->deadline);
+			$form['description']->setValue($ticket->description);
+			
+			if($ticket->assignedTo !== null && $ticket->assignedTo->exists())
+				$form['assignTo']->setValue($ticket->assignedTo->username);
+
+			if($ticket->priority !== null && $ticket->priority->exists())
+				$form['priority']->setValue($ticket->priority->id);
+
+			if($ticket->project !== null && $ticket->project->exists())
+				$form['project']->setValue($ticket->project->name);
+		}
 
 		$form->addSubmit('send', __('Save'));
 
