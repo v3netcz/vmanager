@@ -11,13 +11,13 @@
 							{if $curr->author !== null}{if $curr->author->exists()}{$curr->author->username}{else}<?php echo _x('User n. %d', array($curr->author->id)); ?>{/if}{else}<?php echo __('nobody'); ?>{/if}
 							@ <abbr title="{$curr->timestamp}">{$curr->timestamp|timeAgoInWords}</abbr>
 							
-							{if $curr->author->id == Nette\Environment::getUser()->id}
+							{*if $curr->author->id == Nette\Environment::getUser()->id}
 								{if $curr->comment && $curr->comment->private}
 									<a href="#" class="boxHeadButton privateToggle" title="<?php echo __('Make this comment public'); ?>"><img src="/images/icons/small/white/User%20Comment.png" /></a>
 								{else}
 									<a href="#" class="boxHeadButton privateToggle" title="<?php echo __('Make this comment private'); ?>"><img src="/images/icons/small/white/User%20Comment%20Crossed.png" /></a>
 								{/if}
-							{/if}
+							{/if*}
 							<a href="#" class="toggle nograbber boxHeadButtonToggle"></a>
 					</h2>
 					
