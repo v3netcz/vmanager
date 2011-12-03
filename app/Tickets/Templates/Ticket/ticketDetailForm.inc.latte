@@ -1,8 +1,10 @@
 {if $form->hasErrors()}
-	<div n:foreach="$form->getErrors() as $error" class="alert alert_orange">
-		<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
-		{$error}
-	</div>
+	{foreach array($form['name'], $form['deadline'], $form['assignTo'], $form['project'], $form['priority']) as $control}
+		<div n:foreach="$control->getErrors() as $error" class="alert alert_orange">
+			<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+			{$error}
+		</div>
+	{/foreach}
 {/if}
 
 <div style="width: 45%; float: left;">

@@ -170,7 +170,7 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 		$log = array();
 		
 		foreach($t2->getMetadata()->getFields() as $field) {
-			if(in_array($field, array('timestamp', 'author', 'revision', 'comment')))
+			if(in_array($field, array('timestamp', 'author', 'revision', 'comment', 'attachment')))
 				continue;
 
 			$change = null;

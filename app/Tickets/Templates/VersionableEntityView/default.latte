@@ -11,13 +11,13 @@
 							{if $curr->author !== null}{if $curr->author->exists()}{$curr->author->username}{else}<?php echo _x('User n. %d', array($curr->author->id)); ?>{/if}{else}<?php echo __('nobody'); ?>{/if}
 							@ <abbr title="{$curr->timestamp}">{$curr->timestamp|timeAgoInWords}</abbr>
 							
-							{if $curr->author->id == Nette\Environment::getUser()->id}
+							{*if $curr->author->id == Nette\Environment::getUser()->id}
 								{if $curr->comment && $curr->comment->private}
 									<a href="#" class="boxHeadButton privateToggle" title="<?php echo __('Make this comment public'); ?>"><img src="/images/icons/small/white/User%20Comment.png" /></a>
 								{else}
 									<a href="#" class="boxHeadButton privateToggle" title="<?php echo __('Make this comment private'); ?>"><img src="/images/icons/small/white/User%20Comment%20Crossed.png" /></a>
 								{/if}
-							{/if}
+							{/if*}
 							<a href="#" class="toggle nograbber boxHeadButtonToggle"></a>
 					</h2>
 					
@@ -33,6 +33,12 @@
 						$log = $curr->diffLogAgainst($previousRevision);
 						foreach($log as $change) echo $change;
 					?>
+					</div>
+							
+					<div class="attachments" n:if="$curr->comment && $curr->comment->attachments->count()">
+						<div class="attachment attachment-{? echo Nette\Utils\Strings::webalize($curr2->type)}" n:foreach="$curr->comment->attachments as $curr2">
+							<a href="{$curr2->getUrl()}">{$curr2->name}</a>
+						</div>
 					</div>
 				
 					<div class="comment">

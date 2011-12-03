@@ -106,6 +106,21 @@ CREATE TABLE `pm_comments` (
   PRIMARY KEY (`commentId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
+# Dump of table pm_attachments
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `pm_attachments`;
+
+CREATE TABLE `pm_attachments` (
+  `attachmentId` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `commentId` int(10) unsigned NOT NULL,
+  `name` varchar(64) NOT NULL DEFAULT '',
+  `type` varchar(64) NOT NULL DEFAULT '',
+  `path` varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (`attachmentId`),
+  KEY `commentId` (`commentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 # Dump of table pm_projects
 # ------------------------------------------------------------

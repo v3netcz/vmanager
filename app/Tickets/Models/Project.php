@@ -126,9 +126,9 @@ class Project extends vBuilder\Orm\ActiveEntity {
 
 		if (!$user->isLoggedIn())
 			return false;
-		if ($user->isInRole('Project manager'))
+		if ($user->identity->isInRole('Project manager'))
 			return true;
-		if (!$user->isInRole('Ticket user'))
+		if (!$user->identity->isInRole('Ticket user'))
 			return false;
 		if ($user->getId() == $this->data->assignedTo)
 			return true;
@@ -145,10 +145,12 @@ class Project extends vBuilder\Orm\ActiveEntity {
 	 */
 	function userIsAllowedToChange() {
 		$user = $this->context->user;
-
-		if ($user->isInRole('Project manager'))
+	
+		if (!$user->isLoggedIn())
+			return false;
+		if ($user->identity->isInRole('Project manager'))
 			return true;
-		if (!$user->isInRole('Ticket user'))
+		if (!$user->identity->isInRole('Ticket user'))
 			return false;
 		return $user->getId() == $this->data->assignedTo;
 	}

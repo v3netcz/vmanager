@@ -45,6 +45,9 @@ class Form extends Nette\Application\UI\Form {
 		
 		$this->getElementPrototype()->novalidate = 'novalidate';
 		$this->setRenderer(new Forms\DefaultFormRenderer());
+		
+		// Multiple file uploader
+		MultipleFileUploadControl::register();
 	}
 	
 	/**
