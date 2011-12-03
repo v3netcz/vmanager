@@ -90,8 +90,11 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 	
 	public static function register() {
 		if (self::$registered) {
-			throw new Nette\InvalidStateException('Multiple file upload has already been registered!');
+			// Kdyz je na strance vice formularu tak to nedelalo dobrotu
+			// throw new Nette\InvalidStateException('Multiple file upload has already been registered!');
+			return ;
 		}
+		
 		Forms\Container::extensionMethod('addMultipleFileUpload', callback(__CLASS__, 'addMultipleFileUpload'));
 		self::$registered = true;
 		
