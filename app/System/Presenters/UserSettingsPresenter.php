@@ -146,6 +146,14 @@ class UserSettingsPresenter extends SecuredPresenter {
 		$config->set('system.language', empty($values->language) ? null : $values->language); 
 		$config->save();
 
+		/* 
+		$this->flashMessage(__('All changes are saved.'));
+		$this->redirect('default'); */
+		
+		$this->redirect('changeSaved');
+	}
+	
+	public function actionChangeSaved() {
 		$this->flashMessage(__('All changes are saved.'));
 		$this->redirect('default');
 	}
