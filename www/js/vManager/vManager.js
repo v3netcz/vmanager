@@ -112,17 +112,18 @@ $(document).ready(function () {
 			return false;
 		});
 	});
+		
 	
 	$('.tabs').each(function () {
 		var tabs = $(this);
 		tabs.bind('tabsselect', function(event, ui) {
 			
 			if(ui.index != 0) {
-				$('.tabs .btnTabPrev').each(function () {
+				$('.tabs .btnTabPrev:hidden').each(function () {
 					$(this).show('slide');
 				});
 			} else {
-				$('.tabs .btnTabPrev').each(function () {
+				$('.tabs .btnTabPrev:visible').each(function () {
 					$(this).hide('slide');
 				});
 			}
@@ -145,6 +146,11 @@ $(document).ready(function () {
 					
 					$('.tabs .btnTabNext SPAN.submit').show();
 				}
+				
+				$('.tabs .btnTabFinish').each(function () {
+					$(this).hide('slide', {direction: 'right'});
+				});
+				
 			} else {
 				if($('.tabs .btnTabNext SPAN.submit').size()) {
 					$('.tabs .btnTabNext SPAN').each(function () {
@@ -153,6 +159,10 @@ $(document).ready(function () {
 					
 					$('.tabs .btnTabNext SPAN.submit').hide();
 				}
+				
+				$('.tabs .btnTabFinish:hidden').each(function () {
+						$(this).show('slide');
+				});
 			}
 			
 		});

@@ -105,11 +105,16 @@
 				<img height="24" width="24" alt="Next" src="{$basePath}/images/icons/small/grey/Bended%20Arrow%20Left.png">
 				<span><?php echo __('Back'); ?></span>
 			</button>
-			
+						
 			<button type="submit" class="round_all btnTabNext">
 				<img height="24" width="24" alt="Next" src="{$basePath}/images/icons/small/grey/Bended%20Arrow%20Right.png">
 				<span><?php echo __('Next'); ?></span>
 				<span class="submit hidden">{$form['send']->caption}</span>
+			</button>
+			
+			<button type="submit" class="round_all btnTabFinish">
+				<img height="24" width="24" alt="{$form['send']->caption}" src="{$basePath}/images/icons/small/grey/Box%20Incoming.png">
+				{$form['send']->caption}
 			</button>
 		</div>
 	</div>
