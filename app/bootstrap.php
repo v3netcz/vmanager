@@ -33,6 +33,7 @@ require LIBS_DIR . '/NetteTranslator/shortcuts.php';
 $config = $context->config;
 $lang = $config->get('system.language'); 
 if($lang === null) $lang = $context->httpRequest->detectLanguage((array) Environment::getConfig('languages', array('en')));
+if($lang == null) $lang = 'en'; // Detect muze vratit taky null, pokud neni definovana hlavicka (nektere tupe browsery ji neposilaji)
 
 Environment::setVariable('lang', $lang);
 //NetteTranslator\Panel::register();
