@@ -43,6 +43,12 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected $ticket;
 	/** @var array of suggestions to Assign form field */
 	protected $assignToSuggestions = array();
+	
+	/** @persistent */
+	public $state = '-1';
+	
+	/** @persistent */
+	public $assignedTo = '-1';
 
 	// <editor-fold defaultstate="collapsed" desc="Ticket listing (default)">
 	
