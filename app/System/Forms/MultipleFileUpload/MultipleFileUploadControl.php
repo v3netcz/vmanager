@@ -146,7 +146,8 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 	public function getControl() {
 		$control = parent::getControl();
 		$control->name .= '[]'; // allowing multiple files
-		$control->class[] = 'multiple';
+		$control->class = array('file', 'upload', 'multipleUpload');
+		//$control->class[] = 'multiple';
 		return $control;
 	}
 	
