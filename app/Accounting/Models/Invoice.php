@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Accounting;
 
-use dibi, Nette;
+use dibi, Nette, Nette\Utils\Strings;
 
 /**
  * Simple Invoice data class. Data are loaded from XML file generated
@@ -85,11 +85,17 @@ class Invoice extends Nette\Object {
 	}
 	
 	public function getDate() {
-		return new \DibiDateTime($this->data['created']);
+		if(Strings::match($this->data['created'], '/^[0-9]{1,2}.\s*[0-9]{1,2}.\s*[0-9]{4}/'))
+			return new \DibiDateTime($this->data['created']);
+		else
+			return new \DibiDateTime(0);
 	}
 	
 	public function getDeadline() {
-		return new \DibiDateTime($this->data['due']);
+		if(Strings::match($this->data['due'], '/^[0-9]{1,2}.\s*[0-9]{1,2}.\s*[0-9]{4}/'))
+			return new \DibiDateTime($this->data['due']);
+		else
+			return new \DibiDateTime(0);
 	}
 	
 	public function getTotal() {
