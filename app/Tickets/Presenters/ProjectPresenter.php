@@ -90,9 +90,15 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 						if($project->isInProgress()) {
 							$classes[] = 'currentProject';
 							
-							$today = new \DateTime;
-							if($project->deadline && $project->deadline < $today)
-								$classes[] = 'overdueProject';
+							
+							if($project->deadline) {
+								$today = new \DateTime;
+								$deadline = clone $project->deadline;
+								$deadline->add(\DateInterval::createFromDateString('1 day'));
+								
+								if($deadline < $today)
+									$classes[] = 'overdueProject';
+							}
 						}
 						
 					  return empty($classes) ? null : implode(" ", $classes);
@@ -150,9 +156,12 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 					 return;
 				 }
 
+				$deadline = clone $project->deadline;
+				$deadline->add(\DateInterval::createFromDateString('1 day'));
+								
 				 echo Nette\Utils\Html::el("abbr")
           ->title($project->deadline->format("d. m. Y"))
-          ->setText(vManager\Application\Helpers::timeAgoInWords($project->deadline));
+          ->setText(vManager\Application\Helpers::timeAgoInWords($deadline));
 			 },
 			 "sortable" => true
 		))->setCellClass("date deadline");

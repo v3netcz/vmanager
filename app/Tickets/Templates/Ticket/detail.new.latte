@@ -2,20 +2,21 @@
 
 {block beforeTicketSummary}
 	{if $data->deadline}
-		{var $deadline = $data->deadline}
+		{var $deadline = clone $data->deadline}
 	{elseif $data->getProject() && $data->getProject()->deadline}
-		{var $deadline = $data->getProject()->deadline}
+		{var $deadline = clone $data->getProject()->deadline}
 	{/if}
 	
 	{if isset($deadline)}
+	{? $deadline->add(\DateInterval::createFromDateString('1 day'))}
     <script type="text/javascript" src="{$basePath}/js/countdown/jquery.countdown.js"></script>
     <script type="text/javascript" src="{$basePath}/js/countdown/jquery.countdown-cs.js"></script>
 		<script type="text/javascript">
 		jQuery(document).ready(function() {l}
-      var deadline = new Date(
-        {!$data->deadline->format('Y')}, 
-        {!$data->deadline->format('m')}-1, 
-        {!$data->deadline->format('j')});
+      var deadline = new Date(	
+        {!$deadline->format('Y')}, 
+        {!$deadline->format('m')}-1, 
+        {!$deadline->format('j')});
       var now = new Date();
       if (deadline > now) {
         $('#countdown').countdown({l}until: deadline{r}); 
@@ -40,6 +41,6 @@
 			}
 		</style>
     
-		<span n:class="$data->deadline > (new \DateTime) ? countDownBeforeDeadline : countDownPassedDeadline" id="countdown" n:if="$data->deadline"></span>
+		<span n:class="$deadline > (new \DateTime) ? countDownBeforeDeadline : countDownPassedDeadline" id="countdown" n:if="$deadline"></span>
 	{/if}
 {/block}

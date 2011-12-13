@@ -106,9 +106,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->setRowClass(function ($iterator, $ticket) {
 					  $classes = array();
 
+						$deadline = $ticket->deadline != null ? clone $ticket->deadline : null;
+
 					  if($ticket->state->isFinal())
 						  $classes[] = 'closedTicket';
-					  elseif($ticket->deadline != null && $ticket->deadline->format("U") < time())
+					  elseif($deadline && $deadline->add(\DateInterval::createFromDateString('1 day'))->format("U") < time())
 						  $classes[] = 'overdueTicket';
 
 					  if($ticket->priority !== null && $ticket->priority->exists()) {
@@ -172,15 +174,18 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
               		return;
             	} 
             
-            	echo Nette\Utils\Html::el("abbr")
-              		->title($ticket->getProject()->deadline->format("d. m. Y"))
-                	->setText(vManager\Application\Helpers::timeAgoInWords($ticket->getProject()->deadline));
-           		return;
+            	$deadline = $ticket->getProject()->deadline;
+
+			   } else {
+			   		$deadline = $ticket->deadline;
 			   }
 			   
+			   $deadline2 = clone $deadline;
+			   $deadline2->add(\DateInterval::createFromDateString('1 day'));
+			   
 				echo Nette\Utils\Html::el("abbr")
-				 	->title($ticket->deadline->format("d. m. Y"))
-				 	->setText(vManager\Application\Helpers::timeAgoInWords($ticket->deadline));
+				 	->title($deadline->format("d. m. Y"))
+				 	->setText(vManager\Application\Helpers::timeAgoInWords($deadline2));
 			 },
 			 "sortable" => true
 		))->setCellClass("date deadline");
