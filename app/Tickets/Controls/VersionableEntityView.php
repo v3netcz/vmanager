@@ -125,6 +125,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 
 		$tpl->registerHelper('texy', callback($texy, 'process'));
 		$tpl->registerHelper('timeAgoInWords', 'vManager\Application\Helpers::timeAgoInWords');
+		$tpl->registerHelper('timeDiffInWords', 'vManager\Application\Helpers::timeDiffInWords');
 
 		$tpl->order = $this->order;
 		$tpl->data = $this->order == self::DESC ? reset($this->data) : end($this->data);

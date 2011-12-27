@@ -104,4 +104,22 @@ class Helpers {
 		return _nx('%d year ago', '%d years ago', round($delta / 525960), array(round($delta / 525960)));
 	}
 
+	public static function timeDiffInWords($diffTimestamp) {
+		$meta = floor($diffTimestamp/60);
+		$result = '';
+		if ($meta > 24*60) {
+			$diff = floor($meta/(24*60));
+			$result .= _nx('%d day, ', '%d days, ', $diff, array ($diff));
+			$meta -= $diff*24*60;
+		}
+		if ($meta > 60) {
+			$diff = floor($meta/60);
+			$result .= _nx('%d hour ', '%d hours ', $diff, array ($diff));
+			$meta -= $diff*60;
+		}
+		if ($meta > 1) {
+			$result .= (isset($diff)?__('and '):'')._nx('%d minute', '%d minutes', $meta, array ($meta));
+		}
+		return $result;
+	}
 }

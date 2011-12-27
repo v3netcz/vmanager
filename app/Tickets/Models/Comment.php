@@ -36,6 +36,7 @@ use vManager, vBuilder, Nette;
  * @Column(text, realName="comment", type="string")
  * @Column(private, type="boolean")
  * @Column(attachments, type="OneToMany", entity="vManager\Modules\Tickets\Attachment", joinOn="id=commentId")
+ * @Column(deadlineThen, type="DateTime")
  */
 class Comment extends vBuilder\Orm\ActiveEntity {
 	

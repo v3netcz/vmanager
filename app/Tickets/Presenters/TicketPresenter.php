@@ -346,10 +346,9 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$ticket->comment->text = $values['comment'];
 
 			if (isset($values['private']) && !empty($values['private'])) {
-        $ticket->comment->private = $values['private'];
+				$ticket->comment->private = $values['private'];
 			} else {
-        $ticket->comment->private = false;
-
+				$ticket->comment->private = false;
 			}
 			$changed = true;
 		} else {
@@ -414,6 +413,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$priority = $this->context->repository->get('vManager\\Modules\\Tickets\\Priority', $values['priority']);
 			$ticket->priority = $priority->exists() ? $priority : null;
 			$changed = true;
+		}
+		
+		if ($ticket->comment) {
+			$ticket->comment->deadlineThen = $ticket->deadline;
 		}
 
 		foreach(array('name', 'description', 'deadline') as $curr) {
