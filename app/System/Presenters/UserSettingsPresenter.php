@@ -49,7 +49,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 
 		$form->addText('salutation', __('Salutation: '))
 				  ->addRule(Form::FILLED, __('Salutation cannot be empty.'))
-				  ->setValue($user->getSalutation());
+				  ->setDefaultValue($user->getSalutation());
 
 		$form->addText('name', __('Name:'))
 				  ->addRule(Form::FILLED, __('Name cannot be empty.'))
@@ -124,15 +124,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 				// The $user->identity->getAvatarUrl() method, however, favores jpg's
 				// so we have to delete any pictures that are there. Nette\Finder unfortunately
 				// doesn't really help us here.
-				$exts = array ('jpg','png','gif');
-
-				// the file saver will overwrite this one
-				unset($exts[array_search($avatar->extension, $exts)]);
-				foreach ($exts as $ext) {
-					$file = FILES_DIR.'/avatars/'.$uid.'.'.$ext;
-					if (file_exists($file))
-						unlink($file);
-				}
+				vManager\Modules\Users\Helpers::deleteUserAvatar($uid);
 				$avatar->setFilename($uid);
 				$path = FILES_DIR.$avatar->save('/avatars/');
 				$img = Nette\Image::fromFile($path);

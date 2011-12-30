@@ -90,6 +90,7 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 			"handler" => function ($row) use ($grid) {
 				if(!$row) Nette\Environment::getApplication()->getPresenter()->flashMessage(__('Record not found'), 'warn');
 				else {
+					Helpers::deleteUserAvatar($row->id);
 					$row->delete();
 					Nette\Environment::getApplication()->getPresenter()->flashMessage(_x("User %s has been removed.", array($row->username)));
 				}
