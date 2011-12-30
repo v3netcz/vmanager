@@ -84,6 +84,12 @@ class UploadedFile extends Nette\Object
 		return $this;
 	}
 	
+	public function setFilename($filename) {
+		$this->filename = $filename;
+		$this->saver->setFilename($filename);
+		return $this;
+	}
+	
 	/**
 	 *
 	 * @param string $destination rlative path to where to save the file

@@ -36,6 +36,8 @@ class FileSaver extends Nette\Object
 {	
 	private $file;
 	
+	private $filename;
+	
 	private static $dirname;
 	private static $relativeDir;
 	private static $prefix;
@@ -49,10 +51,19 @@ class FileSaver extends Nette\Object
 		return $this->file;
 	}
 	
+	public function getFilename() {
+		return $this->filename ?: $this->file['filename'];
+	}
+	
+	public function setFilename($filename) {
+		$this->filename = $filename;
+		return $this;
+	}
+	
 	public function save($autoRenameDuplicates = true) {
 		if($this->getFile()->isOk()) {
 			$file = $this->generateFileName($autoRenameDuplicates);
-			$path = $file['filename'].($file['extension']?'.'.$file['extension']:'');
+			$path = $this->getFilename().($file['extension']?'.'.$file['extension']:'');
 			if ($this->getFile()->move(self::getFilesDir().$path)) {
 				$file['mimeType'] = $this->getFile()->getContentType();
 				$file['uploadedPath'] = self::$relativeDir . '/' . $path;
@@ -78,7 +89,7 @@ class FileSaver extends Nette\Object
 		$parts = \pathinfo($webalized);
 		$extension = isset($parts['extension']) ? $parts['extension'] : null;
 		if (!$withExtension) {
-			$webalized = $parts['filename'];
+			$webalized = $this->getFilename();
 			$extension = null;
 		}
 		$file = self::getFilesDir() . $webalized;
