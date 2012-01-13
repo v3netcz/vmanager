@@ -415,9 +415,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$changed = true;
 		}
 		
-		if ($ticket->comment) {
+		// Deadline u komentaru? WTF? Proc se to nebere z aktualniho stavu ticketu?
+		/* if ($ticket->comment) {
 			$ticket->comment->deadlineThen = $ticket->deadline;
-		}
+		} */
 
 		foreach(array('name', 'description', 'deadline') as $curr) {
 			if($ticket->{$curr} != $values[$curr]) {

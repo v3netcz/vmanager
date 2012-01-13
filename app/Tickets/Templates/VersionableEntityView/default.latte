@@ -10,9 +10,12 @@
 							<img src="{=$curr->author->avatarUrl}" width="30" alt="Avatar" style="vertical-align:middle; padding-top:10px; padding-bottom:10px; padding-right:10px" />
 							{if $curr->author !== null}{if $curr->author->exists()}{$curr->author->username}{else}<?php echo _x('User n. %d', array($curr->author->id)); ?>{/if}{else}<?php echo __('nobody'); ?>{/if}
 							@ <abbr title="{$curr->timestamp}">{$curr->timestamp|timeAgoInWords}</abbr>
-							{if $curr->comment && $curr->comment->deadlineThen->getTimestamp() < $curr->timestamp->getTimestamp()}
+							{* Vyhazuje vyjimku u starych komentaru, co nemaji deadlineThen jeste definovany *}
+							{*if $curr->comment && isset($curr->comment->deadlineThen) && isset($curr->timestamp) && $curr->comment->deadlineThen->getTimestamp() < $curr->timestamp->getTimestamp()}
 								| <i>{$curr->timestamp->getTimestamp()-60*60*24-$curr->comment->deadlineThen->getTimestamp()|timeDiffInWords} <?php echo __('after the deadline') ?></i>
-							{/if}
+							{/if*}
+							
+							{* TODO *}
 							{*if $curr->author->id == Nette\Environment::getUser()->id}
 								{if $curr->comment && $curr->comment->private}
 									<a href="#" class="boxHeadButton privateToggle" title="<?php echo __('Make this comment public'); ?>"><img src="/images/icons/small/white/User%20Comment.png" /></a>
