@@ -39,15 +39,6 @@
 	<div class="flat_area grid_16" style="margin-bottom: 20px;">
 		<h2><?php echo __('Invoices'); ?></h2>
 		<a href="{link Invoice:newInvoice}" class="color-button"><?php echo __('Create new invoice'); ?></a>
-		
-		{*if isset($years)}
-			<div class="yearSelectionBox">
-			Roky: 
-			{foreach $years as $curr}
-				[<a href="{link this, 'year' => $curr}">{$curr}</a>]
-			{/foreach}
-			</div>
-		{/if*}
 	</div>
 	
 	{include ../../../System/Templates/Includes/flashes.latte}
