@@ -1,0 +1,43 @@
+{extends '../../../System/Gridito/Templates/grid.latte'}
+{*var $form = $presenter['ticketFilter']*}
+{block tableHead}
+	<tr>
+		{*<td colspan="{=count($control['columns']->getComponents())}" class="ui-widget-header">
+			{control $form begin}
+			<div class="filterHeader">
+				<div class="filterInputGroup" n:if="isset($form['state'])">
+					{$form['state']->label}
+					{$form['state']->control}
+				</div>
+				
+				<div class="filterInputGroup" n:if="isset($form['assignedTo'])">
+					{$form['assignedTo']->label}
+					{$form['assignedTo']->control}
+				</div>
+				
+				<div class="filterInputGroup" n:if="isset($form['projectId'])">
+					{$form['projectId']->label}
+					{$form['projectId']->control}
+				</div>
+				
+				{$form['send']->control}
+				<div class="clear"></div>
+			</div> 						 
+			{control $form end}
+		</td>*}
+		<td colspan="{=count($control['columns']->getComponents()) + 1}" class="ui-widget-header">
+			<div class="filterHeader">
+				{if isset($presenter->template->years)}
+				<div class="yearSelectionBox">
+				Rok:&nbsp;&nbsp;
+				{foreach $presenter->template->years as $curr}
+					[<a href="{plink this, 'year' => $curr}" style="{if $presenter->getParam('year') == $curr || ($presenter->getParam('year') == NULL && $curr == date('Y'))}color: orange;{else}color: yellow;{/if}">&nbsp;{$curr}&nbsp;</a>]
+				{/foreach}
+			</div>
+		{/if}
+			
+				<div class="clear"></div>
+			</div> 	
+		</td>
+	</tr>
+{/block}

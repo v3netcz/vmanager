@@ -36,6 +36,9 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 	/** @var array of invoices */
 	private $invoices;
 	
+	/** @persistent */
+	public $year;
+	
 	protected function getInvoices() {
 		if($this->invoices !== null) return $this->invoices;
 		
@@ -101,12 +104,15 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 				 
 				 'canceled' => $curr->isCanceled(),
 				 'paid' => $curr->isPaid(),
-				 'overdue' => $curr->isOverdue()
+				 'overdue' => $curr->isOverdue(),
+				 
+				 'paidDate' => $curr->isPaid() ? $curr->getPaymentDate()->format("d. m. Y") : '-'
 			);
 		}
 		
 		
 		$grid = new vManager\Grid($this, $name);		
+		$grid->setTemplateFile(__DIR__ . '/../Templates/Gridito/invoiceGrid.latte');
 		$grid->setModel(new vManager\Grid\ArrayModel($data));
 		
 		$grid->setRowClass(function ($iterator, $row) {
@@ -129,6 +135,7 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 				  
 		$grid->addColumn("date", __('Date of issuance'))->setCellClass("issuance");
 		$grid->addColumn("deadline", __('Due date'))->setCellClass("deadline");
+		$grid->addColumn("paidDate", __('Paid date'))->setCellClass("paidDate");
 		$grid->addColumn("total", __('Value'))->setCellClass("price");
 		
 		$grid->addButton("btnCancel", __('Cancel'), array(
