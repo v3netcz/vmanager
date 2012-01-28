@@ -1,0 +1,20 @@
+{*block head}
+	<style>
+
+	</style>
+{/block*}
+
+{block content}
+	<div class="flat_area grid_16" style="margin-bottom: 20px;">
+		<h2><?php echo __('Employees'); ?></h2>
+		{* <a href="{link Invoice:newInvoice}" class="color-button"><?php echo __('Create new invoice'); ?></a> *}
+	</div>
+	
+	{include ../../../System/Templates/Includes/flashes.latte}
+	
+	<div class="box grid_16 round_all">
+		<div class="employeeListing">
+			{control employeeGrid}
+		</div>
+	</div>
+{/block}

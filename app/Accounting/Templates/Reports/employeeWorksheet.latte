@@ -1,0 +1,63 @@
+{extends '@layout.latte'}
+
+{block title}
+Mzdový výkaz
+
+<div n:if="(intval($since->format('t')) - 1) == $until->diff($since)->format('%d')" style="font-size: 200%;">
+{=vManager\Application\Helpers::monthInWords($since->format('Y-m'))}
+</div>
+{/block}
+
+{block content}
+<style>
+TABLE.workHoursTable {
+	border-top: 1px solid black;
+	width: 100%;
+	margin-top: 30px;
+}
+
+TABLE.workHoursTable TD {
+	border-bottom: 1px solid #efefef;
+	padding: 8px 5px;
+}
+
+TABLE.workHoursTable TD.date {
+	text-align: right;
+	width: 50px;
+}
+
+TABLE.workHoursTable TD.hours {
+	text-align: right;
+	width: 90px;
+	padding-right: 15px;
+}
+</style>
+
+<div>
+<div style="font-size: 200%;">{$employee->displayName}</div>
+Rodné číslo: {$employee->in}
+</div>
+
+<table width="100%" style="font-size: 9pt; margin-top: 20px; line-height: 150%;"><tr>
+	<td width="50%">
+	za období: <strong>{$since->format('j. n. Y')} - {$until->format('j. n. Y')}</strong><br />
+	celkem odpracováno: <?php echo _nx('%d hour', '%d hours', $sum, array($sum)); ?><br />
+	mzda: {=vStore\Latte\Helpers\Shop::currency($payPerHour)} Kč / hod
+	</td>
+
+	<td style="vertical-align: top;">
+	vypočtená hrubá mzda: {=vStore\Latte\Helpers\Shop::currency($pay)}<br />
+	srážková daň: {=vStore\Latte\Helpers\Shop::currency($tax)}<br />
+	čistá mzda: <strong>{=vStore\Latte\Helpers\Shop::currency($pay - $tax)}</strong>
+	</td>
+</tr></table>
+
+<table class="workHoursTable" n:if="isset($workHours)">
+	<tbody>
+		<tr n:foreach="$workHours as $curr">
+			<td class="date">{$curr->date->format('j. n.')}</td>
+			<td class="hours">{=number_format($curr->hours, 2)} h</td>
+			<td class="desc">{$curr->description}</td>
+		</tr>
+	</tbody>
+</table>

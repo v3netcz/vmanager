@@ -1,0 +1,20 @@
+{extends '../../../System/Gridito/Templates/grid.latte'}
+
+{block tableHead}
+	<tr>
+		<td colspan="{=count($control['columns']->getComponents())}" class="ui-widget-header">
+			<div class="filterHeader">
+				{if isset($presenter->template->employee)}
+				<div class="yearSelectionBox">
+				Měsíc:&nbsp;&nbsp;
+				{foreach $presenter->template->employee->employedMonths as $curr}
+					[<a href="{plink this, 'month' => $curr}" style="{if $presenter->getParam('month') == $curr || ($presenter->getParam('month') == NULL && $curr == date('Y-m'))}color: orange;{else}color: yellow;{/if}">&nbsp;{=vManager\Application\Helpers::monthInWords($curr)}&nbsp;</a>]
+				{/foreach}
+				</div>
+				{/if}
+			
+				<div class="clear"></div>
+			</div> 	
+		</td>
+	</tr>
+{/block}

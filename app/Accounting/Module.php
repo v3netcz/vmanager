@@ -72,6 +72,7 @@ class Accounting extends vManager\Application\Module implements vManager\Applica
 	public function initPermission(Nette\Security\Permission & $acl) {
 		$acl->addResource('Accounting');
 		$acl->addResource('Accounting:Invoice', 'Accounting');
+		$acl->addResource('Accounting:Employee', 'Accounting');
 		
 		$acl->addRole('Accounting Manager', 'User');
 		$acl->allow('Accounting Manager', 'Accounting', Nette\Security\Permission::ALL);
@@ -85,13 +86,31 @@ class Accounting extends vManager\Application\Module implements vManager\Applica
 	public function getMenuItems() {
 		$menu = array();
 		
-		if(Nette\Environment::getUser()->isAllowed('Accounting:Invoice', 'default')) {		
+		$user = Nette\Environment::getUser();
+		
+		if($user->isAllowed('Accounting:Invoice', 'default')) {
+			$childMenus = array();
+			
+			$childMenus[] = array(
+				'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Invoice:default'),
+				'label' => __('Invoices')
+			);
+			
+			if($user->isAllowed('Accounting:Employee', 'default')) {
+				$childMenus[] = array(
+					'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Employee:default'),
+					'label' => __('Employees')
+				);
+			}
+		
 			$menu[] = array(
-				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Invoice:default'),
-				'label' => __('Invoices'),
-				'icon' => System::getBasePath() . '/images/icons/small/grey/Money.png'
+				'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Invoice:default'),
+				'label' => __('Accounting'),
+				'icon' => System::getBasePath() . '/images/icons/small/grey/Money.png',
+				'children' => $childMenus
 			);
 		}
+		
 		
 		return $menu;
 	}

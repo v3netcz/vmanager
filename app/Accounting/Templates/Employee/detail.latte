@@ -1,0 +1,83 @@
+{block head}
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		// Load the Visualization API and the piechart package.
+		google.load('visualization', '1.0', {'packages':['corechart']});
+
+		// Set a callback to run when the Google Visualization API is loaded.
+		google.setOnLoadCallback(drawChart);
+
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+		function drawChart() {
+
+			// Create the data table.
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', '');
+			data.addColumn('number', 'Kč');
+			data.addRows([
+				['Odpracováno', {$sum}],
+				['Zbývá do limitu', Math.floor(10000 / {$payPerHour}) - {$sum}]
+			]);
+
+			// Set chart options
+			var options = {'title':' ',
+				'width':400,
+				'height':160,
+				'colors': ['#3366cc', '#912237']
+			};
+
+			// Instantiate and draw our chart, passing in some options.
+			var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		}
+	</script>
+{/block}
+
+{block content}
+
+	<div class="flat_area grid_16" style="margin-bottom: 20px;">
+		<h2>{$employee->displayName}</h2>
+		
+		<a href="#addWorkHours" onclick="$('#frmaddWorkHoursForm-date').focus();" class="color-button"><?php echo __('Report work hours'); ?></a>
+		<a href="{link Employee:report}" class="color-button"><?php echo __('Save report'); ?></a>
+
+	</div>
+	
+	{include ../../../System/Templates/Includes/flashes.latte}
+	
+	<div class="box grid_16 round_all">
+		<div class="employeeListing">
+			{control workHoursGrid}
+		</div>
+	</div>
+	
+	<div class="box grid_8 round_all">
+		<h2 class="box_head grad_colour"><?php echo __('Summary'); ?></h2>
+		<a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>
+		<div class="toggle_container">
+			<div class="block" style="padding-bottom: 15px; line-height: 180%;">
+				Období: {$presenter->getSince()->format('j. n. Y')} - {$presenter->getUntil()->format('j. n. Y')}<br />
+				Počet odpracovaných hodin: {$sum}<br />
+				Vypočtená hrubá mzda: <strong>{=vStore\Latte\Helpers\Shop::currency($pay)}</strong>
+				
+				<div id="chart_div"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="box grid_8 round_all">
+		<h2 class="box_head grad_colour"><?php echo __('Report work hours'); ?></h2>
+		<a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>
+		<div class="toggle_container">
+			<div class="block">
+				<a name="addWorkHours"></a>	
+				{control addWorkHoursForm}
+			</div>
+		</div>
+	</div>
+	
+{/block}

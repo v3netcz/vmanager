@@ -1,0 +1,227 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2012-01-28 20:43+0200\n"
+"Language: cs\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:89
+msgid "Name"
+msgstr "Jméno"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:90
+msgid "Surname"
+msgstr "Příjmení"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:91
+msgid "National Identification Number"
+msgstr "Rodné číslo"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:92
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:168
+msgid "E-mail"
+msgstr "E-mail"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:100
+msgid "View employee card"
+msgstr "Zobrazit zaměstnaneckou kartu"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:102
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:138
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:151
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:161
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:171
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:182
+msgid "Record not found"
+msgstr "Záznam nenalezen"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:143
+msgid "Date"
+msgstr "Datum"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:152
+msgid "# Hours"
+msgstr "Počet hodin"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:159
+msgid "Job description"
+msgstr "Popis práce"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:122
+msgid "ID"
+msgstr "ID"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:123
+msgid "Customer"
+msgstr "Zákazník"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:130
+msgid "Date of issuance"
+msgstr "Datum vystavení"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:131
+msgid "Due date"
+msgstr "Datum splatnosti"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:132
+msgid "Value"
+msgstr "Hodnota"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:134
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:141
+#, php-format
+msgid "Invoice %s has been marked as canceled."
+msgstr "Faktura %s byla označena jako zrušená."
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:148
+msgid "Pay"
+msgstr "Zaplaceno"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:158
+msgid "Use as template"
+msgstr "Použít jako šablonu"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:179
+msgid "View"
+msgstr "Zobrazit"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:195
+msgid "File not found"
+msgstr "Soubor nenalezen"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:226
+msgid "Missing ID"
+msgstr "Chybí ID"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:230
+msgid "Recipient"
+msgstr "Příjemce"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:231
+msgid "Subject"
+msgstr "Předmět"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:237
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:287
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:365
+msgid "Save"
+msgstr "Uložit"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:257
+#, php-format
+msgid "Message has been sent. Recipient: %s"
+msgstr "Zpráva byla odeslána. Příjemce: %s"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:273
+msgid "Replace?"
+msgstr "Přepsat?"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:310
+msgid "Malformed XML data."
+msgstr "Chybná XML data."
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:333
+#, php-format
+msgid "Invoice with ID %s already exists."
+msgstr "Faktura číslo %s již existuje."
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:346
+#, php-format
+msgid "Invoice with ID %s has been successfuly created."
+msgstr "Faktura byla úspěšně vytvořena. Pořadové číslo: %s"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:361
+msgid "Date of payment recieve:"
+msgstr "Datum obdržení platby:"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:376
+msgid "Payment has been recorded."
+msgstr "Platba byla zaznamenána."
+
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:48
+msgid "You don't have enough privileges to perform this action."
+msgstr "Nemáte dostatečné oprávnění pro tuto akci."
+
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:96
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Invoice/default.latte:40
+msgid "Invoices"
+msgstr "Faktury"
+
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:102
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Employee/default.latte:9
+msgid "Employees"
+msgstr "Zaměstnanci"
+
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:108
+msgid "Accounting"
+msgstr "Účetnictví"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Invoice/default.latte:41
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Employee/default.latte:10
+msgid "Create new invoice"
+msgstr "Vytvořit novou fakturu"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Invoice/default.latte:62
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Employee/detail.latte:57
+msgid "Summary"
+msgstr "Souhrn"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Invoice/email.latte:14
+msgid "Send by e-mail"
+msgstr "Poslat e-mailem"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Invoice/newInvoice.latte:18
+msgid "New invoice"
+msgstr "Nová faktura"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Invoice/pay.latte:5
+msgid "Log payment"
+msgstr "Zapsat platbu"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Employee/detail.latte:44
+msgid "Save report"
+msgstr "Uložit report"
+
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d hodina"
+msgstr[1] "%d hodiny"
+msgstr[2] "%d hodin"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:204
+msgid "Date:"
+msgstr "Datum:"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:210
+msgid "Work hours for this date have already been set"
+msgstr "Zadané datum již má zapsané odpracované hodiny"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:217
+msgid "Hours:"
+msgstr "Odpracované hodiny:"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:220
+msgid ""
+"Work hours have to be decimal number. Minimum step is 0.25 hour (15 minutes)."
+msgstr "Odpracované hodiny musí být desetinné číslo. Nejmenší krok je 0.25 (15 minut)."
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:222
+msgid "Job description:"
+msgstr "Popis odvedené práce"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:222
+msgid "Job description is mandatory"
+msgstr "Popis odvedené práce nesmí být prázdný"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:224
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Employee/detail.latte:43
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Employee/detail.latte:72
+msgid "Report work hours"
+msgstr "Zapsat hodiny"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:232
+msgid "Work hours has been reported"
+msgstr "Odpracované hodiny byly úspěšně zapsány"
