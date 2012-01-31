@@ -48,7 +48,11 @@ class ExpensePresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid = new vManager\Grid($this, $name);
 		$grid->setTemplateFile(__DIR__ . '/../Templates/Gridito/expenseGrid.latte');
 		
-		$model = new vManager\Grid\OrmModel($this->context->repository->findAll(self::ENTITY_EXPENSE));
+		$ds = $this->context->repository->findAll(self::ENTITY_EXPENSE)
+				->where('[date] >= %s', $this->getSince()->format('Y-m-d'))
+				->and('[date] <= %s', $this->getUntil()->format('Y-m-d'));
+		
+		$model = new vManager\Grid\OrmModel($ds);
 
 		$grid->setModel($model);
 		$grid->setItemsPerPage(10);
@@ -121,7 +125,7 @@ class ExpensePresenter extends vManager\Modules\System\SecuredPresenter {
 		foreach($this->getMonths() as $m)
 			$months[$m] = vManager\Application\Helpers::monthInWords($m);
 		
-		$form->addSelect('month', __('Month:'), $months);
+		$form->addSelect('month', __('Month:'), $months)->setDefaultValue($this->month);
 		$form->addSubmit('send', __('Filter'));
 		
 		$presenter = $this;
@@ -143,7 +147,10 @@ class ExpensePresenter extends vManager\Modules\System\SecuredPresenter {
 			foreach($d as $curr) $this->_months[] = $curr->m;
 		}
 		
-		return $this->_months + array(date('Y-m'));
+		if(!in_array(date('Y-m'), $this->_months))
+			$this->_months[] = date('Y-m');
+		
+		return $this->_months;
 	}
 	
 	protected function setupParams() {
