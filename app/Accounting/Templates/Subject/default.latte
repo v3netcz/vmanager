@@ -1,0 +1,201 @@
+{block head}
+	<style>
+		.subjectFormTable {
+			width: 70%;
+		}
+	
+		.subjectFormTable TD {
+			padding: 10px;
+		}
+		
+		.subjectFormTable TD A {
+			color: #0a4e98 !important;
+			font-weight: normal !important;
+			text-decoration: underline;
+		}
+		
+		.subjectFormTable TD A:hover {
+			text-decoration: none;
+		}
+		
+		.subjectFormTable TD INPUT.text {
+			width: 150px !important;
+		}
+		
+		.subjectFormTable TD.separator {
+			border-top: 1px solid #eeeeee;
+			padding-bottom: 15px;
+		}
+		
+	</style>
+	<script type="text/javascript">
+		$(function() {
+			link = $('#newSubjectLoad');
+			
+			link.click(function() {
+				$(this).hide();
+				$('#newSubjectLoading').show();
+				$('#newSubjectLoadError').hide();
+			
+				url = '/accounting.subject/load-subject-info?ic=' + $('#frmnewSubjectForm-in').val();
+				
+				$.getJSON(url, function(data) {
+					$('#newSubjectLoading').hide();
+					$('#newSubjectLoad').show();
+						
+					$('#frmnewSubjectForm-name').val(data.name);
+					$('#frmnewSubjectForm-tin').val(data.tin);
+					$('#frmnewSubjectForm-street').val(data.address.street);
+					$('#frmnewSubjectForm-houseNumber').val(data.address.houseNumber);
+					$('#frmnewSubjectForm-city').val(data.address.city);
+					$('#frmnewSubjectForm-postal').val(data.address.postal);
+					$('#frmnewSubjectForm-country').val(data.address.country);
+				}).error(function() {
+					$('#newSubjectLoading').hide();
+					$('#newSubjectLoadError').show();
+					$('#newSubjectLoad').show();
+				});
+				
+				return false;
+			});
+			
+			link.show();
+		});
+	</script>
+{/block}
+
+{block content}
+	<div class="flat_area grid_16" style="margin-bottom: 20px;">
+		<h2><?php echo __('Customers / Suppliers'); ?></h2>
+		
+		<a href="#newSubjectBox" onclick="$('#newSubjectBox').slideDown(); $('#frmnewSubjectForm-in').focus();" class="color-button"><?php echo __('Add new subject'); ?></a>
+	</div>
+	
+	{include ../../../System/Templates/Includes/flashes.latte}
+	
+	<div class="box grid_16 round_all">
+		<div class="employeeListing">
+			{control subjectGrid}
+		</div>
+	</div>
+	
+	<div class="box grid_16 round_all hidden" id="newSubjectBox">
+		<h2 class="box_head grad_colour"><?php echo __('New subject'); ?></h2>
+		<a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>
+		<div class="toggle_container">
+			<div class="block">
+				<a name="newSubjectBox"></a>
+			
+				{*control newSubjectForm*}
+				{form newSubjectForm}
+					{if $form->hasErrors()}
+						<div n:foreach="$form->getErrors() as $error" class="alert alert_orange">
+							<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+							{$error}
+						</div>
+					{/if}
+				
+					<table class="subjectFormTable">
+						<tr>
+							<td style="background: #fffada;">
+								{!$form['in']->label}
+								<input type="text" class="medium text" name="{$form['in']->name}" id="frm{$form['in']->parent->name}-{$form['in']->name}" value="{$form['in']->value}" />
+								<span style="padding-left: 10px;">
+									<span class="hidden" id="newSubjectLoadError"><?php echo __('Error.'); ?></span>
+									<a href="#" class="hidden" id="newSubjectLoad"><?php echo __('Load'); ?></a>
+									<span class="hidden" id="newSubjectLoading"><?php echo __('Loading…'); ?></span>
+								</span>
+							</td>
+							
+							<td width="10%"></td>
+							
+							<td>
+								{!$form['tin']->label}
+								<input type="text" class="medium text" name="tin" id="frm{$form->name}-tin" value="{$form['tin']->value}" />
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								{!$form['name']->label}
+								<input type="text" class="medium text" name="{$form['name']->name}" id="frm{$form['name']->parent->name}-{$form['name']->name}" value="{$form['name']->value}" />
+							</td>
+							
+							<td></td>
+							<td></td>
+						</tr>
+												
+						<tr>
+							<td colspan="3" class="separator"></td>
+						</tr>
+						
+						<tr>
+							<td>
+								{!$form['street']->label}
+								<input type="text" class="medium text" name="street" id="frm{$form->name}-street" value="{$form['street']->value}" />
+								<input type="text" class="medium text" name="houseNumber" id="frm{$form->name}-houseNumber" value="{$form['houseNumber']->value}" style="width: 80px !important; margin-left: 5px;" />
+							</td>
+							
+							<td></td>
+							
+							<td>
+								{!$form['city']->label}
+								<input type="text" class="medium text" name="city" id="frm{$form->name}-city" value="{$form['city']->value}" />
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								{!$form['postal']->label}
+								<input type="text" class="medium text" name="postal" id="frm{$form->name}-postal" value="{$form['postal']->value}" />
+							</td>
+							
+							<td></td>
+							
+							<td>
+								{!$form['country']->label}
+						<input type="text" class="medium text" name="country" id="frm{$form->name}-country" value="{$form['country']->value}" />
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="3" class="separator"></td>
+						</tr>
+						
+						<tr>
+							<td>
+								{!$form['contactName']->label}
+								<input type="text" class="medium text" name="contactName" id="frm{$form->name}-contactName" value="{$form['contactName']->value}" />
+							</td>
+							
+							<td></td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td>
+								{!$form['contactEmail']->label}
+								<input type="text" class="medium text" name="contactEmail" id="frm{$form->name}-contactEmail" value="{$form['contactEmail']->value}" />
+							</td>
+							
+							<td></td>
+							
+							<td>
+								{!$form['contactPhone']->label}
+								<input type="text" class="medium text" name="contactPhone" id="frm{$form->name}-contactPhone" value="{$form['contactPhone']->value}" />
+							</td>
+						</tr>
+						
+					</table>
+
+			                
+					<button class="button_colour round_all">
+						<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
+			         	<span>{$form['s']->caption}</span>
+					</button>
+				{/form}
+			</div>
+		</div>
+	</div>
+{/block}

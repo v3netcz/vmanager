@@ -73,6 +73,7 @@ class Accounting extends vManager\Application\Module implements vManager\Applica
 		$acl->addResource('Accounting');
 		$acl->addResource('Accounting:Invoice', 'Accounting');
 		$acl->addResource('Accounting:Employee', 'Accounting');
+		$acl->addResource('Accounting:Subject', 'Accounting');
 		
 		$acl->addRole('Accounting Manager', 'User');
 		$acl->allow('Accounting Manager', 'Accounting', Nette\Security\Permission::ALL);
@@ -100,6 +101,13 @@ class Accounting extends vManager\Application\Module implements vManager\Applica
 				$childMenus[] = array(
 					'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Employee:default'),
 					'label' => __('Employees')
+				);
+			}
+			
+			if($user->isAllowed('Accounting:Subject', 'default')) {
+				$childMenus[] = array(
+					'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Subject:default'),
+					'label' => __('Customers / Suppliers')
 				);
 			}
 		
