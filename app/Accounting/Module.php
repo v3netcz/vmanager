@@ -74,6 +74,7 @@ class Accounting extends vManager\Application\Module implements vManager\Applica
 		$acl->addResource('Accounting:Invoice', 'Accounting');
 		$acl->addResource('Accounting:Employee', 'Accounting');
 		$acl->addResource('Accounting:Subject', 'Accounting');
+		$acl->addResource('Accounting:Expense', 'Accounting');
 		
 		$acl->addRole('Accounting Manager', 'User');
 		$acl->allow('Accounting Manager', 'Accounting', Nette\Security\Permission::ALL);
@@ -97,10 +98,17 @@ class Accounting extends vManager\Application\Module implements vManager\Applica
 				'label' => __('Invoices')
 			);
 			
+			if($user->isAllowed('Accounting:Expense', 'default')) {
+				$childMenus[] = array(
+					'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Expense:default'),
+					'label' => __('Expenses')
+				);
+			}
+			
 			if($user->isAllowed('Accounting:Employee', 'default')) {
 				$childMenus[] = array(
 					'url' => Nette\Environment::getApplication()->getPresenter()->link(':Accounting:Employee:default'),
-					'label' => __('Employees')
+					'label' => __('Payrolls')
 				);
 			}
 			

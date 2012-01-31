@@ -30,7 +30,7 @@ $(document).ready(function () {
 			});
 		}
 		
-		if(el.hasClass('text') && el.attr('autocomplete-src') != undefined) {
+		if(el.attr('type') == 'text' && el.attr('autocomplete-src') != undefined) {
 			var cache = {}, lastXhr;
 			
 			el.autocomplete({

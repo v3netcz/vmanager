@@ -26,6 +26,7 @@ msgstr "E-mail"
 msgid "View employee card"
 msgstr "Zobrazit zaměstnaneckou kartu"
 
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:105
 #: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:102
 #: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:145
 #: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:158
@@ -35,6 +36,8 @@ msgstr "Zobrazit zaměstnaneckou kartu"
 msgid "Record not found"
 msgstr "Záznam nenalezen"
 
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:61
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:181
 #: /var/www/vmanager/tools/../app/Accounting/Presenters/EmployeePresenter.php:143
 msgid "Date"
 msgstr "Datum"
@@ -59,6 +62,8 @@ msgstr "Zákazník"
 msgid "Date of issuance"
 msgstr "Datum vystavení"
 
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:81
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:188
 #: /var/www/vmanager/tools/../app/Accounting/Presenters/InvoicePresenter.php:137
 msgid "Due date"
 msgstr "Datum splatnosti"
@@ -145,17 +150,17 @@ msgstr "Platba byla zaznamenána."
 msgid "You don't have enough privileges to perform this action."
 msgstr "Nemáte dostatečné oprávnění pro tuto akci."
 
-#: /var/www/vmanager/tools/../app/Accounting/Module.php:97
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:98
 #: /var/www/vmanager/tools/../app/Accounting/Templates/Invoice/default.latte:40
 msgid "Invoices"
-msgstr "Faktury"
+msgstr "Vystavené faktury"
 
-#: /var/www/vmanager/tools/../app/Accounting/Module.php:103
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:111
 #: /var/www/vmanager/tools/../app/Accounting/Templates/Employee/default.latte:9
-msgid "Employees"
-msgstr "Zaměstnanci"
+msgid "Payrolls"
+msgstr "Mzdy"
 
-#: /var/www/vmanager/tools/../app/Accounting/Module.php:116
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:124
 msgid "Accounting"
 msgstr "Účetnictví"
 
@@ -228,67 +233,67 @@ msgstr "Zapsat hodiny"
 msgid "Work hours has been reported"
 msgstr "Odpracované hodiny byly úspěšně zapsány"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:58
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:59
 msgid "Subject name"
 msgstr "Název organizace"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:59
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:60
 msgid "Subject IN"
 msgstr "IČ subjektu"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:72
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:73
 msgid "Subject IN:"
 msgstr "IČ subjektu:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:77
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:78
 msgid "This subject is already in database"
 msgstr "Zadaný subjekt je již evidován"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:79
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:80
 msgid "Subject TIN:"
 msgstr "DIČ:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:80
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:81
 msgid "Subject name:"
 msgstr "Název organizace:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:82
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:83
 msgid "Street / house number:"
 msgstr "Ulice / číslo popísné:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:83
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:84
 msgid "House number is required"
 msgstr "Číslo popisné nesmí být prázdné"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:84
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:85
 msgid "City:"
 msgstr "Město:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:85
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:86
 msgid "Postal code:"
 msgstr "PSČ:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:86
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:87
 msgid "Country:"
 msgstr "Země:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:88
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:89
 msgid "Contact person name:"
 msgstr "Kontaktní osoba:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:89
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:90
 msgid "Contact e-mail:"
 msgstr "Kontaktní e-mail:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:90
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:91
 msgid "Contact phone number:"
 msgstr "Kontaktní telefon:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:92
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:93
 msgid "Add subject"
 msgstr "Přidat subjekt"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:126
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/SubjectPresenter.php:127
 #, php-format
 msgid "Subject %s has been successfully created."
 msgstr "Subjekt %s byl úspěšně přidán do evidence."
@@ -297,7 +302,7 @@ msgstr "Subjekt %s byl úspěšně přidán do evidence."
 msgid "Paid date"
 msgstr "Zaplacena dne"
 
-#: /var/www/vmanager/tools/../app/Accounting/Module.php:110
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:118
 #: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:69
 msgid "Customers / Suppliers"
 msgstr "Odběratelé / dodavatelé"
@@ -306,18 +311,103 @@ msgstr "Odběratelé / dodavatelé"
 msgid "Add new subject"
 msgstr "Přidat nový subjekt"
 
-#: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:83
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:84
 msgid "New subject"
 msgstr "Nový subjekt"
 
-#: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:105
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:109
 msgid "Error."
 msgstr "Chyba."
 
-#: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:106
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:110
 msgid "Load"
 msgstr "Načíst"
 
-#: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:107
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:111
 msgid "Loading…"
 msgstr "Načítám…"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:68
+msgid "Expense description"
+msgstr "Předmět fakturace"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:70
+msgid "Supplier"
+msgstr "Dodavatel"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:79
+msgid "Supplier evidence"
+msgstr "Číslo dokladu"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:91
+msgid "Cost"
+msgstr "Cena"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:98
+msgid "Remove"
+msgstr "Odebrat"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:101
+msgid "Are you sure you want to remove this expense?"
+msgstr "Opravdu chcete odstranit tento záznam?"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:108
+msgid "Record has been removed."
+msgstr "Záznam byl odstraněn."
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:124
+msgid "Month:"
+msgstr "Měsíc:"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:125
+msgid "Filter"
+msgstr "Zobrazit"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:170
+msgid "Supplier:"
+msgstr "Dodavatel:"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:172
+msgid "From whom did you get the receipt?"
+msgstr "Od koho jste obdržel/a fakturu?"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:177
+msgid "Supplier does not exist in subject database. Please add him first."
+msgstr "Dodavatel není evidován v databázi. Prosím přidejte jej nejprve do databáze dodavatelů."
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:179
+msgid "Supplier evidence ID:"
+msgstr "Číslo dokladu (dodavatelovo)"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:190
+msgid "Description:"
+msgstr "Předmět fakturace:"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:191
+msgid "Cost:"
+msgstr "Hodnota:"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:192
+msgid "Cost has to be a number"
+msgstr "Hodnota faktury musí být číslo"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:194
+msgid "Add expense"
+msgstr "Zapsat"
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/ExpensePresenter.php:220
+msgid "Expense has been successfully recorded."
+msgstr "Záznam byl úspěšně započítán."
+
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:104
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Expense/default.latte:71
+msgid "Expenses"
+msgstr "Přijaté faktury (náklady)"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Expense/default.latte:73
+msgid "Add new expense"
+msgstr "Zapsat fakturu"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Expense/default.latte:86
+msgid "New expense"
+msgstr "Nová přijatá faktura"

@@ -44,6 +44,7 @@ class SubjectPresenter extends vManager\Modules\System\SecuredPresenter {
 	public $id;
 	
 	private $loadedSubjectInfo;
+	private $subjectSuggestions;
 	
 	protected function createComponentSubjectGrid($name) {
 		$grid = new vManager\Grid($this, $name);
@@ -162,6 +163,34 @@ class SubjectPresenter extends vManager\Modules\System\SecuredPresenter {
 	
 	public function renderLoadSubjectInfo() {
 		$this->sendResponse(new Nette\Application\Responses\JsonResponse($this->loadedSubjectInfo));
+	}
+	
+	/**
+	 * Set matching items for current query given in typedText parameter (GET term)
+	 * 
+	 * @param string $typedText The text the user typed in the input
+	 *
+	 * @return void
+	 */
+	public function actionSuggestSubject() {
+		$typedText = $this->getParam('term', '');
+
+		$subjects = $this->context->connection->query('SELECT [name] FROM [accounting_subjects] WHERE [name] LIKE %like~ LIMIT 10', $typedText)
+			->fetchAll();
+			
+
+		$this->subjectSuggestions = array();
+		foreach($subjects as $curr)
+			$this->subjectSuggestions[] = $curr['name'];
+	}
+	
+	/**
+	 * Send the matching items for assign to field completer (JSON)
+	 * 
+	 * @return void
+	 */
+	public function renderSuggestSubject() {
+		$this->sendResponse(new Nette\Application\Responses\JsonResponse($this->subjectSuggestions));
 	}
 	
 	protected function isValidIc($ic) {

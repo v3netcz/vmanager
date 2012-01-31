@@ -1,0 +1,24 @@
+{extends '../../../System/Gridito/Templates/grid.latte'}
+
+{block tableHead}
+	<tr>
+		<td colspan="{=count($control['columns']->getComponents()) + 1}" class="ui-widget-header">
+			<div class="filterHeader">
+				{var $form = $presenter['expenseFilterForm']}
+				{control $form begin}
+				<div class="filterHeader" style="padding: 0; margin: 0;">
+					<div class="filterInputGroup" n:if="isset($form['month'])">
+						{$form['month']->label}
+						{$form['month']->control}
+					</div>
+					
+					{$form['send']->control}
+					<div class="clear"></div>
+				</div> 						 
+				{control $form end}
+			
+				<div class="clear"></div>
+			</div> 	
+		</td>
+	</tr>
+{/block}
