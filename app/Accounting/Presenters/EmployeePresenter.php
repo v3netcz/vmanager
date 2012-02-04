@@ -136,8 +136,8 @@ class EmployeePresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$grid->setModel($model);
 		$grid->setItemsPerPage(31);
-		$grid->sortColumn = 'date';
-		$grid->sortType = 'desc';
+		$grid->sortColumn = $grid->sortColumn ?: 'date';
+		$grid->sortType = $grid->sortType ?: 'desc';
 
 		// columns		
 		$grid->addColumn("date", __("Date"), array(

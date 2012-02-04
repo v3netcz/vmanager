@@ -65,10 +65,12 @@ class MonthlyPresenter extends BasePresenter {
 	protected function getMonths() {
 		if(!isset($this->_months)) {
 			$this->_months = $this->getMonthsGatherer();;
+			
+			if(!in_array(date('Y-m'), $this->_months))
+				$this->_months[] = date('Y-m');
+			
+			arsort($this->_months);
 		}
-		
-		if(!in_array(date('Y-m'), $this->_months))
-			$this->_months[] = date('Y-m');
 		
 		return $this->_months;
 	}
