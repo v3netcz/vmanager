@@ -293,11 +293,13 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 		if(isset($values['comment']) && !empty($values['comment'])) {
 			$project->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
 			$project->comment->text = $values['comment'];
+
 			if (isset($values['private']) && !empty($values['private'])) {
         $project->comment->private = $values['private'];
 			} else {
         $project->comment->private = false;
 			}
+
 			$changed = true;
 		} else {
 			$project->comment = null;
@@ -442,7 +444,9 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 		$project = $this->getProject();
 
 		$form->addTextArea('comment')->setAttribute('class', 'texyla');
-    $form->addCheckbox('private', __('Make this comment private'));		
+
+    	$form->addCheckbox('private', __('Make this comment private'));		
+
 		$form->addTextArea('description')->setValue($project->description)->setAttribute('class', 'texyla');
 
 

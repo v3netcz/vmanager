@@ -20,16 +20,32 @@
  * You should have received a copy of the GNU General Public License
  * along with vManager. If not, see <http://www.gnu.org/licenses/>.
  */
-namespace vManager\Modules\Wiki\Controls;
+
+namespace vManager\Modules\Users;
+
+use Nette, vManager, vBuilder;
 
 /**
- * 
  *
- * @author Jirka Vebr
+ * @author Jirka
  */
-interface IRenderer
-{
+class Helpers extends vBuilder\Object {
 	
-	
-	public function render(TreeComments $control, $part = null);
+	/**
+	 * Deletes user avatar;
+	 * @param type $uid user id
+	 * @param string $dir dir where to search;
+	 */
+	public static function deleteUserAvatar($uid, $dir = null) {
+		if (!$dir) {
+			$dir = Nette\Environment::getConfig('Users')->avatarDir;
+		}
+		$exts = array ('jpg','png','gif');
+
+		foreach ($exts as $ext) {
+			$file = $dir.$uid.'.'.$ext;
+			if (file_exists($file))
+				unlink($file);
+		}
+	}
 }

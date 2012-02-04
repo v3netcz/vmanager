@@ -1,42 +1,50 @@
 <?php
 
-use Nette\Diagnostics\Debugger as Debug,
-		Nette\Environment,
-		Nette\Application\Routers\Route;
+use Nette\Application\Routers\Route;
 
 // Load Nette Framework
-// this allows load Nette Framework classes automatically so that
-// you don't have to litter your code with 'require' statements
-require LIBS_DIR.'/nette/Nette/loader.php';
-require APP_DIR.'/System/Configurator.php';
-
-// Enable Nette\Debug for error visualisation & logging
-Debug::$strictMode = TRUE;
-Debug::enable();
-
-$configurator = new vManager\Configurator;
-Environment::setConfigurator($configurator);
-$context = $configurator->container;
-
-// Load configuration from config.neon file
-Environment::loadConfig();
+require LIBS_DIR . '/nette/Nette/loader.php';
 
 // Configure application
-$application = $context->application;
+$configurator = new Nette\Config\Configurator;
+
+// Nette extensions
+$configurator->onCompile[] = function($configurator, $compiler) {
+	$compiler->addExtension('database', new DibiNetteExtension);
+};
+
+$configurator->setTempDirectory(TEMP_DIR);
+
+$configurator->addParameters(array(
+	'appDir' => APP_DIR,
+	'libsDir' => LIBS_DIR,
+	'tempDir' => TEMP_DIR,
+	'logDir' => LOG_DIR,
+	'confDir' => CONF_DIR,
+	'filesDir' => FILES_DIR
+));
+
+// Enable RobotLoader - this will load all classes automatically
+$configurator->createRobotLoader()
+	->addDirectory(APP_DIR)
+	->addDirectory(LIBS_DIR)
+	->register();
+	
+// Create Dependency Injection container from config files
+$configurator->addConfig(CONF_DIR . '/config.neon', false);
+$container = $context = $configurator->createContainer();
+
+// Enable Nette Debugger for error visualisation & logging
+// It has to be after config load because of production mode detection (from config)
+Nette\Diagnostics\Debugger::$strictMode = TRUE;
+Nette\Diagnostics\Debugger::enable($container->parameters['productionMode']);
+
+// Configure application
+$application = $container->application;
 $application->errorPresenter = 'System:Error';
-$application->catchExceptions = Debug::$productionMode;
+$application->catchExceptions = $container->parameters['productionMode'];
 
-require LIBS_DIR . '/vBuilderFw/vBuilderFw/bootstrap.php';
-require LIBS_DIR . '/NetteTranslator/shortcuts.php';
-
-// Translator
-$config = $context->config;
-$lang = $config->get('system.language'); 
-if($lang === null) $lang = $context->httpRequest->detectLanguage((array) Environment::getConfig('languages', array('en')));
-if($lang == null) $lang = 'en'; // Detect muze vratit taky null, pokud neni definovana hlavicka (nektere tupe browsery ji neposilaji)
-
-Environment::setVariable('lang', $lang);
-//NetteTranslator\Panel::register();
+require LIBS_DIR . '/vBuilderFw/vBuilderFw/loader.php';
 
 // Load vManager modules
 vManager\Application\ModuleManager::getModules();
@@ -54,5 +62,5 @@ $application->onStartup[] = function() use ($application) {
 	$router[] = new Route('<presenter>/<action>[/<id>]', 'System:Homepage:default');
 };
 
-// Run the application!
-$application->run();
+// Configure and run the application!
+$container->application->run();

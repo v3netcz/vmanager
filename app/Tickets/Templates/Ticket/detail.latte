@@ -1,10 +1,8 @@
-{extends APP_DIR . '/System/Templates/@layout.latte'}
-
-{block #pageTitle}<?php echo _x('#%d %s - vManager', array($data->id, $data->name)); ?>{/block}
+{extends '../../../System/Templates/@layout.latte'}
 
 {var $data = $historyWidget->getTemplate()->data}
-{var $allFiles = $historyWidget->getTemplate()->attachments}
-{var $firstRevision = $historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->getTemplate()->history[0] : $historyWidget->getTemplate()->history[count($historyWidget->getTemplate()->history) - 1]}
+
+{block #pageTitle}<?php echo _x('#%d %s - vManager', array($data->id, $data->name)); ?>{/block}
 
 {block #head}
 <style>
@@ -21,7 +19,10 @@
 </style>
 {/block}
 
-{block content}
+{block #content}
+	{var $allFiles = $historyWidget->getTemplate()->attachments}
+	{var $firstRevision = $historyWidget->getTemplate()->order == vManager\Modules\Tickets\VersionableEntityView::ASC ? $historyWidget->getTemplate()->history[0] : $historyWidget->getTemplate()->history[count($historyWidget->getTemplate()->history) - 1]}
+
 	{include ../../../System/Templates/Includes/flashes.latte}
 	
 	<div class="flat_area grid_16">
@@ -37,6 +38,7 @@
 			{if $data->deadline}
         <?php echo _x('Deadline: <span class="value">%s</span>', array($data->deadline->format('d. m. Y'))); ?><br />
 			{else} 
+
         {if $data->getProject() && $data->getProject()->deadline}
           <?php echo _x('Deadline: <span class="value">%s</span>', array($data->getProject()->deadline->format('d. m. Y'))); ?><br />
         {/if}
@@ -86,6 +88,7 @@
 			<div id="tabs-1" class="block ui-tabs-panel ui-widget-content ui-corner-bottom">
 				<div class="content">
 					{$form['comment']->control}
+
           <div n:if="isset($form['private'])" class="checkboxBlock privateCheckboxBlock">
             {$form['private']->control}	
             {$form['private']->label}				

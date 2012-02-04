@@ -26,6 +26,7 @@ namespace vManager\Modules\System;
 use vManager,
 	 Nette,
 	 vBuilder\Orm\Repository,
+	 vManager\MultipleFileUploadControl,
 	 vManager\Form;
 
 /**
@@ -41,24 +42,23 @@ class UserSettingsPresenter extends SecuredPresenter {
 	 *
 	 * @return Form
 	 */
-	protected function createComponentUserProfileForm() {
-		$user = Nette\Environment::getUser()->getIdentity();
+	protected function createComponentUserProfileForm($name) {
+		$user = $this->user->identity;
 
-		$form = new Form;
+		$form = new Form($this, $name);
 
 		$form->addText('salutation', __('Salutation: '))
 				  ->addRule(Form::FILLED, __('Salutation cannot be empty.'))
-				  ->setValue($user->getSalutation());
-		
-		// $form->addFile('icon', 'Avatar:'); TODO: pridat podporu v db
+				  ->setDefaultValue($user->getSalutation());
+
 		$form->addText('name', __('Name:'))
 				  ->addRule(Form::FILLED, __('Name cannot be empty.'))
-				  ->setValue($user->name);
+				  ->setDefaultValue($user->name);
 		$form->addText('surname', __('Surname:'))
 				  ->addRule(Form::FILLED, __('Surname cannot be empty.'))
-				  ->setValue($user->surname);
+				  ->setDefaultValue($user->surname);
 		$form->addText('username', __('Username:'))
-				  ->setValue($user->username)
+				  ->setDefaultValue($user->username)
 				  ->addRule(Form::FILLED, __('Username cannot be empty.'))
 				  ->addRule(Form::REGEXP, __('Username have to contain alpha-numeric chars only (with exception for chars ._@-). Nor spaces or diacritic chars are allowed.'), '/^[A-Z0-9\\.\\-_@]+$/i')
 				  ->addFilter(function ($value) {
@@ -72,15 +72,25 @@ class UserSettingsPresenter extends SecuredPresenter {
 					  $users = Repository::findAll('vBuilder\Security\User')->where('[username] = %s', $control->value)->fetchSingle();
 					  return ($users === false);
 				  }, __('Desired username is already taken. Please use something else.'));
-		
+				  
 		$form->addText('email', 'E-mail:')
-				  ->setValue($user->email)
+				  ->setDefaultValue($user->email)
 				  ->addRule(Form::EMAIL, __('E-mail is not valid'));
+		
+		$form->addMultipleFileUpload('avatar', __('Select your avatar'))
+				->addRule(MultipleFileUploadControl::VALID, __('You may only upload images!'), array (
+					'jpg' => 'image/jpg',
+					'jpg' => 'image/jpeg',
+					'JPG' => 'image/jpeg',
+					'png' => 'image/png',
+					'gif' => 'image/gif'
+				))
+				->addRule(MultipleFileUploadControl::FILES_COUNT, __('You can upload one file only'), 1);
+		
 
 		$form->addSubmit('send', __('Save'));
 
 		$form->onSuccess[] = callback($this, 'userProfileFormSubmitted');
-		return $form;
 	}
 
 	/**
@@ -91,21 +101,36 @@ class UserSettingsPresenter extends SecuredPresenter {
 	public function userProfileFormSubmitted($form) {
 		//try {
 			$values = $form->getValues();
-			$user = Nette\Environment::getUser()->getIdentity();
+			$user = $this->user->identity;
 
 			$user->name = $values->name;
 			$user->surname = $values->surname;
 			$user->username = $values->username;
 			$user->email = $values->email;
-				
+			
 			// Nechci ukladat defaultni osloveni, protoze zavisi na prekladu			
 			if($values->salutation != $user->getSalutation()) {
-				$config = $this->context->config;
+				$config = $this->context->userConfig;
 				$config->set('system.salutation', $values->salutation); 
 				$config->save();
 			}
-
 			$user->save();
+			
+			$avatar = $values->avatar;
+			if (count($avatar)) { // ArrayHash doesn't support empty() :-P
+				$uid = $user->id;
+				$avatar = $avatar[0];
+				// The user may be using a jpg avatar and upload a gif, for instance.
+				// The $user->identity->getAvatarUrl() method, however, favores jpg's
+				// so we have to delete any pictures that are there. Nette\Finder unfortunately
+				// doesn't really help us here.
+				vManager\Modules\Users\Helpers::deleteUserAvatar($uid);
+				$avatar->setFilename($uid);
+				$path = FILES_DIR.$avatar->save('/avatars/');
+				$img = Nette\Image::fromFile($path);
+				$img->resize(122, 122);
+				$img->save($path);
+			}
 			$this->flashMessage(__('All changes are saved.'));
 			$this->redirect('default');
 		/*} catch(\Exception $e) {
@@ -129,7 +154,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 			$selLanguages[$curr] = $curr;
 		}
 		
-		$config = $this->context->config;
+		$config = $this->context->userConfig;
 		$lang = $config->get('system.language'); 
 		
 		$form->addSelect('language', __('Language:'), $selLanguages)->setValue($lang);
@@ -142,7 +167,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 	
 	public function environmentFormSubmitted($form) {
 		$values = $form->getValues();
-		$config = $this->context->config;
+		$config = $this->context->userConfig;
 		$config->set('system.language', empty($values->language) ? null : $values->language); 
 		$config->save();
 
@@ -207,5 +232,4 @@ class UserSettingsPresenter extends SecuredPresenter {
 			$form->addError($e->getMessage());
 		}
 	}
-
 }

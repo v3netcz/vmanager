@@ -8,6 +8,7 @@
 		<a href="#" class="toggle">&nbsp;</a>
 		<div class="toggle_container">
 			<div class="block">
+				<img src="{=$user->getIdentity()->getAvatarUrl()}" alt="<?php echo __('Current avatar'); ?>" />
 				{control userProfileForm}
 			</div>
 		</div>

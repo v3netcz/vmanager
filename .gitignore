@@ -1,4 +1,4 @@
-/app/config.neon
+/app/config/local.neon
 /nbproject/
 /temp/
 !/temp/.htaccess

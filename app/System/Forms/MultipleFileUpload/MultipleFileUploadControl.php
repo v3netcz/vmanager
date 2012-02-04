@@ -62,9 +62,12 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 	const FILLED = ':filled';
 	const SIZE = ':size';
 	const AGGREGATE_SIZE = ':aggregateSize';
+	const FILES_COUNT = ':filesCount';
+	const FILES_MAX_COUNT = ':filesMaxCount';
 	
 	private static $registered = false;
 	private static $valid = array();
+	private $_control;
 
 
 	public function __construct($label) {
@@ -144,11 +147,15 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 
 
 	public function getControl() {
-		$control = parent::getControl();
-		$control->name .= '[]'; // allowing multiple files
-		$control->class = array('file', 'upload', 'multipleUpload');
-		//$control->class[] = 'multiple';
-		return $control;
+		if (!$this->_control) {
+			$control = parent::getControl();
+			$control->name .= '[]'; // allowing multiple files
+			$control->class = array('file', 'upload', 'multipleUpload');
+			unset($control->data);
+			//$control->class[] = 'multiple';
+			$this->_control = $control;
+		}
+		return $this->_control;
 	}
 	
 	public function getValue() {
@@ -179,9 +186,13 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 				}
 			}
 			return parent::addRule(self::VALID, $message, $modes);
-		} else {
-			return parent::addRule($operation, $message, $arg);
+		} elseif ($operation === self::FILES_COUNT && $arg === 1) {
+			$control = $this->getControl();
+			unset($control->multiple);
+			unset($control->class[array_search('multipleUpload', $control->class)]);
+			$this->_control = $control;
 		}
+		return parent::addRule($operation, $message, $arg);
 	}
 	
 	private static function isUploaded($control) {
@@ -268,6 +279,20 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 			if ($total >= $totalSize) {
 				return false;
 			}
+		}
+		return true;
+	}
+	
+	public static function validateFilesCount(MultipleFileUploadControl $control, $count) {
+		if (self::isUploaded($control)) {
+			return count($control->getFiles()) === $count;
+		}
+		return true;
+	}
+	
+	public static function validateFilesMaxCount(MultipleFileUploadControl $control, $count) {
+		if (self::isUploaded($control)) {
+			return count($control->getFiles()) <= $count;
 		}
 		return true;
 	}

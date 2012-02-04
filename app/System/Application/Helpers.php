@@ -104,4 +104,45 @@ class Helpers {
 		return _nx('%d year ago', '%d years ago', round($delta / 525960), array(round($delta / 525960)));
 	}
 
+	public static function timeDiffInWords($diffTimestamp) {
+		$meta = floor($diffTimestamp/60);
+		$result = '';
+		if ($meta > 24*60) {
+			$diff = floor($meta/(24*60));
+			$result .= _nx('%d day, ', '%d days, ', $diff, array ($diff));
+			$meta -= $diff*24*60;
+		}
+		if ($meta > 60) {
+			$diff = floor($meta/60);
+			$result .= _nx('%d hour ', '%d hours ', $diff, array ($diff));
+			$meta -= $diff*60;
+		}
+		if ($meta > 1) {
+			$result .= (isset($diff)?__('and '):'')._nx('%d minute', '%d minutes', $meta, array ($meta));
+		}
+		return $result;
+	}
+	
+	public static function monthInWords($monthStr) {
+		$y = mb_substr($monthStr, 0, 4);
+		$m = intval(mb_substr($monthStr, 5, 2));
+		
+		switch($m) {
+			case 1: return _x('January %d', array($y));
+			case 2: return _x('February %d', array($y));
+			case 3: return _x('March %d', array($y));
+			case 4: return _x('April %d', array($y));
+			case 5: return _x('May %d', array($y));
+			case 6: return _x('June %d', array($y));
+			case 7: return _x('July %d', array($y));
+			case 8: return _x('August %d', array($y));
+			case 9: return _x('September %d', array($y));
+			case 10: return _x('October %d', array($y));
+			case 11: return _x('November %d', array($y));
+			case 12: return _x('December %d', array($y));
+		}
+		
+		return $monthStr;
+	}
+
 }

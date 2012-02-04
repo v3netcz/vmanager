@@ -68,6 +68,10 @@ class Permission extends Nette\Security\Permission {
 	public function isAllowed($role, $resource, $privilege) {
 		if(!$this->initialized) $this->init();
 		
+		// Nechceme vyjimky o neexistenci role, protoze
+		// uzivatel muze mit prirazene role, ktere neexistuji napr. z duvodu zdisablovani modulu
+		if(!$this->hasRole($role)) return false;
+		
 		return parent::isAllowed($role, $resource, $privilege);
 	}
 	

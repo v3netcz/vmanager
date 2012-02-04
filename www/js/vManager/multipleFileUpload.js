@@ -13,6 +13,13 @@
 		this.filter('input:file').each(function () {
 			var $this = $(this),
 				id = $this.attr('id');
+			if (!$this.is('.multipleUpload')) {
+				$this.uniform({
+					fileBtnText: config.fileBtnText,
+					fileDefaultText: config.fileDefaultText
+				});
+				return true; // continue;
+			}
 			$this.removeAttr('id');
 			var masterClone = $this.clone(),
 				getLi = function () {

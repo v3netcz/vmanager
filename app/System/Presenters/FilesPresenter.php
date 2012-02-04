@@ -81,7 +81,7 @@ class FilesPresenter extends BasePresenter {
 			}
 		} 
 
-		throw new BadRequestException("Data file '$file' not found", 404);
+		throw new BadRequestException("Data file '$file' not found.", 404);
 	}
 
 	/**

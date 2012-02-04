@@ -84,6 +84,7 @@ class Project extends vBuilder\Orm\ActiveEntity {
 	  */
 	 function getResolvedTicketCount() {
 		 if($this->_resolvedTicketCount === null) {
+
 			 $stateIds = array();
 			 foreach(vManager\Modules\Tickets::getInstance()->finalTicketStates as $curr)
 				 $stateIds[] = $curr->id;

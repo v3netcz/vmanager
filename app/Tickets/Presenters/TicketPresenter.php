@@ -204,7 +204,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 					 return;
 				 }
 
-				 echo Nette\Templating\DefaultHelpers::escapeHtml($ticket->priority->label);
+				 echo Nette\Templating\Helpers::escapeHtml($ticket->priority->label);
 			 },
 			 "sortable" => true
 		))->setCellClass("priority");

@@ -227,6 +227,7 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 		return $log;
 	}
 	
+
   public function isResponsibleUser(vBuilder\Security\User $user) {
       if ($this->data->assignedTo !== null) {
         if ($this->data->assignedTo == $user->id) 

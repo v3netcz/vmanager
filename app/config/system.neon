@@ -1,0 +1,18 @@
+# System configuration (DO NOT TOUCH THIS FILE. EDIT config.neon INSTEAD!)
+ 
+php:
+	date.timezone: Europe/Prague
+	# session.save_path: "%tempDir%/sessions"
+	# zlib.output_compression: yes
+	# default_charset: "UTF-8"
+ 
+nette:
+	session:
+		autoStart: false
+         
+services:
+ 
+	# DB connection (dibi)
+	connection:
+		class: DibiConnection
+		arguments: ['%database%']

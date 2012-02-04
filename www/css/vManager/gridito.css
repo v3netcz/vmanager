@@ -315,6 +315,22 @@ A.button_orange {
 	text-shadow:0px -1px 1px rgba(000,000,000,1),0px 1px 0px rgba(255,255,255,0.2)
 }
 
+.gridito-table TBODY TD.gridito-actioncell A.button_black,
+A.button_black {
+background: #4c5766; /* old browsers */
+
+background: -moz-linear-gradient(top, #4c5766 0%, #313841 99%); /* firefox */
+
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c5766), color-stop(99%,#313841)); /* webkit */
+
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c5766', endColorstr='#313841',GradientType=0 ); /* ie */
+
+
+border:1px solid #313841;
+	
+zoom:1;
+}
+
 .gridito-table .filterHeader {
 	padding: 12px 15px;
 }

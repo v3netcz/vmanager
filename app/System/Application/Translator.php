@@ -23,7 +23,7 @@
 
 namespace vManager\Application;
 
-use vManager, Nette, NetteTranslator;
+use vManager, vBuilder, Nette;
 
 /**
  * Gettext translator for this application
@@ -31,16 +31,25 @@ use vManager, Nette, NetteTranslator;
  * @author Adam Staněk (V3lbloud)
  * @since Apr 11, 2011
  */
-class Translator extends NetteTranslator\Gettext {
+class Translator extends vBuilder\Localization\Translator {
 
-	public static function getTranslator($options) {
-		$dirs = array();
+	public static function createService(Nette\DI\Container $context) {
+		$dictStorage = new vBuilder\Localization\Storages\Gettext('%dir%/%lang%.mo');
+	
+		$instance = new static();
+		$instance->setStorage($dictStorage);
+
+		$config = $context->userConfig;
+		$lang = $config->get('system.language');
+		if($lang === null) $lang = $context->httpRequest->detectLanguage((array) $context->parameters['languages']);
+		if($lang != null) $instance->setLang($lang);
+		
 		foreach(ModuleManager::getModules() as $curr) {
 			if($curr->isEnabled() && is_dir($curr->getTranslationsDir()))
-				  $dirs[] = $curr->getTranslationsDir();
-		}
+				  $instance->addDictionary($curr->getName(), $curr->getTranslationsDir());
+		}	
 		
-		return new static($dirs, Nette\Environment::getVariable('lang', 'en'));
+		return $instance;
 	}
 
 }

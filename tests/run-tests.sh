@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # Finds PHP binary
-PHPBIN=`whereis php-cgi`
+PHPBIN=`whereis php-cgi | cut -d" " -f2`
 if [ "$PHPBIN" == "" ]; then
-	PHPBIN=`whereis php`
+	PHPBIN=`whereis php | cut -d" " -f2`
 
 	if [ "$PHPBIN" == "" ]; then
 		echo "Error. PHP binary not found"

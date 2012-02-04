@@ -78,7 +78,8 @@ class OrmModel implements Gridito\IModel {
 			if(isset($this->_offset)) $fluent->offset($this->_offset);
 
 			if(isset($this->_sortColumn)) {
-				$fluent->orderBy("[$this->_sortColumn] $this->_sortMethod");
+				$column = $this->getEntityMetadata()->getFieldColumn($this->_sortColumn);
+				$fluent->orderBy("[$column] $this->_sortMethod");
 			}
 
 			$this->_items = $fluent->fetchAll();
@@ -88,7 +89,7 @@ class OrmModel implements Gridito\IModel {
 	}
 
 	public function setSorting($column, $type = self::ASC) {
-		//if($this->_items !== null) throw new Nette\InvalidStateException('Data already loaded');
+		// if($this->_items !== null) throw new Nette\InvalidStateException('Data already loaded');
 		
 		$this->_sortColumn = $column;
 		$this->_sortMethod = $type;
@@ -123,7 +124,18 @@ class OrmModel implements Gridito\IModel {
 	 * @return int
 	 */
 	public function count() {
-		return count($this->getItems());
+		// TODO: Odstranit globalni vazbu. Fuj, bleh
+		global $context;
+	
+		return (int) $context->connection->query(
+			"SELECT COUNT(*) FROM (" .
+				(string) $this->_fluent .
+			") AS c"
+		)->fetchSingle();
+	
+	
+		// Nejde, protoze na count se pta jeste pred razenim, apod
+		// return count($this->getItems());
 	}
 	
 	// ------------------

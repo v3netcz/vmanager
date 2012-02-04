@@ -48,14 +48,14 @@ class Attachment extends vBuilder\Orm\ActiveEntity {
 	}
 	
 	public function getAbsolutePath() {
-		return vManager\FileSaver::getBaseDir() . mb_substr($this->path, 1);
+		return vManager\FileSaver::getBaseDir() . '/' . mb_substr($this->path, 1);
 	}
 	
 	public static function registerAttachmentFileHandler() {
 		vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) {
 			if(!Nette\Utils\Strings::startsWith($filename, '/attachments/')) return ;
 			
-			if($attachment = Nette\Environment::getContext()->repository->findAll(__NAMESPACE__ . '\\Attachment')->where('[path] = %s', $filename)->fetch()) {
+			if(($attachment = Nette\Environment::getContext()->repository->findAll(__NAMESPACE__ . '\\Attachment')->where('[path] = %s', $filename)->fetch()) !== false) {
 				if(!file_exists($attachment->getAbsolutePath())) return ;
 				
 				// TODO: Overeni opravneni
