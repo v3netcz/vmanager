@@ -46,7 +46,7 @@ class DefaultPresenter extends MonthlyPresenter {
 		$ds = $this->connection->select('COUNT(*) AS [value], DATE_FORMAT([timestamp], \'%Y-%m-%d\') AS [date]')->from('shop_orders')
 				// ->where('[state] = 1')
 				->where('[timestamp] >= %s', $this->getSince()->format('Y-m-d'))
-				->and('[timestamp] <= %s', $this->getUntil()->format('Y-m-d'))
+				->and('[timestamp] <= %s', $this->getUntil()->format('Y-m-d 23:59:59'))
 				->groupBy('[date]')->fetchAll();
 	
 		$this->template->chartData = $this->createDateArray($ds);
