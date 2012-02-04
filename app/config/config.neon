@@ -13,7 +13,9 @@ services:
 	authenticator: vBuilder\Security\Authenticator('vManager\Security\User')
 	authorizator: vManager\Security\Permission
 
-	presenterFactory: vManager\Application\PresenterFactory('%appDir%')	
+	presenterFactory: vManager\Application\PresenterFactory('%appDir%')
+	
+	translator: vManager\Application\Translator::createService
 	
 parameters:
 	languages: ['cs', 'en']

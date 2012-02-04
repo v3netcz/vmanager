@@ -110,7 +110,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 			
 			// Nechci ukladat defaultni osloveni, protoze zavisi na prekladu			
 			if($values->salutation != $user->getSalutation()) {
-				$config = $this->context->config;
+				$config = $this->context->userConfig;
 				$config->set('system.salutation', $values->salutation); 
 				$config->save();
 			}
@@ -154,7 +154,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 			$selLanguages[$curr] = $curr;
 		}
 		
-		$config = $this->context->config;
+		$config = $this->context->userConfig;
 		$lang = $config->get('system.language'); 
 		
 		$form->addSelect('language', __('Language:'), $selLanguages)->setValue($lang);
@@ -167,7 +167,7 @@ class UserSettingsPresenter extends SecuredPresenter {
 	
 	public function environmentFormSubmitted($form) {
 		$values = $form->getValues();
-		$config = $this->context->config;
+		$config = $this->context->userConfig;
 		$config->set('system.language', empty($values->language) ? null : $values->language); 
 		$config->save();
 

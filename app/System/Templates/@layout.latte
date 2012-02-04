@@ -65,7 +65,7 @@
 		<script type="text/javascript" src="{$basePath}/js/slidernav/slidernav.js"></script>  *}
 		
 		<!-- Lokalizace DatePickeru -->
-		{if Nette\Environment::getVariable('lang') == 'cs'}	
+		{if $presenter->context->translator->lang == 'cs'}	
 			<script type="text/javascript" src="{$basePath}/js/jquery.ui.datepicker-cs.js"></script>
 		{/if}
 		
@@ -115,7 +115,7 @@
 				filesUploadPath: "filesplugin/files/upload.php",
 				bottomLeftToolbar: [],
 				bottomRightEditToolbar: [],
-				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy'{if $presenter->context->config->get('texyla.developerFunctions')}, ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}],
+				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy'{if $presenter->context->userConfig->get('texyla.developerFunctions')}, ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}],
 				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width(),
 				buttonType: "button"
 			});

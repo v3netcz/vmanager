@@ -135,26 +135,8 @@ class SignPresenter extends BasePresenter {
 				$this->getPresenter()->getApplication()->restoreRequest($values->backlink);
 			} else {
 				$u = $this->getUser()->getIdentity();
-				
-				$config = $this->context->config;
-				$userLang = $config->get('system.language');
-				if($userLang !== null) Nette\Environment::getService('Nette\ITranslator')->setLang($userLang);
-				
 				if($u->getLastLoginInfo()->exists() && $u->getLastLoginInfo()->getTime() !== null) {
-					$host = gethostbyaddr($u->getLastLoginInfo()->getIp());
-					if($host != $u->getLastLoginInfo()->getIp()) $host .= ' ('.$u->getLastLoginInfo()->getIp().')';
-					
-					$this->flashMessage(_x('%s. Welcome back. Last time you logged in %s from %s.', array(
-						 $u->getSalutation(), 
-						 vManager\Application\Helpers::timeAgoInWords($u->getLastLoginInfo()->getTime()),
-						 /*$u->getLastLoginInfo()->getTime()->format('d.m.Y'),
-						 $u->getLastLoginInfo()->getTime()->format('h:i:s'), */
-						 $host
-					)));
-				} else {
-					$this->flashMessage(_x('%s. Since this is the first time you have logged in it is recommended to change your password.', array(
-						 $u->getSalutation()
-					)));
+					$this->redirect('loggedIn');
 				}
 			}
 			
@@ -162,6 +144,29 @@ class SignPresenter extends BasePresenter {
 		} catch(Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}
+	}
+	
+	public function actionLoggedIn() {
+		$u = $this->getUser()->getIdentity();
+	
+		if($u->getLastLoginInfo()->exists() && $u->getLastLoginInfo()->getTime() !== null) {
+			$host = gethostbyaddr($u->getLastLoginInfo()->getIp());
+			if($host != $u->getLastLoginInfo()->getIp()) $host .= ' ('.$u->getLastLoginInfo()->getIp().')';
+					
+				$this->flashMessage(_x('%s. Welcome back. Last time you logged in %s from %s.', array(
+					 $u->getSalutation(), 
+					 vManager\Application\Helpers::timeAgoInWords($u->getLastLoginInfo()->getTime()),
+					 /*$u->getLastLoginInfo()->getTime()->format('d.m.Y'),
+					 $u->getLastLoginInfo()->getTime()->format('h:i:s'), */
+					 $host
+				)));
+			} else {
+				$this->flashMessage(_x('%s. Since this is the first time you have logged in it is recommended to change your password.', array(
+					 $u->getSalutation()
+				)));
+		}
+	
+		$this->redirect('Homepage:');
 	}
 
 	/**
