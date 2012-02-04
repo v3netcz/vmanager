@@ -55,7 +55,3 @@ parameters:
 		enabled: true
 		comments:
 			enabled: false
-		
-	Accounting:
-		enabled: true
-		invoiceDir: '%filesDir%/invoices'
