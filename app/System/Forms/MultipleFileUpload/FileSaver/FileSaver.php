@@ -52,7 +52,7 @@ class FileSaver extends Nette\Object
 	}
 	
 	public function getFilename() {
-		return $this->filename ?: $this->file['filename'];
+		return $this->filename ?: $this->file->name;
 	}
 	
 	public function setFilename($filename) {

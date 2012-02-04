@@ -25,21 +25,15 @@ namespace vManager\Security;
 
 use vManager, vBuilder, Nette;
 
-/* * @Table(name="security_users")
- *
- * @Behavior(Secure)
- * 
- * @Column(id, pk, type="integer", generatedValue)
- * @Column(username, type="string")
- * @Column(password, type="string")
- * @Column(email, type="string")
- * @Column(registrationTime, type="DateTime")
- * @Column(roles, type="OneToMany", table="security_user_roles", joinOn="id=user")
- * @Column(lastLoginInfo, type="OneToOne", entity="vBuilder\Security\LastLoginInfo", mappedBy="vManager\Security\User", joinOn="id=userId")*/
-
-/**
+/** 
  * Overloaded user entity
- * 
+ *
+ * Addtional fields:
+ *
+ * @Column(name)
+ * @Column(surname)
+ * @Column(email)
+ *
  * @author Adam Staněk (V3lbloud)
  * @since Apr 28, 2011
  */
@@ -56,21 +50,8 @@ class User extends vBuilder\Security\User {
 	function getSalutation() {
 		global $context;
 		
-		$config = $context->config;
+		$config = $context->userConfig;
 		return $config->get('system.salutation', _x('Hi %s', array($this->getName())));
-	}
-	
-	/**
-	 * Returns user's display name
-	 * 
-	 * @return string
-	 */
-	function getDisplayName() {
-		$name = $this->name;
-		if($name != '') $name .= ' ';
-		$name .= $this->surname;
-		
-		return $name != '' ? $name : $this->username;
 	}
 	
 	/**

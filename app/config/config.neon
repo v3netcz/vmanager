@@ -1,0 +1,61 @@
+# General configuration - add any application specific stuff here
+ 
+includes: [
+	'local.neon',                                           # Machine specific (DB, environment)
+     
+	'system.neon',                                          # Nette Framework + PHP setup
+	'../../libs/vBuilderFw/vBuilderFw/config.neon',         # vBuilder Framework
+]
+ 
+# Add any application specific services in here
+# Any of default services, can be overriden
+services:
+	authenticator: vBuilder\Security\Authenticator('vManager\Security\User')
+	authorizator: vManager\Security\Permission
+
+	presenterFactory: vManager\Application\PresenterFactory('%appDir%')
+	
+	translator: vManager\Application\Translator::createService
+	
+parameters:
+	languages: ['cs', 'en']
+	
+	upload:
+		saveWithExtension: true
+		dir: '%filesDir%'
+		
+	# User administration module
+	Users:
+		enabled: true
+		avatarDir: '%filesDir/avatars'
+		
+	# Ticketing system
+	Tickets:
+		enabled: true
+
+		attachments:
+			enabled: true
+
+		ticketStates:
+			new:
+				name: New
+				succ: [accepted, solved, canceled]
+
+			accepted:
+				name: Accepted
+				succ: [solved, canceled]
+
+			solved:
+				name: Done
+
+			canceled:
+				name: Canceled
+				
+	Wiki:
+		enabled: true
+		comments:
+			enabled: false
+		
+	Accounting:
+		enabled: true
+		invoiceDir: '%filesDir%/invoices'

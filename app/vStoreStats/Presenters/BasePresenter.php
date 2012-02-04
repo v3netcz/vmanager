@@ -21,30 +21,29 @@
  * along with vManager. If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace vManager\Modules\vStoreStats;
 
-namespace vManager;
-
-use vBuilder,
-		Nette;
-
-require_once LIBS_DIR . '/vBuilderFw/vBuilderFw/Configurator.php';
+use vManager,
+	Nette;
 
 /**
- * Configurator for vManager
+ * Base presenter of vStore stats
  *
  * @author Adam Staněk (V3lbloud)
- * @since Oct 5, 2011
+ * @since Feb 4, 2011
  */
-class Configurator extends vBuilder\Configurator {
+class BasePresenter extends vManager\Modules\System\SecuredPresenter {
 	
-	/**
-	 * @return Nette\Application\IPresenterFactory
-	 */
-	public static function createServicePresenterFactory(Nette\DI\Container $container) {
-		return new Application\PresenterFactory(
-				  isset($container->params['appDir']) ? $container->params['appDir'] : NULL,
-				  $container
-		);
+	private $_connection;
+	
+	public function getConnection() {
+	
+		if(!isset($this->_connection)) {
+			$config = array_merge($this->context->parameters['database'], (array) $this->context->parameters['vStoreStats']['profiles'][0]['dbConnection']);
+			$this->_connection = new \DibiConnection($config);
+		}
+		
+		return $this->_connection;
 	}
 	
 }
