@@ -118,7 +118,7 @@ class DefaultPresenter extends BasePresenter {
 					$article = $presenter->getArticle($values['oldUrl']);	
 				} else {
 					// creating
-					$article = new \vManager\Modules\Wiki\Article;
+					$article = $presenter->context->repository->create('vManager\Modules\Wiki\Article');
 					$article->added = $date->getTimestamp();
 				}
 
