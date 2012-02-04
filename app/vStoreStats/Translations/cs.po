@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2012-02-04 20:50+0200\n"
+"Language: cs\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Presenters/MonthlyPresenter.php:54
+msgid "Month:"
+msgstr "Měsíc:"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Presenters/MonthlyPresenter.php:55
+msgid "Filter"
+msgstr "Zobrazit"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:74
+msgid "ID"
+msgstr "ID"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:75
+msgid "Product name"
+msgstr "Název produktu"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:76
+msgid "Amount"
+msgstr "Množství"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:77
+msgid "Revenue"
+msgstr "Tržba"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Module.php:63
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:1
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:52
+msgid "E-shop statistics"
+msgstr "Statistiky obchodu"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:40
+msgid "Number of recieved orders:"
+msgstr "Počet přijatých objednávek:"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:60
+msgid "Number of recieved orders"
+msgstr "Počet přijatých objednávek"
