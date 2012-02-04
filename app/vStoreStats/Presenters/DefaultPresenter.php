@@ -67,8 +67,8 @@ class DefaultPresenter extends MonthlyPresenter {
 
 		$grid->setModel($model);
 		$grid->setItemsPerPage(20);
-		$grid->sortColumn = 'revenue';
-		$grid->sortType = 'desc';
+		$grid->sortColumn = $grid->sortColumn ?: 'revenue';
+		$grid->sortType = $grid->sortType ?: 'desc';
 
 		// columns
 		$grid->addColumn("productId", __("ID"))->setSortable(true);
