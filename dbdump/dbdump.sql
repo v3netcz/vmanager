@@ -29,7 +29,6 @@ CREATE TABLE `config` (
   PRIMARY KEY (`key`,`scope`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 # Dump of table security_userRoles
 # ------------------------------------------------------------
 
@@ -104,7 +103,7 @@ CREATE TABLE `pm_comments` (
   `comment` text NOT NULL,
   `private` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Dump of table pm_attachments
 # ------------------------------------------------------------
