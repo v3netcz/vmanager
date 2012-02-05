@@ -62,3 +62,11 @@
 	float: left;
 	clear: none;
 }
+
+.accountingSummaryBox .block {
+	padding-bottom: 15px;
+}
+
+.accountingSummaryBox .price {
+	font-weight: bold;
+}

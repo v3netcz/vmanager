@@ -33,6 +33,14 @@ use vManager, vBuilder, Nette, vManager\Form, Gridito;
  */
 class CashRecordPresenter extends RecordPresenter {
 	
+	private $_total;
+	
+	public function renderDefault() {
+		$this->template->registerHelper('currency', 'vBuilder\Latte\Helpers\FormatHelpers::currency');
+		
+		$this->template->total = $this->getTotal();
+	}
+	
 	protected function getBillingClass() {
 		return '211001';
 	}
@@ -43,6 +51,16 @@ class CashRecordPresenter extends RecordPresenter {
 		$ds->and('([d] LIKE %like~ OR [md] LIKE %like~)', $this->getBillingClass(), $this->getBillingClass());
 		
 		return $ds;
+	}
+	
+	public function getTotal() {
+		if(!isset($this->_total)) {
+			$this->_total = $this->context->connection->query('SELECT SUM([value]) AS `v` FROM ('.strval($this->getDataSource()).') AS [a]')
+				->setType('v', \dibi::FLOAT)->fetchSingle();
+			
+		}
+		
+		return $this->_total;
 	}
 	
 }

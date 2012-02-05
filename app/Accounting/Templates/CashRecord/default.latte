@@ -1,2 +1,13 @@
 {extends '../Record/default.latte'}
 
+{block recordContent2}
+	<div class="box grid_8 round_all accountingSummaryBox">
+		<h2 class="box_head grad_colour"><?php echo __('Summary'); ?></h2>
+		<a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>
+		<div class="toggle_container">
+			<div class="block summaryBox" style="padding-bottom: 15px;">
+				Aktuální spočtený zůstatek: <span class="price">{$total|currency}</span><br />
+			</div>
+		</div>
+	</div>
