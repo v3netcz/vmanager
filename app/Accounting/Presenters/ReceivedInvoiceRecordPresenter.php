@@ -33,6 +33,9 @@ use vManager, vBuilder, Nette, vManager\Form, Gridito;
  */
 class ReceivedInvoiceRecordPresenter extends IssuedInvoiceRecordPresenter {
 
+	protected function isSubjectEvidendceIdNeeded() {
+		return true;
+	}
 		
 	protected function getDPrefix() {
 		return '5';	// Náklady

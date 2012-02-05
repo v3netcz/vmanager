@@ -30,6 +30,10 @@
 	color: #cc3300;
 }
 
+.accountingRecordListing .subject:first-letter {
+	text-transform: uppercase;
+}
+
 #recordFormBox .formTable {
 	width: 80%;
 }

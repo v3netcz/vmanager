@@ -14,8 +14,10 @@
 		<td width="10%"></td>
 					
 		<td>
-			{!$form['subjectEvidenceId']->label}
-			{!$form['subjectEvidenceId']->control}
+			{if isset($form['subjectEvidenceId'])}
+				{!$form['subjectEvidenceId']->label}
+				{!$form['subjectEvidenceId']->control}
+			{/if}
 		</td>
 	</tr>
 	

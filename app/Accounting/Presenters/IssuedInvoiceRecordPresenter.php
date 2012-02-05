@@ -33,6 +33,9 @@ use vManager, vBuilder, Nette, vManager\Form, Gridito;
  */
 class IssuedInvoiceRecordPresenter extends RecordPresenter {
 
+	protected function isSubjectEvidendceIdNeeded() {
+		return false;
+	}
 		
 	protected function getDPrefix() {
 		return '602';	// Tržby z prodeje služeb
@@ -55,9 +58,11 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 			 "orderColumnWeight" => 3
 		));
 		
-		$grid->addColumn('subjectEvidenceId', __('C. evidence ID'))
-			->setCellClass('evidenceId')
-			->setOrderColumnWeight(4);
+		if($this->isSubjectEvidendceIdNeeded()) {
+			$grid->addColumn('subjectEvidenceId', __('C. evidence ID'))
+				->setCellClass('evidenceId')
+				->setOrderColumnWeight(4);
+		}
 		
 		$grid['columns']->getComponent('description')->setOrderColumnWeight(8);
 		$grid['columns']->getComponent('value')->setOrderColumnWeight(9);	
@@ -80,8 +85,9 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 						->where('[name] = %s', $control->value)->fetch() !== false;
 					
 				}, __('Supplier does not exist in subject database. Please add him first.'));
-			  	
-		$form->addText('subjectEvidenceId', __('Customer evidence ID:'));
+		
+		if($this->isSubjectEvidendceIdNeeded())	  	
+			$form->addText('subjectEvidenceId', __('Customer evidence ID:'));
 		
 		$this->loadRecordForm($form);
 		

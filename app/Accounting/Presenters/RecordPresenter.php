@@ -74,7 +74,7 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->setModel($model);
 		$grid->setItemsPerPage(20);
 		$grid->sortColumn = $grid->sortColumn ?: 'date';
-		$grid->sortType = $grid->sortType ?: 'desc';
+		$grid->sortType = $grid->sortType ?: 'asc';
 		
 		$grid->addColumn("date", __("Date"), array(
 			 "renderer" => function ($row) {
@@ -90,7 +90,7 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 			 "sortable" => true,
 		))->setCellClass('evidenceId');
 		
-		$grid->addColumn('description', __('Subject'));
+		$grid->addColumn('description', __('Subject'))->setCellClass('subject');
 				
 		$grid->addColumn("value", __("Value"), array(
 			 "renderer" => function ($row) {
