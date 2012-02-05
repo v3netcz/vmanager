@@ -64,7 +64,7 @@
 						 </tr>
                     <tr class="columnHeader">
                         {block tableheader}
-                        <th n:foreach="$control['columns']->getComponents() as $column" n:class="$iterator->isFirst() ? first, $iterator->isLast() && !$control->hasActions() ? last">
+                        <th n:foreach="$control->getOrderedColumns() as $column" n:class="$iterator->isFirst() ? first, $iterator->isLast() && !$control->hasActions() ? last">
                            {block tableheadercontent}
 									
 									{if $column->isSortable()}
@@ -87,7 +87,7 @@
 							{if $control->getPaginator()->getItemCount() > 0}
                     {block tablebody}
                     <tr n:foreach="$control->getModel() as $item" n:class="$control->getRowClass($iterator, $item)">
-                        <td n:class="gridito-cell, $column->getCellClass($iterator, item), $control->getHighlightOrderedColumn() && $column->getSorting() ? ui-state-highlight" n:foreach="$control['columns']->getComponents() as $column">
+                        <td n:class="gridito-cell, $column->getCellClass($iterator, item), $control->getHighlightOrderedColumn() && $column->getSorting() ? ui-state-highlight" n:foreach="$control->getOrderedColumns() as $column">
                             {control $column:cell $item}
                         </td>
                         <td n:class="gridito-actioncell, $column->getCellClass($iterator, item)" n:if="$control->hasActions()" n:inner-foreach="$control['actions']->getComponents() as $button">
