@@ -71,7 +71,7 @@ class CashRecordPresenter extends RecordPresenter {
 	
 	public function getTotal() {
 		if(!isset($this->_total)) {
-			$this->_total = $this->context->connection->query('SELECT SUM([value]) AS `v` FROM ('.strval($this->getDataSource()).') AS [a]')
+			$this->_total = $this->context->connection->query('SELECT SUM(IF([md] = %s, [value], 0 - [value])) AS `v` FROM ('.strval($this->getDataSource()).') AS [a]', $this->getBillingClass())
 				->setType('v', \dibi::FLOAT)->fetchSingle();
 			
 		}
