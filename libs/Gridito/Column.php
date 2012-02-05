@@ -26,6 +26,8 @@ class Column extends \Nette\Application\UI\Control
 
 	/** @var string|callable */
 	private $cellClass = null;
+	
+	private $orderColumnWeight = 1;
 
 	// </editor-fold>
 
@@ -48,6 +50,14 @@ class Column extends \Nette\Application\UI\Control
 		} else {
 			return null;
 		}
+	}
+
+	public function setOrderColumnWeight($weight) {
+		$this->orderColumnWeight = $weight;
+	}
+	
+	public function getOrderColumnWeight() {
+		return $this->orderColumnWeight;
 	}
 
 

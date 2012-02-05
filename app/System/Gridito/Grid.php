@@ -24,8 +24,9 @@
 namespace vManager;
 
 use vManager,
-	 Nette,
-	 Gridito;
+	Nette,
+	Gridito,
+	vBuilder;
 
 /**
  * Extended Gridito implementation
@@ -54,6 +55,23 @@ class Grid extends Gridito\Grid {
 	protected function createTemplate($class = NULL) {
 		return parent::createTemplate()->setFile(isset($this->tplFile) ? $this->tplFile
 								 : __DIR__."/Templates/grid.latte");
+	}
+	
+	public function getOrderedColumns() {
+		$it = $this['columns']->getComponents();
+				
+		$it2 = new vBuilder\Utils\SortingIterator($it, function ($item1, $item2) {
+			return $item1->getOrderColumnWeight() >= $item2->getOrderColumnWeight();
+		});
+
+	
+		return $it2;
+	}
+	
+	public function addColumn($name, $label = null, array $options = array()) {
+		if(!isset($options['orderColumnWeight'])) $options['orderColumnWeight'] = count($this['columns']->getComponents());
+	
+		return parent::addColumn($name, $label, $options);
 	}
 
 }

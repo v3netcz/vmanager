@@ -303,7 +303,7 @@ class Grid extends \Nette\Application\UI\Control
 	public function addColumn($name, $label = null, array $options = array())
 	{
 		$column = new Column($this["columns"], $name);
-		$column->setLabel($label);
+		$column->setLabel($label);		
 		$this->setOptions($column, $options);
 		return $column;
 	}
