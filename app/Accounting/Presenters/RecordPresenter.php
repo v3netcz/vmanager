@@ -42,11 +42,11 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 	private $_billingClasses;
 
 	function getSince() {
-		return \DateTime::createFromFormat('Y-m-d', '2012-01-01');
+		return \DateTime::createFromFormat('Y-m-d', '2011-01-01');
 	}
 	
 	function getUntil() {
-		return new \DateTime;
+		return \DateTime::createFromFormat('Y-m-d', '2013-01-01');
 	}
 	
 	protected function getDataSource() {
@@ -194,8 +194,11 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 				$this->flashMessage(__('Record not found'), 'warn');	
 				$this->redirect('this', array('editId' => null));
 			}
-			
+						
 			$form->loadFromEntity($record);
+			
+			if($record->d && $record->d->id != '') $form['d']->setDefaultValue($record->d->id);
+			if($record->md && $record->md->id != '') $form['md']->setDefaultValue($record->md->id);
 		}
 	}
 	
@@ -252,7 +255,7 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 			});
 		}
 	
-		$form->addSelect($name, $label, $values);
+		$form->addSelect($name, $label, $values)->setPrompt('-');
 	}
 	
 	protected function getDPrefix() {

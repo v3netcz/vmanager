@@ -21,6 +21,8 @@
 			<li n:class="$presenter->name == 'Accounting:BankRecord' ? current"><a href="{link BankRecord:default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:BankRecord' ? 'white' : 'grey'}/Piggy%20Bank.png"/><?php echo __('Bank account'); ?></a></li>
 			
 			<li n:class="$presenter->name == 'Accounting:CashRecord' ? current"><a href="{link CashRecord:default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:CashRecord' ? 'white' : 'grey'}/Money%202.png"/><?php echo __('Cash'); ?></a></li>
+			
+			<li n:class="$presenter->name == 'Accounting:Balance' ? current"><a href="{link Balance:default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:Balance' ? 'white' : 'grey'}/Graph.png"/><?php echo __('Balance'); ?></a></li>
 
 		</ul>	
 	</div>

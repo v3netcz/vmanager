@@ -37,7 +37,9 @@ class Helpers {
 		return str_replace(" ", "\xc2\xa0", number_format($value, 0, "", " "))."\xc2\xa0Kč";
 	}
 	
-	public static function billingClass(BillingClass $class) {
+	public static function billingClass($class) {
+		if(!($class instanceof BillingClass) || $class->id == '' || !$class->exists()) return '-';
+	
 		$str = mb_strlen($class->id) > 3 ? mb_substr($class->id, 0, 3) . "\xc2\xa0" . mb_substr($class->id, 3) : $class->id;
 		$desc = '';
 		
