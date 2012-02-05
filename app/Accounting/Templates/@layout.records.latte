@@ -12,17 +12,17 @@
 
 	<div id="nav_top" class="clearfix  round_top">
 		<ul class="clearfix">
-			<li n:class="$presenter->name == 'Accounting:Record' ? current"><a href="{link Record:default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:Record' ? 'white' : 'grey'}/Money.png"/><?php echo __('All records'); ?></a></li>
+			<li n:class="$presenter->name == 'Accounting:Record' ? current"><a href="{link Record:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:Record' ? 'white' : 'grey'}/Money.png"/><?php echo __('All records'); ?></a></li>
 			
-			<li n:class="$presenter->name == 'Accounting:IssuedInvoiceRecord' ? current"><a href="{link IssuedInvoiceRecord:default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:IssuedInvoiceRecord' ? 'white' : 'grey'}/Box%20Outgoing.png"/><?php echo __('Issued invoices'); ?></a></li>
+			<li n:class="$presenter->name == 'Accounting:IssuedInvoiceRecord' ? current"><a href="{link IssuedInvoiceRecord:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:IssuedInvoiceRecord' ? 'white' : 'grey'}/Box%20Outgoing.png"/><?php echo __('Issued invoices'); ?></a></li>
 			
-			<li n:class="$presenter->name == 'Accounting:ReceivedInvoiceRecord' ? current"><a href="{link ReceivedInvoiceRecord:default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:ReceivedInvoiceRecord' ? 'white' : 'grey'}/Box%20Incoming.png"/><?php echo __('Received invoices'); ?></a></li>
+			<li n:class="$presenter->name == 'Accounting:ReceivedInvoiceRecord' ? current"><a href="{link ReceivedInvoiceRecord:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:ReceivedInvoiceRecord' ? 'white' : 'grey'}/Box%20Incoming.png"/><?php echo __('Received invoices'); ?></a></li>
 			
-			<li n:class="$presenter->name == 'Accounting:BankRecord' ? current"><a href="{link BankRecord:default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:BankRecord' ? 'white' : 'grey'}/Piggy%20Bank.png"/><?php echo __('Bank account'); ?></a></li>
+			<li n:class="$presenter->name == 'Accounting:BankRecord' ? current"><a href="{link BankRecord:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:BankRecord' ? 'white' : 'grey'}/Piggy%20Bank.png"/><?php echo __('Bank account'); ?></a></li>
 			
-			<li n:class="$presenter->name == 'Accounting:CashRecord' ? current"><a href="{link CashRecord:default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:CashRecord' ? 'white' : 'grey'}/Money%202.png"/><?php echo __('Cash'); ?></a></li>
+			<li n:class="$presenter->name == 'Accounting:CashRecord' ? current"><a href="{link CashRecord:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:CashRecord' ? 'white' : 'grey'}/Money%202.png"/><?php echo __('Cash'); ?></a></li>
 			
-			<li n:class="$presenter->name == 'Accounting:Balance' ? current"><a href="{link Balance:default}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:Balance' ? 'white' : 'grey'}/Graph.png"/><?php echo __('Balance'); ?></a></li>
+			<li n:class="$presenter->name == 'Accounting:Balance' ? current"><a href="{link Balance:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:Balance' ? 'white' : 'grey'}/Graph.png"/><?php echo __('Balance'); ?></a></li>
 
 		</ul>	
 	</div>

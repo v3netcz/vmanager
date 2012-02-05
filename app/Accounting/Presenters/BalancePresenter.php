@@ -41,7 +41,15 @@ class BalancePresenter extends vManager\Modules\System\SecuredPresenter {
 			'HAVING balance IS NOT NULL'
 		);
 		
-		$this->template->balance = $balance->fetchAll();
+		$barData = array();
+		foreach($balance as $curr) {
+			$barData[$curr->id . '<br />' . wordwrap($curr->name, 30, '<br />')] = 
+				$curr->balance > 0
+					? $curr->balance
+					: array('y' => $curr->balance, 'color' => '#a21d21');
+		}
+		
+		$this->template->barData = $barData;
 	}
 	
 }
