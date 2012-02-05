@@ -23,42 +23,27 @@
 
 namespace vManager\Modules\Accounting;
 
-use Nette;
+use vBuilder;
 
 /**
- * Latte template helpers
+ * Accounting book record
  *
- * @author Adam Staněk (velbloud)
- * @since Mar 2, 2011
+ * @author Adam Staněk (V3lbloud)
+ * @since Feb 5, 2011
+ * 
+ * @Table(name="accounting_records")
+ *
+ * @Column(id, pk, type="integer", generatedValue)
+ * @Column(evidenceId)
+ * @Column(date, type="DateTime")
+ * @Column(description, type="string")
+ * @Column(value)
+ * @Column(md, type="OneToOne", entity="vManager\Modules\Accounting\BillingClass", joinOn="md=id")
+ * @Column(d, type="OneToOne", entity="vManager\Modules\Accounting\BillingClass", joinOn="d=id")
+ *
+ * @Column(subject, realName="subjectId", type="OneToOne", entity="vManager\Modules\Accounting\Subject", joinOn="subject=id")
+ * @Column(subjectEvidenceId)
  */
-class Helpers {
-
-	public static function currency($value) {
-		return str_replace(" ", "\xc2\xa0", number_format($value, 0, "", " "))."\xc2\xa0Kč";
-	}
-	
-	public static function billingClass(BillingClass $class) {
-		$str = mb_strlen($class->id) > 3 ? mb_substr($class->id, 0, 3) . "\xc2\xa0" . mb_substr($class->id, 3) : $class->id;
-		$desc = '';
-		
-		if($class->name != '') $desc = $class->name;
-		
-		
-		$el = Nette\Utils\Html::el("abbr")->setText($str);		
-		if(!empty($desc)) $el->title($desc);
-		return (String) $el;			
-	}
-	
-	public static function evidenceId($id) {
-		if(mb_strlen($id) == 7)
-			return mb_substr($id, 0, 2)
-					. "\xc2\xa0"
-					. mb_substr($id, 2, 2)
-					. "\xc2\xa0"
-					. mb_substr($id, 4);
-					
-					
-		return $id;		
-	}
+class Record extends vBuilder\Orm\ActiveEntity {
 
 }

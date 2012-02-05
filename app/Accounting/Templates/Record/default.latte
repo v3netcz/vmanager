@@ -1,0 +1,44 @@
+{extends '../@layout.records.latte'}
+
+{block recordHead}
+	<link rel="stylesheet" href="{$basePath}/css/accounting.css" type="text/css">
+	<script type="text/javascript" src="{$basePath}/js/vManager/accounting.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#newRecordLink').click(function () {
+				{if $presenter->getParam('editId') === null}
+				$('#recordFormBox').slideDown();
+				$('#recordFormBox INPUT:first').focus();
+				window.location.hash = 'recordFormBox';
+				
+				$('#recordFormBox H2.box_head').html('<?php echo __('New record'); ?>');
+				{else}
+					alert('<?php echo __('Please cancel current form data first.'); ?>');
+				{/if}
+			});
+			
+				$('#recordFormBox BUTTON[name=c]').click(function () {
+					return confirm('<?php echo __('Are you sure you want to abandon current data?'); ?>');
+				});
+		});
+	</script>
+{/block}
+
+{block recordContent}
+	<div class="flat_area grid_16" style="margin-bottom: 20px;">
+
+		<a href="#recordFormBox" id="newRecordLink" class="color-button"><?php echo __('Add new record'); ?></a>
+	</div>
+	
+	{include ../../../System/Templates/Includes/flashes.latte}
+	
+	<div class="box grid_16 round_all">
+		<div class="accountingRecordListing">
+			{control generalRecordGrid}
+		</div>
+	</div>
+
+	{block recordForm}
+		{include 'generalRecordForm.inc.latte'}
+	{/block}

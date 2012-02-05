@@ -1,0 +1,25 @@
+{extends '../Record/generalRecordForm.inc.latte'}
+
+{block afterHeadFields}
+	<tr>
+		<td colspan="3" class="separator"></td>
+	</tr>
+	
+	<tr>
+		<td>
+			{!$form['subject']->label}
+			{!$form['subject']->control}
+		</td>
+					
+		<td width="10%"></td>
+					
+		<td>
+			{!$form['subjectEvidenceId']->label}
+			{!$form['subjectEvidenceId']->control}
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="3" class="separator"></td>
+	</tr>
+{/block}										

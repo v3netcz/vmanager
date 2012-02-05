@@ -1,0 +1,64 @@
+.accountingRecordListing ABBR {
+	border-bottom: 1px dashed #bbbbbb;
+	padding: 0 1px;
+}
+
+.accountingRecordListing .billingClass {
+	text-align: right;
+	width: 50px;
+}
+
+.accountingRecordListing .day {
+	text-align: right;
+	width: 70px;
+}
+
+.accountingRecordListing .evidenceId {
+	width: 110px;
+}
+
+.accountingRecordListing .value {
+	text-align: right;
+	width: 80px;
+}
+
+.accountingRecordListing .income .value {
+	color: #338800;
+}
+
+.accountingRecordListing .expense .value {
+	color: #cc3300;
+}
+
+#recordFormBox .formTable {
+	width: 80%;
+}
+
+#recordFormBox .formTable TD {
+	padding: 10px 0;
+}
+
+#recordFormBox .formTable TD A {
+	color: #0a4e98 !important;
+	font-weight: normal !important;
+	text-decoration: underline;
+}
+
+#recordFormBox .formTable TD A:hover {
+	text-decoration: none;
+}
+
+#recordFormBox .formTable TD INPUT.text {
+	width: 150px !important;
+}
+
+#recordFormBox .formTable TD.separator {
+	border-top: 1px solid #eeeeee;
+	padding-bottom: 15px;
+}
+
+#recordFormBox .formButtonBlock BUTTON {
+	display: block;
+	float: left;
+	clear: none;
+}

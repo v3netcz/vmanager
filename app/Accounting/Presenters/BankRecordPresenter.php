@@ -23,26 +23,18 @@
 
 namespace vManager\Modules\Accounting;
 
-use vManager,
-	vBuilder,
-	Nette;
+use vManager, vBuilder, Nette, vManager\Form, Gridito;
 
 /**
- * Subject data class
+ * Presenter for bank account records
  *
  * @author Adam Staněk (V3lbloud)
- * @since Jan 31, 2011
- * 
- * @Table(name="accounting_expenses")
- * 
- * @Column(id, pk, type="integer", generatedValue)
- * @Column(supplier, realName="supplierId", type="OneToOne", entity="vManager\Modules\Accounting\Subject", joinOn="supplier=id")
- * @Column(supplierEvidenceId, type="string")
- * @Column(date, type="DateTime")
- * @Column(dueDate, type="DateTime")
- * @Column(description, type="string")
- * @Column(cost, type="Float")
+ * @since Feb 6, 2012
  */
-class Expense extends vBuilder\Orm\ActiveEntity {
-
+class BankRecordPresenter extends CashRecordPresenter {
+	
+	protected function getBillingClass() {
+		return '221001';
+	}
+	
 }

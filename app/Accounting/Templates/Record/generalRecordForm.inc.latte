@@ -1,0 +1,89 @@
+{form recordForm}
+<div class="box grid_16 round_all{if !$form->hasErrors() && $presenter->getParam('editId') === null} hidden{/if}" id="recordFormBox">
+	<h2 class="box_head grad_colour"><?php echo __('Edit record'); ?></h2>
+	<a href="#" class="grabber">&nbsp;</a>
+	<a href="#" class="toggle">&nbsp;</a>
+	<div class="toggle_container">
+		<div class="block">
+			<a name="recordFormBox"></a>
+
+			{if $form->hasErrors() || $presenter->getParam('editId') !== null}		
+				<script type="text/javascript">
+					window.location.hash = 'recordFormBox';
+				</script>
+			{/if}
+		
+			{if $form->hasErrors()}			
+				<div n:foreach="$form->getErrors() as $error" class="alert alert_orange">
+					<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
+					{$error}
+				</div>
+			{/if}
+			
+			{* ----- START OF FORM FIELDS ----------------------------------------------------------------- *}
+			
+			<table class="formTable">
+				<tr>
+					<td>
+						{!$form['date']->label}
+						{!$form['date']->control}
+					</td>
+					
+					<td width="10%"></td>
+					
+					<td>
+						{!$form['evidenceId']->label}
+						{!$form['evidenceId']->control}
+					</td>
+				</tr>
+						
+				{block afterHeadFields}{/block}										
+
+				<tr>
+					<td>
+						{!$form['description']->label}
+						{!$form['description']->control}
+					</td>
+					
+					<td width="10%"></td>
+					
+					<td>
+						{!$form['value']->label}
+						{!$form['value']->control}
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						{!$form['md']->label}
+						{!$form['md']->control}
+					</td>
+					
+					<td width="10%"></td>
+					
+					<td>
+						{!$form['d']->label}
+						{!$form['d']->control}
+					</td>
+				</tr>
+				
+			</table>
+	
+			<div class="formButtonBlock">
+		        <button name="c" value="c"  id="frm{$form->name}-c" class="button_colour red round_all" formnovalidate="formnovalidate">
+					<img height="24" width="24" alt="Cancel" src="{$basePath}/images/icons/small/white/Walking%20Man.png">
+		         	<span>{$form['c']->caption}</span>
+				</button> 
+		                
+				<button name="s" value="s" class="button_colour round_all">
+					<img height="24" width="24" alt="Save" src="{$basePath}/images/icons/small/white/Create%20Write.png">
+		         	<span>{$form['s']->caption}</span>
+				</button>
+			</div>
+			
+			{* ----- END OF FORM FIELDS ------------------------------------------------------------------ *}
+			
+		</div>
+	</div>
+</div>
+{/form}

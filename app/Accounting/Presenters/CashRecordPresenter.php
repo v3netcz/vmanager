@@ -23,42 +23,26 @@
 
 namespace vManager\Modules\Accounting;
 
-use Nette;
+use vManager, vBuilder, Nette, vManager\Form, Gridito;
 
 /**
- * Latte template helpers
+ * Presenter for cash records
  *
- * @author Adam Staněk (velbloud)
- * @since Mar 2, 2011
+ * @author Adam Staněk (V3lbloud)
+ * @since Feb 6, 2012
  */
-class Helpers {
-
-	public static function currency($value) {
-		return str_replace(" ", "\xc2\xa0", number_format($value, 0, "", " "))."\xc2\xa0Kč";
-	}
+class CashRecordPresenter extends RecordPresenter {
 	
-	public static function billingClass(BillingClass $class) {
-		$str = mb_strlen($class->id) > 3 ? mb_substr($class->id, 0, 3) . "\xc2\xa0" . mb_substr($class->id, 3) : $class->id;
-		$desc = '';
-		
-		if($class->name != '') $desc = $class->name;
-		
-		
-		$el = Nette\Utils\Html::el("abbr")->setText($str);		
-		if(!empty($desc)) $el->title($desc);
-		return (String) $el;			
-	}
-	
-	public static function evidenceId($id) {
-		if(mb_strlen($id) == 7)
-			return mb_substr($id, 0, 2)
-					. "\xc2\xa0"
-					. mb_substr($id, 2, 2)
-					. "\xc2\xa0"
-					. mb_substr($id, 4);
-					
-					
-		return $id;		
+	protected function getBillingClass() {
+		return '211001';
 	}
 
+	protected function getDataSource() {
+		$ds = parent::getDataSource();
+		
+		$ds->and('([d] LIKE %like~ OR [md] LIKE %like~)', $this->getBillingClass(), $this->getBillingClass());
+		
+		return $ds;
+	}
+	
 }
