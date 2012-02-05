@@ -33,7 +33,7 @@ use vManager, vBuilder, Nette, vManager\Form, Gridito;
  */
 class BankRecordPresenter extends CashRecordPresenter {
 	
-	protected function getBillingClass() {
+	public function getBillingClass() {
 		return '221001';
 	}
 	

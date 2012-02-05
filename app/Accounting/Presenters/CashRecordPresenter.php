@@ -41,7 +41,23 @@ class CashRecordPresenter extends RecordPresenter {
 		$this->template->total = $this->getTotal();
 	}
 	
-	protected function getBillingClass() {
+	protected function createComponentGeneralRecordGrid($name) {
+		$presenter = $this;
+		$grid = parent::createComponentGeneralRecordGrid($name);
+	
+		$grid->setRowClass(function ($iterator, $row) use ($presenter) {
+			$classes = array();
+			
+			if($row->md->id == $presenter->getBillingClass()) $classes[] = 'income';
+			else $classes[] = 'expense';
+
+			return empty($classes) ? null : implode(" ", $classes);
+		});
+		
+		return $grid;
+	}
+	
+	public function getBillingClass() {
 		return '211001';
 	}
 

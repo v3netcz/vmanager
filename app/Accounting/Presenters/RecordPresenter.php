@@ -76,15 +76,6 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->sortColumn = $grid->sortColumn ?: 'date';
 		$grid->sortType = $grid->sortType ?: 'desc';
 		
-		$grid->setRowClass(function ($iterator, $row) {
-			$classes = array();
-			
-			if($row->value < 0) $classes[] = 'expense';
-			elseif($row->value > 0) $classes[] = 'income';
-
-			return empty($classes) ? null : implode(" ", $classes);
-		});
-		
 		$grid->addColumn("date", __("Date"), array(
 			 "renderer" => function ($row) {
 				 echo $row->date->format('j. n. \'y');
