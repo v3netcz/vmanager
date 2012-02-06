@@ -16,12 +16,12 @@
 		         text: null
 		      },
 	      xAxis: [{
-	         categories: ['Awaiting<br />for payment'],
+	         categories: ['<?php echo __('Awaiting<br />for payment'); ?>'],
 	         reversed: false,
 	      }, { // mirror axis on right side
 	         opposite: true,
 			 reversed: false,
-	         categories: ['Paid'],
+	         categories: ['<?php echo __('Paid'); ?>'],
 				         linkedTo: 0
 	      }],
 	      
@@ -63,10 +63,10 @@
 			},
 	      
 	      series: [{
-	         name: '<?php echo __('Awaiting'); ?>',
+	         name: '<?php echo __('Awaiting for payment'); ?>',
 	         data: [-{$totalAwaiting}]
 	      }, {
-	         name: '<?php echo __('Received'); ?>',
+	         name: '<?php echo __('Paid'); ?>',
 	         data: [{$totalPaid}]
 	      }]
 	   });

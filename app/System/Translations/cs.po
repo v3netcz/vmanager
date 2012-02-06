@@ -5,7 +5,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:220
+#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:225
 msgid "You have been signed out."
 msgstr "Byl jste úspěšně odhlášen."
 
@@ -161,7 +161,7 @@ msgstr "E-mail:"
 
 #: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:105
 #: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:108
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:184
+#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:189
 msgid "Please provide your username or e-mail."
 msgstr "Prosím zadejte vaše uživatelské jméno nebo e-mail."
 
@@ -169,11 +169,11 @@ msgstr "Prosím zadejte vaše uživatelské jméno nebo e-mail."
 msgid "Send new password"
 msgstr "Zaslat nové heslo"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:196
+#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:201
 msgid "vManager - new password"
 msgstr "vManager - nové heslo"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:204
+#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:209
 msgid "A new password has been sent to your e-mail address."
 msgstr "Nové heslo bylo zasláno na Vaši e-mailovou adresu."
 
@@ -184,7 +184,7 @@ msgstr "Uživatel nebyl nalezen nebo byl formulář chybně vyplněn."
 msgid "Back to login form"
 msgstr "Zpět na přihlašovací formulář"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:207
+#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:212
 msgid "User not found."
 msgstr "Uživatel nenalezen."
 
@@ -381,12 +381,12 @@ msgstr "Požadavek na změnu hesla"
 msgid "Sign in with new credentials"
 msgstr "Přihlásit se s novým heslem"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:147
+#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:156
 #, php-format
 msgid "%s. Welcome back. Last time you logged in %s from %s."
 msgstr "%s. Poslední přihlášení proběhlo %s z počítače %s."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:155
+#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:164
 #, php-format
 msgid ""
 "%s. Since this is the first time you have logged in it is recommended to "
@@ -400,7 +400,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr "Nástěnka"
 
-#: /var/www/vmanager/tools/../app/System/Security/User.php:60
+#: /var/www/vmanager/tools/../app/System/Security/User.php:54
 #, php-format
 msgid "Hi %s"
 msgstr "Dobrý den %s"
@@ -516,3 +516,35 @@ msgstr "Prosinec %d"
 #: /var/www/vmanager/tools/../app/System/Templates/UserSettings/default.latte:11
 msgid "Current avatar"
 msgstr "Současný avatar"
+
+#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:64
+msgid "Your reaction was successfully saved"
+msgstr ""
+
+#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:72
+msgid "An error occured while saving your reaction. Please try again."
+msgstr ""
+
+#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:76
+msgid "Subject:"
+msgstr ""
+
+#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:77
+msgid "You have to enter the subject!"
+msgstr ""
+
+#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:78
+msgid "Response:"
+msgstr ""
+
+#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:79
+msgid "You have to write the response!"
+msgstr ""
+
+#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:81
+msgid "Add!"
+msgstr ""
+
+#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/renderers/templates/tree.latte:25
+msgid "React"
+msgstr ""

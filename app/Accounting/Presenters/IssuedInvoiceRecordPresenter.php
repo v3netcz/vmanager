@@ -55,7 +55,7 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 				$totalAwaiting += abs($curr->balance);
 		}
 		
-		$this->template->totalPaid = $totalPaid;
+		$this->template->totalPaid = $totalPaid - $totalAwaiting;
 		$this->template->totalAwaiting = $totalAwaiting;
 	}
 
