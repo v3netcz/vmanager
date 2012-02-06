@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Accounting;
 
-use vManager, vBuilder, Nette, vManager\Form, Gridito;
+use vManager, vBuilder, Nette, vManager\Form, Gridito, Nette\Utils\Strings;
 
 /**
  * Presenter for issued invoices
@@ -32,6 +32,32 @@ use vManager, vBuilder, Nette, vManager\Form, Gridito;
  * @since Feb 6, 2012
  */
 class IssuedInvoiceRecordPresenter extends RecordPresenter {
+
+	public function renderDefault() {
+		$balance = $this->context->connection->query(
+			'SELECT id, name, ' .
+				'(SELECT SUM(IF(md = a.id, value, 0 - value)) ' .
+				'FROM accounting_records WHERE (md = a.id OR d = a.id) ' .
+				// 'AND [date] BETWEEN %s AND %s',  $this->getSince()->format('Y-m-d'), $this->getUntil()->format('Y-m-d 23:59:59'),
+				') AS balance ' .
+			'FROM accounting_billingClasses AS a ' .
+			'WHERE [id] LIKE %like~ OR [id] LIKE %like~ ' .
+			'HAVING balance IS NOT NULL ',
+			$this->getDPrefix(), $this->getMdPrefix()
+		);
+		
+		$totalPaid = 0;
+		$totalAwaiting = 0;
+		foreach($balance as $curr) {
+			if(Strings::startsWith($curr->id, $this->getDPrefix()))
+				$totalPaid += abs($curr->balance);
+			else
+				$totalAwaiting += abs($curr->balance);
+		}
+		
+		$this->template->totalPaid = $totalPaid;
+		$this->template->totalAwaiting = $totalAwaiting;
+	}
 
 	protected function isSubjectEvidendceIdNeeded() {
 		return false;
@@ -46,6 +72,7 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 	}
 	
 	protected function createComponentGeneralRecordGrid($name) {
+		$presenter = $this;
 		$grid = parent::createComponentGeneralRecordGrid($name);
 	
 		$grid->addColumn("subject", __("Customer"), array(
@@ -68,6 +95,30 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 		$grid['columns']->getComponent('value')->setOrderColumnWeight(9);	
 		$grid['columns']->getComponent('md')->setOrderColumnWeight(10);
 		$grid['columns']->getComponent('d')->setOrderColumnWeight(11);
+		
+		// Jen pro vystavene
+		if($this->getDPrefix() != '602') return $grid;
+		
+		$grid->setRowClass(function ($iterator, $row) use ($presenter) {
+			$classes = array();
+			
+			if($presenter->template->totalAwaiting >= $row->value) {
+				$e = $presenter->context->connection->query(
+					'SELECT * FROM [accounting_records]',
+					'WHERE [value] = %i', $row->value,
+					'AND [d] = %s', $row->md->id,
+					'AND [date] >= %s', $row->date->format('Y-m-d'),
+					'AND [description] LIKE %~like~', $row->evidenceId
+				);
+				
+				if($e->fetch() !== false)
+					$classes[] = 'paid';		
+			} else {
+				$classes[] = 'paid';
+			}
+
+			return empty($classes) ? null : implode(" ", $classes);
+		});
 		
 		return $grid;
 	}

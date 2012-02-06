@@ -38,17 +38,30 @@ class BalancePresenter extends vManager\Modules\System\SecuredPresenter {
 			'SELECT id, name, ' .
 				'(SELECT SUM(IF(md = a.id, value, 0 - value)) FROM accounting_records WHERE md = a.id OR d = a.id) AS balance ' .
 			'FROM accounting_billingClasses AS a ' .
-			'HAVING balance IS NOT NULL'
+			'HAVING balance IS NOT NULL ' .
+			'ORDER BY [id]'
 		);
 		
 		$barData = array();
+		$min = null; $max = null;
 		foreach($balance as $curr) {
-			$barData[$curr->id . '<br />' . wordwrap($curr->name, 30, '<br />')] = 
-				$curr->balance > 0
-					? $curr->balance
-					: array('y' => $curr->balance, 'color' => '#a21d21');
+			
+			if($curr->id == '211001' || $curr->id == '221001') {
+				$b = array('y' => $curr->balance, 'color' => '#89A54E');
+			} elseif($curr->balance > 0) {
+				$b = array('y' => -$curr->balance, 'color' => '#AA4643');
+			} else {
+				$b = -$curr->balance;
+			}
+			
+			$barData[$curr->id . '<br />' . wordwrap($curr->name, 30, '<br />')] = $b;
+					
+			if($curr->balance > $max) $max = $curr->balance;
+			if($curr->balance < $min) $min = $curr->balance;
 		}
 		
+		$this->template->barRangeMax = max($max, abs($min)) * 1.1;
+		$this->template->barRangeMin = -$this->template->barRangeMax;
 		$this->template->barData = $barData;
 	}
 	

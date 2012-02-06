@@ -22,7 +22,8 @@
 	width: 80px;
 }
 
-.accountingRecordListing .income .value {
+.accountingRecordListing .income .value,
+.accountingRecordListing .paid .value {
 	color: #338800;
 }
 
