@@ -9,6 +9,9 @@ msgstr ""
 msgid "Month:"
 msgstr "Měsíc:"
 
+msgid "Period:"
+msgstr "Období:"
+
 #: /var/www/vmanager/tools/../app/vStoreStats/Presenters/MonthlyPresenter.php:55
 msgid "Filter"
 msgstr "Zobrazit"
@@ -49,7 +52,7 @@ msgstr "Posledních 30 dní"
 
 #: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:78
 msgid "Save report"
-msgstr "Uloži report"
+msgstr "Uložit report"
 
 #: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:100
 msgid "Summary"
