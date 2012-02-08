@@ -76,6 +76,23 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->sortColumn = $grid->sortColumn ?: 'date';
 		$grid->sortType = $grid->sortType ?: 'asc';
 		
+		$grid->setRowClass(function ($iterator, $row) use ($presenter) {
+			$classes = array();
+			
+			if(Strings::match($row->evidenceId, '/^20[0-9]{5}$/'))
+				$classes[] = 'invoice';
+			elseif(Strings::match($row->evidenceId, '/^[0-9]{2}BP[0-9]{3}$/'))
+				$classes[] = 'bankIncome';
+			elseif(Strings::match($row->evidenceId, '/^[0-9]{2}BV[0-9]{3}$/'))
+				$classes[] = 'bankExpense';
+			elseif(Strings::match($row->evidenceId, '/^[0-9]{2}PP[0-9]{3}$/'))
+				$classes[] = 'cashIncome';
+			elseif(Strings::match($row->evidenceId, '/^[0-9]{2}PV[0-9]{3}$/'))
+				$classes[] = 'cashExpense';
+
+			return empty($classes) ? null : implode(" ", $classes);
+		});
+		
 		$grid->addColumn("date", __("Date"), array(
 			 "renderer" => function ($row) {
 				 echo $row->date->format('j. n. \'y');
@@ -88,7 +105,7 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 				 echo Helpers::evidenceId($row->evidenceId);
 			 },
 			 "sortable" => true,
-		))->setCellClass('evidenceId');
+		))->setCellClass('evidenceId myEvidenceId');
 		
 		$grid->addColumn('description', __('Subject'))->setCellClass('subject');
 				
