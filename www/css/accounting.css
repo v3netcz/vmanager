@@ -31,6 +31,27 @@
 	color: #cc3300;
 }
 
+.accountingRecordListing .invoice .myEvidenceId {
+	color: purple;
+}
+
+.accountingRecordListing .bankIncome .myEvidenceId {
+	color: #338800;
+}
+
+.accountingRecordListing .bankExpense .myEvidenceId {
+	color: #cc3300;
+}
+
+.accountingRecordListing .cashIncome .myEvidenceId {
+	color: #777700;
+}
+
+.accountingRecordListing .cashExpense .myEvidenceId {
+	color: #cc7700;
+}
+
+
 .accountingRecordListing .subject:first-letter {
 	text-transform: uppercase;
 }
