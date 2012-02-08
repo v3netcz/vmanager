@@ -54,14 +54,31 @@ class ArrayModel extends \Gridito\AbstractModel {
 		return false;
 	}
 
-	public function getItems() {
+	public function getItems() {	
 		$items = array();
+		$sortIndex = array();
 		reset($this->data);
+		list($sortColumn, $sortType) = $this->getSorting();
+		
 		for($i = 0; $i < $this->getOffset(); $i++) next($this->data);
-		for($i = 0; $i < $this->getLimit(); $i++) {
+		for($i = 0; $i < $this->getLimit(); $i++) {		
 			$items[key($this->data)] = current($this->data);
+			
+			if($sortColumn != null && isset($items[key($this->data)]->$sortColumn))
+				$sortIndex[key($this->data)] = $items[key($this->data)]->$sortColumn;
+			
 			next($this->data);
 		}
+		
+		if($sortColumn != null && count($sortIndex) > 0) {
+			if($sortType == self::DESC) arsort($sortIndex);
+			else asort($sortIndex);
+			
+			$items2 = array();
+			foreach($sortIndex as $k => $v) $items2[$k] = $items[$k];
+			$items = $items2;
+		}
+		
 		
 		return $items;
 	}
