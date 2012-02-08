@@ -51,7 +51,7 @@ class MonthlyPresenter extends BasePresenter {
 		foreach($this->getMonths() as $m)
 			$months[$m] = vManager\Application\Helpers::monthInWords($m);
 		
-		$form->addSelect('month', __('Month:'), $months)->setDefaultValue($this->month);
+		$form->addSelect('month', __('Period:'), $months)->setDefaultValue($this->month);
 		$form->addSubmit('send', __('Filter'));
 		
 		$presenter = $this;
