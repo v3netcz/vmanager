@@ -29,11 +29,13 @@ use vManager,
 	mPDF;
 
 // Trailing slashes!
-define("_MPDF_TEMP_PATH", TEMP_DIR . '/mpdf/');
-define('_MPDF_TTFONTDATAPATH', FILES_DIR . '/mpdf-fontdata/');
+if(!defined('_MPDF_TEMP_PATH')) {
+	define("_MPDF_TEMP_PATH", TEMP_DIR . '/mpdf/');
+	define('_MPDF_TTFONTDATAPATH', FILES_DIR . '/mpdf-fontdata/');
 
-// TODO: INCLUDE PATH
-require_once(LIBS_DIR . '/mPDF/mpdf.php');
+	// TODO: INCLUDE PATH
+	require_once(LIBS_DIR . '/mPDF/mpdf.php');
+}
 
 /**
  * Renderer for PDF reports
