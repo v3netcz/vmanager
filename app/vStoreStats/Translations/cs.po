@@ -30,15 +30,27 @@ msgid "Revenue"
 msgstr "Tržba"
 
 #: /var/www/vmanager/tools/../app/vStoreStats/Module.php:63
-#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:1
-#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:52
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:3
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:73
 msgid "E-shop statistics"
 msgstr "Statistiky obchodu"
 
-#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:40
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:61
 msgid "Number of recieved orders:"
 msgstr "Počet přijatých objednávek:"
 
-#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:60
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:84
 msgid "Number of recieved orders"
 msgstr "Počet přijatých objednávek"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Presenters/MonthlyPresenter.php:50
+msgid "Last 30 days"
+msgstr "Posledních 30 dní"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:78
+msgid "Save report"
+msgstr "Uloži report"
+
+#: /var/www/vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:100
+msgid "Summary"
+msgstr "Souhrn"
