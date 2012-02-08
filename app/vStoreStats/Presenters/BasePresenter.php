@@ -35,15 +35,61 @@ use vManager,
 class BasePresenter extends vManager\Modules\System\SecuredPresenter {
 	
 	private $_connection;
+	private $_profileNames;
+	private $_profiles = array();
 	
-	public function getConnection() {
+	/** @persistent */
+	public $profileId;
 	
-		if(!isset($this->_connection)) {
-			$config = array_merge($this->context->parameters['database'], (array) $this->context->parameters['vStoreStats']['profiles'][0]['dbConnection']);
-			$this->_connection = new \DibiConnection($config);
+	public function startup() {
+		parent::startup();
+
+		if(!isset($this->profileId))
+			list($this->profileId) = array_keys($this->getProfileNames());
+
+	}	
+	
+	/**
+	 * Returns array of profile names
+	 *
+	 * @return array
+	 */
+	public function getProfileNames() {
+		if(!isset($this->_profileNames)) {
+			if(!isset($this->context->parameters['vStoreStats']['profiles']))
+				throw new vBuilder\InvalidConfigurationException('Missing vStoreStats.profiles');
+		
+			$this->_profileNames = array();
+			foreach((array) $this->context->parameters['vStoreStats']['profiles'] as $k => $profile) {
+				$this->_profileNames[$k] = isset($profile['name']) ? $profile['name'] : $k;
+			}
+		}
+			
+		return $this->_profileNames;
+	}
+	
+	/**
+	 * Returns specified / current profile
+	 *
+	 * @param string profile key
+	 */
+	public function getProfile($id = null) {
+		if($id === null) $id = $this->profileId;
+	
+		if(!isset($this->_profiles[$id])) {
+			if(!isset($this->context->parameters['vStoreStats']['profiles'][$id]))
+				throw new Nette\InvalidStateException("Profile " . var_export($id, true) . " is not defined");
+		
+			$this->_profiles[$id] = new Profile($id, (array) $this->context->parameters['vStoreStats']['profiles'][$id], $this->context);
 		}
 		
-		return $this->_connection;
+		return $this->_profiles[$id];
+	}
+	
+	public function createTemplate($class = null) {
+		$template = parent::createTemplate($class);
+		$template->registerHelper('currency', 'vBuilder\Latte\Helpers\FormatHelpers::currency');
+		return $template;
 	}
 	
 }

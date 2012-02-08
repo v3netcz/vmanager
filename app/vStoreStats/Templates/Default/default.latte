@@ -1,3 +1,5 @@
+{extends '../@layout.latte'}
+
 {block pageTitle}<?php echo __('E-shop statistics'); ?>{/block}
 
 {block head}
@@ -5,6 +7,22 @@
 		.productGrid .price,
 		.productGrid .amount {
 			text-align: right;
+		}
+		
+		FORM#frm-monthSelectionForm DIV {
+			float: left;
+			line-height: 32px;
+			padding-right: 5px;
+		}
+		
+		FORM#frm-monthSelectionForm LABEL {
+			padding-right: 5px;
+		}
+		
+		FORM#frm-monthSelectionForm BUTTON {
+			display: block !important;
+			float: left !important;
+			clear: none !important;
 		}
 	</style>
 
@@ -21,7 +39,7 @@
 				text: null
 			},
 			xAxis: {
-				categories: {? echo json_encode(range(1, count($chartData)))}
+				categories: {? echo json_encode(array_keys($chartData))}
 			},
 			yAxis: {
 				title: {
@@ -35,6 +53,9 @@
 			series: [{
 				data: {? echo json_encode(array_values($chartData))}
 			}],
+			credits: {
+				enabled: false
+			},
 			tooltip: {
 				formatter: function() {
 					return '<?php echo __('Number of recieved orders:'); ?> <b>'+ this.y + '</b>';
@@ -47,12 +68,15 @@
    </script>
 {/block}
 
-{block content}
+{block statsContent}
 <div class="flat_area grid_16">
-	<h2><?php echo __('E-shop statistics'); ?></h2>
+	<h2><?php echo __('E-shop statistics'); ?> - {$control->profile->name}</h2>
 	
 	{control monthSelectionForm}
-		
+	
+	<div style="line-height: 32px; float: right">
+		<a href="{link Default:report}" class="color-button button_black"><?php echo __('Save report'); ?></a>
+	</div>
 	
 </div>
 
@@ -70,4 +94,17 @@
 
 <div class="box grid_16 round_all productGrid">
 {control productGrid}
+</div>
+
+<div class="box grid_8 round_all">
+	<h2 class="box_head grad_colour"><?php echo __('Summary'); ?></h2>
+	<a href="#" class="grabber">&nbsp;</a>
+	<a href="#" class="toggle">&nbsp;</a>
+	<div class="toggle_container">
+		<div class="block" style="padding-bottom: 10px;">
+			Celkový obrat: <span class="price">{$totalRevenue|currency}</span><br />
+			Celkový počet objednávek: <span class="price">{$totalCount}</span><br />
+			Průměrná cena objednávky: <span class="price">{$avgOrderValue|currency}</span>
+		</div>
+	</div>
 </div>

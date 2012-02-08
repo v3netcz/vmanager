@@ -1,0 +1,83 @@
+{* Page margins in mm (top, left, bottom, right) *}
+{$renderer->setPageMargins(8, 8, 8, 8)}
+
+{* Fixed header height (in mm) *}
+{*$renderer->setHeaderHeight(25)}
+<htmlpageheader name="firstHeader">
+	WTF
+</htmlpageheader>
+
+<htmlpageheader name="secondHeader">
+	<div style="float: right;">{l}PAGENO{r}/{l}nb{r}</div>
+	{include #title}
+</htmlpageheader> *}
+
+
+{* Fixed footer height (in mm) *}
+{*$renderer->setFooterHeight(50)}
+<sethtmlpagefooter name="invoiceFooter" page="ALL" value="on" show-this-page="0" />
+<htmlpagefooter name="invoiceFooter">
+<table width="100%" style="vertical-align: bottom; margin: 0 10mm;">
+	<tr>
+		<tdstyle="padding: 12mm 0 5mm 0; text-align: center;">
+			- Strana {l}PAGENO{r}/{l}nb{r} -
+		</td>
+	</tr>
+</table>
+</htmlpagefooter> *}
+
+<!----------------------------------------------------------------------------->
+
+<style>
+	A {
+		color: #06B;
+	}
+
+	TABLE {
+		border-collapse: collapse;
+	}
+
+	TABLE.reportTable {
+		border-top: 1px solid black;
+		width: 100%;
+		margin-top: 30px;
+	}
+	
+	TABLE.reportTable TD {
+		border-bottom: 1px solid #efefef;
+		padding: 8px 5px;
+	}	
+		
+	TABLE.reportTable TD.price {
+		text-align: right;
+		width: 100px;
+	} 
+</style>
+
+<!----------------------------------------------------------------------------->
+
+{block pageHeader}
+<table width="100%" style="font-family: Myriad Pro; font-size: 8pt; vertical-align: middle;"><tr>
+	<td width="55mm">
+		<img src="/var/invoices/logo2.jpg" width="45mm" />
+	</td>
+	<td>
+		V3Net.cz, s.r.o., Charkovská 385/15,
+		101 00 Praha 10 - Vršovice,
+		Česká republika<br />
+		
+		IČ: 24192007,
+		www.v3net.cz,
+		info@v3net.cz,
+		tel:  +420 774 890 708
+	</td>
+</tr></table>
+{/block}
+
+<div style="margin: 0px 10mm; font-family: Myriad Pro; font-size: 9pt;">
+
+<h1 style="text-align: right; font-size: 10pt; margin-bottom: 9pt; font-weight: normal;">{include #title}</h1>
+
+{include #content}
+	
+</div>

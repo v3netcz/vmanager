@@ -1,0 +1,25 @@
+{extends '../../System/Templates/@layout.latte'}
+
+{block head}
+	<link rel="stylesheet" href="{$basePath}/css/accounting.css" type="text/css">
+	<script type="text/javascript" src="{$basePath}/js/vManager/accounting.js"></script>
+	
+	{block recordHead}{/block}
+{/block}
+
+{block content}
+	{dump $presenter->name == 'Accounting:IssuedInvoiceRecord'}
+
+	<div id="nav_top" class="clearfix  round_top">
+		<ul class="clearfix">
+			<li n:class="$control->profile->id == $pId ? current" n:foreach="$control->profileNames as $pId => $pName">
+				<a href="{link Default:default, profileId => $pId}">
+					<img src="{$basePath}/images/icons/small/{? echo $control->profile->id == $pId ? 'white' : 'grey'}/Globe.png"/>
+					{$pName}
+				</a>
+			</li>
+		</ul>	
+	</div>
+	
+	{include #statsContent}
+{/block}

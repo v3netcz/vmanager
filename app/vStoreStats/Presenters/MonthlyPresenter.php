@@ -47,7 +47,7 @@ class MonthlyPresenter extends BasePresenter {
 	public function createComponentMonthSelectionForm($name) {
 		$form = new Form($this, $name);
 		
-		$months = array();
+		$months = array('last30days' => __('Last 30 days'));
 		foreach($this->getMonths() as $m)
 			$months[$m] = vManager\Application\Helpers::monthInWords($m);
 		
@@ -60,6 +60,18 @@ class MonthlyPresenter extends BasePresenter {
 		}; 
 		
 		return $form;
+	}
+	
+	protected function getMonthsGatherer() {
+		$m = array();
+		$d = clone $this->profile->since;
+		do {
+			$m[] = $d->format('Y-m');
+			$d->add(\DateInterval::createFromDateString('+1 month'));
+			
+		} while($d <= $this->profile->until);
+	
+		return $m;
 	}
 	
 	protected function getMonths() {
@@ -77,14 +89,25 @@ class MonthlyPresenter extends BasePresenter {
 	
 	protected function setupParams() {
 		$this->month = $this->getParam('month');
-		if(!isset($this->month)) $this->month = date('Y-m');
+		if(!isset($this->month)) $this->month = 'last30days';
 	}
 	
 	public function getSince() {
+		if($this->month == 'last30days') {
+			$d = new \DateTime('now');
+			$d->add(\DateInterval::createFromDateString('-30 day'));
+			
+			return $d;
+		}
+		
 		return \DateTime::createFromFormat('Y-m-d', $this->month . '-01');
 	}
 	
 	public function getUntil() {
+		if($this->month == 'last30days') {
+			return new \DateTime('now');
+		}
+	
 		$d = clone $this->getSince();
 		return $d->add(\DateInterval::createFromDateString(($d->format('t') - 1) . ' days'));
 	}

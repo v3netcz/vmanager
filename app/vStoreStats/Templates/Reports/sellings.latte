@@ -1,0 +1,63 @@
+{extends '@layout.latte'}
+
+{block title}
+Internetové prodeje
+
+{if (intval($since->format('t')) - 1) == $until->diff($since)->format('%d') && $since->format('Ymd') == $since->format('Ym01')}
+	<div style="font-size: 200%;">
+		{=vManager\Application\Helpers::monthInWords($since->format('Y-m'))}
+	</div>
+{else}
+	<div style="font-size: 75%;">&nbsp;</div>
+{/if}
+{/block}
+
+{block content}
+<style>
+
+	TABLE.reportTable TD.id {
+		text-align: right;
+		width: 50px;
+		padding-right: 15px;
+	}
+	
+	TABLE.reportTable TD.amount {
+		text-align: right;
+		width: 50px;
+		padding-right: 15px;
+	}
+
+</style>
+
+<div class="firstHeader">
+<div>
+<div style="font-size: 200%;">{$profile->name}</div>
+<span style="#cccccc" n:if="$profile->url">{$profile->url->getHost()}</span>
+</div>
+
+
+<table width="100%" style="font-size: 9pt; margin-top: 20px; line-height: 150%;"><tr>
+	<td width="50%">
+	za období: <strong>{$since->format('j. n. Y')} - {$until->format('j. n. Y')}</strong><br />
+	celkem přijato objednávek: <strong>{$totalCount}</strong><br />
+	o hodnotě: <span style="color: green">{=vStore\Latte\Helpers\Shop::currency($totalRevenue)}</span>
+	</td>
+
+	<td style="vertical-align: top;">
+	vypočtená průměrná cena objednávky: {=vStore\Latte\Helpers\Shop::currency($avgOrderValue)}
+	</td>
+</tr></table>
+</div>
+
+<div class="secondHeader">
+<table class="reportTable" style="border-top: 1px solid black; margin-top: 30px;" n:if="isset($sellings)">
+	<tbody>
+		<tr n:foreach="$sellings as $curr">
+			<td class="id">{$curr->productId}</td>
+			<td class="name">{$curr->name}</td>
+			<td class="amount">{$curr->amount} ks</td>
+			<td class="price revenue">{=vStore\Latte\Helpers\Shop::currency($curr->revenue)}</td>
+		</tr>
+	</tbody>
+</table>
+</div>
