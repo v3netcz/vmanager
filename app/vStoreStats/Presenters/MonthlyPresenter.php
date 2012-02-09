@@ -109,7 +109,7 @@ class MonthlyPresenter extends BasePresenter {
 		}
 	
 		$d = clone $this->getSince();
-		return $d->add(\DateInterval::createFromDateString(($d->format('t') - 1) . ' days'));
+		return min(new \DateTime('now'), $d->add(\DateInterval::createFromDateString(($d->format('t') - 1) . ' days')));
 	}
 	
 	protected function createDateArray($results, $mCol = 'date', $vCol = 'value') {
