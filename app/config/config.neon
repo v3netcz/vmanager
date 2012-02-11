@@ -24,6 +24,11 @@ parameters:
 		saveWithExtension: true
 		dir: '%filesDir%'
 		
+	System:
+		sideLinks:
+			'http://www.vmanager.cz': 'vManager'
+			'http://www.v3net.cz': 'V3Net.cz'
+		
 	# User administration module
 	Users:
 		enabled: true
