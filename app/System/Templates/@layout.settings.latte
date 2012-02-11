@@ -1,0 +1,25 @@
+{extends '@layout.latte'}
+
+
+{var $robots = noindex}
+{block #content}
+	<div id="nav_top" class="clearfix round_top" n:if="$user->isAllowed('System:Settings')">
+		<ul class="clearfix">
+			<li n:class="$presenter->name == 'System:UserSettings' ? current" n:if="$user->isAllowed('System:UserSettings')">
+				<a href="{link UserSettings:default}">
+					<img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'System:UserSettings' ? 'white' : 'grey'}/User%202.png"/>
+					<?php echo __('User profile'); ?>
+				</a>
+			</li>
+		
+			<li n:class="$presenter->name == 'System:Settings' ? current" n:if="$user->isAllowed('System:Settings')">
+				<a href="{link Settings:default}">
+					<img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'System:Settings' ? 'white' : 'grey'}/Globe.png"/>
+					<?php echo __('System settings'); ?>
+				</a>
+			</li>
+		</ul>	
+	</div>
+
+
+	{block #settingsContent}{/block}
