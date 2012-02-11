@@ -8,7 +8,7 @@
 	{block pageHeader}
 	<table width="100%" style="font-family: Myriad Pro; font-size: 8pt; vertical-align: middle;"><tr>
 		<td width="55mm">
-			<img src="/var/invoices/logo2.jpg" width="45mm" />
+			<img src="{$ownerInfo->logoUrl}" width="45mm" n:if="$ownerInfo->logoUrl" />
 		</td>
 		<td>
 			V3Net.cz, s.r.o., Charkovská 385/15,

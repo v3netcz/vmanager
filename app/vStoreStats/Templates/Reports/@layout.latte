@@ -8,9 +8,7 @@
 	{block pageHeader}
 	<table width="100%" style="font-family: Myriad Pro; font-size: 8pt; vertical-align: middle;"><tr>
 		<td width="55mm">
-			{if $context->userConfig->get('company.logo') && file_exists($context->userConfig->get('company.logo'))}
-				<img src="{=vManager\Modules\System\FilesPresenter::getLink('/logo.png')}" width="45mm" />
-			{/if}
+			<img src="{$ownerInfo->logoUrl}" width="45mm" n:if="$ownerInfo->logoUrl" />
 		</td>
 		<td style="text-align: right; margin: 0px 10mm; font-family: Myriad Pro; font-size: 11pt; margin-bottom: 9pt; font-weight: normal;">
 			{include #title}
