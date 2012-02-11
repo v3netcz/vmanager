@@ -35,6 +35,31 @@ use vManager, Nette;
  */
 class BasePresenter extends Nette\Application\UI\Presenter {
 
+	private $_module;
+
+	/**
+	 * Public function get current module instance
+	 *
+	 * @return vManager\Application\Module
+	 */
+	public function getModule() {
+		if(!isset($this->_module)) {
+			if(($matches = Nette\Utils\Strings::match($this->reflection->getNamespaceName(), '/^(vManager\\\\Modules\\\\[^\\\\]+)/')) !== null) {
+				$moduleName = $matches[1];
+				
+				foreach(vManager\Application\ModuleManager::getModules() as $module) {
+					if($module instanceof $moduleName) {
+						return $module;
+					}
+				}
+			}
+		
+			throw new Nette\InvalidStateException("Module is not defined for class " . var_export(get_called_class(), true));
+		}
+		
+		return $this->_module;
+	}
+
 	/**
 	 * Formats view template file names.
 	 * @param  string
@@ -92,6 +117,13 @@ class BasePresenter extends Nette\Application\UI\Presenter {
 		}
 		
 		return $list;
+	}
+	
+	protected function createTemplate($class = null) {
+		$template = parent::createTemplate($class);
+		$template->module = $this->module;
+		
+		return $template;
 	}
 
 }

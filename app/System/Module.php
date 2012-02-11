@@ -34,22 +34,29 @@ use vManager, vBuilder, Nette, vManager\Security\User, vBuilder\Orm\Behaviors\Se
 class System extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
 	vManager\Application\IAclEnabledModule {
 	
+	private $_ownerInfo;
+	
 	public function __construct() {
 		global $context;
 	
+		// Avatars
 		vManager\Security\User::registerAvatarFileHandler();
 		
-		$logoPath = $context->userConfig->get('company.logo');
-		if($logoPath != null && file_exists($logoPath)) {
-			vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) use ($logoPath) {
-			
-				if($filename == '/logo.png') {
-					return new vBuilder\Application\Responses\FileResponse($logoPath);
-				}
+		// Company logo
+		vManager\Modules\System\OwnerInfo::registerLogoFileHandler();
+	}
 
-			};
+	/**
+	 * Returns owner info
+	 *
+	 * @return System\OwnerInfo
+	 */
+	public function getOwnerInfo() {
+		if(!isset($this->_ownerInfo)) {
+			$this->_ownerInfo = new System\OwnerInfo;
 		}
-
+		
+		return $this->_ownerInfo;
 	}
 	
 	/**

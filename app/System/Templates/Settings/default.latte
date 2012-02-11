@@ -9,9 +9,9 @@
 		<a href="#" class="toggle">&nbsp;</a>
 		<div class="toggle_container">
 			<div class="block">
-				{if $control->context->userConfig->get('company.logo') && file_exists($control->context->userConfig->get('company.logo'))}
-					<img src="{=vManager\Modules\System\FilesPresenter::getLink('/logo.png')}" alt="<?php echo __('Current logo'); ?>" />
-				{/if}
+				<div style="margin-bottom: 20px;" n:if="$module->ownerInfo->logoUrl">
+					<img src="{$module->ownerInfo->logoUrl}" alt="<?php echo __('Current logo'); ?>" style="max-width: 200px" />
+				</div>
 				
 				{control settingsForm}
 			</div>

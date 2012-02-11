@@ -100,6 +100,7 @@ abstract class TemplateReportRenderer extends vBuilder\Object {
 		$template->baseUrl = rtrim($this->context->httpRequest->getUrl()->getBaseUrl(), '/');
 		$template->renderer = $this;
 		$template->context = $this->context;
+		$template->ownerInfo = vManager\Modules\System::getInstance()->getOwnerInfo();
 		
 		return $template;
 	}

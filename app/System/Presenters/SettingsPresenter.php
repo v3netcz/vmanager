@@ -26,7 +26,8 @@ namespace vManager\Modules\System;
 use vManager,
 	Nette,
 	vManager\Form,
-	vManager\MultipleFileUploadControl;
+	vManager\MultipleFileUploadControl,
+	vBuilder;
 
 /**
  * System settings presenter
@@ -48,11 +49,11 @@ class SettingsPresenter extends SecuredPresenter {
 		
 		$form->addMultipleFileUpload('logo', __('Select your logo'))
 				->addRule(MultipleFileUploadControl::VALID, __('You may only upload PNG images!'), array (
-					/* 'jpg' => 'image/jpg',
+					'jpg' => 'image/jpg',
 					'jpg' => 'image/jpeg',
-					'JPG' => 'image/jpeg', */
+					'JPG' => 'image/jpeg',
 					'png' => 'image/png',
-					// 'gif' => 'image/gif'
+					'gif' => 'image/gif'
 				))
 				->addRule(MultipleFileUploadControl::FILES_COUNT, __('You can upload one file only'), 1);
 		
@@ -72,15 +73,23 @@ class SettingsPresenter extends SecuredPresenter {
 		$config = $this->context->userConfig->getGlobalScope();
 
 		if (count($values->logo)) {
-			$logo = $values->logo[0];
 			
+			vBuilder\Utils\FileSystem::tryDeleteFiles(
+				vBuilder\Utils\FileSystem::findFilesWithBaseName(
+					FILES_DIR . '/logo',
+					array('jpg', 'png', 'gif')
+				)
+			);			
+
+			$logo = $values->logo[0];			
 			$logo->setFilename('logo');
 			$path = FILES_DIR . $logo->save('/');
-			$img = Nette\Image::fromFile($path);
-			$img->resize(122, 122);
-			$img->save($path);
 			
-			$config->set('company.logo', $path); 
+			/* $img = Nette\Image::fromFile($path);
+			$img->resize(122, 122);
+			$img->save($path); */
+			
+			//$config->set('company.logo', $path); 
 		}
 		
 		$config->save();
