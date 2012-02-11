@@ -13,7 +13,7 @@
 	<div id="nav_top" class="clearfix  round_top">
 		<ul class="clearfix">
 			<li n:class="$control->profile->id == $pId ? current" n:foreach="$control->profileNames as $pId => $pName">
-				<a href="{link Default:default, profileId => $pId}">
+				<a href="{link Default:default, profileId => $pId, month => null}">
 					<img src="{$basePath}/images/icons/small/{? echo $control->profile->id == $pId ? 'white' : 'grey'}/Globe.png"/>
 					{$pName}
 				</a>
