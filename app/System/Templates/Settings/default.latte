@@ -1,0 +1,21 @@
+{extends '../@layout.settings.latte'}
+
+{block #settingsContent}
+	{include ../Includes/flashes.latte}
+
+	<div class="box grid_8 round_all">
+		<h2 class="box_head grad_colour"><?php echo __('Company info'); ?></h2>
+		<a href="#" class="grabber">&nbsp;</a>
+		<a href="#" class="toggle">&nbsp;</a>
+		<div class="toggle_container">
+			<div class="block">
+				{if $control->context->userConfig->get('company.logo') && file_exists($control->context->userConfig->get('company.logo'))}
+					<img src="{=vManager\Modules\System\FilesPresenter::getLink('/logo.png')}" alt="<?php echo __('Current logo'); ?>" />
+				{/if}
+				
+				{control settingsForm}
+			</div>
+		</div>
+	</div>
+{/block}
+		

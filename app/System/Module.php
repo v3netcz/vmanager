@@ -35,7 +35,21 @@ class System extends vManager\Application\Module implements vManager\Application
 	vManager\Application\IAclEnabledModule {
 	
 	public function __construct() {
+		global $context;
+	
 		vManager\Security\User::registerAvatarFileHandler();
+		
+		$logoPath = $context->userConfig->get('company.logo');
+		if($logoPath != null && file_exists($logoPath)) {
+			vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) use ($logoPath) {
+			
+				if($filename == '/logo.png') {
+					return new vBuilder\Application\Responses\FileResponse($logoPath);
+				}
+
+			};
+		}
+
 	}
 	
 	/**
@@ -57,6 +71,7 @@ class System extends vManager\Application\Module implements vManager\Application
 		$acl->addResource('System:Homepage', 'System');
 		$acl->addResource('System:Search', 'System');
 		$acl->addResource('System:UserSettings', 'System');
+		$acl->addResource('System:Settings', 'System');
 		
 		// Vsichni musi mit pristup k tomu cist uzivatele (login)
 		// Zaroven uzivatel musi mit opravneni k tomu, editovat vlastni profil
@@ -64,7 +79,9 @@ class System extends vManager\Application\Module implements vManager\Application
 		$acl->allow('guest', User::getParentResourceId(), Secure::ACL_PERMISSION_UPDATE); // Password reset form, TODO: osetrit to
 		//$acl->allow('User', User::getParentResourceId(), Secure::ACL_PERMISSION_UPDATE, array('vManager\Security\User', 'permissionOwnProfileAssert'));
 		
-		$acl->allow('User', 'System', Nette\Security\Permission::ALL);
+		$acl->allow('User', 'System:Homepage', Nette\Security\Permission::ALL);
+		$acl->allow('User', 'System:Search', Nette\Security\Permission::ALL);
+		$acl->allow('User', 'System:UserSettings', Nette\Security\Permission::ALL);
 	}
 	
 	/**
