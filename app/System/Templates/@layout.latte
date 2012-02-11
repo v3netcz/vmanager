@@ -195,9 +195,11 @@
 				<!--<form id="search_side" method="get" action="{link :System:Search:default}"><input class="round_all" name="s" type="text" value="<?php echo __('Search...'); ?>" onclick="value=''"></form>-->
 				
 				<!-- Other links -->
-				<ul id="side_links" class="text_shadow" >
-					<li><a href="http://www.vmanager.cz">vManager</a>
-					<li><a href="http://www.v3net.cz">V3Net.cz</a></li>
+				{var $sysConfig = vManager\Modules\System::getInstance()->getConfig()}
+				<ul id="side_links" class="text_shadow" n:if="isset($sysConfig['sideLinks'])">
+					<li n:foreach="$sysConfig['sideLinks'] as $url => $label">
+						<a href="{$url}">{$label}</a>
+					</li>
 				</ul>
 			</div><!-- #sidebar -->
 			
