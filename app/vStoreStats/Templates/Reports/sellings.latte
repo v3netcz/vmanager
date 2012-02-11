@@ -8,7 +8,10 @@ Internetové prodeje
 		{=vManager\Application\Helpers::monthInWords($since->format('Y-m'))}
 	</div>
 {else}
-	<div style="font-size: 75%;">&nbsp;</div>
+	<div style="font-size: 200%;">
+	{$since->format($since->format('Y') == $until->format('Y') ? 'j. n.' : 'j. n. Y')} - {$until->format('j. n. Y')}
+	</div>
+	{* <div style="font-size: 75%;">&nbsp;</div> *}
 {/if}
 {/block}
 
