@@ -104,11 +104,11 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 			
 			if($presenter->template->totalAwaiting >= $row->value) {
 				$e = $presenter->context->connection->query(
-					'SELECT * FROM [accounting_records]',
-					'WHERE [value] = %i', $row->value,
-					'AND [d] = %s', $row->md->id,
+					'SELECT SUM([value]) AS [paid] FROM [accounting_records]',
+					'WHERE [d] = %s', $row->md->id,
 					'AND [date] >= %s', $row->date->format('Y-m-d'),
-					'AND [description] LIKE %~like~', $row->evidenceId
+					'AND [subjectEvidenceId] = %s', $row->evidenceId,
+					'HAVING [paid] >= %i', $row->value
 				);
 				
 				if($e->fetch() !== false)

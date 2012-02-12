@@ -1,5 +1,9 @@
 {extends '../Record/default.latte'}
 
+{block recordForm}
+	{include 'cashRecordForm.inc.latte'}
+{/block}
+
 {block recordContent2}
 	<div class="box grid_8 round_all accountingSummaryBox">
 		<h2 class="box_head grad_colour"><?php echo __('Summary'); ?></h2>

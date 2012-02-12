@@ -1,0 +1,24 @@
+{extends '../Record/generalRecordForm.inc.latte'}
+
+{block footFields}
+	<tr>
+		<td colspan="3" class="separator"></td>
+	</tr>
+	
+	<tr>					
+					
+		<td>
+			{if isset($form['subjectEvidenceId'])}
+				{!$form['subjectEvidenceId']->label}
+				{!$form['subjectEvidenceId']->control}
+			{/if}
+		</td>
+		
+		<td width="10%"></td>
+		
+		<td>
+		</td>
+		
+	</tr>
+
+{/block}										

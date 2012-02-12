@@ -79,4 +79,41 @@ class CashRecordPresenter extends RecordPresenter {
 		return $this->_total;
 	}
 	
+	public function createComponentRecordForm($name) {		
+		$context = $this->context;
+		$form = new Form($this, $name);
+		$this->setupRecordForm($form);
+		
+		$form->addText('subjectEvidenceId', __('Bound evidence ID:'))
+			->setAttribute('autocomplete-src', $this->link('CashRecord:suggestSubjectEvidenceId'))
+			->setAttribute('title', __('To which receipt assign this transaction?'))
+			->addRule(function ($control) use ($context) {
+					return $context->repository->findAll(RecordPresenter::ENTITY_RECORD)
+						->where('[evidenceId] = %s', $control->value)->fetch() !== false;
+					
+			}, __('Bound evidence ID does not exists.'));
+		
+		$this->loadRecordForm($form);
+		
+		return $form;
+	}
+	
+	/**
+	 * Queries suggestion item for subject evidence id
+	 *
+	 * @return void
+	 */
+	public function actionSuggestSubjectEvidenceId() {
+		$typedText = $this->getParam('term', '');
+		$suggestions = array();
+
+		$ids = $this->context->connection->query('SELECT [evidenceId] FROM [accounting_records] WHERE [evidenceId] LIKE %like~ LIMIT 10', $typedText)
+			->fetchAll();
+			
+		foreach($ids as $curr)
+			$suggestions[] = $curr['evidenceId'];
+			
+		$this->sendResponse(new Nette\Application\Responses\JsonResponse($suggestions));
+	}
+	
 }
