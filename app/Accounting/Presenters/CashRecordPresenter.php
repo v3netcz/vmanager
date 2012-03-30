@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\Accounting;
 
-use vManager, vBuilder, Nette, vManager\Form, Gridito;
+use vManager, vBuilder, Nette, vManager\Form, Gridito, Nette\Utils\Strings;
 
 /**
  * Presenter for cash records
@@ -88,8 +88,8 @@ class CashRecordPresenter extends RecordPresenter {
 			->setAttribute('autocomplete-src', $this->link('CashRecord:suggestSubjectEvidenceId'))
 			->setAttribute('title', __('To which receipt assign this transaction?'))
 			->addRule(function ($control) use ($context) {
-					return $context->repository->findAll(RecordPresenter::ENTITY_RECORD)
-						->where('[evidenceId] = %s', $control->value)->fetch() !== false;
+					return ($control->value == "") || ($context->repository->findAll(RecordPresenter::ENTITY_RECORD)
+						->where('[evidenceId] = %s OR [subjectEvidenceId] = %s', $control->value, $control->value)->fetch() !== false);
 					
 			}, __('Bound evidence ID does not exists.'));
 		
@@ -107,13 +107,13 @@ class CashRecordPresenter extends RecordPresenter {
 		$typedText = $this->getParam('term', '');
 		$suggestions = array();
 
-		$ids = $this->context->connection->query('SELECT [evidenceId] FROM [accounting_records] WHERE [evidenceId] LIKE %like~ LIMIT 10', $typedText)
+		$ids = $this->context->connection->query('SELECT [evidenceId], [subjectEvidenceId] FROM [accounting_records] WHERE [evidenceId] LIKE %like~ OR [subjectEvidenceId] LIKE %like~ LIMIT 10', $typedText, $typedText)
 			->fetchAll();
 			
 		foreach($ids as $curr)
-			$suggestions[] = $curr['evidenceId'];
+			$suggestions[] = Strings::startsWith($curr['evidenceId'], $typedText) ? $curr['evidenceId'] : $curr['subjectEvidenceId'];
 			
-		$this->sendResponse(new Nette\Application\Responses\JsonResponse($suggestions));
+		$this->sendResponse(new Nette\Application\Responses\JsonResponse(array_unique($suggestions)));
 	}
 	
 }

@@ -268,6 +268,8 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 				$id = key($values);							
 				next($values);
 				
+				if(Strings::endsWith($id, '0')) return false;
+				
 				return Strings::startsWith($id, $prefix);
 			});
 		}

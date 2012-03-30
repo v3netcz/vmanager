@@ -95,30 +95,66 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 		$grid['columns']->getComponent('value')->setOrderColumnWeight(9);	
 		$grid['columns']->getComponent('md')->setOrderColumnWeight(10);
 		$grid['columns']->getComponent('d')->setOrderColumnWeight(11);
+				
+		$linkedRecords = array();
+		$grid['columns']->getComponent('evidenceId')->setRenderer(function ($row) use(&$linkedRecords) {
+			 echo Helpers::evidenceId($row->evidenceId);
+			 
+			 if(isset($linkedRecords[$row->id]) && count($linkedRecords[$row->id])) {
+			 	echo Nette\Utils\Html::el("span")
+			 				->class("evidenceLink")
+			 				->title(_x('Linked with evidence n. %s', array(implode(', ', $linkedRecords[$row->id]) )))
+				 			->add(Nette\Utils\Html::el('span')->setText('L'));
+			 }
+			 
+		});
 		
-		// Jen pro vystavene
-		if($this->getDPrefix() != '602') return $grid;
 		
-		$grid->setRowClass(function ($iterator, $row) use ($presenter) {
+		$issued = ($this->getDPrefix() == '602');
+		$grid->setRowClass(function ($iterator, $row) use ($presenter, &$linkedRecords, $issued) {
 			$classes = array();
 			
-			if($presenter->template->totalAwaiting >= $row->value) {
-				$e = $presenter->context->connection->query(
-					'SELECT SUM([value]) AS [paid] FROM [accounting_records]',
-					'WHERE [d] = %s', $row->md->id,
-					'AND [date] >= %s', $row->date->format('Y-m-d'),
-					'AND [subjectEvidenceId] = %s', $row->evidenceId,
-					'HAVING [paid] >= %i', $row->value
-				);
+			//if($presenter->template->totalAwaiting >= $row->value) {
+			
+				if($issued) {
+					$e = $presenter->context->connection->query(
+						'SELECT [evidenceId], [value] FROM [accounting_records]',
+						'WHERE [d] = %s', $row->d->id,
+						// 'AND [date] >= %s', $row->date->format('Y-m-d'),
+						'AND [subjectEvidenceId] = %s', $row->evidenceId
+					)->fetchAll();
+				} else {
+					$e = $presenter->context->connection->query(
+						'SELECT [evidenceId], [value] FROM [accounting_records]',
+						'WHERE [md] = %s', $row->d->id,
+						// 'AND [date] >= %s', $row->date->format('Y-m-d'),
+						'AND [subjectEvidenceId] IN %in AND [subjectEvidenceId] <> \'\'', array($row->subjectEvidenceId, $row->evidenceId)
+					)->fetchAll();
+				}
 				
-				if($e->fetch() !== false)
-					$classes[] = 'paid';		
-			} else {
+				Nette\Diagnostics\Debugger::barDump($e);
+				
+				if($e !== false) {
+
+					$sum = 0;
+					$linkedRecords[$row->id] = array();
+					foreach($e as $curr) {
+						$sum += $curr->value;
+						$linkedRecords[$row->id][] = Helpers::evidenceId($curr['evidenceId']);
+					}
+					
+					if($sum == $row->value)
+						$classes[] = 'paid';
+					
+				}	
+			/* } else {
 				$classes[] = 'paid';
-			}
+			} */
 
 			return empty($classes) ? null : implode(" ", $classes);
 		});
+		
+
 		
 		return $grid;
 	}
