@@ -63,6 +63,7 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 		// Presentery
 		$acl->addResource('Tickets:Ticket', 'TaskManagement');
 		$acl->addResource('Tickets:Project', 'TaskManagement');
+				$acl->addResource('Tickets:JsonConnector', 'TaskManagement');
 				
 		// Uzivatel ticketovaciho systemu
 		$acl->addRole('Ticket user', 'User');
