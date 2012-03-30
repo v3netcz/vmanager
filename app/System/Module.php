@@ -79,6 +79,7 @@ class System extends vManager\Application\Module implements vManager\Application
 		$acl->addResource('System:Search', 'System');
 		$acl->addResource('System:UserSettings', 'System');
 		$acl->addResource('System:Settings', 'System');
+		// $acl->addResource('System:JsonConnector', 'System');
 		
 		// Vsichni musi mit pristup k tomu cist uzivatele (login)
 		// Zaroven uzivatel musi mit opravneni k tomu, editovat vlastni profil
