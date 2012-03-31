@@ -42,12 +42,12 @@ Rodné číslo: {$employee->in}
 	<td width="50%">
 	za období: <strong>{$since->format('j. n. Y')} - {$until->format('j. n. Y')}</strong><br />
 	celkem odpracováno: <?php echo _nx('%d hour', '%d hours', $sum, array($sum)); ?><br />
-	mzda: {=vStore\Latte\Helpers\Shop::currency($payPerHour)} Kč / hod
+	mzda: {=vStore\Latte\Helpers\Shop::currency($payPerHour)} / hod
 	</td>
 
 	<td style="vertical-align: top;">
 	vypočtená hrubá mzda: {=vStore\Latte\Helpers\Shop::currency($pay)}<br />
-	srážková daň: {=vStore\Latte\Helpers\Shop::currency($tax)}<br />
+	zálohová daň: {=vStore\Latte\Helpers\Shop::currency($tax)}<br />
 	čistá mzda: <strong>{=vStore\Latte\Helpers\Shop::currency($pay - $tax)}</strong>
 	</td>
 </tr></table>

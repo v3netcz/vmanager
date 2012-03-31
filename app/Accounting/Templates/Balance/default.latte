@@ -82,13 +82,18 @@
 
 
 {block recordContent}
+
+<div class="flat_area grid_16" style="margin-bottom: 20px;">
+	<a href="{link balanceSheet}" class="color-button"><?php echo __('Balance sheet'); ?></a>
+</div>
+
 <div class="box grid_16 round_all">
 	<h2 class="box_head grad_colour"><?php echo __('Summary'); ?></h2>
 	<a href="#" class="grabber">&nbsp;</a>
 	<a href="#" class="toggle">&nbsp;</a>
 	<div class="toggle_container">
 		<div style="padding: 15px 5px 8px 5px;">
-			<div id="container" style="width: 100%;"></div>
+			<div id="container" style="width: 100%; min-height: 800px;"></div>
 		</div>
 	</div>
 </div>

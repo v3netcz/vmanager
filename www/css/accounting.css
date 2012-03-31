@@ -51,6 +51,18 @@
 	color: #cc7700;
 }
 
+.accountingRecordListing .evidenceLink {
+	display: block;
+	float: right;
+	width: 14px; height: 21px;
+	
+	background: url('../images/icons/link.png') no-repeat;
+}
+
+.accountingRecordListing .evidenceLink SPAN {
+	display: none;
+}
+
 
 .accountingRecordListing .subject:first-letter {
 	text-transform: uppercase;

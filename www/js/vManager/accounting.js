@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$('.accountingRecordListing ABBR').each(function () {
+	$('.accountingRecordListing ABBR').add('.accountingRecordListing .evidenceLink').each(function () {
 		var el = $(this);
 			
 		if(el.attr('title') != '') {

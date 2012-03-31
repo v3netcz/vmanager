@@ -18,6 +18,8 @@
 			
 			<li n:class="$presenter->name == 'Accounting:ReceivedInvoiceRecord' ? current"><a href="{link ReceivedInvoiceRecord:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:ReceivedInvoiceRecord' ? 'white' : 'grey'}/Box%20Incoming.png"/><?php echo __('Received invoices'); ?></a></li>
 			
+			<li n:class="$presenter->name == 'Accounting:OtherLiabilityRecord' ? current"><a href="{link OtherLiabilityRecord:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:OtherLiabilityRecord' ? 'white' : 'grey'}/Cash%20Register.png"/><?php echo __('Other liabilities'); ?></a></li>
+			
 			<li n:class="$presenter->name == 'Accounting:BankRecord' ? current"><a href="{link BankRecord:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:BankRecord' ? 'white' : 'grey'}/Piggy%20Bank.png"/><?php echo __('Bank account'); ?></a></li>
 			
 			<li n:class="$presenter->name == 'Accounting:CashRecord' ? current"><a href="{link CashRecord:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:CashRecord' ? 'white' : 'grey'}/Money%202.png"/><?php echo __('Cash'); ?></a></li>

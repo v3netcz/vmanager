@@ -1,0 +1,58 @@
+{extends '@layout.latte'}
+
+{block title}
+<strong>Účetní rozvaha</strong>
+
+<div style="font-size: 200%;">
+za rok {$year}
+</div>
+
+<div style="font-style: italic; font-size: 98%;" n:if="isset($until)">
+(ke dni: {$until->format('j. n. Y')})
+</div>
+{/block}
+
+{block content}
+<style>
+TABLE.balanceTable {
+	border-top: 1px solid black;
+	width: 100%;
+	margin-top: 30px;
+}
+
+TABLE.balanceTable TD {
+	border-bottom: 1px solid #efefef;
+	padding: 8px 5px;
+	width: 50%;
+}
+
+TABLE.balanceTable THEAD TD {
+	text-align: center;
+}
+</style>
+
+<!-- http://business.center.cz/business/pravo/zakony/ucto-v2002-500/priloha1.aspx -->
+<table class="balanceTable">
+	<tbody>
+		<tr>
+			<td class="label">Pohledávky za upsané vlastní jmění</td>
+			<td></td>
+			<td></td>
+			
+			<td class="label">Vlastní jmění</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+
+	<thead>
+		<tr>
+			<td>Aktiva</td>
+			<td>1. 1. {$year}</td>
+			<td>{if isset($until)}{$until->format('j. n. Y')}{else}31. 12. {$year}{/if}</td>
+			<td>Pasiva</td>
+			<td>1. 1. {$year}</td>
+			<td>{if isset($until)}{$until->format('j. n. Y')}{else}31. 12. {$year}{/if}</td>
+		</tr>
+	</thead>
+</table>

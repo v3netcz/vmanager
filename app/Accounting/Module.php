@@ -79,6 +79,7 @@ class Accounting extends vManager\Application\Module implements vManager\Applica
 		$acl->addResource('Accounting:Record', 'Accounting');
 		$acl->addResource('Accounting:IssuedInvoiceRecord', 'Accounting');
 		$acl->addResource('Accounting:ReceivedInvoiceRecord', 'Accounting');
+		$acl->addResource('Accounting:OtherLiabilityRecord', 'Accounting');
 		$acl->addResource('Accounting:CashRecord', 'Accounting');
 		$acl->addResource('Accounting:BankRecord', 'Accounting');
 		$acl->addResource('Accounting:Balance', 'Accounting');

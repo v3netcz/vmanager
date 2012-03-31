@@ -23,44 +23,18 @@
 
 namespace vManager\Modules\Accounting;
 
-use vManager, vBuilder, Nette, vManager\Form, Gridito;
+use vManager, vBuilder, Nette, vManager\Form, Gridito, Nette\Utils\Strings;
 
 /**
- * Presenter for issued invoices
+ * Presenter for other liabilities
  *
  * @author Adam Staněk (V3lbloud)
- * @since Feb 6, 2012
+ * @since Mar 24, 2012
  */
-class ReceivedInvoiceRecordPresenter extends IssuedInvoiceRecordPresenter {
+class OtherLiabilityRecordPresenter extends ReceivedInvoiceRecordPresenter {
 
-	protected function isSubjectEvidendceIdNeeded() {
-		return true;
-	}
-		
 	protected function getDPrefix() {
-		return '321'; // Dodavatelé	
-	}
-	
-	protected function getMdPrefix() {
-		return '5';	// Náklady
-	}
-	
-	protected function createComponentGeneralRecordGrid($name) {
-		$grid = parent::createComponentGeneralRecordGrid($name);
-	
-		$grid['columns']->getComponent('subject')->setLabel(__('Supplier'));
-		$grid['columns']->getComponent('subjectEvidenceId')->setLabel(__('S. evidence ID'));
-		
-		return $grid;
-	}
-	
-	public function createComponentRecordForm($name) {		
-		$form = parent::createComponentRecordForm($name);
-		
-		$form['subject']->caption = __('Supplier:');
-		$form['subjectEvidenceId']->caption = __('Supplier evidence ID:');
-		
-		return $form;
+		return '325';	// Ostatní závazky
 	}
 	
 }
