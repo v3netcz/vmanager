@@ -72,14 +72,15 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->select('IFNULL([deadline], IF([projectId] IS NULL, NULL, (SELECT [deadline] FROM ['.
 				  	Project::getMetadata()->getTableName().'] WHERE [revision] > 0 AND [projectId] = [d.projectId]) )) AS [deadline2]')
 				  
-				  ->select('[ticketId], [projectId], [revision], [author], [commentId], [name], [description], [priority], [assignedTo], [timestamp], [state],  [deadline]')
-				  
+				  ->select('[ticketId], [projectId], [starId], [s.timestamp] AS [starTime], [revision], [author], [commentId], [name], [description], [priority], [assignedTo], [d.timestamp], [state],  [deadline]')
+
 				  ->removeClause('from')
 				  ->from(Ticket::getMetadata()->getTableName())
 				  ->as('d')
 				  ->leftJoin(Priority::getMetadata()->getTableName())->as('p')->on('[priority] = [p.id]')
+				  ->leftJoin(Star::getMetadata()->getTableName())->as('s')->on('[s.entityId] = [d.ticketId]')
 				  ->where('[revision] > 0');
-
+		
 		// Pokud to neni spravce ticketu, zobrazuju jen tickety, ktere uzivatel zalozil
 		// nebo kterym je prirazen
 		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
@@ -102,10 +103,13 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$ds->and("[projectId] = %i", $this->getParam('projectId'));
 		
 		// Konec filteru
-		
+
+		$order = '[s.timestamp] DESC';
 		if($grid->sortColumn === null)
-			$ds->orderBy('IF([state] IN %in, 1, 0)', $finalStateIds,', IF([deadline2] IS NULL, 0, 1) DESC, [deadline2], [p.weight] DESC, [assignedTo], [ticketId]');
-		
+			$ds->orderBy($order.', IF([state] IN %in, 1, 0)', $finalStateIds,', IF([deadline2] IS NULL, 0, 1) DESC, [deadline2], [p.weight] DESC, [assignedTo], [ticketId]');
+		else
+			$ds->orderBy($order);
+
 		$grid->setModel(new Gridito\DibiFluentModel($ds, 'vManager\\Modules\\Tickets\\Ticket'));
 		$grid->setItemsPerPage(20);
 
@@ -130,6 +134,32 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				  });
 
 		// =======================================================================
+		
+		// Tohle by melo byt zbytecne. Vsechna potrebna data jsou jiz v tom predchozim
+		// megaselectu. Nase ORM vsak nepodporuje, kdyz se snazime do rowClass (entity)
+		// narvat i jina data, ktera nejsou popsana v anotacich. Nechtel jsem davat do
+		// Ticketu join na stars, protoze to neni jednoznacne, kazdy user to ma jinak.
+		// Jak to resit...?
+		$stars = $this->context->repository->findAll('vManager\Modules\Tickets\Star')
+					->where('[userId] = %i',$this->user->id)
+						->and('[entity] = %s','vManager\Modules\Tickets\Ticket')
+					->fetchAll(); // fetchAssoc mi nefunguje. Bug nebo debil?
+		$marked = array ();
+		foreach ($stars as $star) {
+			$marked[$star->entityId] = $star;
+		}
+				  
+		// Oznaceni hvezdickou
+		$grid->addColumn("star", __('Starred'), array (
+			"renderer" => function ($ticket) use ($marked) {
+				$starred = array_key_exists($ticket->id, $marked);
+				$phrase = $starred ? __('Unstar') : __('Mark with a star');
+				$param = $starred ? -1*$ticket->id : $ticket->id;
+				$link = Nette\Environment::getApplication()->getPresenter()->link('star!', $param);
+				echo Nette\Utils\Html::el("a")->class(($starred ? 'unstar' : 'star').' starLink')->href($link)->setHtml('&nbsp;');
+			},
+			"sortable" => false
+		));
 		// ID ticketu
 		$grid->addColumn("id", __('ID'), array(
 			 "renderer" => function ($ticket) {
@@ -643,8 +673,45 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	public function getModule() {
 		return vManager\Modules\Tickets::getInstance();
 	}
+	
+	public function handleStar($ticketId) {
+		$repository = $this->context->repository;
+		$id = intval($ticketId);
+		if ($id > 0) {
+			// star
+			$star = $repository->create('vManager\Modules\Tickets\Star');
+			$star->user = $this->user->identity;
+			$star->entity = 'vManager\Modules\Tickets\Ticket';
+			$star->entityId = $id;
+			$star->save();
+			if ($this->isAjax()) {
+				$this->payload->success = true;
+				$this->sendPayload();
+			} else {
+				$this->flashMessage(__('The ticket was successfully starred.'));
+				$this->redirect('this');
+			}
+		} elseif ($id < 0) {
+			// unstar
+			$star = $repository->findAll('vManager\Modules\Tickets\Star')
+							->where('[userId] = %i',$this->user->id)
+								->and('[entity] = %s','vManager\Modules\Tickets\Ticket')
+								->and('[entityId] = %i', -1*$id)
+							->fetch();
+			$star->delete();
+			if ($this->isAjax()) {
+				$this->payload->success = true;
+				$this->sendPayload();
+			} else {
+				$this->flashMessage(__('The star was successfully removed.'));
+				$this->redirect('this');
+			}
+		} else {
+			
+		}
+	}
 
-  /**
+	/**
    * Create specific template according to ticket state
    * @return
    */   
