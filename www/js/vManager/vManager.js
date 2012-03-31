@@ -175,5 +175,6 @@ $(document).ready(function () {
 		$this.resizable('destroy');
 		$this.autogrow();
 	});
-
+	
+	$('a.starLink').starLink();
 });

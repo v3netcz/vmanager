@@ -2069,3 +2069,16 @@ ABBR {
 .boxHeadButtonToggle {
 	top: 17px !important;
 }
+
+/* This is for testing only... */
+a.starLink {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+}
+a.starLink.star {
+	background-color: grey; /* test value, obviously. Will be replaced by an image... */
+}
+a.starLink.unstar {
+	background-color: yellow; /* test value, obviously. Will be replaced by an image... */
+}
