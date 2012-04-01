@@ -160,6 +160,7 @@ CREATE TABLE `pm_tickets` (
   PRIMARY KEY (`ticketId`,`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 # Dump of table pm_priorities
 # ------------------------------------------------------------
 
@@ -178,6 +179,23 @@ VALUES
 	(2,'Normal',1),
 	(3,'High', 2),
 	(4,'Critical', 3);
+	
+
+# Dump of table pm_stars
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `pm_stars`;
+
+CREATE TABLE `pm_stars` (
+  `starId` int(8) unsigned NOT NULL AUTO_INCREMENT,
+  `userId` int(11) unsigned NOT NULL,
+  `entityId` int(11) NOT NULL,
+  `entity` varchar(128) CHARACTER SET utf8mb4 NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`starId`),
+  UNIQUE KEY `userId_entityId_entity` (`userId`,`entityId`,`entity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
