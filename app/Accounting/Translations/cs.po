@@ -159,12 +159,12 @@ msgstr "Nemáte dostatečné oprávnění pro tuto akci."
 msgid "Invoices"
 msgstr "Vystavené faktury"
 
-#: /var/www/vmanager/tools/../app/Accounting/Module.php:121
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:122
 #: /var/www/vmanager/tools/../app/Accounting/Templates/Employee/default.latte:9
 msgid "Payrolls"
 msgstr "Mzdy"
 
-#: /var/www/vmanager/tools/../app/Accounting/Module.php:133
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:134
 msgid "Accounting"
 msgstr "Účetnictví"
 
@@ -177,7 +177,7 @@ msgstr "Vytvořit novou fakturu"
 #: /var/www/vmanager/tools/../app/Accounting/Templates/CashRecord/default.latte:9
 #: /var/www/vmanager/tools/../app/Accounting/Templates/IssuedInvoiceRecord/default.latte:85
 #: /var/www/vmanager/tools/../app/Accounting/Templates/Employee/detail.latte:57
-#: /var/www/vmanager/tools/../app/Accounting/Templates/Balance/default.latte:86
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Balance/default.latte:91
 msgid "Summary"
 msgstr "Souhrn"
 
@@ -309,7 +309,7 @@ msgstr "Subjekt %s byl úspěšně přidán do evidence."
 msgid "Paid date"
 msgstr "Zaplacena dne"
 
-#: /var/www/vmanager/tools/../app/Accounting/Module.php:128
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:129
 #: /var/www/vmanager/tools/../app/Accounting/Templates/Subject/default.latte:69
 msgid "Customers / Suppliers"
 msgstr "Odběratelé / dodavatelé"
@@ -368,11 +368,11 @@ msgstr "Zobrazit"
 msgid "Supplier:"
 msgstr "Dodavatel:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/IssuedInvoiceRecordPresenter.php:133
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/IssuedInvoiceRecordPresenter.php:169
 msgid "From whom did you get the receipt?"
 msgstr "Od koho jste obdržel/a fakturu?"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/IssuedInvoiceRecordPresenter.php:138
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/IssuedInvoiceRecordPresenter.php:174
 msgid "Supplier does not exist in subject database. Please add him first."
 msgstr ""
 "Dodavatel není evidován v databázi. Prosím přidejte jej nejprve do databáze "
@@ -462,7 +462,7 @@ msgstr "Částka musí být číslo"
 msgid "Save record"
 msgstr "Uložit záznam"
 
-#: /var/www/vmanager/tools/../app/Accounting/Module.php:105
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:106
 msgid "Invoicing"
 msgstr "Fakturace"
 
@@ -497,15 +497,15 @@ msgstr "S. číslo dokladu"
 msgid "C. evidence ID"
 msgstr "Z. číslo dokladu:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/IssuedInvoiceRecordPresenter.php:131
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/IssuedInvoiceRecordPresenter.php:167
 msgid "Customer:"
 msgstr "Zákazník:"
 
-#: /var/www/vmanager/tools/../app/Accounting/Presenters/IssuedInvoiceRecordPresenter.php:141
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/IssuedInvoiceRecordPresenter.php:177
 msgid "Customer evidence ID:"
 msgstr "Číslo dokladu (zákaznické):"
 
-#: /var/www/vmanager/tools/../app/Accounting/Module.php:115
+#: /var/www/vmanager/tools/../app/Accounting/Module.php:116
 msgid "Accounting records"
 msgstr "Účetní záznamy"
 
@@ -521,15 +521,15 @@ msgstr "Vydané faktury"
 msgid "Received invoices"
 msgstr "Přijaté faktury (náklady)"
 
-#: /var/www/vmanager/tools/../app/Accounting/Templates/@layout.records.latte:21
+#: /var/www/vmanager/tools/../app/Accounting/Templates/@layout.records.latte:23
 msgid "Bank account"
 msgstr "Bankovní účet"
 
-#: /var/www/vmanager/tools/../app/Accounting/Templates/@layout.records.latte:23
+#: /var/www/vmanager/tools/../app/Accounting/Templates/@layout.records.latte:25
 msgid "Cash"
 msgstr "Pokladna"
 
-#: /var/www/vmanager/tools/../app/Accounting/Templates/@layout.records.latte:25
+#: /var/www/vmanager/tools/../app/Accounting/Templates/@layout.records.latte:27
 msgid "Balance"
 msgstr "Bilance"
 
@@ -562,4 +562,19 @@ msgstr "K jaké přijaté / vydané faktuře se tato transakce váže?"
 
 #: /var/www/vmanager/tools/../app/Accounting/Presenters/CashRecordPresenter.php:94
 msgid "Bound evidence ID does not exists."
-msgstr "Vázaný doklad neexistuje. Prosím opravte číslo svázaného dokladu nebo jej nejprve vytvořte."
+msgstr ""
+"Vázaný doklad neexistuje. Prosím opravte číslo svázaného dokladu nebo jej "
+"nejprve vytvořte."
+
+#: /var/www/vmanager/tools/../app/Accounting/Presenters/IssuedInvoiceRecordPresenter.php:106
+#, php-format
+msgid "Linked with evidence n. %s"
+msgstr "Spojeno s dokladem č. %s"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/@layout.records.latte:21
+msgid "Other liabilities"
+msgstr "Ostatní závazky"
+
+#: /var/www/vmanager/tools/../app/Accounting/Templates/Balance/default.latte:87
+msgid "Balance sheet"
+msgstr "Účetní rozvaha"
