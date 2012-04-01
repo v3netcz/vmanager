@@ -2073,12 +2073,14 @@ ABBR {
 /* This is for testing only... */
 a.starLink {
 	display: inline-block;
+	float: left;
 	width: 10px;
-	height: 10px;
+	height: 100%;
+	text-decoration: none !important;
 }
 a.starLink.star {
-	background-color: grey; /* test value, obviously. Will be replaced by an image... */
+	background-color: #d0d0d0; /* test value, obviously. Will be replaced by an image... */
 }
 a.starLink.unstar {
-	background-color: yellow; /* test value, obviously. Will be replaced by an image... */
+	background-color: #ee7700; /* test value, obviously. Will be replaced by an image... */
 }

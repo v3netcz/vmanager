@@ -78,7 +78,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->from(Ticket::getMetadata()->getTableName())
 				  ->as('d')
 				  ->leftJoin(Priority::getMetadata()->getTableName())->as('p')->on('[priority] = [p.id]')
-				  ->leftJoin(Star::getMetadata()->getTableName())->as('s')->on('[s.entityId] = [d.ticketId]')
+				  ->leftJoin(Star::getMetadata()->getTableName())->as('s')->on('[s.entity] = %s AND [s.entityId] = [d.ticketId] AND [s.userId] = %i', 'vManager\\Modules\\Tickets\\Ticket', $uid)
 				  ->where('[revision] > 0');
 		
 		// Pokud to neni spravce ticketu, zobrazuju jen tickety, ktere uzivatel zalozil
@@ -148,23 +148,20 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		foreach ($stars as $star) {
 			$marked[$star->entityId] = $star;
 		}
-				  
-		// Oznaceni hvezdickou
-		$grid->addColumn("star", __('Starred'), array (
-			"renderer" => function ($ticket) use ($marked) {
-				$starred = array_key_exists($ticket->id, $marked);
-				$phrase = $starred ? __('Unstar') : __('Mark with a star');
-				$param = $starred ? -1*$ticket->id : $ticket->id;
-				$link = Nette\Environment::getApplication()->getPresenter()->link('star!', $param);
-				echo Nette\Utils\Html::el("a")->class(($starred ? 'unstar' : 'star').' starLink')->href($link)->setHtml('&nbsp;');
-			},
-			"sortable" => false
-		));
+				  		
 		// ID ticketu
 		$grid->addColumn("id", __('ID'), array(
-			 "renderer" => function ($ticket) {
-				 $link = Nette\Environment::getApplication()->getPresenter()->link('detail', $ticket->id);
-				 echo Nette\Utils\Html::el("a")->href($link)->setText('#'.$ticket->id);
+			 "renderer" => function ($ticket) use($marked) {
+			 		// Oznaceni hvezdickou
+					$starred = array_key_exists($ticket->id, $marked);
+					$phrase = $starred ? __('Unstar') : __('Mark with a star');
+					$param = $starred ? -1*$ticket->id : $ticket->id;
+					$link = Nette\Environment::getApplication()->getPresenter()->link('star!', $param);
+					echo Nette\Utils\Html::el("a")->class(($starred ? 'unstar' : 'star').' starLink')->href($link)->setHtml('&nbsp;');
+			 
+			 		// ID ticketu
+					$link = Nette\Environment::getApplication()->getPresenter()->link('detail', $ticket->id);
+					echo Nette\Utils\Html::el("a")->href($link)->setText('#'.$ticket->id);
 			 },
 			 "sortable" => true,
 		))->setCellClass('id');;
