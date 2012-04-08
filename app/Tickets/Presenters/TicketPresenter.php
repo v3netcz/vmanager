@@ -674,6 +674,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$star->save();
 			if ($this->isAjax()) {
 				$this->payload->success = true;
+				$this->payload->newUrl = $this->link('star!', -1*$id);
 				$this->sendPayload();
 			} else {
 				$this->flashMessage(__('The ticket was successfully starred.'));
@@ -689,6 +690,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$star->delete();
 			if ($this->isAjax()) {
 				$this->payload->success = true;
+				$this->payload->newUrl = $this->link('star!', -1*$id);
 				$this->sendPayload();
 			} else {
 				$this->flashMessage(__('The star was successfully removed.'));

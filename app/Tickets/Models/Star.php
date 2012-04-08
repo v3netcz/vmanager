@@ -89,7 +89,8 @@ class Star extends Orm\ActiveEntity {
 			if (!$this->getEntityId()) {
 				throw new Nette\InvalidStateException("");
 			}
-			$entityName = parent::getEntity();
+			//$entityName = parent::getEntity();
+			$entityName = $this->defaultGetter('entity'); // Because of PHP<5.3.4
 			$this->_entityInstance = $this->createEntityInstance($entityName);
 		}
 		return $this->_entityInstance;
@@ -112,7 +113,8 @@ class Star extends Orm\ActiveEntity {
 		} else {
 			throw new Nette\InvalidArgumentException('You have to supply either an entity name or its instance!');
 		}
-		parent::setEntity($entity);
+		//parent::setEntity($entity);
+		$this->defaultSetter('entity', $entity); // Because of PHP<5.3.4
 	}
 	
 	/**

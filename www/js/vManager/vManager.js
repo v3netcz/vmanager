@@ -176,5 +176,7 @@ $(document).ready(function () {
 		$this.autogrow();
 	});
 	
-	$('a.starLink').starLink();
+	$('a.starLink').starLink({
+		errorMessage: 'Vyskytla se chyba. Zkuste to prosím znovu'
+	});
 });

@@ -2084,3 +2084,7 @@ a.starLink.star {
 a.starLink.unstar {
 	background-color: #ee7700; /* test value, obviously. Will be replaced by an image... */
 }
+tr.locked a { /* test */
+	text-decoration: none !important;
+	color: #202020 !important;
+}
