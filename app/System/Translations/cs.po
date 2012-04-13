@@ -5,73 +5,73 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:225
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:225
 msgid "You have been signed out."
 msgstr "Byl jste úspěšně odhlášen."
 
-#: /var/www/vmanager/tools/../app/System/Module.php:79
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Module.php:105
 msgid "Homepage"
 msgstr "Úvod"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SecuredPresenter.php:50
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SecuredPresenter.php:50
 msgid "You have been signed off during long inactivity."
 msgstr "Byl/a jste odhlášen z důvodu dlouhé nečinnosti."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SecuredPresenter.php:57
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SecuredPresenter.php:57
 msgid "You don't have enough privileges to perform this action."
 msgstr "Nemáte dostatečné oprávnění k provedení této akce."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:60
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:50
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:85
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:50
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:85
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:60
 msgid "Username:"
 msgstr "Login:"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:51
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:51
 msgid "Please provide a username."
 msgstr "Prosím zadejte uživatelské jméno"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:53
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:53
 msgid "Password:"
 msgstr "Heslo:"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:54
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:54
 msgid "Please provide a password."
 msgstr "Prosím zadejte heslo."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:56
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:56
 msgid "Auto-login in future."
 msgstr "Přihlašovat automaticky"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:58
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:58
 msgid "Sign in"
 msgstr "Přihlásit"
 
-#: /var/www/vmanager/tools/../app/System/Templates/Sign/in.latte:32
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Sign/in.latte:32
 msgid "Forgot your password?"
 msgstr "Zapomněli jste heslo?"
 
-#: /var/www/vmanager/tools/../app/System/Templates/Sign/in.latte:15
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Sign/in.latte:15
 msgid "Access denied."
 msgstr "Přístup zamítnut."
 
-#: /var/www/vmanager/tools/../app/System/Templates/@layout.latte:167
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:169
 msgid "Administrator"
 msgstr "Administrátor"
 
-#: /var/www/vmanager/tools/../app/System/Templates/@layout.latte:167
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:169
 msgid "User"
 msgstr "Uživatel"
 
-#: /var/www/vmanager/tools/../app/System/Templates/@layout.latte:170
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:172
 msgid "settings"
 msgstr "nastavení"
 
-#: /var/www/vmanager/tools/../app/System/Templates/@layout.latte:171
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:173
 msgid "logout"
 msgstr "odhlásit"
 
-#: /var/www/vmanager/tools/../app/System/Templates/@layout.latte:195
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:197
 msgid "Search..."
 msgstr "Hledat..."
 
@@ -80,66 +80,67 @@ msgid_plural "entries"
 msgstr[0] "záznam"
 msgstr[1] "záznamů"
 
-#: /var/www/vmanager/tools/../app/System/Gridito/Templates/grid.latte:118
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:118
 #, php-format
 msgid "Showing %d to %d of %d entries"
 msgstr "Zobrazen %d. až %d. záznam z %d záznamů"
 
-#: /var/www/vmanager/tools/../app/System/Gridito/Templates/grid.latte:120
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:120
 msgid "Showing 1 of 1 entry"
 msgstr "Zobrazen jediný záznam"
 
-#: /var/www/vmanager/tools/../app/System/Gridito/Templates/grid.latte:128
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:128
 msgid "First"
 msgstr "První"
 
-#: /var/www/vmanager/tools/../app/System/Gridito/Templates/grid.latte:129
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:129
 msgid "Previous"
 msgstr "Předchozí"
 
-#: /var/www/vmanager/tools/../app/System/Gridito/Templates/grid.latte:135
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:135
 msgid "Next"
 msgstr "Další"
 
-#: /var/www/vmanager/tools/../app/System/Gridito/Templates/grid.latte:136
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:136
 msgid "Last"
 msgstr "Poslední"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:54
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:54
 msgid "Name:"
 msgstr "Jméno:"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:57
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:57
 msgid "Surname:"
 msgstr "Příjmení:"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:78
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:93
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:93
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:78
 msgid "E-mail is not valid"
 msgstr "Zadaná e-mailová adresa není platná"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:196
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:196
 msgid "Old password:"
 msgstr "Vaše staré heslo:"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:202
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:202
 msgid "New password:"
 msgstr "Nové heslo:"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:206
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:206
 msgid "Confirm new password:"
 msgstr "Nové heslo (znovu):"
 
 msgid "Confirmation password didnt match."
 msgstr "Zadaná hesla se neshodují."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:134
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:182
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:229
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:97
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:134
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:182
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:229
 msgid "All changes are saved."
 msgstr "Všechny změny byly úspěšně uloženy."
 
-#: /var/www/vmanager/tools/../app/System/Templates/Sign/pwdReset.latte:22
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Sign/pwdReset.latte:22
 msgid ""
 "Write your username <strong>OR</strong> your e-mail address below.<br />New "
 "password will be sent to e-mail filled in registration."
@@ -148,89 +149,90 @@ msgstr ""
 "registrovanou k vašemu uživatelskému kontu.<br /><br />Nové heslo bude "
 "zasláno na e-mail vyplněný při registraci."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:207
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:207
 msgid "Confirmation password have to be the same as password."
 msgstr "Políčka 'Heslo' a 'Heslo (znovu)' musí být shodné."
 
 msgid "Old password is not correct!"
 msgstr "Vyplněné současné heslo není platné!"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:90
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:90
 msgid "E-mail:"
 msgstr "E-mail:"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:105
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:108
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:189
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:105
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:108
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:189
 msgid "Please provide your username or e-mail."
 msgstr "Prosím zadejte vaše uživatelské jméno nebo e-mail."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:111
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:111
 msgid "Send new password"
 msgstr "Zaslat nové heslo"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:201
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:201
 msgid "vManager - new password"
 msgstr "vManager - nové heslo"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:209
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:209
 msgid "A new password has been sent to your e-mail address."
 msgstr "Nové heslo bylo zasláno na Vaši e-mailovou adresu."
 
 msgid "User not found or missing required field!"
 msgstr "Uživatel nebyl nalezen nebo byl formulář chybně vyplněn."
 
-#: /var/www/vmanager/tools/../app/System/Templates/Sign/pwdReset.latte:43
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Sign/pwdReset.latte:43
 msgid "Back to login form"
 msgstr "Zpět na přihlašovací formulář"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:212
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:212
 msgid "User not found."
 msgstr "Uživatel nenalezen."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:55
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:55
 msgid "Name cannot be empty."
 msgstr "Vaše jméno nemůže být prázdné."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:58
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:58
 msgid "Surname cannot be empty."
 msgstr "Příjmení nemůže být prázdné."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:62
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:62
 msgid "Username cannot be empty."
 msgstr "Uživatelské jméno nemůže být prázdné."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:74
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:74
 msgid "Desired username is already taken. Please use something else."
 msgstr "Zvolené uživatelské jméno je již obsazeno. Zvolte prosím jiné."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:200
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:200
 msgid "Invalid password. Access denied."
 msgstr "Špatné heslo. Přístup zamítnut."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:204
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:204
 msgid "Please provide password."
 msgstr "Prosím zadejte heslo."
 
-#: /var/www/vmanager/tools/../app/System/Templates/UserSettings/default.latte:6
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/UserSettings/default.latte:7
 msgid "Basic user info"
 msgstr "Osobní údaje"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:209
-#: /var/www/vmanager/tools/../app/System/Templates/UserSettings/default.latte:18
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:209
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/UserSettings/default.latte:19
 msgid "Change password"
 msgstr "Změnit heslo"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:91
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:162
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:61
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:91
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:162
 msgid "Save"
 msgstr "Uložit"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:203
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:203
 msgid "Password have to be at least 6 chars long."
 msgstr "Heslo musí být dlouhé alespoň 6 znaků."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:63
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:63
 msgid ""
 "Username have to contain alpha-numeric chars only (with exception for chars ."
 "_@-). Nor spaces or diacritic chars are allowed."
@@ -238,15 +240,15 @@ msgstr ""
 "Uživatelské jméno může obsahovat pouze znaky anglické abecedy a čísla (s "
 "vyjímkou znaků ._@-). Mezery ani znaky s diakritikou nejsou povoleny."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:97
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:97
 msgid "Security code:"
 msgstr "Bezpeč. kód:"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:100
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:100
 msgid "Rewrite text from image."
 msgstr "Přepište text z obrázku."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:101
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:101
 msgid "Security code is incorrect. Read it carefuly from image above."
 msgstr ""
 "Bezpečnosntí kód byl vyplněn nesprávně. Přepište jej prosím pečlivě z "
@@ -255,11 +257,11 @@ msgstr ""
 msgid "Welcome"
 msgstr "Vítejte"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:84
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:84
 msgid "few seconds ago"
 msgstr "před okamžikem"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:86
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:86
 msgid "1 minute ago"
 msgstr "před minutou"
 
@@ -270,7 +272,7 @@ msgstr[0] "před minutou"
 msgstr[1] "před %d minutami"
 msgstr[2] "před %d minutami"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:90
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:90
 msgid "about an hour ago"
 msgstr "přibližně před hodinou"
 
@@ -281,7 +283,7 @@ msgstr[0] "před hodinou"
 msgstr[1] "před %d hodinami"
 msgstr[2] "před %d hodinami"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:94
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:94
 msgid "yesterday"
 msgstr "včera"
 
@@ -292,7 +294,7 @@ msgstr[0] "před 1 dnem"
 msgstr[1] "před %d dny"
 msgstr[2] "před %d dny"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:98
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:98
 msgid "a month ago"
 msgstr "před měsícem"
 
@@ -303,7 +305,7 @@ msgstr[0] "před měsícem"
 msgstr[1] "před %d měsíci"
 msgstr[2] "před %d měsíci"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:102
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:102
 msgid "a year ago"
 msgstr "před rokem"
 
@@ -314,11 +316,11 @@ msgstr[0] "před rokem"
 msgstr[1] "před %d roky"
 msgstr[2] "před %d lety"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:59
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:59
 msgid "few seconds left"
 msgstr "za několik sekund"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:61
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:61
 msgid "in a minute"
 msgstr "za minutu"
 
@@ -329,7 +331,7 @@ msgstr[0] "za minutu"
 msgstr[1] "za %d minuty"
 msgstr[2] "za %d minut"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:65
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:65
 msgid "in one hour"
 msgstr "za hodinu"
 
@@ -340,7 +342,7 @@ msgstr[0] "za hodinu"
 msgstr[1] "za %d hodiny"
 msgstr[2] "za %d hodin"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:69
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:69
 msgid "tomorrow"
 msgstr "zítra"
 
@@ -351,7 +353,7 @@ msgstr[0] "za %d den"
 msgstr[1] "za %d dny"
 msgstr[2] "za %d dní"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:73
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:73
 msgid "in a month"
 msgstr "za měsíc"
 
@@ -362,7 +364,7 @@ msgstr[0] "za měsíc"
 msgstr[1] "za %d měsíce"
 msgstr[2] "za %d měsíců"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:77
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:77
 msgid "in one year"
 msgstr "za rok"
 
@@ -373,20 +375,20 @@ msgstr[0] "za rok"
 msgstr[1] "za %d roky"
 msgstr[2] "za %d let"
 
-#: /var/www/vmanager/tools/../app/System/Templates/Emails/pwdReset.latte:10
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Emails/pwdReset.latte:10
 msgid "Password reset request"
 msgstr "Požadavek na změnu hesla"
 
-#: /var/www/vmanager/tools/../app/System/Templates/Emails/pwdReset.latte:25
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Emails/pwdReset.latte:25
 msgid "Sign in with new credentials"
 msgstr "Přihlásit se s novým heslem"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:156
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:156
 #, php-format
 msgid "%s. Welcome back. Last time you logged in %s from %s."
 msgstr "%s. Poslední přihlášení proběhlo %s z počítače %s."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/SignPresenter.php:164
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SignPresenter.php:164
 #, php-format
 msgid ""
 "%s. Since this is the first time you have logged in it is recommended to "
@@ -396,155 +398,196 @@ msgstr ""
 "Váš profil a změnil/a heslo. Pokračujte kliknutím na 'nastavení' vlevo pod "
 "vaším avatarem."
 
-#: /var/www/vmanager/tools/../app/System/Templates/Homepage/default.latte:5
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Homepage/default.latte:5
 msgid "Dashboard"
 msgstr "Nástěnka"
 
-#: /var/www/vmanager/tools/../app/System/Security/User.php:54
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Security/User.php:54
 #, php-format
 msgid "Hi %s"
 msgstr "Dobrý den %s"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:50
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:50
 msgid "Salutation: "
 msgstr "Oslovení: "
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:51
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:51
 msgid "Salutation cannot be empty."
 msgstr "Oslovení nemůže být prázdné."
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:151
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:151
 msgid "Auto"
 msgstr "Automaticky"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:160
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:160
 msgid "Language:"
 msgstr "Jazyk:"
 
-#: /var/www/vmanager/tools/../app/System/Templates/UserSettings/default.latte:72
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/UserSettings/default.latte:73
 msgid "Environment"
 msgstr "Prostředí"
 
-#: /var/www/vmanager/tools/../app/System/Gridito/Templates/grid.latte:102
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:102
 msgid "No results has been found matching your criteria."
 msgstr "Pro zadané parametry nebyly nalezeny žádné výsledky k zobrazení."
 
-#: /var/www/vmanager/tools/../app/System/Templates/@layout.latte:146
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:148
 msgid "Choose File"
 msgstr "Vybrat"
 
-#: /var/www/vmanager/tools/../app/System/Templates/@layout.latte:147
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:149
 msgid "No file selected"
 msgstr "Žádný soubor nebyl vybrán"
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:80
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:80
 msgid "Select your avatar"
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:81
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:81
 msgid "You may only upload images!"
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:88
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:58
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:88
 msgid "You can upload one file only"
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:121
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:121
 msgid "and "
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:131
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:131
 #, php-format
 msgid "January %d"
 msgstr "Leden %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:132
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:132
 #, php-format
 msgid "February %d"
 msgstr "Únor %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:133
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:133
 #, php-format
 msgid "March %d"
 msgstr "Březen %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:134
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:134
 #, php-format
 msgid "April %d"
 msgstr "Duben %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:135
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:135
 #, php-format
 msgid "May %d"
 msgstr "Květen %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:136
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:136
 #, php-format
 msgid "June %d"
 msgstr "Červen %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:137
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:137
 #, php-format
 msgid "July %d"
 msgstr "Červenec %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:138
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:138
 #, php-format
 msgid "August %d"
 msgstr "Srpen %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:139
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:139
 #, php-format
 msgid "September %d"
 msgstr "Září %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:140
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:140
 #, php-format
 msgid "October %d"
 msgstr "Říjen %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:141
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:141
 #, php-format
 msgid "November %d"
 msgstr "Listopad %d"
 
-#: /var/www/vmanager/tools/../app/System/Application/Helpers.php:142
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:142
 #, php-format
 msgid "December %d"
 msgstr "Prosinec %d"
 
-#: /var/www/vmanager/tools/../app/System/Templates/UserSettings/default.latte:11
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/UserSettings/default.latte:12
 msgid "Current avatar"
 msgstr "Současný avatar"
 
-#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:64
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:64
 msgid "Your reaction was successfully saved"
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:72
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:72
 msgid "An error occured while saving your reaction. Please try again."
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:76
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:76
 msgid "Subject:"
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:77
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:77
 msgid "You have to enter the subject!"
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:78
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:78
 msgid "Response:"
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:79
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:79
 msgid "You have to write the response!"
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:81
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Controls/TreeComments/TreeComments.php:81
 msgid "Add!"
 msgstr ""
 
-#: /var/www/vmanager/tools/../app/System/Controls/TreeComments/renderers/templates/tree.latte:25
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Controls/TreeComments/renderers/templates/tree.latte:25
 msgid "React"
 msgstr ""
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:50
+msgid "Select your logo"
+msgstr "Vyberte Vaše logo"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:51
+msgid "You may only upload PNG images!"
+msgstr "Lze nahrát pouze obrázky ve formátu PNG."
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Timeline/default.latte:10
+msgid "No records available"
+msgstr "Nejsou k dispozici žádné záznamy k zobrazení"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Timeline/default.latte:17
+msgid "Today"
+msgstr "Dnes"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Timeline/default.latte:18
+msgid "Yesterday"
+msgstr "Včera"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.settings.latte:11
+msgid "User profile"
+msgstr "Uživatelský profil"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.settings.latte:18
+msgid "System settings"
+msgstr "Systémová nastavení"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Settings/default.latte:7
+msgid "Company info"
+msgstr "Informace o společnosti"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Settings/default.latte:13
+msgid "Current logo"
+msgstr "Současné logo"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Module.php:111
+msgid "Timeline"
+msgstr "Časová osa"
