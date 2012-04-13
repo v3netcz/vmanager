@@ -35,7 +35,7 @@ use vManager, vBuilder, Nette,
  * @since Apr 5, 2011
  */
 class Tickets extends vManager\Application\Module implements vManager\Application\IMenuEnabledModule,
-	vManager\Application\IAclEnabledModule {
+	vManager\Application\IAclEnabledModule, vManager\Application\ITimelineEnabledModule {
 	
 	protected $_availableTicketStates;
 	protected $_finalTicketStates;
@@ -130,6 +130,74 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 		}
 		
 		return $menu;
+	}
+	
+	/**
+	 * Returns array of timeline records
+	 *
+	 * @param DateTime since
+ 	 * @param DateTime until
+	 *
+	 * @return array of vManager/Timeline/IRecord
+	 */
+	public function getTimelineRecords(\DateTime $since, \DateTime $until) {
+		$data = array();
+		$context = Nette\Environment::getContext();
+		
+		$ticketRevisions = $context->connection->select('[ticketId], [name], [timestamp], [author], [revision], [state]')
+						->from(Ticket::getMetadata()->getTableName())
+						->where('[timestamp] BETWEEN %d AND %d', $since, $until)
+						->fetchAll();
+		
+		// Pokud se nejedna o projektoveho manazera, vyselektuju jen ukoly, kterych
+		// se dotycny ucastnil
+		if(!$context->user->identity->isInRole('Project manager')) {
+			$uid = $context->user->id;
+		
+			$myTickets = $context->connection->select('DISTINCT [ticketId]')
+						->from(Ticket::getMetadata()->getTableName())
+						->where('[author] = %i OR [assignedTo] = %i', $uid, $uid)
+						->fetchAll();
+			
+			foreach($ticketRevisions as $key=>$curr) {
+				$found = false;
+				foreach($myTickets as $curr2) {
+					if($curr->ticketId == $curr2->ticketId) {
+						$found = true;
+						break;
+					}
+				}
+				
+				if(!$found)
+					unset($ticketRevisions[$key]);
+			}
+			
+		}
+			
+						
+		foreach($ticketRevisions as $curr) {
+			$record = new Tickets\TimelineRecord($curr->timestamp);
+			$record->ticketId = $curr->ticketId;
+			$record->ticketName = $curr->name;
+			$record->author = $context->repository->get('vManager\\Security\\User', $curr->author);
+			
+			if($curr->revision > 0) {
+				$record->hasBeenCreated = $curr->revision == 1;
+				$record->hasBeenSolved = false;
+				
+				foreach($this->getFinalTicketStates() as $state) {
+					if($curr->state == $state->id) {
+						$record->hasBeenSolved = true;
+						break;
+					}
+				}
+			}
+			
+			$data[] = $record;
+		}
+		
+	
+		return $data;
 	}
 	
 	/**

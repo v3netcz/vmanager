@@ -1,0 +1,32 @@
+{var $robots = noindex}
+
+{block head}
+	<link rel="stylesheet" href="{$basePath}/css/timeline.css" type="text/css">
+{/block}
+
+<div class="flat_area grid_16 timeline" n:block="#content">
+
+{if count($records) == 0}
+<p><?php echo __('No records available'); ?></p>
+{/if}
+
+{var $prevDay = null}
+{foreach $records as $record}
+	{* Renders day information *}
+	<h1 n:if="$prevDay == null || $record->getTimestamp()->format('Y-m-d') != $prevDay" n:class="$prevDay == null ? first">
+		{if $record->getTimestamp()->format('Y-m-d') == date('Y-m-d')}<?php echo __('Today'); ?>
+		{elseif $record->getTimestamp()->format('Y-m-d') == date('Y-m-d', time() - 24*60*60)}<?php echo __('Yesterday'); ?>
+		{else}{$record->getTimestamp()->format('l, j. n. Y')}{/if}
+	</h1>
+	{var $prevDay = $record->getTimestamp()->format('Y-m-d')}
+	
+	{* Record itself *}
+	<div class="record">
+		<span class="time">{$record->getTimestamp()->format('H:i')}</span>
+		
+		{* Renders timeline records by custom renderer *}
+		{!$control->getRecordRenderer($record)->render($record)}
+	</div>
+{/foreach}
+
+</div>

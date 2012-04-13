@@ -1,0 +1,34 @@
+.timeline {
+	padding:  8px;
+}
+
+.timeline H1 {
+	margin: 22px 0 10px 0;
+}
+
+.timeline H1.first {
+	margin-top: 0;
+}
+
+.timeline .record {
+	line-height: 180%;
+}
+
+.timeline .record A {
+	color: #0a4e98;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+.timeline .record A:hover {
+	text-decoration: none;
+}
+
+.timeline .record .time {
+	padding: 0 10px 5px 0;
+	color: #227722;
+}
+
+.timeline .record .author {
+	color: #bb2200;
+}

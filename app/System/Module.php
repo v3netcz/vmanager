@@ -79,6 +79,7 @@ class System extends vManager\Application\Module implements vManager\Application
 		$acl->addResource('System:Search', 'System');
 		$acl->addResource('System:UserSettings', 'System');
 		$acl->addResource('System:Settings', 'System');
+		$acl->addResource('System:Timeline', 'System');
 		// $acl->addResource('System:JsonConnector', 'System');
 		
 		// Vsichni musi mit pristup k tomu cist uzivatele (login)
@@ -104,6 +105,13 @@ class System extends vManager\Application\Module implements vManager\Application
 			 'label' => __('Homepage'),
 			 'icon' => self::getBasePath() . '/images/icons/small/grey/Home.png'
 		);
+		
+		$menu[] = array(
+			 'url' => Nette\Environment::getApplication()->getPresenter()->link(':System:Timeline:default'),
+			 'label' => __('Timeline'),
+			 'icon' => self::getBasePath() . '/images/icons/small/grey/Books.png'
+		);
+		
 		return $menu;
 	}
 	
