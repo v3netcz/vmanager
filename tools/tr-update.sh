@@ -2,6 +2,9 @@
 #
 # Script for auto-update all GetText translations
 #
+# Requires xgettext
+# 	- on debian install: aptitude install gettext
+#
 # Author: Adam Staněk <adam.stanek@v3net.cz>
 
 # saves the path to this script's directory
