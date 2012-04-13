@@ -2,6 +2,15 @@
 
 {block head}
 	<link rel="stylesheet" href="{$basePath}/css/timeline.css" type="text/css">
+
+	<?php
+	
+	vBuilder\Utils\ColorGenerator::installPalette('authorPalette', array(
+		'#bb2200', '#990000', '#660000', '#dd2200'
+	));
+	
+	?>
+
 {/block}
 
 <div class="flat_area grid_16 timeline" n:block="#content">

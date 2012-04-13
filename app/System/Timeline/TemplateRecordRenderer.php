@@ -87,6 +87,10 @@ class TemplateRecordRenderer extends vBuilder\Object implements IRecordRenderer 
 		$template->registerHelperLoader('Nette\Templating\Helpers::loader');
 		$template->setCacheStorage($this->context->templateCacheStorage);
 		
+		$template->registerHelper('colorForValue', function ($v, $palette = vBuilder\Utils\ColorGenerator::DEFAULT_PALETTE) {
+			return vBuilder\Utils\ColorGenerator::getColorForValue($v, $palette);
+		});
+		
 		// default parameters
 		$template->renderer = $this;
 		$template->presenter = $template->_presenter = $this->_presenter;

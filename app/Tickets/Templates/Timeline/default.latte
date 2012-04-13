@@ -4,5 +4,5 @@
 {elseif $record->hasBeenSolved}<?php echo __('has been solved'); ?>
 {else}<?php echo __('has been changed'); ?>{/if}
 
-{if $record->author}<?php echo _x('by <span class="author">%s</span>', array($record->author->displayName)); ?>
-{else}<?php echo _x('by <span class="author">user n. %d</span>', array($record->author->id)); ?>{/if}
+{if $record->author}<?php echo _x('by <span class="author" style="color: %s">%s</span>', array($template->colorForValue($record->author->id, 'authorPalette'), $record->author->displayName)); ?>
+{else}<?php echo _x('by <span class="author" style="color: %s">user n. %d</span>', array($template->colorForValue($record->author->id, 'authorPalette'), $record->author->id)); ?>{/if}
