@@ -1,14 +1,10 @@
 # Local machine configuration. Use this config for defining any machine specific configuration.
  
 parameters:
-	# Enabling debugger
-	# productionMode: false
- 
 	# DB connection info
 	database:
 		driver: mysql
 		charset: utf8
-		profiler: true
          
 		host: 127.0.0.1
 		database: myDbName
