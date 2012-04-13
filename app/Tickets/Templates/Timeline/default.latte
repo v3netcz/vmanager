@@ -1,0 +1,8 @@
+<a n:href=":Tickets:Ticket:detail, $record->ticketId">Ticket #{$record->ticketId} - {$record->ticketName}</a>
+
+{if $record->hasBeenCreated}<?php echo __('has been created'); ?>
+{elseif $record->hasBeenSolved}<?php echo __('has been solved'); ?>
+{else}<?php echo __('has been changed'); ?>{/if}
+
+{if $record->author}<?php echo _x('by <span class="author">%s</span>', array($record->author->displayName)); ?>
+{else}<?php echo _x('by <span class="author">user n. %d</span>', array($record->author->id)); ?>{/if}
