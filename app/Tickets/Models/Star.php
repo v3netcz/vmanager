@@ -134,7 +134,7 @@ class Star extends Orm\ActiveEntity {
 	 * @param Star $star 
 	 */
 	public function _onPreSave(Star $star) {
-		list($entity, $id) = array (parent::getEntity(), parent::getEntityId()); // :-)
+		list($entity, $id) = array ($this->defaultGetter('entity'), $this->defaultGetter('entityId')); // :-)
 		if (!isset($entity) || !isset($id)) {
 			throw new Nette\InvalidStateException("Either an instance of an entity or both its id and class must be provided. See ".__FILE__." for more information");
 		}
