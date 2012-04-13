@@ -33,6 +33,10 @@ use vManager, Nette;
  */
 class HomepagePresenter extends SecuredPresenter {
 
+	public function actionDefault() {
+		$this->redirect(':System:Timeline:default');
+	}
+
 	public function renderDefault() {		  
 		
 	}
