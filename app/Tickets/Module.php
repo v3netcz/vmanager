@@ -182,7 +182,7 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 			$record->author = $context->repository->get('vManager\\Security\\User', $curr->author);
 			
 			if($curr->revision > 0) {
-				$record->hasBeenCreated = $curr->revision == 1;
+				$record->hasBeenCreated = abs($curr->revision) == 1;
 				$record->hasBeenSolved = false;
 				
 				foreach($this->getFinalTicketStates() as $state) {
