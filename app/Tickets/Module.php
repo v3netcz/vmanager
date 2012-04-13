@@ -146,7 +146,7 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 		
 		$ticketRevisions = $context->connection->select('[ticketId], [name], [timestamp], [author], [revision], [state]')
 						->from(Ticket::getMetadata()->getTableName())
-						->where('[timestamp] BETWEEN %d AND %d', $since, $until)
+						->where('[timestamp] BETWEEN %d AND %t', $since, $until)
 						->fetchAll();
 		
 		// Pokud se nejedna o projektoveho manazera, vyselektuju jen ukoly, kterych
