@@ -132,6 +132,9 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 		$tpl->history = $this->data;
 		$tpl->attachments = $this->attachments;
 
+		if(!$tpl->data)
+			throw new Nette\InvalidStateException("No data for " . $this->entityName . " with id " . $this->id);
+
 		return $tpl;
 	}
 
