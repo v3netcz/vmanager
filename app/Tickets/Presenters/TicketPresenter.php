@@ -285,8 +285,40 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	 * @param int $id 
 	 */
 	public function actionDetail($id) {
-		// TODO: Autorizace prav uzivatele pro zobrazeni/pridani apod. ticketu
-		// pripadne to povesit do entity na event handlery (u verzovanych nemuze byt Secured)
+		
+		$entity = 'vManager\\Modules\\Tickets\\Ticket';
+		$metadata = $entity::getMetadata();
+		$idFields = $metadata->getIdFields();
+		
+		// TODO: dat do do nejake mezivrstvy, aby to bylo spolecne i pro historyWidget
+		$revisions = $this->context->repository->findAll($entity)
+			  ->where('[' . $metadata->getFieldColumn($idFields[0]) . '] = %i', $id)
+			  ->orderBy('[revision] DESC')
+			  ->fetchAll();
+		
+		// Kontrola existence ticketu
+		if($revisions === false || count($revisions) == 0) {
+			throw new Nette\Application\BadRequestException("Ticket id " . var_export($id, true) . " not found");
+		}
+		
+		// Kontrola pristupovych prav
+		//  - Pokud je uzivatel Project manager
+		// 	- Pokud byl ticket vytvoren aktualnim uzivatelem, nebo byl alespon jednou resitelem / prispivatelem
+		// 	- Pokud je uzivatel spravcem asociovaneho projektu
+		elseif(!$this->user->identity->isInRole('Project manager')) {
+		
+			$found = false;
+			foreach($revisions as $curr) {
+				if($curr->data->assignedTo == $this->context->user->id || $curr->data->author == $this->context->user->id) {
+					$found = true;
+					break;
+				}
+			}
+			
+			if(!$found && (!$revisions[0]->project || !$revisions[0]->project->isResponsibleUser($this->context->user->identity)))
+				throw new Nette\Application\ForbiddenRequestException("Access denied to ticket id " . var_export($id, true));
+		}
+
 	}
 
 	/**
