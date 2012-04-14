@@ -15,6 +15,17 @@
 
 <div class="flat_area grid_16 timeline" n:block="#content">
 
+{include ../Includes/flashes.latte}
+
+{if $showUserFilter}
+{form timelineFilter}
+<div class="timelineControl">
+{input forUser}
+{input s}
+</div>
+{/form}
+{/if}
+
 {if count($records) == 0}
 <p><?php echo __('No records available'); ?></p>
 {/if}

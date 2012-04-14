@@ -137,44 +137,39 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 	 *
 	 * @param DateTime since
  	 * @param DateTime until
+ 	 * @param array of user ids for query (defined by getTimelineUsers)
 	 *
 	 * @return array of vManager/Timeline/IRecord
 	 */
-	public function getTimelineRecords(\DateTime $since, \DateTime $until) {
+	public function getTimelineRecords(\DateTime $since, \DateTime $until, array $forUids) {
 		$data = array();
 		$context = Nette\Environment::getContext();
-		
+				
 		$ticketRevisions = $context->connection->select('[ticketId], [name], [timestamp], [author], [revision], [state]')
 						->from(Ticket::getMetadata()->getTableName())
 						->where('[timestamp] BETWEEN %d AND %t', $since, $until)
 						->fetchAll();
 		
-		// Pokud se nejedna o projektoveho manazera, vyselektuju jen ukoly, kterych
-		// se dotycny ucastnil
-		if(!$context->user->identity->isInRole('Project manager')) {
-			$uid = $context->user->id;
+		// Vyfiltruju jen zaznamy, ktere mi prislusi ----------
+		$myTickets = $context->connection->select('DISTINCT [ticketId]')
+					->from(Ticket::getMetadata()->getTableName())
+					->where('[author] IN %in OR [assignedTo] IN %in', $forUids, $forUids)
+					->fetchAll();
 		
-			$myTickets = $context->connection->select('DISTINCT [ticketId]')
-						->from(Ticket::getMetadata()->getTableName())
-						->where('[author] = %i OR [assignedTo] = %i', $uid, $uid)
-						->fetchAll();
-			
-			foreach($ticketRevisions as $key=>$curr) {
-				$found = false;
-				foreach($myTickets as $curr2) {
-					if($curr->ticketId == $curr2->ticketId) {
-						$found = true;
-						break;
-					}
+		foreach($ticketRevisions as $key=>$curr) {
+			$found = false;
+			foreach($myTickets as $curr2) {
+				if($curr->ticketId == $curr2->ticketId) {
+					$found = true;
+					break;
 				}
-				
-				if(!$found)
-					unset($ticketRevisions[$key]);
 			}
 			
+			if(!$found)
+				unset($ticketRevisions[$key]);
 		}
 			
-						
+		// Vytvorim strukturu zaznamu --------------------------			
 		foreach($ticketRevisions as $curr) {
 			$record = new Tickets\TimelineRecord($curr->timestamp);
 			$record->ticketId = $curr->ticketId;
@@ -198,6 +193,37 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 		
 	
 		return $data;
+	}
+	
+	/**
+	 * Returns array of available user ids for timeline presentation.
+	 *
+	 * @return array of user ids
+	 */
+	public function getTimelineUsers() {
+		$context = Nette\Environment::getContext();
+	
+		// Projektovy manager vidi vsechny uzivatele ticketovaciho systemu
+		if($context->user->identity->isInRole('Project manager')) {
+			$result = array();
+			$users = $context->repository->findAll('vManager\\Security\\User');
+			foreach($users as $curr) {
+				if($curr->isInRole('Ticket user'))
+					$result[] = $curr->id;
+			}
+			
+			return $result;
+		
+		// Ostatni useri vidi jen sebe
+		} elseif($context->user->identity->isInRole('Ticket user')) {
+			return array($context->user->id);
+		}
+		
+		// Pokud se nejedna o uzivatele ticketovaciho systemu vratim prazdne pole,
+		// takze se getTimelineRecords ani nebude volat
+		else {
+			return array();
+		}
 	}
 	
 	/**
