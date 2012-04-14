@@ -36,9 +36,24 @@ interface ITimelineEnabledModule {
 	 *
 	 * @param DateTime since
  	 * @param DateTime until
+ 	 * @param array of user ids which should be used for query (defined by getTimelineUsers)
 	 *
 	 * @return array of vManager/Timeline/IRecord
 	 */
-	public function getTimelineRecords(\DateTime $since, \DateTime $until);
+	public function getTimelineRecords(\DateTime $since, \DateTime $until, array $forUids);
+	
+	/**
+	 * Returns array of available user ids for timeline presentation.
+	 *
+	 * This function is important, because modules define their own ACL roles,
+	 * so parent presenter doesn't know if current user is priviledged for module's records
+	 * or not.
+	 *
+	 * @warning Function should always return at least current user id or getTimelineRecords
+	 * 		won't be queried at all.
+	 *
+	 * @return array of user ids
+	 */
+	public function getTimelineUsers();
 
 }

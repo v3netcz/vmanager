@@ -91,6 +91,7 @@ class System extends vManager\Application\Module implements vManager\Application
 		$acl->allow('User', 'System:Homepage', Nette\Security\Permission::ALL);
 		$acl->allow('User', 'System:Search', Nette\Security\Permission::ALL);
 		$acl->allow('User', 'System:UserSettings', Nette\Security\Permission::ALL);
+		$acl->allow('User', 'System:Timeline', Nette\Security\Permission::ALL);
 	}
 	
 	/**

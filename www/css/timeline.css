@@ -32,3 +32,8 @@
 .timeline .record .author {
 
 }
+
+.timelineControl {
+	float: right;
+	margin: 20px;
+}
