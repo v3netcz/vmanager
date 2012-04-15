@@ -1,0 +1,4 @@
+New commit <a href="{$record->commit->url}">{$record->commit->message}</a>
+in <span class="highlight1 repository">{$record->commit->repo->name}</span>
+
+{if $record->commit->author}<?php echo _x('by <span class="author" style="color: %s">%s</span>', array($template->colorForValue($record->commit->author->name, 'authorPalette'), $record->commit->author->name)); ?>{/if}

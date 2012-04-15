@@ -32,7 +32,8 @@ use vManager, Nette,
  * @author Adam Staněk (V3lbloud)
  * @since Apr 14, 2012
  */
-class GitHub extends vManager\Application\Module {
+class GitHub extends vManager\Application\Module implements vManager\Application\IAclEnabledModule,
+			vManager\Application\ITimelineEnabledModule {
 
 	public function __construct() {
 		if(!$this->isEnabled()) return ;
@@ -40,12 +41,59 @@ class GitHub extends vManager\Application\Module {
 		$application = Nette\Environment::getApplication();
 		$application->onStartup[] = function() use ($application) {
 			
-
-			
 			$router = $application->getRouter();	
 			$router[] = new Route('github-push[/<token>]', 'GitHub:PushHook:default', Route::ONE_WAY);
 		
 		};
+	}
+	
+	/**
+	 * Initializes permission resources/roles/etc.
+	 * 
+	 * @param Nette\Security\Permission reference to permission class
+	 */
+	public function initPermission(Nette\Security\Permission & $acl) {
+		$acl->addRole('Github user', 'User');
+	}
+	
+	/**
+	 * Returns array of timeline records
+	 *
+	 * @param DateTime since
+ 	 * @param DateTime until
+ 	 * @param array of user ids for query (defined by getTimelineUsers)
+	 *
+	 * @return array of vManager/Timeline/IRecord
+	 */
+	public function getTimelineRecords(\DateTime $since, \DateTime $until, array $forUids) {
+		$context = Nette\Environment::getContext();
+		
+		$commits = $context->repository->findAll('vManager\\Modules\\GitHub\\Commit')
+				->where('[timestamp] BETWEEN %d AND %t', $since, $until)
+				->fetchAll();
+				
+		$data = array();
+		foreach($commits as $commit) {
+			$data[] = new GitHub\TimelineRecord($commit);
+		} 
+		
+		return $data;
+	}
+	
+	/**
+	 * Returns array of available user ids for timeline presentation.
+	 *
+	 * @return array of user ids
+	 */
+	public function getTimelineUsers() {
+		$context = Nette\Environment::getContext();
+	
+		// Docasne reseni, povolujeme jen GH usery, ale tem zobrazujeme vsechno,
+		// protoze uzivatelske ucty prozatim nejsou sparovane s Githubem.
+		if($context->user->identity->isInRole('Github user'))
+			return array($context->user->id);
+			
+		return array();
 	}
 
 }
