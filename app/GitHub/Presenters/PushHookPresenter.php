@@ -65,7 +65,8 @@ class PushHookPresenter extends Nette\Application\UI\Presenter {
 		if(!isset($this->module->config['securityToken'])) throw new vBuilder\InvalidConfigurationException("Missing GitHub.securityToken configuration option");
 		if($this->module->config['securityToken'] != $token) throw new Nette\Application\ForbiddenRequestException("Access denied");
 		
-		$receivedData = file_get_contents('php://input');
+		//$receivedData = file_get_contents('php://input');
+		$receivedData = $this->context->httpRequest->getPost('payload');
 		
 		// Log support
 		if(isset($this->module->config['log']['enabled']) && $this->module->config['log']['enabled'])
