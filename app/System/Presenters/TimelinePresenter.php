@@ -166,7 +166,7 @@ class TimelinePresenter extends SecuredPresenter {
 		$data = array();
 			
 		foreach($this->getTimelineEnabledModules() as $module) {
-			$moduleData = $module->getTimelineRecords($since, $until, $forUid);
+			$moduleData = $module->getTimelineRecords($since, $until, array_intersect($forUid, $module->getTimelineUsers()));
 			
 			if(!is_array($moduleData))
 				throw new Nette\InvalidArgumentException(get_class($module) . '::getTimelineRecords has to return array, ' .gettype($moduleData) . ' given');
