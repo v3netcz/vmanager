@@ -1,8 +1,13 @@
 #!/bin/sh
 
+[ "$1" = "" ] && {
+	echo "Usage $0 <mySecurityToken>"
+	exit
+}
+
 #SERVER="127.0.0.1"
 SERVER="vmanager.bilahora.v3net.cz"
-TOKEN="mysecrettoken"
+TOKEN=$1
 
 # ------------------------------------------------------------------
 POST_DATA=$(cat <<'END_HEREDOC'
@@ -53,6 +58,6 @@ END_HEREDOC
 # ------------------------------------------------------------------
 
 # X-Requested-With for AJAX Request simulation for disabling Nette Debugger panel 
-curl --data "$POST_DATA" \
+curl --data "payload=$POST_DATA" \
 		--header "X-Requested-With: XMLHttpRequest"	\
 		http://$SERVER/github-push/$TOKEN
