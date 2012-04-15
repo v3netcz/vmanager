@@ -50,6 +50,8 @@ class PushHookPresenter extends Nette\Application\UI\Presenter {
 
 	public function actionDefault() {
 		
+		// try {
+		
 		$allowed = false;
 		foreach(self::$allowedRemotes as $curr) {
 			if(Strings::startsWith($this->context->httpRequest->getRemoteAddress(), $curr)) {
@@ -61,7 +63,7 @@ class PushHookPresenter extends Nette\Application\UI\Presenter {
 		if(!$allowed) throw new Nette\Application\ForbiddenRequestException("Access denied");				
 	
 		$token = $this->getParam('token');
-		if($token == "") throw new Nette\Application\BadRequestException("Missing security token");
+		if($token == "") throw new Nette\Application\ForbiddenRequestException("Missing security token");
 		if(!isset($this->module->config['securityToken'])) throw new vBuilder\InvalidConfigurationException("Missing GitHub.securityToken configuration option");
 		if($this->module->config['securityToken'] != $token) throw new Nette\Application\ForbiddenRequestException("Access denied");
 		
@@ -79,19 +81,31 @@ class PushHookPresenter extends Nette\Application\UI\Presenter {
 			throw new Nette\Application\BadRequestException("Malformed data received");
 			
 		if(!isset($decodedData->repository) || !isset($decodedData->commits))
-			throw new Nette\Application\BadRequestException("Malformed data received");
+			throw new Nette\Application\BadRequestException("Invalid data format received");
 
+		$tz = new \DateTimeZone(date_default_timezone_get());
 		$repo = $this->getGitHubRepository($decodedData->repository->url, $decodedData->repository->name);				
 		foreach($decodedData->commits as $commit) {
+		
+			// Konverze casoveho pasma
+			$timestamp = \DateTime::createFromFormat(\DateTime::W3C, $commit->timestamp);
+			$timestamp->setTimezone($tz);
+		
+			// Commit
 			$e = $this->context->repository->create('vManager\\Modules\\GitHub\\Commit');
 			$e->id = $commit->id;
 			$e->url = $commit->url;
 			$e->repo = $repo;
 			$e->author = $this->getGitHubUser($commit->author->name, $commit->author->email);
-			$e->timestamp = \DateTime::createFromFormat(\DateTime::W3C, $commit->timestamp);
+			$e->timestamp = $timestamp;
 			$e->message = $commit->message;
 			$e->save();
 		}
+		
+		/* } catch(\Exception $e) {
+			echo "Logged exception\n";
+			Nette\Diagnostics\Debugger::log($e);
+		} */
 
 		// Poslu prazdnou odpoved s HTTP 200
 		$this->sendResponse(new Nette\Application\Responses\TextResponse(""));
