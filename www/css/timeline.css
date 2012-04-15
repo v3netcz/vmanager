@@ -37,3 +37,7 @@
 	float: right;
 	margin: 20px;
 }
+
+.timeline .record .highlight1 {
+	color: purple;
+}
