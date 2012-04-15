@@ -23,7 +23,7 @@
 
 namespace vManager\Modules\GitHub;
 
-use vManager, vBuilder, Nette;
+use vManager, vBuilder, Nette, Nette\Utils\Strings;
 
 /**
  * Receiver of push web hook
@@ -36,7 +36,30 @@ use vManager, vBuilder, Nette;
  */
 class PushHookPresenter extends Nette\Application\UI\Presenter {
 
+	private static $allowedRemotes = array(
+		'127.0.0.1',
+		
+		// V3Net.cz - development
+		'77.48.73.134',
+		'10.10.',
+	
+		// GitHub public IPs
+		'207.97.227.253',
+		'50.57.128.197'
+	);
+
 	public function actionDefault() {
+		
+		$allowed = false;
+		foreach(self::$allowedRemotes as $curr) {
+			if(Strings::startsWith($this->context->httpRequest->getRemoteAddress(), $curr)) {
+				$allowed = true;
+				break;	
+			}
+		}
+
+		if(!$allowed) throw new Nette\Application\ForbiddenRequestException("Access denied");				
+	
 		$token = $this->getParam('token');
 		if($token == "") throw new Nette\Application\BadRequestException("Missing security token");
 		if(!isset($this->module->config['securityToken'])) throw new vBuilder\InvalidConfigurationException("Missing GitHub.securityToken configuration option");
