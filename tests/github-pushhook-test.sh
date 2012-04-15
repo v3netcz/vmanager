@@ -2,6 +2,7 @@
 
 #SERVER="127.0.0.1"
 SERVER="vmanager.bilahora.v3net.cz"
+TOKEN="mysecrettoken"
 
 # ------------------------------------------------------------------
 POST_DATA=$(cat <<'END_HEREDOC'
@@ -54,4 +55,4 @@ END_HEREDOC
 # X-Requested-With for AJAX Request simulation for disabling Nette Debugger panel 
 curl --data "$POST_DATA" \
 		--header "X-Requested-With: XMLHttpRequest"	\
-		http://$SERVER/git-hub.push-hook/
+		http://$SERVER/github-push/$TOKEN
