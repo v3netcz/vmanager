@@ -36,7 +36,7 @@
 	<h1 n:if="$prevDay == null || $record->getTimestamp()->format('Y-m-d') != $prevDay" n:class="$prevDay == null ? first">
 		{if $record->getTimestamp()->format('Y-m-d') == date('Y-m-d')}<?php echo __('Today'); ?>
 		{elseif $record->getTimestamp()->format('Y-m-d') == date('Y-m-d', time() - 24*60*60)}<?php echo __('Yesterday'); ?>
-		{else}{$record->getTimestamp()->format('l, j. n. Y')}{/if}
+		{else}{$record->getTimestamp()|dayOfWeekInWords}, {$record->getTimestamp()->format('j. n. Y')}{/if}
 	</h1>
 	{var $prevDay = $record->getTimestamp()->format('Y-m-d')}
 	
