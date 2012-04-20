@@ -41,3 +41,9 @@
 .timeline .record .highlight1 {
 	color: purple;
 }
+
+.timeline .record .project {
+	color: purple;
+	font-size: 0.8em;
+	padding-right: 3px;
+}
