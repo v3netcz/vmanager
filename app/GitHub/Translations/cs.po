@@ -1,0 +1,18 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2012-04-20 16:49+0200\n"
+"Language: cs\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/GitHub/Templates/Timeline/default.latte:2
+#, php-format
+msgid ""
+"New commit <a href=\"%s\">%s</a> in <span class=\"highlight1 repository\">"
+"%s</span>"
+msgstr "Přidán commit <a href=\"%s\">%s</a> do repozitáře <span class=\"highlight1 repository\">%s</span>"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/GitHub/Templates/Timeline/default.latte:9
+#, php-format
+msgid "by <span class=\"author\" style=\"color: %s\">%s</span>"
+msgstr "uživatelem <span class=\"author\" style=\"color: %s\">%s</span>"
