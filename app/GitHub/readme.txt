@@ -23,3 +23,10 @@ II. Setup your GitHub repositories ---------------------------------------------
 	HTTPs is advised but not required.
 	
 Procedure above can be applied to as many repositories as you wish.
+
+III. Notes ---------------------------------------------------------------------
+
+It seems that for some strange reason GitHub won't run their hooks if it
+receives push with commits dated in the future. It's untested bug,
+but it seems that way. So please keep your dev machine's clock in sync
+for best experience.
