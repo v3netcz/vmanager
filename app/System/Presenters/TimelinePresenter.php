@@ -208,4 +208,11 @@ class TimelinePresenter extends SecuredPresenter {
 		return $this->_timelineEnabledModules;
 	}
 	
+	protected function createTemplate($class = null) {
+		$template = parent::createTemplate($class);
+		$template->registerHelper('dayOfWeekInWords', 'vManager\Application\Helpers::dayOfWeekInWords');
+		
+		return $template;
+	}
+	
 }
