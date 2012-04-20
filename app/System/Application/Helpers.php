@@ -144,4 +144,20 @@ class Helpers {
 		
 		return $monthStr;
 	}
+	
+	public static function dayOfWeekInWords(\DateTime $date) {
+
+		switch($date->format('w')) {
+			case 0: return __('Sunday');
+			case 1: return __('Monday');
+			case 2: return __('Tuesday');
+			case 3: return __('Wednesday');
+			case 4: return __('Thursday');
+			case 5: return __('Friday');
+			case 6: return __('Saturday');
+		}
+		
+		return NULL;
+	}
+	
 }
