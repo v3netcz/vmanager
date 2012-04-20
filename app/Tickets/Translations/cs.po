@@ -28,57 +28,57 @@ msgstr "Poslední změna"
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:415
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:459
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:551
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:632
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:583
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:664
 msgid "Save"
 msgstr "Uložit"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:319
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:351
 msgid "Task title:"
 msgstr "Název úkolu:"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:319
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:351
 msgid "Short task description. Please be concrete."
 msgstr "Krátký popis úkolu. Snažte se býti co nejvíce konkrétní."
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:270
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:320
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:352
 msgid "Task title has to be filled."
 msgstr "Název úkolu musí být vyplněn."
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:273
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:323
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:355
 msgid "Deadline:"
 msgstr "Termín dokončení úkolu:"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:323
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:355
 msgid "When has to be task done?"
 msgstr "Do kdy musí být úkol hotov?"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:327
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:359
 msgid "Assign to:"
 msgstr "Řešitel:"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:329
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:361
 msgid "Who will resolve this issue?"
 msgstr "Komu má být úkol přiřazen?"
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:284
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:334
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:366
 msgid "Responsible person does not exist."
 msgstr "Zadaný řešitel neexistuje."
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:566
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:598
 msgid "New ticket has been created."
 msgstr "Nový úkol byl úspěšně vytvořen."
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:471
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:644
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:676
 msgid "Change has been saved."
 msgstr "Změny byly uloženy."
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:473
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:646
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:678
 msgid "Nothing to change."
 msgstr "Žádné změny nebyly provedeny."
 
@@ -179,7 +179,7 @@ msgstr "Změnil pole <span class=\"field\">%s</span>"
 msgid "Close ticket with this comment"
 msgstr "Označit úkol jako hotový"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:608
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:640
 msgid "Reopen this ticket"
 msgstr "Znovuotevřít tento úkol k řešení"
 
@@ -331,7 +331,7 @@ msgstr "Kritická"
 msgid "Priority"
 msgstr "Priorita"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:354
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:386
 msgid "Priority:"
 msgstr "Priorita:"
 
@@ -387,12 +387,12 @@ msgstr "Projekt"
 msgid "Filter"
 msgstr "Filtrovat"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:341
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:373
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Ticket/detail.latte:35
 msgid "Project:"
 msgstr "Projekt:"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:343
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:375
 msgid "Is this task part of greater project?"
 msgstr "Je tento úkol součástí nějakého většího projektu?"
 
@@ -516,26 +516,26 @@ msgid "This project does not exist."
 msgstr "Zadaný projekt neexistuje"
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/ProjectPresenter.php:448
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:588
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:620
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/VersionableEntityView/default.latte:23
 msgid "Make this comment private"
 msgstr "Označit komentář jako soukromý"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:597
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:629
 #, php-format
 msgid "resolve as %s"
 msgstr "vyřešit úkol jako %s"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:598
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:630
 #, php-format
 msgid "change to %s"
 msgstr "změnit na %s"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:600
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:632
 msgid "State:"
 msgstr "Stav:"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:610
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:642
 #, php-format
 msgid "Change state to '%s'"
 msgstr "Změnit stav úkolu na '%s'"
@@ -568,7 +568,7 @@ msgid "Comment is private"
 msgstr "Komentář je soukromý"
 
 # Stavy
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:601
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:633
 msgid "do not change"
 msgstr "neměnit"
 
@@ -585,7 +585,7 @@ msgstr "Hotovo"
 msgid "Canceled"
 msgstr "Zrušeno"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:337
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:369
 msgid "Select any file to attach"
 msgstr "Vyberte soubor/y k přiložení"
 
@@ -612,41 +612,54 @@ msgstr ""
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:157
 msgid "Unstar"
-msgstr ""
+msgstr "Zrušit označení"
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:157
 msgid "Mark with a star"
-msgstr ""
+msgstr "Označit hvězdičkou"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:697
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:721
 msgid "The ticket was successfully starred."
-msgstr ""
+msgstr "Ticket byl označen jako oblíbený"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:713
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Presenters/TicketPresenter.php:737
 msgid "The star was successfully removed."
-msgstr ""
+msgstr "Označení ticketu bylo zrušeno"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:3
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:7
 msgid "has been created"
 msgstr "byl založen"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:5
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:9
 msgid "has been changed"
 msgstr "byl změněn"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:7
 #, php-format
 msgid "by <span class=\"author\">%s</span>"
 msgstr "uživatelem <span class=\"author\">%s</span>"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:8
 #, php-format
 msgid "by <span class=\"author\">user n. %d</span>"
 msgstr "<span class=\"author\">uživatelem č. %d</span>"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:4
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:8
 msgid "has been solved"
 msgstr "byl vyřešen"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:5
+#, php-format
+msgid "(former: %s)"
+msgstr "(dříve: %s)"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:11
+#, php-format
+msgid "by <span class=\"author\" style=\"color: %s\">%s</span>"
+msgstr "uživatelem <span class=\"author\" style=\"color: %s\">%s</span>"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Timeline/default.latte:12
+#, php-format
+msgid "by <span class=\"author\" style=\"color: %s\">user n. %d</span>"
+msgstr "<span class=\"author\" style=\"color: %s\">uživatelem č. %d</span>"
 
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Ticket/multipleInsert.latte:3
 msgid "Multiple insert"

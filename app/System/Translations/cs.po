@@ -9,7 +9,7 @@ msgstr ""
 msgid "You have been signed out."
 msgstr "Byl jste úspěšně odhlášen."
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Module.php:105
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Module.php:106
 msgid "Homepage"
 msgstr "Úvod"
 
@@ -560,15 +560,15 @@ msgstr "Vyberte Vaše logo"
 msgid "You may only upload PNG images!"
 msgstr "Lze nahrát pouze obrázky ve formátu PNG."
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Timeline/default.latte:10
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Timeline/default.latte:30
 msgid "No records available"
 msgstr "Nejsou k dispozici žádné záznamy k zobrazení"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Timeline/default.latte:17
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Timeline/default.latte:37
 msgid "Today"
 msgstr "Dnes"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Timeline/default.latte:18
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Timeline/default.latte:38
 msgid "Yesterday"
 msgstr "Včera"
 
@@ -588,6 +588,51 @@ msgstr "Informace o společnosti"
 msgid "Current logo"
 msgstr "Současné logo"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Module.php:111
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Module.php:112
 msgid "Timeline"
 msgstr "Časová osa"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/TimelinePresenter.php:61
+#, php-format
+msgid "Cannot show timeline for user id %d"
+msgstr ""
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/TimelinePresenter.php:111
+msgid "For user:"
+msgstr ""
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/TimelinePresenter.php:112
+msgid "-- All users --"
+msgstr "-- Všichni uživatelé --"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/TimelinePresenter.php:115
+msgid "Filter"
+msgstr ""
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:151
+msgid "Sunday"
+msgstr "Neděle"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:152
+msgid "Monday"
+msgstr "Pondělí"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:153
+msgid "Tuesday"
+msgstr "Úterý"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:154
+msgid "Wednesday"
+msgstr "Středa"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:155
+msgid "Thursday"
+msgstr "Čtvrtek"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:156
+msgid "Friday"
+msgstr "Pátek"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:157
+msgid "Saturday"
+msgstr "Sobota"
