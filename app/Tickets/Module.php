@@ -156,6 +156,7 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 					->where('[author] IN %in OR [assignedTo] IN %in', $forUids, $forUids)
 					->fetchAll();
 		
+		$neededTicketIds = array();
 		foreach($ticketRevisions as $key=>$curr) {
 			$found = false;
 			foreach($myTickets as $curr2) {
@@ -167,13 +168,24 @@ class Tickets extends vManager\Application\Module implements vManager\Applicatio
 			
 			if(!$found)
 				unset($ticketRevisions[$key]);
+			else
+				$neededTicketIds[$curr->ticketId] = null;
 		}
+			
+		// Nastu aktualni verze ticketu ------------------------
+		$actualTickets = $context->repository->findAll('vManager\Modules\Tickets\Ticket')
+				->where('[ticketId] IN %in', array_keys($neededTicketIds))
+				->and('[revision] > 0')->fetchAssoc('id');
+				
 			
 		// Vytvorim strukturu zaznamu --------------------------			
 		foreach($ticketRevisions as $curr) {
 			$record = new Tickets\TimelineRecord($curr->timestamp);
-			$record->ticketId = $curr->ticketId;
-			$record->ticketName = $curr->name;
+			$record->ticketName = $curr->name;	// Back then
+			
+			$record->ticket = $actualTickets[$curr->ticketId];
+
+			// Author of change (not of the ticket itself)			
 			$record->author = $context->repository->get('vManager\\Security\\User', $curr->author);
 			
 			$record->hasBeenCreated = abs($curr->revision) == 1;

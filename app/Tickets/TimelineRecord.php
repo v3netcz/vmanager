@@ -35,9 +35,11 @@ use vBuilder,
  */
 class TimelineRecord extends vBuilder\Object implements vManager\Timeline\IRecord {
 
-	public $ticketId;
+	public $ticket;
 	public $ticketName;
+	
 	public $author;
+
 	public $hasBeenCreated;
 	public $hasBeenSolved;
 

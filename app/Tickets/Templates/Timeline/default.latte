@@ -1,4 +1,8 @@
-<a n:href=":Tickets:Ticket:detail, $record->ticketId">Ticket #{$record->ticketId} - {$record->ticketName}</a>
+<span class="project" n:if="$record->ticket->project && $record->ticket->project->exists()">[{$record->ticket->project->name}]</span>
+
+<a n:href=":Tickets:Ticket:detail, $record->ticket->id">Ticket #{$record->ticket->id} - {$record->ticket->name}</a>
+
+<span n:if="$record->ticket->name != $record->ticketName"><?php echo _x('(former: %s)', array($record->ticketName)); ?></span>
 
 {if $record->hasBeenCreated}<?php echo __('has been created'); ?>
 {elseif $record->hasBeenSolved}<?php echo __('has been solved'); ?>
