@@ -109,16 +109,18 @@
 			$.texyla.setDefaults({	
 				texyCfg: "admin",
 				baseDir: "/texyla",
-				previewPath: "preview.php",
+				previewPath: {link :System:Texy:preview},
 				filesPath: "filesplugin/files.php",
 				filesThumbPath: "filesplugin/thumbnail.php?image=%var%",
 				filesUploadPath: "filesplugin/files/upload.php",
-				bottomLeftToolbar: [],
+				bottomLeftToolbar: ['edit', 'preview'],
+				tabs: true,
 				bottomRightEditToolbar: [],
-				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy'{if $presenter->context->userConfig->get('texyla.developerFunctions')}, ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}],
+				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', null, 'ticket'{if $presenter->context->userConfig->get('texyla.developerFunctions')}, ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql'], 'API'{/if}],
 				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width(),
 				buttonType: "button"
 			});
+			$
 		});
 		</script>
 		
@@ -136,11 +138,17 @@
 		<script type="text/javascript" src="{$basePath}/js/vManager/jquery.starLink.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/jquery.activeTableRow.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/vManager/vManager.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/vManager/vManager-texyla.js"></script>
 		
 		<!-- Inicializace zavisla na prostredi (preklady, config, apod.) -->
 		<script type="text/javascript">
 		//<![CDATA[
 		$(document).ready(function () {
+			$('textarea.texyla').setupvManagerTexyla({
+				apiPromptClassSource: {link :System:Texy:promptClassName},
+				apiPromptMethodSource: {link :System:Texy:promptMethodName}
+			});
+			
 			$('input:file').vMultipleFileUpload({
 				//linkText: 'Add another',
 				//containerClass: 'vMultipleFileUpload',
