@@ -168,14 +168,6 @@ $(document).ready(function () {
 		});
 	});
 	
-	$('textarea.texyla').each(function () {
-		var $this = $(this);
-		$this.texyla();
-		$this.addClass('expand');
-		$this.resizable('destroy');
-		$this.autogrow();
-	});
-	
 	$('a.starLink').starLink({
 		errorMessage: 'Vyskytla se chyba. Zkuste to prosím znovu'
 	});

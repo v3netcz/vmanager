@@ -329,14 +329,13 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	 * @param int $id 
 	 */
 	public function renderDetail($id) {
-		$texy = new \Texy();
-		$texy->encoding = 'utf-8';
-		$texy->allowedTags = \Texy::NONE;
-		$texy->allowedStyles = \Texy::NONE;
-		$texy->setOutputMode(\Texy::XHTML1_STRICT);
+		$texy = $this->context->texy;
+		$texy->setPresenter($this); // because we want to support ticket links
 
-		$this->template->registerHelper('texy', callback($texy, 'process'));    
-		$this->template->historyWidget = new VersionableEntityView('vManager\\Modules\\Tickets\\Ticket', $id);
+		$this->template->registerHelper('texy', callback($texy, 'process'));
+		$versionableEntityView = new VersionableEntityView('vManager\\Modules\\Tickets\\Ticket', $id);
+		$this->addComponent($versionableEntityView, 'versionableEntityView');
+		$this->template->historyWidget = $versionableEntityView;
 		
 	}
 	

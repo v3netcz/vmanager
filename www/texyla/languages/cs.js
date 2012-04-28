@@ -52,6 +52,10 @@ jQuery.texyla.addStrings("cs", {
 	btn_submit: "Odeslat",
 
 	btn_web: "Web editoru Texyla",
+	
+	btn_API: "API odkaz",
+	
+	btn_ticket: "Odkaz na ticket",
 
 	// funkce
 	texyHeadingText: "Text nadpisu",
@@ -139,5 +143,10 @@ jQuery.texyla.addStrings("cs", {
 	btn_youtube: "YouTube",
 	win_youtube: "YouTube",
 	youtubeUrl: "Vlo\u017ete adresu videa nebo jeho ID",
-	youtubePreview: "Náhled videa"
+	youtubePreview: "Náhled videa",
+	
+	// API
+	className: "Jméno t\u0159ídy",
+	methodName: "Jméno metody",
+	noClassName: "Musíte zadat jméno t\u0159ídy"
 });

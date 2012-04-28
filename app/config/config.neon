@@ -16,6 +16,8 @@ services:
 	presenterFactory: vManager\Application\PresenterFactory('%appDir%')
 	
 	translator: vManager\Application\Translator::createService
+
+	texy: vManager\Texy
 	
 parameters:
 	languages: ['cs', 'en']

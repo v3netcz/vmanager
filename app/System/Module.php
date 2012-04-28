@@ -80,6 +80,7 @@ class System extends vManager\Application\Module implements vManager\Application
 		$acl->addResource('System:UserSettings', 'System');
 		$acl->addResource('System:Settings', 'System');
 		$acl->addResource('System:Timeline', 'System');
+		$acl->addResource('System:Texy', 'System');
 		// $acl->addResource('System:JsonConnector', 'System');
 		
 		// Vsichni musi mit pristup k tomu cist uzivatele (login)
@@ -92,6 +93,7 @@ class System extends vManager\Application\Module implements vManager\Application
 		$acl->allow('User', 'System:Search', Nette\Security\Permission::ALL);
 		$acl->allow('User', 'System:UserSettings', Nette\Security\Permission::ALL);
 		$acl->allow('User', 'System:Timeline', Nette\Security\Permission::ALL);
+		$acl->allow('User', 'System:Texy', Nette\Security\Permission::ALL);
 	}
 	
 	/**

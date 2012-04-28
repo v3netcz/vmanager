@@ -53,6 +53,10 @@ jQuery.texyla.addStrings("en", {
 
 	btn_web: "Texyla's web",
 
+	btn_API: "API link",
+	
+	btn_ticket: "Ticket link",
+	
 	// functions
 	texyHeadingText: "Heading text",
 	acronymTitle: "Title",
@@ -139,5 +143,10 @@ jQuery.texyla.addStrings("en", {
 	btn_youtube: "YouTube",
 	win_youtube: "YouTube",
 	youtubeUrl: "Insert address or ID",
-	youtubePreview: "Preview"
+	youtubePreview: "Preview",
+	
+	// API
+	className: "Class name",
+	methodName: "Method name",
+	noClassName: "You have to fill in the class name"
 });
