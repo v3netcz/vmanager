@@ -98,6 +98,8 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		
 		if($this->getParam('assignedTo') > 0)
 			$ds->and("[assignedTo] = %i", $this->getParam('assignedTo'));
+		elseif($this->getParam('assignedTo') == -2)
+			$ds->and("[assignedTo] IS NULL");
 		
 		if($this->getParam('projectId') > 0)
 			$ds->and("[projectId] = %i", $this->getParam('projectId'));
@@ -257,7 +259,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$form->addSelect('state', __('State'), $states);
 		
 		if(Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
-			$form->addSelect('assignedTo', __('Assigned to'), array(-1 => __('To anybody')) + $this->getAllAvailableUsernames(true));
+			$form->addSelect('assignedTo', __('Assigned to'), array(-1 => __('To anybody'), -2 => __('To nobody')) + $this->getAllAvailableUsernames(true));
 		}
 		
 		$projects = $this->getAllAvailableProjects();
@@ -579,6 +581,14 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$form->addTextArea('description')
 				  ->getControlPrototype()->class('texyla');
+
+		if($this->getParam('projectId')) {
+			$project = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Project')
+					->where('[projectId] = %i', $this->getParam('projectId'))->and('[revision] > 0')->fetch();
+		
+			if($project)		
+				$form['project']->setDefaultValue($project->name);
+		}
 
 		$form->addSubmit('send', __('Save'));
 

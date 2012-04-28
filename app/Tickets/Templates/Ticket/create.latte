@@ -2,11 +2,12 @@
 
 {block head}
 <script type="text/javascript">
-  function checkProjectExist(el) {            
-    $.getJSON( el.attr('autocomplete-src'), function( data ) {
+  function checkProjectExist(el) {          
+    $.getJSON( el.attr('autocomplete-src') + "?term=" + el.val(), function( data ) {
       for(var item in data) {
 				if (el.val() == data[item]) return;
 			}
+			
       $('#dialog').dialog('open');
       return false;      
     });      
