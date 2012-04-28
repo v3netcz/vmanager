@@ -65,6 +65,7 @@ jQuery.texyla.addStrings("cs", {
 	// pohledy
 	wait: "Prosím \u010dekejte",
 	viewEmpty: "Textové pole je prázdné!",
+	ajaxError: "Vyskytla se chyba. Zkuste to prosím znovu.",
 
 	// okna
 	windowOk: "OK",

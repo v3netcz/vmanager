@@ -116,6 +116,11 @@ Texyla.prototype.view = function(type, first) {
 		this.htmlPreview.hide();
 		
 		// volá ajax
-		jQuery.post(this.options.previewPath, {texy: taVal, cfg: this.options.texyCfg}, onLoad, "html");
+		jQuery.post(this.options.previewPath, {texy: taVal, cfg: this.options.texyCfg}, onLoad, "html")
+			  .error(function () {
+				 alert(_this.lng.ajaxError);
+				 _this.view('edit');
+				 _this.lastPreviewedTexy = '';
+			  });
 	}
 };

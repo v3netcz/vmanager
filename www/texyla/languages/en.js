@@ -65,6 +65,7 @@ jQuery.texyla.addStrings("en", {
 	// view
 	wait: "Wait please",
 	viewEmpty: "Text area is empty!",
+	ajaxError: "An error has occured. Please try again.",
 
 	// window
 	windowOk: "OK",
