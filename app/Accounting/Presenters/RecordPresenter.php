@@ -191,12 +191,12 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 		$record->save();
 		
 		$this->flashMessage($this->getParam('editId') !== null ? __('Record has been saved.') : __('Record has been created.'));	
-		$this->redirect('default', array('editId' => null));
+		$this->redirect('this', array('editId' => null));
 	}
 	
 		
 	public function recordFormCanceled() {
-		$this->redirect('default', array('editId' => null));
+		$this->redirect('this', array('editId' => null));
 	}
 	
 	protected function saveRecordForm(Form $form, vBuilder\Orm\ActiveEntity $record) {
@@ -216,6 +216,8 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 			
 			if($record->d && $record->d->id != '') $form['d']->setDefaultValue($record->d->id);
 			if($record->md && $record->md->id != '') $form['md']->setDefaultValue($record->md->id);
+			
+			return $record;
 		}
 	}
 	
