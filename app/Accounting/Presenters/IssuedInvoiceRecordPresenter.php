@@ -181,6 +181,18 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 		return $form;
 	}
 	
+	protected function loadRecordForm(Form $form) {
+		$record = parent::loadRecordForm($form);
+	
+		if($record) {
+			if($record->subject) {
+				$form['subject']->setDefaultValue($record->subject->name);
+			}
+		}
+	
+		return $record;
+	}
+	
 	protected function saveRecordForm(Form $form, vBuilder\Orm\ActiveEntity $record) {
 		parent::saveRecordForm($form, $record);
 		
