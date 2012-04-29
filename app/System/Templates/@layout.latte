@@ -102,7 +102,7 @@
 		<script src="{$basePath}/texyla/plugins/color/color.js" type="text/javascript"></script>
 		<script src="{$basePath}/texyla/plugins/textTransform/textTransform.js" type="text/javascript"></script>
 		<script src="{$basePath}/texyla/plugins/youtube/youtube.js" type="text/javascript"></script> *}
-		
+
 		<script type="text/javascript">
 		//<![CDATA[
 		$(function () {
@@ -113,10 +113,11 @@
 				filesPath: "filesplugin/files.php",
 				filesThumbPath: "filesplugin/thumbnail.php?image=%var%",
 				filesUploadPath: "filesplugin/files/upload.php",
-				bottomLeftToolbar: ['edit', 'preview'],
+				bottomLeftToolbar: [],
+				bottomRightPreviewToolbar: [],
 				tabs: true,
 				bottomRightEditToolbar: [],
-				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', null, 'ticket', null{if $presenter->context->userConfig->get('texyla.developerFunctions')}, 'API', ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}],
+				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', null, 'ticket', null{if $presenter->context->userConfig->get('texyla.developerFunctions')}, 'API', ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}, 'preview'],
 				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width(),
 				buttonType: "button"
 			});

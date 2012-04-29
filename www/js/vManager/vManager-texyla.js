@@ -20,7 +20,7 @@
 		$.texyla.addButton('preview', function () {
 			var $this = $(this.textarea);
 			$('div.preview-wrapper').animate({
-				height: $this.height() + 25 + 'px'
+				height: $this.height() + 40 + 'px'
 			}, 800);
 			this.view("preview");
 		});

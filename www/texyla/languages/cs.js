@@ -56,6 +56,8 @@ jQuery.texyla.addStrings("cs", {
 	btn_API: "API odkaz",
 	
 	btn_ticket: "Odkaz na ticket",
+	
+	editAgain: "Znovu editovat",
 
 	// funkce
 	texyHeadingText: "Text nadpisu",
