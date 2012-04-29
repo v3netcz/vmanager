@@ -148,7 +148,7 @@ jQuery.texyla.addStrings("en", {
 	
 	// API
 	className: "Class name",
-	methodName: "Method name",
+	memberName: "Member name",
 	noClassName: "You have to fill in the class name",
 	
 	// Tickets
