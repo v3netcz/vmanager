@@ -34,13 +34,13 @@ use vManager, vBuilder, Nette,
 class Texy extends \Texy {
 	
 	/**
-	 * We need ::link()
-	 * @var Nette\Application\UI\Presenter
+	 * @var Nette\DI\IContainer
 	 */
-	protected $presenter;
+	protected $context;
 	
 	public function __construct(Nette\DI\IContainer $context) {
 		parent::__construct();
+		$this->context = $context;
 		
 		$this->encoding = 'utf-8';
 		$this->allowedTags = static::NONE;
@@ -53,7 +53,6 @@ class Texy extends \Texy {
 		$modules = vManager\Application\ModuleManager::getModules();
 		foreach ($modules as $module) {
 			if ($module instanceof vManager\Modules\Tickets && $module->isEnabled()) {
-				$this->presenter = $context->application->presenter;
 				$this->addHandler('phrase', array($this, 'ticketLinkHandler'));
 			}
 		}
@@ -82,37 +81,15 @@ class Texy extends \Texy {
 		if (Strings::startsWith($url, 'api://')) {
 			$url = Strings::substring($url, 6);
 			if (Strings::contains($url, '::')) { //class::method
-				list($class, $method) = explode('::', $url);
+				list($class, $member) = explode('::', $url);
 			} else {
 				$class = $url;
-				$method = null;
+				$member = null;
 			}
-			$link->URL = $this->generateApiLink($class, $method);
+			$link->URL = $this->context->apiManager->generateApiLink($class, $member);
 		}
 
 		return $invocation->proceed();
-	}
-	
-	
-	/**
-	 * @param string $class class name with all namespaces
-	 * @param string $method 
-	 */
-	protected function generateApiLink($class, $method = null) {		
-		$baseUrl = 'http://api.vmanager.cz/internal/class-';
-		
-		if (Strings::startsWith($class, '\\')) {
-			$class = Strings::substring($class, 1);
-		}
-		$url = $baseUrl . str_replace('\\', '.', $class) . '.html';
-		if (isset($method)) {
-			$url .= '#';
-			if (!Strings::startsWith($method, '$')) { // property
-				$url .= '_';
-			}
-			$url .= $method;
-		}
-		return $url;
 	}
 	
 	/**
@@ -132,7 +109,7 @@ class Texy extends \Texy {
 
 		if (Strings::match($url, '~^#\d+$~')) {
 			$id = (int) Strings::substring($url, 1);
-			$link->URL = $this->presenter->link(':Tickets:Ticket:detail', $id);
+			$link->URL = $this->context->application->presenter->link(':Tickets:Ticket:detail', $id);
 		}
 
 		return $invocation->proceed();

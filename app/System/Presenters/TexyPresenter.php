@@ -51,14 +51,21 @@ class TexyPresenter extends SecuredPresenter {
 	public function actionPromptClassName($term) { /* has to be called $term!!! 
 		jQuery autocomplete does not support any other parameter name
 	 */
-		if ($this->isAjax()) { // Only ajax calls are intended to use this method.
-			$classes = get_declared_classes(); // dummy values
-			$result = array ();
-			foreach ($classes as $class) {
-				if (Strings::contains($class, $term, false)) { // false -> case insensitive
-					$result[] = $class;
-				}
-			}
+		if ($this->isAjax() && Strings::length($term) > 3) { // Only ajax calls are intended to use this method.
+			$result = $this->context->apiManager->searchApi($term);
+			$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
+		}
+		$this->terminate();
+	}
+	
+	/**
+	 * @param string $term 
+	 */
+	public function actionPromptMemberName($class, $term) { /* has to be called $term!!! 
+		jQuery autocomplete does not support any other parameter name
+	 */
+		if ($this->isAjax() && isset($class) && Strings::length($term) > 2) {
+			$result = $this->context->apiManager->searchForMember($class, $term);
 			$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
 		}
 		$this->terminate();

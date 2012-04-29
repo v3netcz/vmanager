@@ -5,9 +5,10 @@
 	$.fn.setupvManagerTexyla = function (options) {
 		var defaults = {
 				apiPromptClassSource: [],
-				apiPromptMethodSource: [],
-				apiPromptMinLength: 4,
+				apiPromptMemberSource: [],
+				apiPromptMinLength: 3,
 				apiPromptInputClass: 'API-text',
+				apiPromptMemberClassParamName: 'class',
 				
 				ticketPromptSource: [],
 				ticketPromptMinLength: 4,
@@ -28,18 +29,25 @@
 			createContent: function () {
 				var inputs = [$('<input type="text" id="apiPromptClass">').addClass(config.apiPromptInputClass).autocomplete({
 							source: config.apiPromptClassSource,
-							minLength: config.apiPromptMinLength
+							minLength: config.apiPromptMinLength,
+							change: function (e, ui) {
+								var baseUri = config.apiPromptMemberSource,
+									uri = baseUri + (baseUri.indexOf('?') != -1 ? '&' : '?');
+								uri += config.apiPromptMemberClassParamName + '=' + encodeURIComponent(ui.item.value);
+
+								$('#apiPromptMember').autocomplete('option', 'source', uri);
+							}
 						}),
-						$('<input type="text" id="apiPromptMethod">').addClass(config.apiPromptInputClass)/*.autocomplete({
-							source: config.apiPromptMethodSource,
+						$('<input type="text" id="apiPromptMember">').addClass(config.apiPromptInputClass).autocomplete({
+							source: config.apiPromptMemberSource,
 							minLength: config.apiPromptMinLength
 						}).focus(function (e) {
 							if (!$('#apiPromptClassInput').val()) {
 								return false;
 							}
-						})*/
+						})
 					],
-					labels = [this.lng.className, this.lng.methodName],
+					labels = [this.lng.className, this.lng.memberName],
 					container = $('<div><table></table></div>');
 					
 				$.each(inputs, function (key, value) {
@@ -55,14 +63,14 @@
 
 			action: function (el) {
 				var className = el.find('#apiPromptClass').val(),
-					methodName = el.find('#apiPromptMethod').val();
+					memberName = el.find('#apiPromptMember').val();
 				if (className == '') {
 					alert(this.lng.noClassName);
 					return;
 				}
-				methodName = methodName == '' ? '' : ('::'+methodName);
-				var linkText = methodName;
-				var output = '"'+linkText+'":api://'+className+methodName;
+				var linkText;
+				memberName = memberName == '' ? (linkText = '') : ('::'+(linkText = memberName));
+				var output = '"'+linkText+'":api://'+className+memberName;
 				this.texy.replace(output);
 			}
 		});
