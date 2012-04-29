@@ -8,6 +8,10 @@
 				apiPromptMethodSource: [],
 				apiPromptMinLength: 4,
 				apiPromptInputClass: 'API-text',
+				
+				ticketPromptSource: [],
+				ticketPromptMinLength: 4,
+				ticketNamePromptInputClass: 'Ticket-text'
 			},
 			config = $.extend(defaults, options);
 			
@@ -49,26 +53,44 @@
 				return container;
 			},
 
-		action: function (el) {
-			var className = el.find('#apiPromptClass').val(),
-				methodName = el.find('#apiPromptMethod').val();
-			if (className == '') {
-				alert(this.lng.noClassName);
-				return;
+			action: function (el) {
+				var className = el.find('#apiPromptClass').val(),
+					methodName = el.find('#apiPromptMethod').val();
+				if (className == '') {
+					alert(this.lng.noClassName);
+					return;
+				}
+				methodName = methodName == '' ? '' : ('::'+methodName);
+				var linkText = methodName;
+				var output = '"'+linkText+'":api://'+className+methodName;
+				this.texy.replace(output);
 			}
-			var linkText;
-			methodName = methodName == '' ? '' : ('::'+(linkText = methodName));
-			var output = '"'+linkText+'":api://'+className+methodName;
-			this.texy.replace(output);
-		}});
-	
+		});
+			
 		$.texyla.addWindow('ticket', {
-			dimensions: [400, 200],
+			dimensions: [320, 180],
 			createContent: function () {
-				alert('Not yet implemented. However, "link text":#123 already works.')
+				var inputId = 'ticketNamePrompt',
+					input = $('<input type="text" id="'+inputId+'">').addClass(config.ticketNamePromptInputClass).autocomplete({
+						source: config.ticketPromptSource,
+						minLength: config.ticketPromptMinLength,
+						select: function (e, ui) {
+							var res = /^#(\d+)\s(.+)$/.exec(ui.item.value),
+								$this = $(this);
+							$this.data('ticketId', res[1]);
+							$this.data('ticketName', res[2]);
+						}
+					}),
+					container = $('<div></div>');
+				container.append($('<label for="'+inputId+'">').html(this.lng.ticketName))
+						 .append(input);
+				return container;
 			},
 			action: function (el) {
-				
+				var input = el.find('.'+config.ticketNamePromptInputClass),
+					id = input.data('ticketId'),
+					name = input.data('ticketName');
+				this.texy.replace('"'+name+'":#'+id);
 			}
 		});
 		
