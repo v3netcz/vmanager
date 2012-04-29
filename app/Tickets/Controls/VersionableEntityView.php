@@ -117,8 +117,7 @@ class VersionableEntityView extends Nette\Application\UI\Control {
 		$tpl = parent::createTemplate();
 		$tpl->setFile(__DIR__.'/../Templates/VersionableEntityView/default.latte');
 
-		$texy = new vManager\Texy();
-		$texy->setPresenter($this->presenter);
+		$texy = new vManager\Texy($this->presenter->context);
 
 		$tpl->registerHelper('texy', callback($texy, 'process'));
 		$tpl->registerHelper('timeAgoInWords', 'vManager\Application\Helpers::timeAgoInWords');

@@ -39,7 +39,7 @@ class Texy extends \Texy {
 	 */
 	protected $presenter;
 	
-	public function __construct() {
+	public function __construct(Nette\DI\IContainer $context) {
 		parent::__construct();
 		
 		$this->encoding = 'utf-8';
@@ -48,22 +48,18 @@ class Texy extends \Texy {
 		$this->setOutputMode(static::XHTML1_STRICT);
 		
 		$this->addHandler('phrase', array($this, 'apiLinkHandler'));
+		
+		// We want ticket links only if the module is enabled...
+		$modules = vManager\Application\ModuleManager::getModules();
+		foreach ($modules as $module) {
+			if ($module instanceof vManager\Modules\Tickets && $module->isEnabled()) {
+				$this->presenter = $context->application->presenter;
+				$this->addHandler('phrase', array($this, 'ticketLinkHandler'));
+			}
+		}
 	}
 	
-	/**
-	 * We need Presenter::link().
-	 * @param Nette\Application\UI\Presenter $presenter
-	 * @return Texy 
-	 */
-	public function setPresenter(Nette\Application\UI\Presenter $presenter) {
-		$this->presenter = $presenter;
-		$this->addHandler('phrase', array($this, 'ticketLinkHandler'));
-		return $this;
-	}
-	
-	/**
-	 * WARNING: You have to call Texy::setPresenter() for this to work!
-	 * 
+	/** 
 	 * "My link to API":api://namespace\namespace\Class
 	 *		OR
 	 * "My link to API":api://namespace\namespace\Class::method

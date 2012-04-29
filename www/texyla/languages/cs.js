@@ -149,5 +149,8 @@ jQuery.texyla.addStrings("cs", {
 	// API
 	className: "Jméno t\u0159ídy",
 	methodName: "Jméno metody",
-	noClassName: "Musíte zadat jméno t\u0159ídy"
+	noClassName: "Musíte zadat jméno t\u0159ídy",
+	
+	// Tickets
+	ticketName: "Jméno ticketu"
 });

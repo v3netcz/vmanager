@@ -116,7 +116,7 @@
 				bottomLeftToolbar: ['edit', 'preview'],
 				tabs: true,
 				bottomRightEditToolbar: [],
-				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', null, 'ticket'{if $presenter->context->userConfig->get('texyla.developerFunctions')}, ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql'], 'API'{/if}],
+				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', null, 'ticket', null{if $presenter->context->userConfig->get('texyla.developerFunctions')}, 'API', ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}],
 				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width(),
 				buttonType: "button"
 			});
@@ -146,7 +146,8 @@
 		$(document).ready(function () {
 			$('textarea.texyla').setupvManagerTexyla({
 				apiPromptClassSource: {link :System:Texy:promptClassName},
-				apiPromptMethodSource: {link :System:Texy:promptMethodName}
+				apiPromptMethodSource: {link :System:Texy:promptMethodName},
+				ticketPromptSource: {link :System:Texy:promptTicketName}
 			});
 			
 			$('input:file').vMultipleFileUpload({

@@ -17,7 +17,7 @@ services:
 	
 	translator: vManager\Application\Translator::createService
 
-	texy: vManager\Texy
+	texy: vManager\Texy(@container)
 	
 parameters:
 	languages: ['cs', 'en']
