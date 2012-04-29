@@ -57,6 +57,8 @@ jQuery.texyla.addStrings("en", {
 	
 	btn_ticket: "Ticket link",
 	
+	editAgain: "Edit again",
+	
 	// functions
 	texyHeadingText: "Heading text",
 	acronymTitle: "Title",

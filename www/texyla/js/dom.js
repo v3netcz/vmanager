@@ -28,11 +28,14 @@ Texyla.prototype.wrap = function () {
 	/* div s náhledem */
 	this.previewDiv = jQuery('<div class="preview-div"></div>').insertAfter(this.editDiv);
 	// hlavička
-	this.previewDiv.prepend(
-		'<div class="view-header" style="background-image: url(\'' +
+	var prev = $('<div class="view-header" style="background-image: url(\'' +
 		this.expand(this.options.iconPath, "preview") + '\');">' +
-		this.lng.btn_preview + '</div>'
-	);
+		this.lng.btn_preview + '</div>'),
+		_this = this;
+	this.previewDiv.prepend(prev.append($('<a href="#">').html(this.lng.editAgain).addClass('edit-again').click(function (e) {
+		_this.view('edit');
+		e.preventDefault();
+	})));
 
 	this.preview = jQuery('<div class="preview"></div>')
 		.appendTo(this.previewDiv)
