@@ -149,10 +149,12 @@ jQuery.texyla.addStrings("cs", {
 	youtubePreview: "Náhled videa",
 	
 	// API
+	win_API: "Zvolte t\u0159ídu",
 	className: "Jméno t\u0159ídy",
 	memberName: "Jméno proměnné/metody",
 	noClassName: "Musíte zadat jméno t\u0159ídy",
 	
 	// Tickets
+	win_ticket: "Zvolte ticket",
 	ticketName: "Jméno ticketu"
 });

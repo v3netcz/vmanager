@@ -149,10 +149,12 @@ jQuery.texyla.addStrings("en", {
 	youtubePreview: "Preview",
 	
 	// API
+	win_API: "Choose a class",
 	className: "Class name",
 	memberName: "Member name",
 	noClassName: "You have to fill in the class name",
 	
 	// Tickets
+	win_ticket: "Choose a ticket",
 	ticketName: "Ticket name"
 });
