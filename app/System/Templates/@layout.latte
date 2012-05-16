@@ -117,7 +117,11 @@
 				bottomRightPreviewToolbar: [],
 				tabs: true,
 				bottomRightEditToolbar: [],
-				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', null, 'ticket', null{if $presenter->context->userConfig->get('texyla.developerFunctions')}, 'API', ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}, 'preview'],
+				// Netestovane funkce jsou prozatim zakazany
+				//toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', null, 'ticket', null{if $presenter->context->userConfig->get('texyla.developerFunctions')}, 'API', ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}, 'preview'],
+				
+				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', null{if $presenter->context->userConfig->get('texyla.developerFunctions')}, ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}, 'preview'],
+				
 				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width(),
 				buttonType: "button"
 			});
