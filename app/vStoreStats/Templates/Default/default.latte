@@ -104,7 +104,11 @@
 		<div class="block" style="padding-bottom: 10px;">
 			Celkový obrat: <span class="price">{$totalRevenue|currency}</span><br />
 			Celkový počet objednávek: <span class="price">{$totalCount}</span><br />
-			Průměrná cena objednávky: <span class="price">{$avgOrderValue|currency}</span>
+			Průměrná cena objednávky: <span class="price">{$avgOrderValue|currency}</span><br />
+			<br />
+			Počet unikátních zákazníků: <span class="value">{$numOfUniqueCustomers}</span><br />
+			Počet nových zákazníků: <span class="value">{$numOfNewCustomers}</span><br />
+			Počet objednávek od neregistrovaných zákazníků: <span class="value">{$totalOrdersFromNonRegisteredUsers}</span>
 		</div>
 	</div>
 </div>

@@ -56,6 +56,10 @@ class DefaultPresenter extends MonthlyPresenter {
 		foreach($dailyOrders as $dailyData) $this->template->totalCount += $dailyData->value;;		
 		
 		$this->template->avgOrderValue = $this->template->totalCount ? $this->template->totalRevenue / $this->template->totalCount : 0;
+		
+		$this->template->numOfUniqueCustomers = $this->profile->getUniqueCustomers($this->getSince(), $this->getUntil());
+		$this->template->numOfNewCustomers = $this->profile->getNewCustomers($this->getSince(), $this->getUntil());
+		$this->template->totalOrdersFromNonRegisteredUsers = $this->profile->getTotalOrdersFromNonRegisteredUsers($this->getSince(), $this->getUntil());
 	}
 	
 	protected function createComponentProductGrid($name) {
@@ -110,6 +114,83 @@ class DefaultPresenter extends MonthlyPresenter {
 		);
 		
 		$renderer->render();
+		exit;
+	}
+	
+	public function actionReportYearSummary($id) {
+		$this->setupParams($id);
+		$years = array(date('Y') - 2, date('Y') - 1, date('Y'));
+		$td = new \DateTime('now');
+		$td->setTime(0, 0, 0); // Dnesni objednavky uz nechceme, aby report byl po cely den konzistentni
+		
+		$data = array(0 => array());
+		
+		for($month = 1; $month <= 12; $month++) {
+			foreach($years as $year) {
+				$since = \DateTime::createFromFormat('Y-n-d H:i:s', $year . '-' . $month . '-01 00:00:00');
+				$until = clone $since;
+				$until->add(\DateInterval::createFromDateString('1 month'));
+				$until->sub(\DateInterval::createFromDateString('1 second'));
+				if($until > $td) {
+					$until = clone $td; // Zariznuti dnesnich objednavek
+					$until->sub(\DateInterval::createFromDateString('1 second'));
+				}
+
+				
+				// Inicializace souhrnu -------------------------------
+				if(!isset($data[0][$year])) {
+					$firstDayOfYear = \DateTime::createFromFormat('Y-m-d H:i:s', $year . '-01-01 00:00:00');
+					$ytd = \DateTime::createFromFormat('Y-m-d H:i:s', $year . '-' . $td->format('m-d') . ' 00:00:00')->sub(\DateInterval::createFromDateString('1 second'));
+					
+					$data[0][$year] = array(
+						'numOrders' => 0,
+						'revenue' => $this->profile->getTotalRevenue($firstDayOfYear, $ytd),
+						'customers' => $this->profile->getUniqueCustomers($firstDayOfYear, $ytd)
+					);
+				}
+				
+				// Inicializace mesicnich data ------------------------
+				$data[$month][$year] = array(
+					'numOrders' => 0,
+					'revenue' => 0,
+					'customers' => 0,
+					'newCustomers' => 0
+				);
+				
+				if($this->profile->getUntil() > $since) {
+					$data[$month][$year]['revenue'] = $this->profile->getTotalRevenue($since, $until);
+				
+					$dailyOrders = $this->profile->getDailyOrders($since, $until);
+					foreach($dailyOrders as $dailyData) {
+						$day = \DateTime::createFromFormat('Y-m-d H:i:s', $dailyData->date . ' 00:00:00');
+						
+						if($day->format('n') < $td->format('n') || ($day->format('n') == $td->format('n') && $day->format('j') < $td->format('j'))) {
+							$data[0][$year]['numOrders'] += $dailyData->value;
+						}
+						
+						$data[$month][$year]['numOrders'] += $dailyData->value;
+					}
+					
+					$data[$month][$year]['customers'] = $this->profile->getUniqueCustomers($since, $until);
+					$data[$month][$year]['newCustomers'] = $this->profile->getNewCustomers($since, $until);
+				}
+			}
+		}
+		
+		$renderer = new vManager\Reporting\PdfRenderer($this->context);
+		$renderer->setTemplateFile(__DIR__ . '/../Templates/Reports/yearSummary.latte');
+		$renderer->template->profile = $this->profile;
+		$renderer->template->years = $years;
+		$renderer->template->data = $data;
+		$renderer->template->td = $td;
+		$renderer->template->labels = array(
+			'numOrders' => 'Počet objednávek',
+			'revenue' => 'Tržba',
+			'customers' => '# zákazníků',
+			'newCustomers' => '# nových zákazníků'
+		);
+		$renderer->render();
+		
 		exit;
 	}
 	

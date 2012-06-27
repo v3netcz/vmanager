@@ -67,16 +67,24 @@ class vBuilderCmsV1 extends BaseDataSource {
 				->and('[time] <= %s', $until->format('Y-m-d 23:59:59'))
 				->groupBy('[date]');
 				
+		if(isset($this->_parameters['shop']['orderFlag']))
+			$ds->where('[flag] = %i', $this->_parameters['shop']['orderFlag']);
+				
 		return $ds->fetchAll();
 	}
 
 	public function getTotalRevenue(\DateTime $since, \DateTime $until) {
-		return $this->connection->select('SUM(`totalCost`) AS [revenue]')
+	
+		$ds = $this->connection->select('SUM(`totalCost`) AS [revenue]')
 				->from(self::TABLE_ORDERS)->as('o')
 				->join(self::TABLE_CARTS)->on('[order] = [o.id]')
 				->where('[time] >= %s', $since->format('Y-m-d'))
-				->and('[time] <= %s', $until->format('Y-m-d 23:59:59'))
-				->fetchSingle();
+				->and('[time] <= %s', $until->format('Y-m-d 23:59:59'));
+								
+		if(isset($this->_parameters['shop']['orderFlag']))
+			$ds->where('[flag] = %i', $this->_parameters['shop']['orderFlag']);
+				
+		return $ds->fetchSingle();
 	}
 
 	public function getProductSellings(\DateTime $since, \DateTime $until) {
@@ -87,8 +95,47 @@ class vBuilderCmsV1 extends BaseDataSource {
 				->where('[time] >= %s', $since->format('Y-m-d'))
 				->and('[time] <= %s', $until->format('Y-m-d 23:59:59'))
 				->groupBy('[ci.id]');
+				
+		if(isset($this->_parameters['shop']['orderFlag']))
+			$ds->where('[flag] = %i', $this->_parameters['shop']['orderFlag']);
 		
 		return $ds->fetchAll();
+	}
+	
+	public function getNewCustomers(\DateTime $since, \DateTime $until) {
+		$ds = $this->connection
+				->select('COUNT(DISTINCT [email]) numOfCustomers')
+				->from(self::TABLE_ORDERS)->as('o')
+				->where('[time] >= %s', $since->format('Y-m-d'))
+				->and('[time] <= %s', $until->format('Y-m-d 23:59:59'))
+				->and('[email] NOT IN (%SQL)', 
+					(string) $this->connection->select('[email]')->from(self::TABLE_ORDERS)
+						->where('[time] < %s', $since->format('Y-m-d'))
+				);
+	
+		if(isset($this->_parameters['shop']['orderFlag']))
+			$ds->where('[flag] = %i', $this->_parameters['shop']['orderFlag']);
+	
+		$stats = $ds->fetch();
+		return intval($stats->numOfCustomers);
+	}
+	
+	public function getUniqueCustomers(\DateTime $since, \DateTime $until) {
+		$ds = $this->connection
+				->select('COUNT(DISTINCT [email]) numOfCustomers')
+				->from(self::TABLE_ORDERS)->as('o')
+				->where('[time] >= %s', $since->format('Y-m-d'))
+				->and('[time] <= %s', $until->format('Y-m-d 23:59:59'));
+	
+		if(isset($this->_parameters['shop']['orderFlag']))
+			$ds->where('[flag] = %i', $this->_parameters['shop']['orderFlag']);
+	
+		$stats = $ds->fetch();
+		return intval($stats->numOfCustomers);
+	}
+	
+	public function getTotalOrdersFromNonRegisteredUsers(\DateTime $since, \DateTime $until) {
+		return 0;
 	}
 
 }

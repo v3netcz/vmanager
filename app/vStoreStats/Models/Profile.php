@@ -142,24 +142,40 @@ class Profile extends vBuilder\Object {
 			throw new Nette\MemberAccessException("Call to class '" . get_called_class() . "->name()' method without name.");
 		}
 		
-		$satisfied = false;		
+		$satisfied = false;
+		$result = null;		
 		foreach($this->_dataSources as $ds) {
 			list($since, $until) = $args;
 			
+			// Bacha na tu svini -> muze zpusobovat hazet MemberAccessException
 			if($until < $ds->since || $since > $ds->until) continue;
 		
 			$refl = $ds->getReflection();
 			if($refl->hasMethod($name)) {
 				$satisfied = true;
-				$result = $refl->getMethod($name)->invokeArgs($ds, $args);
+				$result2 = $refl->getMethod($name)->invokeArgs($ds, $args);
 				
-				// Dokud se nedoresi podpora pro vice result setu
-				return $result;
+				// Numericke vysledky jednotlivych data sourcu scitam
+				if(is_numeric($result2)) {
+					if(!isset($result)) $result = 0;
+					$result += $result2;
+				
+				
+				} else {
+					// Dokud se nedoresi podpora pro vice result setu
+					return $result2;	
+				}
 			}
 		}
 		
-		if(!$satisfied)
-			throw new Nette\MemberAccessException("Call to undefined method " . get_called_class() . "::$name().");
+		if(!$satisfied) {
+			$ds = "";
+			foreach($this->_dataSources as $dsInstance) $ds .= " " . get_class($dsInstance);
+
+			throw new Nette\MemberAccessException("Call to undefined method " . get_called_class() . "::$name(). (DataSources: $ds)");
+		}
+		
+		return $result;
 	}
 
 }
