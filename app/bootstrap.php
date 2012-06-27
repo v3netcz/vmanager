@@ -37,19 +37,15 @@ $configurator->createRobotLoader()
 $configurator->addConfig(CONF_DIR . '/config.neon', false);
 $container = $context = $configurator->createContainer();
 
+// Compatibility layer for old DI service
+$container->addService('connection', function($container) {
+    return $container->database->connection;
+});
+
 // Enable Nette Debugger for error visualisation & logging
 // It has to be after config load because of production mode detection (from config)
 Nette\Diagnostics\Debugger::$strictMode = TRUE;
 Nette\Diagnostics\Debugger::enable($container->parameters['productionMode']);
-
-// Nelze spolehat na DibiNetteExtension, protoze nezna aktualni production mode
-// (muze se zmenit nezavisle na nacachovanem containeru)
-if(!$container->parameters['productionMode']) {
-	$dibiDebugPanel = new DibiNettePanel;
-	Nette\Diagnostics\Debugger::$bar->addPanel($dibiDebugPanel);
-	Nette\Diagnostics\Debugger::$blueScreen->addPanel(array($dibiDebugPanel, 'renderException'));
-	$container->connection->onEvent[] = array($dibiDebugPanel, 'logEvent');
-}
 
 // Configure application
 $application = $container->application;

@@ -11,8 +11,3 @@ nette:
 		autoStart: false
          
 services:
- 
-	# DB connection (dibi)
-	connection:
-		class: DibiConnection
-		arguments: ['%database%']
