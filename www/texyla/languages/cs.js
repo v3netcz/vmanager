@@ -56,6 +56,8 @@ jQuery.texyla.addStrings("cs", {
 	btn_API: "API odkaz",
 	
 	btn_ticket: "Odkaz na ticket",
+	
+	editAgain: "Znovu editovat",
 
 	// funkce
 	texyHeadingText: "Text nadpisu",
@@ -65,6 +67,7 @@ jQuery.texyla.addStrings("cs", {
 	// pohledy
 	wait: "Prosím \u010dekejte",
 	viewEmpty: "Textové pole je prázdné!",
+	ajaxError: "Vyskytla se chyba. Zkuste to prosím znovu.",
 
 	// okna
 	windowOk: "OK",
@@ -147,6 +150,9 @@ jQuery.texyla.addStrings("cs", {
 	
 	// API
 	className: "Jméno t\u0159ídy",
-	methodName: "Jméno metody",
-	noClassName: "Musíte zadat jméno t\u0159ídy"
+	memberName: "Jméno proměnné/metody",
+	noClassName: "Musíte zadat jméno t\u0159ídy",
+	
+	// Tickets
+	ticketName: "Jméno ticketu"
 });

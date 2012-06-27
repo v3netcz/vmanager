@@ -199,7 +199,7 @@ class TimelinePresenter extends SecuredPresenter {
 			$this->_timelineEnabledModules = array();
 			
 			foreach(vManager\Application\ModuleManager::getModules() as $moduleInstance) {
-				if($moduleInstance instanceof vManager\Application\ITimelineEnabledModule) {
+				if($moduleInstance->isEnabled() && $moduleInstance instanceof vManager\Application\ITimelineEnabledModule) {
 					$this->_timelineEnabledModules[] = $moduleInstance;
 				}
 			}

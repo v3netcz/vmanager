@@ -1,12 +1,14 @@
 # Local machine configuration. Use this config for defining any machine specific configuration.
- 
-parameters:
-	# DB connection info
-	database:
-		driver: mysql
-		charset: utf8
+
+# DB connection info
+database:
+	driver: mysql
+	charset: utf8
          
-		host: 127.0.0.1
-		database: myDbName
-		username: jsmith
-		password: mypassword55
+	host: 127.0.0.1
+	database: myDbName
+	username: jsmith
+	password: mypassword55
+
+# Other machine specific parameters 
+parameters:

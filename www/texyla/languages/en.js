@@ -57,6 +57,8 @@ jQuery.texyla.addStrings("en", {
 	
 	btn_ticket: "Ticket link",
 	
+	editAgain: "Edit again",
+	
 	// functions
 	texyHeadingText: "Heading text",
 	acronymTitle: "Title",
@@ -65,6 +67,7 @@ jQuery.texyla.addStrings("en", {
 	// view
 	wait: "Wait please",
 	viewEmpty: "Text area is empty!",
+	ajaxError: "An error has occured. Please try again.",
 
 	// window
 	windowOk: "OK",
@@ -147,6 +150,9 @@ jQuery.texyla.addStrings("en", {
 	
 	// API
 	className: "Class name",
-	methodName: "Method name",
-	noClassName: "You have to fill in the class name"
+	memberName: "Member name",
+	noClassName: "You have to fill in the class name",
+	
+	// Tickets
+	ticketName: "Ticket name"
 });

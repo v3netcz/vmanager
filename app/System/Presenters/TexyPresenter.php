@@ -34,9 +34,7 @@ use vManager, Nette, Nette\Application\Responses\TextResponse,
 class TexyPresenter extends SecuredPresenter {
 	
 	protected function getTexy() {
-		$texy = $this->context->texy;
-		$texy->setPresenter($this);
-		return $texy;
+		return $this->context->texy;
 	}
 	
 	public function actionPreview() {
@@ -53,15 +51,48 @@ class TexyPresenter extends SecuredPresenter {
 	public function actionPromptClassName($term) { /* has to be called $term!!! 
 		jQuery autocomplete does not support any other parameter name
 	 */
-		if ($this->isAjax()) { // Only ajax calls are intended to use this method.
-			$classes = get_declared_classes(); // dummy values
+		if ($this->isAjax() && Strings::length($term) > 3) { // Only ajax calls are intended to use this method.
+			$result = $this->context->apiManager->searchApi($term);
+			$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
+		}
+		$this->terminate();
+	}
+	
+	/**
+	 * @param string $term 
+	 */
+	public function actionPromptMemberName($class, $term) { /* has to be called $term!!! 
+		jQuery autocomplete does not support any other parameter name
+	 */
+		if ($this->isAjax() && isset($class) && Strings::length($term) > 2) {
+			$result = $this->context->apiManager->searchForMember($class, $term);
+			$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
+		}
+		$this->terminate();
+	}
+	
+	
+	/**
+	 * @param string $term 
+	 */
+	public function actionPromptTicketName($term) { /* has to be called $term!!! 
+		jQuery autocomplete does not support any other parameter name
+	 */
+		if (class_exists('vManager\Modules\Tickets') // Modules may be 'disabled' by deletion..
+				&& vManager\Modules\Tickets::getInstance()->isEnabled()
+				&& $this->isAjax()
+				&& Strings::length($term) > 3) {
+			$search = $this->context->repository->findAll('vManager\Modules\Tickets\Ticket')
+								->where('[name] LIKE %~like~',$term)
+									->and('[revision] > 0')
+								->limit('10')
+								->fetchAll();
 			$result = array ();
-			foreach ($classes as $class) {
-				if (Strings::contains($class, $term, false)) { // false -> case insensitive
-					$result[] = $class;
-				}
+			foreach ($search as $entity) {
+				$result[] = '#'.$entity->id.' '.$entity->name;
 			}
 			$this->sendResponse(new Nette\Application\Responses\JsonResponse($result));
 		}
+		$this->terminate();
 	}
 }

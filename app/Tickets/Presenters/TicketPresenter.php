@@ -330,7 +330,6 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	 */
 	public function renderDetail($id) {
 		$texy = $this->context->texy;
-		$texy->setPresenter($this); // because we want to support ticket links
 
 		$this->template->registerHelper('texy', callback($texy, 'process'));
 		$versionableEntityView = new VersionableEntityView('vManager\\Modules\\Tickets\\Ticket', $id);

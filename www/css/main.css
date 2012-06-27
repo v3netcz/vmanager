@@ -2088,3 +2088,14 @@ tr.locked a { /* test */
 	text-decoration: none !important;
 	color: #202020 !important;
 }
+
+.texyla .btn_preview { /* texyla */
+	float: right !important;
+}
+.edit-again {
+	margin-left: 3.5em;
+}
+
+.texyla .bottom-toolbar {
+	display: none; 
+}

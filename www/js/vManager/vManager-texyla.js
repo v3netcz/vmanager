@@ -5,9 +5,14 @@
 	$.fn.setupvManagerTexyla = function (options) {
 		var defaults = {
 				apiPromptClassSource: [],
-				apiPromptMethodSource: [],
-				apiPromptMinLength: 4,
+				apiPromptMemberSource: [],
+				apiPromptMinLength: 3,
 				apiPromptInputClass: 'API-text',
+				apiPromptMemberClassParamName: 'class',
+				
+				ticketPromptSource: [],
+				ticketPromptMinLength: 4,
+				ticketNamePromptInputClass: 'Ticket-text'
 			},
 			config = $.extend(defaults, options);
 			
@@ -15,7 +20,7 @@
 		$.texyla.addButton('preview', function () {
 			var $this = $(this.textarea);
 			$('div.preview-wrapper').animate({
-				height: $this.height() + 25 + 'px'
+				height: $this.height() + 40 + 'px'
 			}, 800);
 			this.view("preview");
 		});
@@ -24,18 +29,25 @@
 			createContent: function () {
 				var inputs = [$('<input type="text" id="apiPromptClass">').addClass(config.apiPromptInputClass).autocomplete({
 							source: config.apiPromptClassSource,
-							minLength: config.apiPromptMinLength
+							minLength: config.apiPromptMinLength,
+							change: function (e, ui) {
+								var baseUri = config.apiPromptMemberSource,
+									uri = baseUri + (baseUri.indexOf('?') != -1 ? '&' : '?');
+								uri += config.apiPromptMemberClassParamName + '=' + encodeURIComponent(ui.item.value);
+
+								$('#apiPromptMember').autocomplete('option', 'source', uri);
+							}
 						}),
-						$('<input type="text" id="apiPromptMethod">').addClass(config.apiPromptInputClass)/*.autocomplete({
-							source: config.apiPromptMethodSource,
+						$('<input type="text" id="apiPromptMember">').addClass(config.apiPromptInputClass).autocomplete({
+							source: config.apiPromptMemberSource,
 							minLength: config.apiPromptMinLength
 						}).focus(function (e) {
 							if (!$('#apiPromptClassInput').val()) {
 								return false;
 							}
-						})*/
+						})
 					],
-					labels = [this.lng.className, this.lng.methodName],
+					labels = [this.lng.className, this.lng.memberName],
 					container = $('<div><table></table></div>');
 					
 				$.each(inputs, function (key, value) {
@@ -49,26 +61,44 @@
 				return container;
 			},
 
-		action: function (el) {
-			var className = el.find('#apiPromptClass').val(),
-				methodName = el.find('#apiPromptMethod').val();
-			if (className == '') {
-				alert(this.lng.noClassName);
-				return;
+			action: function (el) {
+				var className = el.find('#apiPromptClass').val(),
+					memberName = el.find('#apiPromptMember').val();
+				if (className == '') {
+					alert(this.lng.noClassName);
+					return;
+				}
+				var linkText;
+				memberName = memberName == '' ? (linkText = '') : ('::'+(linkText = memberName));
+				var output = '"'+linkText+'":api://'+className+memberName;
+				this.texy.replace(output);
 			}
-			var linkText;
-			methodName = methodName == '' ? '' : ('::'+(linkText = methodName));
-			var output = '"'+linkText+'":api://'+className+methodName;
-			this.texy.replace(output);
-		}});
-	
+		});
+			
 		$.texyla.addWindow('ticket', {
-			dimensions: [400, 200],
+			dimensions: [320, 180],
 			createContent: function () {
-				alert('Not yet implemented. However, "link text":#123 already works.')
+				var inputId = 'ticketNamePrompt',
+					input = $('<input type="text" id="'+inputId+'">').addClass(config.ticketNamePromptInputClass).autocomplete({
+						source: config.ticketPromptSource,
+						minLength: config.ticketPromptMinLength,
+						select: function (e, ui) {
+							var res = /^#(\d+)\s(.+)$/.exec(ui.item.value),
+								$this = $(this);
+							$this.data('ticketId', res[1]);
+							$this.data('ticketName', res[2]);
+						}
+					}),
+					container = $('<div></div>');
+				container.append($('<label for="'+inputId+'">').html(this.lng.ticketName))
+						 .append(input);
+				return container;
 			},
 			action: function (el) {
-				
+				var input = el.find('.'+config.ticketNamePromptInputClass),
+					id = input.data('ticketId'),
+					name = input.data('ticketName');
+				this.texy.replace('"'+name+'":#'+id);
 			}
 		});
 		
