@@ -2089,9 +2089,13 @@ tr.locked a { /* test */
 	color: #202020 !important;
 }
 
-.btn_preview { /* texyla */
+.texyla .btn_preview { /* texyla */
 	float: right !important;
 }
 .edit-again {
 	margin-left: 3.5em;
+}
+
+.texyla .bottom-toolbar {
+	display: none; 
 }
