@@ -145,6 +145,27 @@ class Helpers {
 		return $monthStr;
 	}
 	
+	public static function trMonth($monthStr) {
+		$m = intval($monthStr);
+		
+		switch($m) {
+			case 1: return _x('January', array($y));
+			case 2: return _x('February', array($y));
+			case 3: return _x('March', array($y));
+			case 4: return _x('April', array($y));
+			case 5: return _x('May', array($y));
+			case 6: return _x('June', array($y));
+			case 7: return _x('July', array($y));
+			case 8: return _x('August', array($y));
+			case 9: return _x('September', array($y));
+			case 10: return _x('October', array($y));
+			case 11: return _x('November', array($y));
+			case 12: return _x('December', array($y));
+		}
+		
+		return $monthStr;
+	}
+	
 	public static function dayOfWeekInWords(\DateTime $date) {
 
 		switch($date->format('w')) {
