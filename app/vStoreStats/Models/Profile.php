@@ -148,7 +148,12 @@ class Profile extends vBuilder\Object {
 			list($since, $until) = $args;
 			
 			// Bacha na tu svini -> muze zpusobovat hazet MemberAccessException
-			if($until < $ds->since || $since > $ds->until) continue;
+			if($until < $ds->since || $since > $ds->until) {
+				/* echo "Skipping " . get_class($ds) . " with data range between " . $ds->since->format('Y-m-d') . " and " . $ds->until->format('Y-m-d') . ".<br />Data range " . $since->format('Y-m-d') . " to " . $until->format('Y-m-d') . " unsatisfied.";
+				exit; */
+				
+				continue;
+			}
 		
 			$refl = $ds->getReflection();
 			if($refl->hasMethod($name)) {

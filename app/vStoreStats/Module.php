@@ -43,6 +43,7 @@ class vStoreStats extends vManager\Application\Module implements vManager\Applic
 	public function initPermission(Nette\Security\Permission & $acl) {
 		$acl->addResource('vStoreStats');
 		$acl->addResource('vStoreStats:Default', 'vStoreStats');
+		$acl->addResource('vStoreStats:Annual', 'vStoreStats');
 
 		$acl->addRole('vStore manager', 'User');		
 				
