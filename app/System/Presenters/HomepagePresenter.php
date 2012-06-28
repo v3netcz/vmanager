@@ -33,6 +33,19 @@ use vManager, Nette;
  */
 class HomepagePresenter extends SecuredPresenter {
 
+	public function actionDefault() {
+		$timelineAvailable = false;
+		foreach(vManager\Application\ModuleManager::getModules() as $moduleInstance) {
+			if($moduleInstance->isEnabled() && $moduleInstance instanceof vManager\Application\ITimelineEnabledModule) {
+				$timelineAvailable = true;
+				break;
+			}
+		}
+		
+		if($timelineAvailable)
+			$this->redirect(':System:Timeline:default');
+	}
+
 	public function renderDefault() {		  
 		
 	}

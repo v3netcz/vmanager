@@ -109,11 +109,22 @@ class System extends vManager\Application\Module implements vManager\Application
 			 'icon' => self::getBasePath() . '/images/icons/small/grey/Home.png'
 		);
 		
-		$menu[] = array(
-			 'url' => Nette\Environment::getApplication()->getPresenter()->link(':System:Timeline:default'),
-			 'label' => __('Timeline'),
-			 'icon' => self::getBasePath() . '/images/icons/small/grey/Books.png'
-		);
+		
+		$timelineAvailable = false;
+		foreach(vManager\Application\ModuleManager::getModules() as $moduleInstance) {
+			if($moduleInstance->isEnabled() && $moduleInstance instanceof vManager\Application\ITimelineEnabledModule) {
+				$timelineAvailable = true;
+				break;
+			}
+		}
+		
+		if($timelineAvailable) {
+			$menu[] = array(
+				 'url' => Nette\Environment::getApplication()->getPresenter()->link(':System:Timeline:default'),
+				 'label' => __('Timeline'),
+				 'icon' => self::getBasePath() . '/images/icons/small/grey/Books.png'
+			);
+		}
 		
 		return $menu;
 	}
