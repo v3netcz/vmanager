@@ -53,14 +53,30 @@ class AnnualPresenter extends MonthlyPresenter {
 		
 		$this->template->chartData  = array();
 		$this->template->chartLabels = array();
+		$this->template->numOrdersTD = $data['realMonthlyData'][0][$years[count($years) - 1]]['numOrders'];
+		$this->template->numOrdersTDLY = isset($years[count($years) - 2]) ? $data['realMonthlyData'][0][$years[count($years) - 2]]['numOrders'] : 0;
+		
+		$this->template->revenueTD = $data['realMonthlyData'][0][$years[count($years) - 1]]['revenue'];
+		$this->template->revenueTDLY = isset($years[count($years) - 2]) ? $data['realMonthlyData'][0][$years[count($years) - 2]]['revenue'] : 0;
+		
+		
+		$this->template->geometricMean = $data['thisYearGeometricMean'];
+		$this->template->estimationEOY = 0;		
+				
 		for($month = 1; $month <= 12; $month++) {
 			$this->template->chartLabels[] = vManager\Application\Helpers::trMonth($month);
 
 			foreach(array_slice($years, 0, -1) as $y)
 				$this->template->chartData[$y][$month] = $data['realMonthlyData'][$month][$y]['numOrders'];
+
 				
 			$this->template->chartData[$years[count($years) - 1]][$month] = round($data['thisYearMonthlyNumOrdersEstimation'][$month]);
+			$this->template->estimationEOY += round($data['thisYearMonthlyNumOrdersEstimation'][$month]);
 		}
+		
+		$this->template->revenueEstEOY = isset($years[count($years) - 2])
+			? ($this->template->revenueTD / $this->template->numOrdersTD) * $this->template->estimationEOY
+			: 0;
 	}
 
 	
@@ -190,9 +206,14 @@ class AnnualPresenter extends MonthlyPresenter {
 			}
 		} else {
 			$monthlyNumOrdersEstimation = null;
+			$thisYearGeometricMeanToDate = null;
 		}
 		
-		return array('realMonthlyData' => $data, 'thisYearMonthlyNumOrdersEstimation' => $monthlyNumOrdersEstimation);
+		return array(
+			'realMonthlyData' => $data,
+			'thisYearMonthlyNumOrdersEstimation' => $monthlyNumOrdersEstimation,
+			'thisYearGeometricMean' => $thisYearGeometricMeanToDate
+		);
 	}
 	
 }
