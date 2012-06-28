@@ -149,18 +149,18 @@ class Helpers {
 		$m = intval($monthStr);
 		
 		switch($m) {
-			case 1: return _x('January', array($y));
-			case 2: return _x('February', array($y));
-			case 3: return _x('March', array($y));
-			case 4: return _x('April', array($y));
-			case 5: return _x('May', array($y));
-			case 6: return _x('June', array($y));
-			case 7: return _x('July', array($y));
-			case 8: return _x('August', array($y));
-			case 9: return _x('September', array($y));
-			case 10: return _x('October', array($y));
-			case 11: return _x('November', array($y));
-			case 12: return _x('December', array($y));
+			case 1: return __('January');
+			case 2: return __('February');
+			case 3: return __('March');
+			case 4: return __('April');
+			case 5: return __('May');
+			case 6: return __('June');
+			case 7: return __('July');
+			case 8: return __('August');
+			case 9: return __('September');
+			case 10: return __('October');
+			case 11: return __('November');
+			case 12: return __('December');
 		}
 		
 		return $monthStr;
