@@ -1,0 +1,82 @@
+{extends '@layout.latte'}
+
+{block title}
+Roční přehled
+
+<div style="font-size: 200%;">
+	{if count($years) == 2}
+		{=implode($years, ' / ')}
+	{else}
+		{$years[0]} - {$years[count($years) - 1]}
+	{/if}
+</div>
+{/block}
+
+{block content}
+<style>
+	
+	.posVal {
+		color: #118800;
+	}
+
+	.negVal {
+		color: #cc3300;
+	}
+
+</style>
+
+<div>
+<div style="font-size: 200%;">{$profile->name}</div>
+<span style="#cccccc" n:if="$profile->url">{$profile->url->getHost()}</span>
+</div>
+
+<div>
+<table class="reportTable" style="margin-top: 20px; border-top: none;" n:if="isset($data)">
+	<thead>
+		<tr>
+			<td style="border: none;">&nbsp;</td>
+			<td n:foreach="$years as $year" style="font-size: 200%; text-align: right; border: none;">{$year}</td>
+			<td style="border: none;">&nbsp;</td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		{foreach $data as $month=>$d}
+			<tr>
+				<td style="border: none; font-size: 200%;{if $month != 0} padding-top: 25px;{/if} padding-bottom: 4px;">
+					{if $month == 0}
+						Souhrn ke dni {=$td->format('j. n.')}
+					{else}
+						{=vManager\Application\Helpers::trMonth($month)}
+					{/if}
+				</td>
+				<td style="border: none;" n:foreach="$years as $year">&nbsp;</td>
+				<td style="border: none;">&nbsp;</td>
+			</tr>	
+			<tr n:foreach="$labels as $k=>$label" n:if="isset($d[$year][$k])">
+				<td>{$label}</td>
+				{? $diff = null}
+				{? $per = null}
+				<td n:foreach="$years as $year" style="text-align: right;">
+					{if is_float($d[$year][$k])}{=vStore\Latte\Helpers\Shop::currency($d[$year][$k])}
+					{else}{$d[$year][$k]}
+					{/if}
+					
+					{if $iterator->counter == count($years) - 1}{? $diff = $d[$year][$k]}
+					{elseif $iterator->counter == count($years)}
+						{? $per = $diff == 0 ? 1 : ($d[$year][$k] / $diff - 1.0)}
+						{? $diff = $d[$year][$k] - $diff}
+					{/if}
+				</td>
+				<td style="padding-left: 30px;">
+				<span n:class="$per > 0 ? posVal : negVal">({if $per > 0}+{/if}{=number_format(floatval($per)*100, 0)} %)</span>
+				&nbsp;&nbsp;
+				{if is_float($diff)}{=vStore\Latte\Helpers\Shop::currency($diff)}
+				{else}{$diff}
+				{/if}
+				</td>
+			</tr>	
+		{/foreach}
+	</tbody>
+</table>
+</div>

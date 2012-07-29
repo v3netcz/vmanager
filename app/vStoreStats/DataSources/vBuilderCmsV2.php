@@ -36,6 +36,8 @@ class vBuilderCmsV2 extends BaseDataSource {
 
 	const TABLE_ORDERS = 'shop_orders';
 	const TABLE_ORDER_ITEMS = 'shop_orderItems';
+	const TABLE_USERS = 'security_users';
+	const TABLE_CUSTOMERS = 'shop_customers';
 
 	private $_since = -1;
 	private $_until = -1;
@@ -94,6 +96,83 @@ class vBuilderCmsV2 extends BaseDataSource {
 				->groupBy('[productId]');
 		
 		return $ds->fetchAll();
+	}
+	
+	public function getTotalOrdersFromNonRegisteredUsers(\DateTime $since, \DateTime $until) {
+		$stats = $this->connection
+				->select('COUNT(*) numOfOrders')
+				->from(self::TABLE_ORDERS)->as('o')
+				->where('[timestamp] >= %s', $since->format('Y-m-d'))
+				->and('[timestamp] <= %s', $until->format('Y-m-d 23:59:59'))
+				->and('[user] IS NULL')
+				->fetch();
+	
+		return intval($stats->numOfOrders);
+	}
+	
+	public function getUniqueCustomers(\DateTime $since, \DateTime $until) {
+		$stats = $this->connection
+				->select('COUNT(DISTINCT [c.email]) numOfCustomers')
+				->from(self::TABLE_ORDERS)->as('o')
+				->join(self::TABLE_CUSTOMERS)->as('c')->on('[c.id] = [o.customer]')
+				->where('[timestamp] >= %s', $since->format('Y-m-d'))
+				->and('[timestamp] <= %s', $until->format('Y-m-d 23:59:59'))
+				->fetch();
+	
+		return intval($stats->numOfCustomers);
+	}
+	
+	public function getNewCustomers(\DateTime $since, \DateTime $until) {
+		// Pozor, data v tabulkce shop_customers nejsou normailizovana => duplicitni zaznamy!
+		// TODO: opravit
+	
+		// Nerozlisuje, jestli neregistrovany zakaznik nakupoval vicekrat
+		/* $stats = $this->connection
+				->select('COUNT(DISTINCT [c.email]) numOfCustomers')
+				->from(self::TABLE_ORDERS)->as('o')
+				->leftJoin(self::TABLE_USERS)->as('u')->on('[o.user] = [u.id]')
+				->join(self::TABLE_CUSTOMERS)->as('c')->on('[c.id] = [o.customer]')
+				->where('[timestamp] >= %s', $since->format('Y-m-d'))
+				->and('[timestamp] <= %s', $until->format('Y-m-d 23:59:59'))
+				->and('([registrationTime] >= %s OR [registrationTime] IS NULL)', $since->format('Y-m-d'))
+				->fetch(); */
+				
+		// Neresi registraci uzivatelu (prvni objednavky prenesenych uzivatelu)
+		// Pomale		
+		/*$stats = $this->connection
+				->select('COUNT(DISTINCT [c.email]) numOfCustomers')
+				->from(self::TABLE_ORDERS)->as('o')
+				->join(self::TABLE_CUSTOMERS)->as('c')->on('[c.id] = [o.customer]')
+				->where('[timestamp] >= %s', $since->format('Y-m-d'))
+				->and('[timestamp] <= %s', $until->format('Y-m-d 23:59:59'))
+				->and('[c.email] NOT IN (%SQL)',
+					(string) $this->connection->select('[email]')->from(self::TABLE_ORDERS)->as('o2')
+								->join(self::TABLE_CUSTOMERS)->as('c2')->on('[c2.id] = [o2.customer]')
+								->where('[timestamp] < %s', $since->format('Y-m-d'))
+				)
+				->fetch();*/
+				
+		// Rozlistuje vicenasobne nakupy neregistrovanych zakazniku
+		// Zohlednuje cas registrace uzivatele (kvuli odfiltrovani prenesenych uzivatelu ze stareho webu)
+		// Optimalizace u registrovanych zakazniku
+		// Pri registraci uzivatele se kontroluji e-mail na duplicity, takze jsou unikatni
+		// (u neregistrovanych uzivatelu se unikatnost predpoklada)
+		$stats = $this->connection
+				->select('COUNT(DISTINCT [c.email]) numOfCustomers')
+				->from(self::TABLE_ORDERS)->as('o')
+				->leftJoin(self::TABLE_USERS)->as('u')->on('[o.user] = [u.id]')
+				->join(self::TABLE_CUSTOMERS)->as('c')->on('[c.id] = [o.customer]')
+				->where('[timestamp] >= %s', $since->format('Y-m-d'))
+				->and('[timestamp] <= %s', $until->format('Y-m-d 23:59:59'))
+				->and('([registrationTime] >= %s OR ([registrationTime] IS NULL AND [c.email] NOT IN (%SQL) ))',
+					$since->format('Y-m-d'),
+					(string) $this->connection->select('[email]')->from(self::TABLE_ORDERS)->as('o2')
+								->join(self::TABLE_CUSTOMERS)->as('c2')->on('[c2.id] = [o2.customer]')
+								->where('[timestamp] < %s', $since->format('Y-m-d'))
+				)
+				->fetch();
+	
+		return intval($stats->numOfCustomers);
 	}
 
 }

@@ -103,7 +103,8 @@ abstract class BaseDataSource extends vBuilder\Object {
 	 */
 	public function getConnection() {
 		if(!isset($this->_connection)) {
-			$config = array_merge($this->context->parameters['database'], (array) $this->_parameters['dbConnection']);
+			
+			$config = array_merge($this->context->database->connection->getConfig(), (array) $this->_parameters['dbConnection']);
 			$this->_connection = new \DibiConnection($config);
 		}
 		

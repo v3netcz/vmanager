@@ -28,12 +28,12 @@ use vManager,
 	Nette;
 
 /**
- * Default presenter of vStore stats
+ * Annual summary presenter
  *
  * @author Adam Staněk (V3lbloud)
- * @since Feb 4, 2011
+ * @since Jun 27, 2012
  */
-class DefaultPresenter extends MonthlyPresenter {
+class AnnualPresenter extends MonthlyPresenter {
 
 	/** @persistent */
 	public $month;
@@ -42,84 +42,73 @@ class DefaultPresenter extends MonthlyPresenter {
 		$this->setupParams();
 	}
 	
-	public function renderDefault() {		
-		$dailyOrders = $this->profile->getDailyOrders($this->getSince(), $this->getUntil());
-		$chartData = $this->createDateArray($dailyOrders);
-		$chartData2 = array();
-		foreach($chartData as $k => $v) $chartData2[intval(mb_substr($k, 8))] = $v;
-		
-		$this->template->chartData = $chartData2;
-		
-		$this->template->totalRevenue = $this->profile->getTotalRevenue($this->getSince(), $this->getUntil());
-		
-		$this->template->totalCount = 0;
-		foreach($dailyOrders as $dailyData) $this->template->totalCount += $dailyData->value;;		
-		
-		$this->template->avgOrderValue = $this->template->totalCount ? $this->template->totalRevenue / $this->template->totalCount : 0;
-		
-		$this->template->numOfUniqueCustomers = $this->profile->getUniqueCustomers($this->getSince(), $this->getUntil());
-		$this->template->numOfNewCustomers = $this->profile->getNewCustomers($this->getSince(), $this->getUntil());
-		$this->template->totalOrdersFromNonRegisteredUsers = $this->profile->getTotalOrdersFromNonRegisteredUsers($this->getSince(), $this->getUntil());
+	public function getYears() {
+		$availableYears = range((int)$this->profile->getSince()->format('Y'), (int) $this->profile->getUntil()->format('Y'));
+		return count($availableYears) > 3 ? array_slice($availableYears, -3, 3) : $availableYears;
 	}
 	
-	protected function createComponentProductGrid($name) {
-		$grid = new vManager\Grid($this, $name);
-		//$grid->setTemplateFile(__DIR__ . '/../Templates/Gridito/productGrid.latte');
+	public function renderDefault() {	
+		$years = $this->getYears();
+		$data = $this->gatherData($years);
 		
-		$data = $this->profile->getProductSellings($this->getSince(), $this->getUntil());
-		$model = new vManager\Grid\ArrayModel($data);
+		$this->template->chartData  = array();
+		$this->template->chartLabels = array();
+		$this->template->numOrdersTD = $data['realMonthlyData'][0][$years[count($years) - 1]]['numOrders'];
+		$this->template->numOrdersTDLY = isset($years[count($years) - 2]) ? $data['realMonthlyData'][0][$years[count($years) - 2]]['numOrders'] : 0;
+		
+		$this->template->revenueTD = $data['realMonthlyData'][0][$years[count($years) - 1]]['revenue'];
+		$this->template->revenueTDLY = isset($years[count($years) - 2]) ? $data['realMonthlyData'][0][$years[count($years) - 2]]['revenue'] : 0;
+		
+		
+		$this->template->geometricMean = $data['thisYearGeometricMean'];
+		$this->template->estimationEOY = 0;		
+				
+		for($month = 1; $month <= 12; $month++) {
+			$this->template->chartLabels[] = vManager\Application\Helpers::trMonth($month);
 
-		$grid->setModel($model);
-		$grid->setItemsPerPage(20);
-		$grid->sortColumn = $grid->sortColumn ?: 'revenue';
-		$grid->sortType = $grid->sortType ?: 'desc';
+			foreach(array_slice($years, 0, -1) as $y)
+				$this->template->chartData[$y][$month] = $data['realMonthlyData'][$month][$y]['numOrders'];
 
-		// columns
-		$grid->addColumn("productId", __("ID"))->setSortable(true);
-		$grid->addColumn("name", __("Product name"))->setSortable(true);
-		$grid->addColumn("amount", __("Amount"))->setSortable(true)->setCellClass('amount');
-		$grid->addColumn("revenue", __("Revenue"), array(
-			 "renderer" => function ($row) {
-				 echo vBuilder\Latte\Helpers\FormatHelpers::currency($row->revenue);
-			 },
-			 "sortable" => true,
-		))->setCellClass('price');
+				
+			$this->template->chartData[$years[count($years) - 1]][$month] = round($data['thisYearMonthlyNumOrdersEstimation'][$month]);
+			$this->template->estimationEOY += round($data['thisYearMonthlyNumOrdersEstimation'][$month]);
+		}
+		
+		$this->template->revenueEstEOY = isset($years[count($years) - 2])
+			? ($this->template->revenueTD / $this->template->numOrdersTD) * $this->template->estimationEOY
+			: 0;
 	}
+
 	
 	// <editor-fold defaultstate="collapsed" desc="Report">
 	
 	public function actionReport($id) {
 		$this->setupParams($id);
 		
+		$years = $this->getYears();
+		$data = $this->gatherData($years);
+		
 		$renderer = new vManager\Reporting\PdfRenderer($this->context);
-		$renderer->setTemplateFile(__DIR__ . '/../Templates/Reports/sellings.latte');
-		
-		$renderer->template->since = $this->since;
-		$renderer->template->until = $this->until;
+		$renderer->setTemplateFile(__DIR__ . '/../Templates/Reports/yearSummary.latte');
 		$renderer->template->profile = $this->profile;
-		
-		$renderer->template->totalRevenue = $this->profile->getTotalRevenue($this->getSince(), $this->getUntil());
-		
-		$renderer->template->totalCount = 0;
-		$dailyOrders = $this->profile->getDailyOrders($this->getSince(), $this->getUntil());
-		foreach($dailyOrders as $dailyData) $renderer->template->totalCount += $dailyData->value;
-		
-		$renderer->template->avgOrderValue = $renderer->template->totalCount ? $renderer->template->totalRevenue / $renderer->template->totalCount : 0;
-		
-		$renderer->template->sellings = new vBuilder\Utils\SortingIterator(
-			$this->profile->getProductSellings($this->getSince(), $this->getUntil()),
-			function ($item1, $item2) {
-				return ($item1->revenue <= $item2->revenue);
-			}	
+		$renderer->template->years = $years;
+		$renderer->template->data = $data['realMonthlyData'];
+		$renderer->template->td = new \DateTime('now');
+		$renderer->template->labels = array(
+			'numOrders' => 'Počet objednávek',
+			'revenue' => 'Tržba',
+			'customers' => '# zákazníků',
+			'newCustomers' => '# nových zákazníků'
 		);
-		
 		$renderer->render();
+		
 		exit;
 	}
 	
-	public function actionReportYearSummary($id) {
-		$this->setupParams($id);
-		$years = array(date('Y') - 2, date('Y') - 1, (int) date('Y'));
+	// </editor-fold>
+	
+	
+	private function gatherData($years) {
 		$td = new \DateTime('now');
 		$td->setTime(0, 0, 0); // Dnesni objednavky uz nechceme, aby report byl po cely den konzistentni
 		
@@ -147,8 +136,8 @@ class DefaultPresenter extends MonthlyPresenter {
 					
 					$data[0][$year] = array(
 						'numOrders' => 0,
-						'revenue' => $this->profile->getTotalRevenue($firstDayOfYear, $ytd),
-						'customers' => $this->profile->getUniqueCustomers($firstDayOfYear, $ytd)
+						'revenue' => $ytd > $this->profile->since ? $this->profile->getTotalRevenue($firstDayOfYear, $ytd) : 0,
+						'customers' => $ytd > $this->profile->since ? $this->profile->getUniqueCustomers($firstDayOfYear, $ytd) : 0
 					);
 				}
 				
@@ -160,7 +149,7 @@ class DefaultPresenter extends MonthlyPresenter {
 					'newCustomers' => 0
 				);
 				
-				if($this->profile->getUntil() > $since) {
+				if($this->profile->getUntil() > $since && $until > $this->profile->getSince()) {
 					$data[$month][$year]['revenue'] = $this->profile->getTotalRevenue($since, $until);
 				
 					$dailyOrders = $this->profile->getDailyOrders($since, $until);
@@ -205,40 +194,26 @@ class DefaultPresenter extends MonthlyPresenter {
 				if(isset($monthlyData[$thisYear]) && isset($monthlyData[$lastYear])) {
 					$geometricMeanBaseN++;
 					$geometricMeanBaseUpToDate *= $monthlyData[$thisYear] / $monthlyData[$lastYear];
-					$monthlyNumOrdersEstimation[$m][] = ($monthlyData[$thisYear] / $monthlyData[$lastYear]) * $data[$m][$lastYear]['numOrders'];
+					$monthlyNumOrdersEstimation[$m] = ($monthlyData[$thisYear] / $monthlyData[$lastYear]) * $data[$m][$lastYear]['numOrders'];
 				}
 				
 				// Měsíce v budoucnosti
 				else {				
 					$thisYearGeometricMeanToDate = !isset($thisYearGeometricMeanToDate) ? pow($geometricMeanBaseUpToDate, 1/$geometricMeanBaseN) : $thisYearGeometricMeanToDate;
 					
-					$monthlyNumOrdersEstimation[$m][] = $data[$m][$lastYear]['numOrders'] * $thisYearGeometricMeanToDate;
+					$monthlyNumOrdersEstimation[$m] = $data[$m][$lastYear]['numOrders'] * $thisYearGeometricMeanToDate;
 				}
 			}
+		} else {
+			$monthlyNumOrdersEstimation = null;
+			$thisYearGeometricMeanToDate = null;
 		}
 		
-		
-					
-		dd($monthlyNumOrdersEstimation);
-
-		
-		$renderer = new vManager\Reporting\PdfRenderer($this->context);
-		$renderer->setTemplateFile(__DIR__ . '/../Templates/Reports/yearSummary.latte');
-		$renderer->template->profile = $this->profile;
-		$renderer->template->years = $years;
-		$renderer->template->data = $data;
-		$renderer->template->td = $td;
-		$renderer->template->labels = array(
-			'numOrders' => 'Počet objednávek',
-			'revenue' => 'Tržba',
-			'customers' => '# zákazníků',
-			'newCustomers' => '# nových zákazníků'
+		return array(
+			'realMonthlyData' => $data,
+			'thisYearMonthlyNumOrdersEstimation' => $monthlyNumOrdersEstimation,
+			'thisYearGeometricMean' => $thisYearGeometricMeanToDate
 		);
-		$renderer->render();
-		
-		exit;
 	}
-	
-	// </editor-fold>
 	
 }

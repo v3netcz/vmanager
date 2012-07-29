@@ -38,9 +38,34 @@
 			title: {
 				text: null
 			},
-			xAxis: {
-				categories: {? echo json_encode(array_keys($chartData))}
-			},
+			xAxis: [{
+				categories: {? echo json_encode(array_keys($chartData))},
+				tickmarkPlacement: 'on',
+				
+				plotLines: [
+					{var $keys = array_keys($chartData)}
+					{for $i = count($chartData) + (7 - date('N', strtotime($control->getUntil()->format('Y-m-') .$keys[count($keys) - 1]))); $i > 0; $i -= 7}
+					{
+						color: '#ccc',
+						width: 1,
+						value: {$i}
+					},
+					{/for}
+				]
+			},{
+				opposite: true,
+				linkedTo: 0,
+				
+				labels: {
+	                formatter: function() {
+	                	if(this.value % 7 == {=7+$i}) 
+	                    	return 'Pondělí';
+	                    else
+	                    	return '';
+                    }
+                }
+						
+			}],
 			yAxis: {
 				title: {
 					text: null
@@ -75,7 +100,7 @@
 	{control monthSelectionForm}
 	
 	<div style="line-height: 32px; float: right">
-		<a href="{link Default:report}" class="color-button button_black"><?php echo __('Save report'); ?></a>
+		<a href="{link Default:report}" target="_blank" class="color-button button_black"><?php echo __('Save report'); ?></a>
 	</div>
 	
 </div>
@@ -104,7 +129,11 @@
 		<div class="block" style="padding-bottom: 10px;">
 			Celkový obrat: <span class="price">{$totalRevenue|currency}</span><br />
 			Celkový počet objednávek: <span class="price">{$totalCount}</span><br />
-			Průměrná cena objednávky: <span class="price">{$avgOrderValue|currency}</span>
+			Průměrná cena objednávky: <span class="price">{$avgOrderValue|currency}</span><br />
+			<br />
+			Počet unikátních zákazníků: <span class="value">{$numOfUniqueCustomers}</span><br />
+			Počet nových zákazníků: <span class="value">{$numOfNewCustomers}</span><br />
+			Počet objednávek od neregistrovaných zákazníků: <span class="value">{$totalOrdersFromNonRegisteredUsers}</span>
 		</div>
 	</div>
 </div>

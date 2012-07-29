@@ -17,6 +17,11 @@
 					<img src="{$basePath}/images/icons/small/{? echo $control->profile->id == $pId ? 'white' : 'grey'}/Globe.png"/>
 					{$pName}
 				</a>
+				
+				<ul class="dropdown">
+					<li><a href="{link Default:default, profileId => $pId, month => null}"><?php echo __('Monthly statistics'); ?></a>
+					<li><a href="{link Annual:default, profileId => $pId, month => null}"><?php echo __('Annual summary'); ?></a>
+				</ul>
 			</li>
 		</ul>	
 	</div>
