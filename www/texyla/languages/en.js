@@ -57,6 +57,8 @@ jQuery.texyla.addStrings("en", {
 	
 	btn_ticket: "Ticket link",
 	
+	btn_attachFile: "Attach a file",
+	
 	editAgain: "Edit again",
 	
 	// functions
@@ -156,5 +158,12 @@ jQuery.texyla.addStrings("en", {
 	
 	// Tickets
 	win_ticket: "Choose a ticket",
-	ticketName: "Ticket name"
+	ticketName: "Ticket name",
+	
+	// Files
+	win_attachFile: "Choose a file",
+	attachFileUploadLabel: "File:",
+	attachFileDescriptionLabel: "File description:",
+	imageWidth: "Image width:",
+	imageHeight: "Image height:"
 });

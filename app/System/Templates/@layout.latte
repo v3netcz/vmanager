@@ -117,7 +117,7 @@
 				bottomRightPreviewToolbar: [],
 				tabs: true,
 				bottomRightEditToolbar: [],
-				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', null, 'ticket', null{if $presenter->context->userConfig->get('texyla.developerFunctions')}, 'API', ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}, 'preview'],
+				toolbar: ['bold', 'italic', null, 'ul', 'ol', null, 'link', null, 'emoticon', 'symbol', null, 'notexy', 'attachFile', null, 'ticket', null{if $presenter->context->userConfig->get('texyla.developerFunctions')}, 'API', ['codePhp', 'codeHtml', 'codeJs', 'codeCss', 'codeSql']{/if}, 'preview'],
 				width: $('div.ui-tabs-panel:not(.ui-tabs-hide)').find('.content').width(),
 				buttonType: "button"
 			});
@@ -148,7 +148,12 @@
 			$('textarea.texyla').setupvManagerTexyla({
 				apiPromptClassSource: {link :System:Texy:promptClassName},
 				apiPromptMemberSource: {link :System:Texy:promptMemberName},
-				ticketPromptSource: {link :System:Texy:promptTicketName}
+				ticketPromptSource: {link :System:Texy:promptTicketName},
+				
+				attachFilesFinalFilenameSource: {link :System:Texy:getFinalFilename},
+				fileBtnText: '<?php echo __('Choose File'); ?>',
+				fileDefaultText: '<?php echo __('No file selected'); ?>',
+				randomToken: {= vBuilder\Utils\Strings::random(32)}
 			});
 			
 			$('input:file').vMultipleFileUpload({

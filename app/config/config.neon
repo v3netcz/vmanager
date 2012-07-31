@@ -20,6 +20,8 @@ services:
 	texy: vManager\Texy(@container)
 
 	apiManager: vManager\ApiManager
+
+	uploadManager: vManager\UploadManager(%upload.filesPool%, @container)
 	
 parameters:
 	languages: ['cs', 'en']
@@ -27,6 +29,8 @@ parameters:
 	upload:
 		saveWithExtension: true
 		dir: '%filesDir%'
+
+		filesPool: 'filesPool'
 		
 	System:
 		sideLinks:

@@ -42,9 +42,9 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 	const OFFICE	= 8;
 	const PHP		= 16;
 	
-	private $files = array();
+	protected $files = array();
 	
-	private $extensions = array(
+	protected static $extensions = array(
 		self::IMAGES	=>	array ('jpg','jpeg','png','gif','ico','psd','pdf','bmp'),
 		self::ARCHIVES	=>	array ('zip','rar','tar'),
 		self::OFFICE	=>	array ('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'wpd', 'odt', 'ods', 'odp'),
@@ -52,9 +52,9 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 	);
 	
 	
-	private $mimes = array ();
+	protected $mimes = array ();
 	
-	private $modes = array(
+	protected $modes = array(
 		self::IMAGES, self::ARCHIVES, self::OFFICE, self::PHP
 	);
 	
@@ -65,9 +65,9 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 	const FILES_COUNT = ':filesCount';
 	const FILES_MAX_COUNT = ':filesMaxCount';
 	
-	private static $registered = false;
-	private static $valid = array();
-	private $_control;
+	protected static $registered = false;
+	protected static $valid = array();
+	protected $_control;
 
 
 	public function __construct($label) {
@@ -81,7 +81,7 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 		}
 		foreach ($this->modes as $mode) {
 			$this->mimes[$mode] = array ();
-			foreach ($this->extensions[$mode] as $extension) {
+			foreach (static::$extensions[$mode] as $extension) {
 				if (\array_key_exists($extension, $cache['mime-types'])) {
 					$this->mimes[$mode][] = $cache['mime-types'][$extension];
 				}
@@ -138,7 +138,7 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 			if (!($file instanceof Nette\Http\FileUpload)) {
 				throw new Nette\InvalidArgumentException('Multiple file upload control expects \Nette\Http\FileUpload or an array of more as a value!');
 			}
-			self::$valid[$this->lookupPath('Nette\Application\UI\Presenter')][] = false;
+			self::$valid[$this->lookupPath('Nette\Application\UI\Presenter')][$key] = false;
 		}
 		$this->files = $files;
 		$this->value = null;
@@ -164,12 +164,12 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 			if (!isset(self::$valid[$this->lookupPath('Nette\Application\UI\Presenter')][$key])) {
 				throw new \LogicException('Trying to get unvalidated files is prohibitted for security reasons. It was probably forgotten to add a validating rule.');
 			}
-			$files[] = new UploadedFile($file);
+			$files[$key] = new UploadedFile($file);
 		}
 		return $this->value = Nette\ArrayHash::from($files);
 	}
 
-	private function getFiles() {
+	protected function getFiles() {
 		return $this->files;
 	}
 	
@@ -195,7 +195,7 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 		return parent::addRule($operation, $message, $arg);
 	}
 	
-	private static function isUploaded($control) {
+	protected static function isUploaded($control) {
 		$files = $control->getFiles();
 		$providedFiles = 0;
 		foreach ($control->files as $key => $file) {
@@ -232,7 +232,7 @@ class MultipleFileUploadControl extends Forms\Controls\UploadControl
 						$mim = array($mode);
 					} else {
 						// regular groups
-						$ext = $control->extensions[$mode];
+						$ext = $control::$extensions[$mode];
 						$mim = $control->mimes[$mode];
 					}
 					$extensions = array_merge($extensions, $ext);

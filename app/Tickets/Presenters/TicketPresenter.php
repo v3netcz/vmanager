@@ -385,6 +385,12 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$form->addSelect('priority', __('Priority:'), $priorities)
 				  ->setDefaultValue($defaultValue);
+		
+		// Not sure where to call the extensionMehtod from
+		// temporary
+		$files = vManager\TexylaUploadControl::addMultipleFileUpload($form, 'texylaFiles');
+		$files->addRule(vManager\TexylaUploadControl::VALID, __('You may to upload anything...'),
+					vManager\TexylaUploadControl::ALL);
 	}
 
 	protected function saveTicket(Ticket $ticket, $values) {
@@ -437,6 +443,24 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$changed = true;
 		}
 		
+		// nebo to mam nějak zadrátovat do toho foreache výše...?
+		if (isset($values['texylaFiles']) && count($values['texylaFiles'])) {
+			if(!$ticket->comment) $ticket->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
+
+			foreach($values['texylaFiles'] as $file) {
+				$attachment = $this->context->repository->create('vManager\Modules\Tickets\Attachment');
+				$attachment->name = $file->getFilename();
+				$attachment->type = $file->getMimeType();
+				
+				$attachment->onPreSave[] = function ($attachment) use ($file, $ticket) {
+					$filePath = '/attachments/tickets/' . $ticket->id;
+					$attachment->path = $file->move($filePath);
+				};				
+				$ticket->comment->attachments->add($attachment);
+			}
+			
+			$changed = true;
+		}
 		if(isset($values['assignTo'])) {
 			if(!empty($values['assignTo'])) {
 				$user = $this->context->repository->findAll('vManager\Security\User')->where('[username] = %s', $values['assignTo'])->fetch();
@@ -623,7 +647,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$ticket = $this->getTicket();
 		if(!$ticket) throw new Nette\InvalidStateException('No such ticket');
 
-		$form->addTextArea('comment')->setAttribute('class', 'texyla');
+		$form->addTextArea('comment')->setAttribute('class', 'texyla');		
 
 		$form->addCheckbox('private', __('Make this comment private'));
 		$form->addTextArea('description')->setAttribute('class', 'texyla');
@@ -679,7 +703,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	public function updateFormSubmitted(Form $form) {
 		$values = $form->getValues();
 		$ticket = $this->getTicket();
-
+		
 		if($this->saveTicket($ticket, $values))
 			$this->flashMessage(__('Change has been saved.'));
 		else

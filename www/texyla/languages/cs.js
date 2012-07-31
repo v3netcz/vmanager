@@ -57,6 +57,8 @@ jQuery.texyla.addStrings("cs", {
 	
 	btn_ticket: "Odkaz na ticket",
 	
+	btn_attachFile: "P\u0159ipojit soubor",
+	
 	editAgain: "Znovu editovat",
 
 	// funkce
@@ -156,5 +158,12 @@ jQuery.texyla.addStrings("cs", {
 	
 	// Tickets
 	win_ticket: "Zvolte ticket",
-	ticketName: "Jméno ticketu"
+	ticketName: "Jméno ticketu",
+	
+	// Files
+	win_attachFile: "Zvolte soubor",
+	attachFileUploadLabel: "Soubor:",
+	attachFileDescriptionLabel: "Popisek souboru:",
+	imageWidth: "Šířka obrázku",
+	imageHeight: "Výška obrázku"
 });
