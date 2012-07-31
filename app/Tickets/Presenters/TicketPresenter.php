@@ -203,6 +203,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		// Deadline
 		$grid->addColumn("deadline", __('Deadline'), array(
 			 "renderer" => function ($ticket) {
+
 			   if($ticket->deadline == null) {
        			if ($ticket->getProject() == null || $ticket->project->deadline == null) {
               		echo "-";
@@ -221,6 +222,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				echo Nette\Utils\Html::el("abbr")
 				 	->title($deadline->format("d. m. Y"))
 				 	->setText(vManager\Application\Helpers::timeAgoInWords($deadline2));
+
 			 },
 			 "sortable" => true
 		))->setCellClass("date deadline");
@@ -383,6 +385,12 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$form->addSelect('priority', __('Priority:'), $priorities)
 				  ->setDefaultValue($defaultValue);
+		
+		// Not sure where to call the extensionMehtod from
+		// temporary
+		$files = vManager\TexylaUploadControl::addMultipleFileUpload($form, 'texylaFiles');
+		$files->addRule(vManager\TexylaUploadControl::VALID, __('You may to upload anything...'),
+					vManager\TexylaUploadControl::ALL);
 	}
 
 	protected function saveTicket(Ticket $ticket, $values) {
@@ -401,10 +409,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		if(isset($values['comment']) && !empty($values['comment'])) {
 			$ticket->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
 			$ticket->comment->text = $values['comment'];
+
 			if (isset($values['private']) && !empty($values['private'])) {
-        $ticket->comment->private = $values['private'];
+				$ticket->comment->private = $values['private'];
 			} else {
-        $ticket->comment->private = false;
+				$ticket->comment->private = false;
 			}
 			$changed = true;
 		} else {
@@ -434,6 +443,24 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$changed = true;
 		}
 		
+		// nebo to mam nějak zadrátovat do toho foreache výše...?
+		if (isset($values['texylaFiles']) && count($values['texylaFiles'])) {
+			if(!$ticket->comment) $ticket->comment = $this->context->repository->create('vManager\Modules\Tickets\Comment');
+
+			foreach($values['texylaFiles'] as $file) {
+				$attachment = $this->context->repository->create('vManager\Modules\Tickets\Attachment');
+				$attachment->name = $file->getFilename();
+				$attachment->type = $file->getMimeType();
+				
+				$attachment->onPreSave[] = function ($attachment) use ($file, $ticket) {
+					$filePath = '/attachments/tickets/' . $ticket->id;
+					$attachment->path = $file->move($filePath);
+				};				
+				$ticket->comment->attachments->add($attachment);
+			}
+			
+			$changed = true;
+		}
 		if(isset($values['assignTo'])) {
 			if(!empty($values['assignTo'])) {
 				$user = $this->context->repository->findAll('vManager\Security\User')->where('[username] = %s', $values['assignTo'])->fetch();
@@ -470,6 +497,11 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			$ticket->priority = $priority->exists() ? $priority : null;
 			$changed = true;
 		}
+		
+		// Deadline u komentaru? WTF? Proc se to nebere z aktualniho stavu ticketu?
+		/* if ($ticket->comment) {
+			$ticket->comment->deadlineThen = $ticket->deadline;
+		} */
 
 		foreach(array('name', 'description', 'deadline') as $curr) {
 			if($ticket->{$curr} != $values[$curr]) {
@@ -615,10 +647,10 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$ticket = $this->getTicket();
 		if(!$ticket) throw new Nette\InvalidStateException('No such ticket');
 
-		$form->addTextArea('comment')->setAttribute('class', 'texyla');
+		$form->addTextArea('comment')->setAttribute('class', 'texyla');		
+
 		$form->addCheckbox('private', __('Make this comment private'));
 		$form->addTextArea('description')->setAttribute('class', 'texyla');
-
 		
 		$possibleStates = $ticket->possibleStates;
 				
@@ -631,6 +663,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			
 			$form->addSelect('newState', __('State:'), $states)
 							->setPrompt(__('do not change'));
+
 			
 		} elseif(count($possibleStates) > 0) {
 			list($nextState) = $possibleStates;
@@ -670,7 +703,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 	public function updateFormSubmitted(Form $form) {
 		$values = $form->getValues();
 		$ticket = $this->getTicket();
-
+		
 		if($this->saveTicket($ticket, $values))
 			$this->flashMessage(__('Change has been saved.'));
 		else

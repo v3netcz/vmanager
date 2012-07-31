@@ -24,7 +24,9 @@
 namespace vManager;
 
 use vManager, vBuilder, Nette,
-	vBuilder\Utils\Strings;
+	vBuilder\Utils\Strings,
+	vManager\MultipleFileUploadControl as MFU,
+	Nette\Utils\Html;
 
 /**
  * Base vManager Texy
@@ -48,6 +50,7 @@ class Texy extends \Texy {
 		$this->setOutputMode(static::XHTML1_STRICT);
 		
 		$this->addHandler('phrase', array($this, 'apiLinkHandler'));
+		$this->addHandler('image', array($this, 'fileHandler'));
 		
 		// We want ticket links only if the module is enabled...
 		$modules = vManager\Application\ModuleManager::getModules();
@@ -113,5 +116,67 @@ class Texy extends \Texy {
 		}
 
 		return $invocation->proceed();
+	}
+	
+	/**
+	 * @param TexyHandlerInvocation handler invocation
+	 * @param TexyImage
+	 * @param TexyLink
+	 * @return TexyHtml|string|false
+	 */
+	public function fileHandler($invocation, $image, $link) {
+		if (false) { // is this file uploaded, ... ? -> to be changed
+			$invocation->proceed();
+		}
+		
+		$file = vBuilder\Utils\File::isImage($image->URL) ?
+				$this->getImageHtml($image) :
+				$this->getFileHtml($image);
+		
+		return $this->protect((string) $file, Texy::CONTENT_BLOCK);
+	}
+	
+	protected function getImageHtml($image) {
+		$params = array ();
+		
+		$image->width && $params['width'] = $image->width;
+		$image->height && $params['height'] = $image->height;
+		if (!$image->width && !$image->height) {
+			$params['width'] = $image->width = 250;
+		}
+		$params['id'] = $this->context->application->presenter->getParam('id');
+		$params['source'] = $image->URL;
+		
+		$linkParams = $params;
+		unset($linkParams['width'], $linkParams['height']);
+		$link = Html::el('a', array (
+			'href' => $this->context->application->presenter->link(':System:Texy:texylaImage', $linkParams)
+		));
+		$link->add(Html::el('img', array (
+			'alt' => $image->modifier->title,
+			'src' => $this->context->application->presenter->link(':System:Texy:texylaImage', $params)
+		)));
+		return $link;
+	}
+	
+	protected function getFileHtml($image) {
+		$file = Html::el('a', array (
+			'class' => $this->getFileClass($image),
+			'href' => ''
+		));
+		$file->setText($image->modifier->title);
+		return $file;
+	}
+	
+	protected function getFileClass($image) {
+		$extension = vBuilder\Utils\File::getExtension($image->URL);
+		$extensions = TexylaUploadControl::getExtensionGroups();
+		
+		$class = '';
+		in_array($extension, $extensions[MFU::IMAGES]) && $class = 'image';
+		in_array($extension, $extensions[MFU::ARCHIVES]) && $class = 'archive';
+		in_array($extension, $extensions[MFU::OFFICE]) && $class = 'office';
+		in_array($extension, $extensions[MFU::PHP]) && $class = 'php';
+		return 'file ' . $class;
 	}
 }
