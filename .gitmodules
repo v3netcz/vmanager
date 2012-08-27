@@ -10,3 +10,6 @@
 [submodule "libs/vStore"]
 	path = libs/vStore
 	url = git://github.com/v3netcz/vstore.git
+[submodule "libs/Markdown"]
+	path = libs/Markdown
+	url = git://github.com/michelf/php-markdown.git

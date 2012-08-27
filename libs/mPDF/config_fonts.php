@@ -100,15 +100,20 @@ $this->fontdata = array(
 		//'BI' => "MyriadPro-BoldIt.ttf",
 		'BI' => "MyriadPro-SemiboldIt"
 		),
-
-
+		
+	"georgia" => array(
+		'R' => "Georgia-Regular.ttf",
+		'B' => "Georgia-Bold.ttf",
+		'I' => "Georgia-It.ttf",
+		'BI' => "Georgia-BoldIt.ttf"
+		),
 );
 
 
 // Add fonts to this array if they contain characters in the SIP or SMP Unicode planes
 // but you do not require them. This allows a more efficient form of subsetting to be used.
 $this->BMPonly = array(
-	"myriadpro",
+	"myriadpro", 'georgia'
 	);
 
 // These next 3 arrays do two things:
