@@ -1,0 +1,76 @@
+.docFontFace {
+	color: #222; 
+	font: normal normal 400 100%/1.5em georgia,serif;
+}
+
+.doc {
+	/* margin: 3em auto; */
+	margin: 3em 0 3em 5em;
+	width: 40em
+}
+
+.doc a:link {
+	color: #3366CC
+}
+
+.doc a:visited {
+	color: #224488
+}
+
+.doc code {
+	font: normal normal 87.5%/1.71428571em monospace,sans-serif
+}
+
+.doc img {
+	display: block;
+	margin: 1.5em auto
+}
+
+.doc pre {
+	display: block;
+	font: normal normal 87.5%/1.71428571em monospace,sans-serif;
+	margin: 1.71428571em
+}
+
+.doc h1, .doc h2, .doc h3, .doc h4,.doc h5, .doc h6 {
+	font-weight: 400;
+	color: #58585A;
+}
+
+.doc h1 {
+	font-size: 225%;
+	line-height: 1.3334em;
+	margin: 0 0 0.8em;
+	
+	border-left: 4px solid #E6511E;
+	padding-left: 15px;
+}
+
+.doc h2 {
+	font-size: 175%;
+	line-height: 1.28571429em;
+	margin: 0 0 .4em;
+	
+	border-left: 4px solid #58585A;
+	
+	padding-left: 15px;
+	/* page-break-before: always; */
+}
+
+.doc P {
+	border-left: 1px solid #E4E4E4;
+	
+	padding-left: 18px;
+}
+
+.doc h3 {
+	font-size: 137.5%;
+	line-height: 1.3636em;
+	margin: 0 0 .5em
+}
+
+.doc h4, .doc h5, .doc h6 {
+	font-size: 112.5%;
+	line-height: 1.3334em;
+	margin: 0 0 .7778em
+}

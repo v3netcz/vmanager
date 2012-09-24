@@ -1,0 +1,203 @@
+{* Page margins in mm (top, right, bottom, left) *}
+{$renderer->setPageMargins(0, 8, 35, 8)}
+
+<html>
+ <head>
+ <style>
+.fontFace {
+	color: #222; 
+	font: normal normal 400 100%/1.5em georgia,serif;
+}
+
+/* 
+@page {
+	margin-left: 8mm;
+	margin-right: 8mm;
+	margin-top: 25mm;
+	margin-bottom: 25mm;
+}
+
+@page :first {
+	margin-top: 45mm;
+} */
+
+.firstBlock {
+	margin-top: 0em;
+}
+
+.block {
+	margin: 8em 0 3em 5em;
+	width: 40em;
+}
+
+a:link {
+	color: #3366CC
+}
+
+a:visited {
+	color: #224488
+}
+
+code {
+	font: normal normal 87.5%/1.71428571em dejavusansmono,sans-serif
+}
+
+img {
+	display: block;
+	margin: 1.5em auto
+}
+
+pre {
+	display: block;
+	font: normal normal 87.5%/1.71428571em dejavusansmono,sans-serif;
+	margin: 1.71428571em
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 400;
+	color: #58585A;
+}
+
+h1 {
+	font-size: 225%;
+	line-height: 1.3334em;
+	margin: 0 0 0.8em;
+	
+	border-left: 4px solid #E6511E;
+	padding-left: 15px;
+}
+
+
+h2 {
+	font-size: 175%;
+	line-height: 1.28571429em;
+	margin: 0 0 .4em;
+}
+
+H2, H3 {
+	border-left: 2px solid #777;
+	padding-left: 17px;
+}
+
+.headingAfterContent {
+	margin-top: 10mm;
+}
+
+P {
+	border-left: 1px solid #E4E4E4;
+	padding-left: 18px;
+}
+
+h3 {
+	font-size: 137.5%;
+	line-height: 1.3636em;
+	margin: 0 0 .5em
+}
+
+h4, h5, h6 {
+	font-size: 112.5%;
+	line-height: 1.3334em;
+	margin: 0 0 .7778em
+}
+
+.list {
+	border-left: 1px solid #E4E4E4;
+	padding-left: 18px; 
+	padding-left: 42px; 
+	padding-top: 0;
+}
+
+.list .list {
+	border-left: 1px solid #E6511E;
+	padding-top: 0;
+	padding-left: 30px;
+	margin-top: 2mm;
+}
+
+.list .bullet {
+	margin: 0 0 2mm 0;
+}
+
+.list P {
+	padding: 0;
+	border: 0;
+	margin: 0;
+}
+
+.block TABLE {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.block TABLE TD {
+	border: 1px solid #777;
+	padding: 2px 5px;
+}
+
+ </style>
+ </head>
+ <body>
+ <htmlpageheader name="MyHeader">
+ [header content here]
+ </htmlpageheader>
+ <htmlpagefooter name="MyFooter">
+<table width="100%" style="vertical-align: bottom; margin: 0 10mm; border-left: 4px solid #E6511E; padding-left: 15px; color: #888;">
+	<tr>
+		<td style="padding: 5mm 0 1mm 0;">
+			<span style="color: #555">{$title}</span><br />
+			Strana {l}PAGENO{r}/{l}nb{r}
+			
+		</td>
+		<td style="padding: 3mm 0 1mm 0; text-align: right;">
+			{$date->format('j. n. Y')}{if isset($versionString)}<br />
+			Verze: {$versionString}{/if}
+		</td>
+	</tr>
+</table>
+ </htmlpagefooter>
+
+<htmlpagefooter name="MyFooter2">
+<table width="100%" style="vertical-align: bottom; margin: 0 10mm; border-left: 4px solid #E6511E; padding-left: 15px; color: #888;">
+	<tr>
+		<td style="padding: 5mm 0 1mm 0;" width="33%">
+			<span style="color: #555">{$title}</span><br />
+			Strana {l}PAGENO{r}/{l}nb{r}
+			
+		</td>
+		
+		<td style="text-align: center;">
+			<img src="{$qrCodeUrl}" height="30mm" />
+		</td>
+		
+		<td style="padding: 3mm 0 1mm 0; text-align: right;" width="33%">
+			{$date->format('j. n. Y')}{if isset($versionString)}<br />
+			Verze: {$versionString}{/if}
+		</td>
+	</tr>
+</table>
+</htmlpagefooter>
+
+ <!-- <sethtmlpageheader name="MyHeader" value="on" show-this-page="1" /> -->
+ <sethtmlpagefooter name="MyFooter" value="on" show-this-page="0" />
+ 
+ <table width="100%" class="fontFace" style="vertical-align: middle; font-size: 0.85em;"><tr>
+	<td width="52mm">
+		<img src="/var/invoices/logo2012.svg" width="42mm" />
+	</td>
+	<td>
+		V3Net.cz, s.r.o., Charkovská 385/15,
+		101 00 Praha 10 - Vršovice,
+		Česká republika<br />
+		
+		IČ: 24192007,
+		www.v3net.cz,
+		info@v3net.cz,
+		tel:  +420 774 890 708
+	</td>
+</tr></table>
+ 
+ 
+ {!$html}
+ </body>
+ </html>
+
