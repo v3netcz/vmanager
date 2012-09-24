@@ -345,6 +345,7 @@ class InvoicePresenter extends vManager\Modules\System\SecuredPresenter {
 		file_put_contents(self::getInvoiceDirPath() . '/' . $filename . '.xml', $values->xml);
 		
 		$renderer = new vStore\Invoicing\InvoicePdfRenderer($this->context);
+		$renderer->setTemplateFile(__DIR__ . '/../Templates/Invoice/PdfInvoice.latte');
 		$renderer->renderToFile($invoice, self::getInvoiceDirPath() . '/' . $filename . '.pdf');
 		
 		chmod(self::getInvoiceDirPath() . '/' . $filename . '.pdf', 0600);

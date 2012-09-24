@@ -1,0 +1,9 @@
+{var $path = LIBS_DIR . '/vStore/vStore/Invoicing/Templates/PdfInvoice.default.latte'}
+{include $path}
+
+{* Page margins in mm (top, left, bottom, right) *}
+{$renderer->setPageMargins(8, 8, 8, 8)}
+
+{* Fixed header height (in mm) *}
+{$renderer->setHeaderHeight(40)}
+
