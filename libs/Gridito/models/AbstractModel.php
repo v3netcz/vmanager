@@ -92,7 +92,13 @@ abstract class AbstractModel implements IModel
 		return $this->primaryKey;
 	}
 
-
+	public function getPrimaryKeyColumn() {
+		$tokens = explode('.', $this->primaryKey);
+		
+		return count($tokens) == 1
+					? $this->primaryKey
+					: array_pop($tokens);
+	}
 
 	public function getIterator()
 	{
@@ -103,7 +109,7 @@ abstract class AbstractModel implements IModel
 
 	public function getUniqueId($item)
 	{
-		return $item->{$this->getPrimaryKey()};
+		return $item->{$this->getPrimaryKeyColumn()};
 	}
 
 
