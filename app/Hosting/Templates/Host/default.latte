@@ -1,0 +1,65 @@
+{block head}
+	<style>
+		.hostListing TD.dn {
+			width: 350px;
+		}
+	
+		.hostListing .altDn {
+			width: 300px;
+			font-size: 0.8em;
+			padding-left: 20px;
+			margin-top: 2px;
+			color: #666;
+		} 
+		
+		.hostListing .billingDate {
+			text-align: center;
+		}
+		
+		.hostListing .billingState {
+			text-align: center;
+		}
+		
+		.hostListing .notBillable .billingDate {
+			color: #CC6600;
+		}
+		
+		.hostListing .billedThisYear .billingDate {
+			color: #116600;
+		}
+		
+		.hostListing .overdue .billingState {
+			color: #cc9900;
+		}
+		
+		.hostListing .notBilledYet .billingState {
+			color: #CC6600;
+		}
+		
+		.hostListing .billingState {
+			color: #116600;
+		}
+		
+		.hostListing .notBillable .billingState {
+			color: #116600 !important;
+		}
+		
+		.hostListing .canceled .dn {
+			text-decoration: line-through;
+		}
+	</style>
+{/block}
+
+{block content}
+	<div class="flat_area grid_16" style="margin-bottom: 20px;">
+		<h2><?php echo __('Virtual hosts'); ?></h2>
+	</div>
+	
+	{include ../../../System/Templates/Includes/flashes.latte}
+	
+	<div class="box grid_16 round_all">
+		<div class="hostListing">
+			{control hostGrid}
+		</div>
+	</div>
+{/block}
