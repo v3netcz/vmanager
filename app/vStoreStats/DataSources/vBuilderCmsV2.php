@@ -174,5 +174,23 @@ class vBuilderCmsV2 extends BaseDataSource {
 	
 		return intval($stats->numOfCustomers);
 	}
+	
+	public function getTotalClasses(\DateTime $since, \DateTime $until) {
+		$records = $this->connection
+			->select('([totalClass] - 1) * 500 AS [min], [totalClass] * 500 AS [max], COUNT(*) AS [numOrders]')
+			->from('(%sql)',
+				(string) $this->connection->select('CEIL(SUM(oi.amount * oi.price) / 500) AS totalClass')
+							->from(self::TABLE_ORDERS)->as('o')
+							->join(self::TABLE_ORDER_ITEMS)->as('oi')->on('[o.id] = [oi.orderId]')
+							->where('[timestamp] >= %s', $since->format('Y-m-d'))
+							->and('[timestamp] <= %s', $until->format('Y-m-d 23:59:59'))
+							->groupBy('[o.id]')
+							->having('[totalClass] > 0')
+			)->as('[tc]')
+			 ->groupBy('[totalClass]')
+			 ->orderBy('[totalClass]');
+		
+		return $records->fetchAll();
+	}
 
 }
