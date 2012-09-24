@@ -107,6 +107,13 @@ $this->fontdata = array(
 		'I' => "Georgia-It.ttf",
 		'BI' => "Georgia-BoldIt.ttf"
 		),
+		
+	"dejavusansmono" => array(
+		'R' => "DejaVuSansMono.ttf",
+		'B' => "DejaVuSansMono-Bold.ttf",
+		'I' => "DejaVuSansMono-Oblique.ttf",
+		'BI' => "DejaVuSansMono-BoldOblique.ttf"
+		),
 );
 
 

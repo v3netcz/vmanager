@@ -66,20 +66,25 @@ class PdfRenderer extends TemplateReportRenderer {
 	/** @var int page margin - left (in mm) */
 	protected $pageMarginLeft = 15;
 	
+	/** @var function ($mPdf) **/
+	public $onBeforeOutput = array();
+	
 
 	/**
 	 * Renders report into output buffer
 	 */
 	function render() {
 		$this->setup();
+		$this->onBeforeOutput($this->mPdf);
 		$this->mPdf->Output();
 	}
-	
+		
 	/**
 	 * Renders report into file
 	 */
 	function renderToFile($filepath) {
 		$this->setup();
+		$this->onBeforeOutput($this->mPdf);
 		$this->mPdf->Output($filepath, 'F');
 	}
 	
@@ -95,7 +100,7 @@ class PdfRenderer extends TemplateReportRenderer {
 		
 		$mPdfData = (String) $tpl;
 		$this->mPdf = $this->createMPdf();
-		$this->mPdf->WriteHTML($mPdfData);
+		$this->mPdf->WriteHTML($mPdfData);		
 	}	
 	
 	/**
@@ -116,16 +121,21 @@ class PdfRenderer extends TemplateReportRenderer {
 
 		// http://mpdf1.com/manual/index.php?tid=184
 		$mPdf = new mPDF(
-			'utf-8',										// Mode
-			'a4',												// Format
-			$this->pageMarginTop,				// Margin left (in mm)
+			'utf-8',						// Mode
+			'a4',							// Format
+			null,							// Default font size
+			null,							// Default font
+			$this->pageMarginLeft,			// Margin left (in mm)
 			$this->pageMarginRight,			// Margin right (in mm)
-			$this->pageMarginBottom,		// Margin top (in mm)
-			$this->pageMarginLeft,			// Margin bottom (in mm)
-			$this->headerHeight,				// Header margin (in mm)
-			$this->footerHeight					// Footer margin (in mm)
+			$this->pageMarginTop,			// Margin top (in mm)
+			$this->pageMarginBottom,		// Margin bottom (in mm)
+			$this->headerHeight,			// Header margin (in mm)
+			$this->footerHeight				// Footer margin (in mm)
 		);
-
+		
+		$mPdf->restoreBlockPageBreaks = true;
+		$mPdf->list_indent_first_level = true;
+		// $mPdf->setAutoBottomMargin = '10mm';
 		$mPdf->setAutoFont(0);
 		return $mPdf;
 	}
