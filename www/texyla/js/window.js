@@ -80,6 +80,9 @@ jQuery.texyla.extend({
 
 			// tlačítko Storno
 			options.buttons[this.lng.windowCancel] = function () {
+				if (config.cancel) {
+					config.cancel.call(_this, el);
+				}
 				_this.closeWindow(name);
 			};
 		}

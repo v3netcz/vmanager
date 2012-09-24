@@ -63,7 +63,7 @@ class FileSaver extends Nette\Object
 	public function save($autoRenameDuplicates = true) {
 		if($this->getFile()->isOk()) {
 			$file = $this->generateFileName($autoRenameDuplicates);
-			$path = $this->getFilename().($file['extension']?'.'.$file['extension']:'');
+			$path = $file['filename'];
 			if ($this->getFile()->move(self::getFilesDir().$path)) {
 				$file['mimeType'] = $this->getFile()->getContentType();
 				$file['uploadedPath'] = self::$relativeDir . '/' . $path;
@@ -84,26 +84,7 @@ class FileSaver extends Nette\Object
 	 */
 	private function generateFileName($autoRenameDuplicates)
 	{
-		$withExtension = self::saveWithExtension();
-		$webalized = Strings::webalize(self::getFilenamePrefix().$this->getFile()->getName(),'.');
-		$parts = \pathinfo($webalized);
-		$extension = isset($parts['extension']) ? $parts['extension'] : null;
-		if (!$withExtension) {
-			$webalized = $this->getFilename();
-			$extension = null;
-		}
-		$file = self::getFilesDir() . $webalized;
-		if(is_file($file) && $autoRenameDuplicates) {
-			$iteration = 0;
-			do {
-				$webalized = Strings::webalize(self::getFilenamePrefix().$parts['filename'] . '-' . $iteration . ($withExtension?('.' . $parts['extension']) : '') ,'.');
-				$iteration++;
-			} while (\is_file(self::getFilesDir() . $webalized));
-		}
-		return array(
-			'filename' => \pathinfo($webalized, \PATHINFO_FILENAME),
-			'extension' => $extension
-		);
+		return UploadManager::generateFileName(self::getFilesDir(), $this->getFile()->getName(), $autoRenameDuplicates);		
 	}
 	
 	public static function getFilesDir() {
@@ -141,10 +122,6 @@ class FileSaver extends Nette\Object
 		}
 		self::$dirname = $dirname;
 		return true;
-	}
-
-	public static function saveWithExtension() {
-		return Nette\Environment::getConfig('upload')->saveWithExtension;
 	}
 	
 	public static function getBaseDir() {

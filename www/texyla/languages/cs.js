@@ -57,6 +57,8 @@ jQuery.texyla.addStrings("cs", {
 	
 	btn_ticket: "Odkaz na ticket",
 	
+	btn_attachFile: "P\u0159ipojit soubor",
+	
 	editAgain: "Znovu editovat",
 
 	// funkce
@@ -149,10 +151,19 @@ jQuery.texyla.addStrings("cs", {
 	youtubePreview: "Náhled videa",
 	
 	// API
+	win_API: "Zvolte t\u0159ídu",
 	className: "Jméno t\u0159ídy",
 	memberName: "Jméno proměnné/metody",
 	noClassName: "Musíte zadat jméno t\u0159ídy",
 	
 	// Tickets
-	ticketName: "Jméno ticketu"
+	win_ticket: "Zvolte ticket",
+	ticketName: "Jméno ticketu",
+	
+	// Files
+	win_attachFile: "Zvolte soubor",
+	attachFileUploadLabel: "Soubor:",
+	attachFileDescriptionLabel: "Popisek souboru:",
+	imageWidth: "Šířka obrázku",
+	imageHeight: "Výška obrázku"
 });
