@@ -137,9 +137,5 @@ class vBuilderCmsV1 extends BaseDataSource {
 	public function getTotalOrdersFromNonRegisteredUsers(\DateTime $since, \DateTime $until) {
 		return 0;
 	}
-	
-	public function getTotalClasses(\DateTime $since, \DateTime $until) {
-		return array();
-	}
 
 }

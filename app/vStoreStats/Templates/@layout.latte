@@ -8,7 +8,7 @@
 {/block}
 
 {block content}
-	{dump $presenter->name == 'Accounting:IssuedInvoiceRecord'}
+	{*dump $presenter->name == 'Accounting:IssuedInvoiceRecord'*}
 
 	<div id="nav_top" class="clearfix  round_top">
 		<ul class="clearfix">
@@ -21,11 +21,18 @@
 				<ul class="dropdown">
 					<li><a href="{link Default:default, profileId => $pId, month => null}"><?php echo __('Monthly statistics'); ?></a>
 					<li><a href="{link Order:default, profileId => $pId, month => null}"><?php echo __('Order statistics'); ?></a>
+					<li><a href="{link ActiveUserDiscounts:default, profileId => $pId, month => null}"><?php echo __('Active user discounts'); ?></a>
 					<li><a href="{link Annual:default, profileId => $pId, month => null}"><?php echo __('Annual summary'); ?></a>
 				</ul>
 			</li>
 		</ul>	
 	</div>
 	
-	{include #statsContent}
+	{if isset($enabled) && $enabled === FALSE}
+		<div style="padding: 10px 0 30px 0">
+			Požadovaný modul není v tomto e-shopu podporován.
+		</div>
+	{else}
+		{include #statsContent}
+	{/if}
 {/block}

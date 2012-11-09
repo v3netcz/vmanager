@@ -68,6 +68,8 @@ class DefaultPresenter extends MonthlyPresenter {
 		
 		$data = $this->profile->getProductSellings($this->getSince(), $this->getUntil());
 		$model = new vManager\Grid\ArrayModel($data);
+		
+		$grid->setExport(true);
 
 		$grid->setModel($model);
 		$grid->setItemsPerPage(20);

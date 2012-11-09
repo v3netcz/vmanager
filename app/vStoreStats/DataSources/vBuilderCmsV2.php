@@ -38,6 +38,7 @@ class vBuilderCmsV2 extends BaseDataSource {
 	const TABLE_ORDER_ITEMS = 'shop_orderItems';
 	const TABLE_USERS = 'security_users';
 	const TABLE_CUSTOMERS = 'shop_customers';
+	const TABLE_SCHEDULED_DISCOUNTS = 'shop_scheduledDiscounts';
 
 	private $_since = -1;
 	private $_until = -1;
@@ -190,6 +191,18 @@ class vBuilderCmsV2 extends BaseDataSource {
 			 ->groupBy('[totalClass]')
 			 ->orderBy('[totalClass]');
 		
+		return $records->fetchAll();
+	}
+	
+	public function getActiveUserDiscounts(\DateTime $since, \DateTime $until) {
+		$records = $this->connection
+			->select("[id], [username], [name], [surname], MAX([percentageDiscount]) [percentageDiscount], MIN([until]) [until]")
+			->from(self::TABLE_USERS)->as('u')
+			->join(self::TABLE_SCHEDULED_DISCOUNTS)->as('sd')->on('[u.id] = [sd.user]')
+			->where('[sd.until] >= %s', $since->format('Y-m-d'))
+			->groupBy('[u.id]')
+			->orderBy('[u.surname], [u.name]');
+			
 		return $records->fetchAll();
 	}
 

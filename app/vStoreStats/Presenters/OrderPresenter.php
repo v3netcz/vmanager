@@ -44,8 +44,17 @@ class OrderPresenter extends MonthlyPresenter {
 		$this->setupParams();
 	}
 	
-	public function renderDefault() {		
-
+	public function renderDefault() {
+	
+		
+		try {
+			$this->getTotalClasses();
+			
+		} catch(Nette\MemberAccessException $e) {
+			$this->template->enabled = FALSE;
+		}
+			
+		
 	}
 	
 	protected function createComponentTotalClassesGrid($name) {
