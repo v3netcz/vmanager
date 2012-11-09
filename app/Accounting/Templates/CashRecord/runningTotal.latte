@@ -1,0 +1,31 @@
+{extends '../@layout.records.latte'}
+
+{block recordHead}
+	<style>
+		.accountingRecordListing .positiveDiff .runningTotal,
+		.accountingRecordListing .negativeDiff .runningTotal,
+		.accountingRecordListing .positiveDiff .day,
+		.accountingRecordListing .negativeDiff .day {
+			color: #0033aa;
+		}
+		
+		.accountingRecordListing .positiveDiff .difference {
+			color: #338800;
+		}
+		
+		.accountingRecordListing .negativeDiff .difference {
+			color: #cc3300;
+		}
+	</style>
+	
+	{block recordHead2}{/block}
+{/block}
+
+{block recordContent}
+	{include ../../../System/Templates/Includes/flashes.latte}
+	
+	<div class="box grid_16 round_all">
+		<div class="accountingRecordListing">
+			{control runningTotalGrid}
+		</div>
+	</div>

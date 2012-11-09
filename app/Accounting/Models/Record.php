@@ -46,4 +46,12 @@ use vBuilder;
  */
 class Record extends vBuilder\Orm\ActiveEntity {
 
+	function setEvidenceId($evidenceId) {
+		$this->data->evidenceId = preg_replace('/\\s+/', '', $evidenceId);
+	}
+	
+	function setSubjectEvidenceId($evidenceId) {
+		$this->data->subjectEvidenceId = preg_replace('/\\s+/', '', $evidenceId);
+	}
+
 }

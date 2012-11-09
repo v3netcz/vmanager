@@ -276,7 +276,11 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 			});
 		}
 	
-		$form->addSelect($name, $label, $values)->setPrompt('-');
+		$select = $form->addSelect($name, $label, $values)->setPrompt('-');
+		if(count($values) == 1) {
+			reset($values);
+			$select->setDefaultValue(key($values));
+		}
 	}
 	
 	protected function getDPrefix() {

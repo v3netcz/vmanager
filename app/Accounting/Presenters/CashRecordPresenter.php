@@ -41,6 +41,59 @@ class CashRecordPresenter extends RecordPresenter {
 		$this->template->total = $this->getTotal();
 	}
 	
+	public function renderRunningTotal() {
+		// dd($this->runningTotal);
+	}
+	
+	protected function createComponentRunningTotalGrid($name) {
+		$grid = new vManager\Grid($this, $name);
+		
+		$model = new vManager\Grid\ArrayModel($this->getRunningTotal());
+
+		$grid->setModel($model);
+		$grid->setItemsPerPage(20);
+		$grid->sortColumn = $grid->sortColumn ?: 'date';
+		$grid->sortType = $grid->sortType ?: 'asc';
+		
+		$grid->setRowClass(function ($iterator, $row) {
+			$classes = array();
+			
+			if($row->diff > 0) $classes[] = 'positiveDiff';
+			if($row->diff < 0) $classes[] = 'negativeDiff';
+			
+			return empty($classes) ? null : implode(" ", $classes);
+		});
+		
+		$grid->addColumn("date", __("At the end of the day"), array(
+			 "renderer" => function ($row) {
+				 echo $row->date->format('j. n. \'y');
+			 },
+			 "sortable" => true,
+		))->setCellClass('day');
+		
+		$grid->addColumn("total", __("Total"), array(
+			 "renderer" => function ($row) {
+				 echo vBuilder\Latte\Helpers\FormatHelpers::currency($row->total, true);
+				 
+				 //echo $row->diff;
+			 },
+			 "sortable" => true,
+		))->setCellClass('value runningTotal');
+		
+		$grid->addColumn("diff", __("Difference"), array(
+			 "renderer" => function ($row) {
+			 
+			 	 if($row->diff > 0) echo "+ ";
+			 
+			 	 // echo $row->diff;
+			 
+				 echo vBuilder\Latte\Helpers\FormatHelpers::currency($row->diff, true);
+			 },
+			 "sortable" => true,
+		))->setCellClass('value difference');
+		
+	}
+	
 	protected function createComponentGeneralRecordGrid($name) {
 		$presenter = $this;
 		$grid = parent::createComponentGeneralRecordGrid($name);
@@ -77,6 +130,41 @@ class CashRecordPresenter extends RecordPresenter {
 		}
 		
 		return $this->_total;
+	}
+	
+	public function getRunningTotal() {
+		
+		$ds = $this->getDataSource()->orderBy('date');
+		
+		$runningTotal = array();
+		$total = $diff = 0;
+		$records = $ds->fetchAll();
+		if(count($records) > 0) {
+			$date = clone $records[0]->date;
+			$date->sub(\DateInterval::createFromDateString('1 day'));
+			
+			for($i = 0; $i < count($records); ) {
+				
+				if($records[$i]->date == $date) {
+					$diff += (float) ($records[$i]->md->id == 221001 ? $records[$i]->value : 0 - $records[$i]->value);
+					$i++;
+					
+				} else {
+					$total += $diff;
+
+					$record = &$runningTotal[];
+					$record = new \StdClass;
+					$record->date = clone $date;
+					$record->diff = $diff;
+					$record->total = $total;
+				
+					$date->add(\DateInterval::createFromDateString('1 day'));
+					$diff = 0;
+				}
+			}		
+		}
+				
+		return $runningTotal;
 	}
 	
 	public function createComponentRecordForm($name) {		
