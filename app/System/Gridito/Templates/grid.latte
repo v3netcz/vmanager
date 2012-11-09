@@ -32,6 +32,13 @@
 	        <table class="gridito-table">
                 <thead>
 						 {block tableHead}
+						 <tr n:if="$allowExports">
+							<td colspan="{=count($control['columns']->getComponents())+$control->hasActions()}" class="ui-widget-header">
+								<div class="filterHeader" style="text-align: right;">
+									<a href="{link exportToExcelCsv}" class="color-button button_black">Export to Excel CSV</a>
+								</div>
+							</td>
+						 </tr>
 						 {/block}
 						 <!--<tr>
 							 <td colspan="{=count($control['columns']->getComponents())}" class="ui-widget-header">
