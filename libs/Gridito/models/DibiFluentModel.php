@@ -46,8 +46,8 @@ class DibiFluentModel extends AbstractModel
 	{
 		$fluent = clone $this->fluent;
 
-		$fluent->limit($this->getLimit());
-		$fluent->offset($this->getOffset());
+		if($this->getLimit() !== NULL) $fluent->limit($this->getLimit());
+		if($this->getOffset() !== NULL) $fluent->offset($this->getOffset());
 
 		list($sortColumn, $sortType) = $this->getSorting();
 		if ($sortColumn) {
