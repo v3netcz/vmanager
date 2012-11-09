@@ -26,7 +26,8 @@ namespace vManager;
 use vManager,
 	Nette,
 	Gridito,
-	vBuilder;
+	vBuilder,
+	vBuilder\Utils\Csv;
 
 /**
  * Extended Gridito implementation
@@ -38,6 +39,38 @@ class Grid extends Gridito\Grid {
 
 	/** @var string template file path */
 	private $tplFile;
+
+	/** @var bool */
+	private $allowExports = false;
+
+	public function handleExportToExcelCsv() {
+
+		$data = array();
+		foreach($this->model->getItems() as $record) {
+			$line = array();
+			foreach($this["columns"]->getComponents() as $key=>$column) {
+				ob_start();
+				$column->renderCell($record);
+				$line[] = strip_tags(ob_get_clean());
+			}
+
+			$data[] = $line;
+		}
+
+		$data = Csv::fromData($data, "\t", "\n");
+		$data = iconv('UTF-8', 'UTF-16', $data);
+		// $data = chr(255) . chr(254) . $data;
+
+		$filename = $this->getName(). "-" .date("Y-m-d") . ".csv";
+
+		$httpResponse = $this->getPresenter()->getContext()->httpResponse;
+		$httpResponse->setHeader('Content-Length', strlen($data));
+		$httpResponse->setContentType('text/csv');
+		$httpResponse->setHeader('Content-Disposition', 'attachment; filename="'.$filename.'"');
+
+		$response = new Nette\Application\Responses\TextResponse($data);
+		$this->getPresenter()->sendResponse($response);
+	}
 
 	/**
 	 * Sets absolute filename for template to render
@@ -53,8 +86,12 @@ class Grid extends Gridito\Grid {
 	 * @return Template
 	 */
 	protected function createTemplate($class = NULL) {
-		return parent::createTemplate()->setFile(isset($this->tplFile) ? $this->tplFile
+		$tpl = parent::createTemplate()->setFile(isset($this->tplFile) ? $this->tplFile
 								 : __DIR__."/Templates/grid.latte");
+
+		$tpl->allowExports = $this->allowExports;
+
+		return $tpl;
 	}
 	
 	public function getOrderedColumns() {
@@ -72,6 +109,14 @@ class Grid extends Gridito\Grid {
 		if(!isset($options['orderColumnWeight'])) $options['orderColumnWeight'] = count($this['columns']->getComponents());
 	
 		return parent::addColumn($name, $label, $options);
+	}
+
+	public function setExport($allowExports) {
+		$this->allowExports = $allowExports;
+	}
+
+	public function isExportEnabled() {
+		return $this->allowExports;
 	}
 
 }
