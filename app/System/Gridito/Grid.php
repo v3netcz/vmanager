@@ -46,6 +46,9 @@ class Grid extends Gridito\Grid {
 	public function handleExportToExcelCsv() {
 
 		$data = array();
+		$this->model->setOffset(0);
+		$this->model->setLimit($this->model->count());
+		
 		foreach($this->model->getItems() as $record) {
 			$line = array();
 			foreach($this["columns"]->getComponents() as $key=>$column) {
@@ -56,6 +59,7 @@ class Grid extends Gridito\Grid {
 
 			$data[] = $line;
 		}
+
 
 		$data = Csv::fromData($data, "\t", "\n");
 		$data = iconv('UTF-8', 'UTF-16', $data);
