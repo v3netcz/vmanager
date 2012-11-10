@@ -24,7 +24,7 @@ services:
 	uploadManager: vManager\UploadManager(%upload.filesPool%, @container)
 	
 parameters:
-	languages: ['cs', 'en']
+	languages!: ['cs', 'en']
 	
 	upload:
 		saveWithExtension: true
