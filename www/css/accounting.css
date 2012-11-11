@@ -31,6 +31,16 @@
 	color: #cc3300;
 }
 
+.accountingRecordListing .canceled .value,
+.accountingRecordListing .canceled .evidenceId,
+.accountingRecordListing .canceled .subject {
+	text-decoration: line-through;
+}
+
+.accountingRecordListing .canceled .button_cancel {
+	display: none;
+}
+
 .accountingRecordListing .invoice .myEvidenceId {
 	color: purple;
 }

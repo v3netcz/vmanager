@@ -70,6 +70,8 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 		//$grid->setTemplateFile(__DIR__ . '/../Templates/Gridito/expenseGrid.latte');
 
 		$model = new vManager\Grid\OrmModel($this->getDataSource());
+		
+		$grid->setExport(TRUE);
 
 		$grid->setModel($model);
 		$grid->setItemsPerPage(20);

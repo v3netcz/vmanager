@@ -33,31 +33,18 @@ use vManager, vBuilder, Nette, vManager\Form, Gridito, Nette\Utils\Strings;
  */
 class IssuedInvoiceRecordPresenter extends RecordPresenter {
 
-	public function renderDefault() {
-		$balance = $this->context->connection->query(
-			'SELECT id, name, ' .
-				'(SELECT SUM(IF(md = a.id, value, 0 - value)) ' .
-				'FROM accounting_records WHERE (md = a.id OR d = a.id) ' .
-				// 'AND [date] BETWEEN %s AND %s',  $this->getSince()->format('Y-m-d'), $this->getUntil()->format('Y-m-d 23:59:59'),
-				') AS balance ' .
-			'FROM accounting_billingClasses AS a ' .
-			'WHERE [id] LIKE %like~ OR [id] LIKE %like~ ' .
-			'HAVING balance IS NOT NULL ',
-			$this->getDPrefix(), $this->getMdPrefix()
-		);
-		
-		$totalPaid = 0;
-		$totalAwaiting = 0;
-		foreach($balance as $curr) {
-			if(Strings::startsWith($curr->id, $this->getDPrefix()))
-				$totalPaid += abs($curr->balance);
-			else
-				$totalAwaiting += abs($curr->balance);
-		}
-		
-		$this->template->totalPaid = $totalPaid - $totalAwaiting;
-		$this->template->totalAwaiting = $totalAwaiting;
-	}
+/*
+
+SELECT r.id,r.evidenceId,r.date,r.description,r.value,SUM(r2.value) AS paidValue, MAX(r2.date) AS lastPaymentDate,r.md,r.d,r.subjectId,r.subjectEvidenceId,
+GROUP_CONCAT(r2.id SEPARATOR ',') AS paymentRecordIds,
+IF(r.d = r2.md AND r.md = r2.d,'canceled', IF(r.value = SUM(r2.value), 'paid', 'not paid')) AS state
+FROM accounting_records r
+LEFT JOIN accounting_records r2 ON (r.evidenceId = r2.subjectEvidenceId)
+WHERE r.md = 311001
+GROUP BY r.id
+ORDER BY r.evidenceId
+
+*/
 
 	protected function isSubjectEvidendceIdNeeded() {
 		return false;
@@ -69,6 +56,15 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 	
 	protected function getMdPrefix() {
 		return '311';	// Odběratelé
+	}
+	
+	public function guessNextEvidenceId() {
+		$db = $this->context->database->connection;
+		$lastId = $db->select('MAX([evidenceId])')->from('[accounting_records]')
+			->where('[d] LIKE %like~ AND [md] LIKE %like~', $this->getDPrefix(), $this->getMdPrefix())
+			->fetchSingle();
+		
+		return $lastId + 1;
 	}
 	
 	protected function createComponentGeneralRecordGrid($name) {
@@ -107,8 +103,7 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 				 			->add(Nette\Utils\Html::el('span')->setText('L'));
 			 }
 			 
-		});
-		
+		});	
 		
 		$issued = ($this->getDPrefix() == '602');
 		$grid->setRowClass(function ($iterator, $row) use ($presenter, &$linkedRecords, $issued) {
@@ -131,9 +126,7 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 						'AND [subjectEvidenceId] IN %in AND [subjectEvidenceId] <> \'\'', array($row->subjectEvidenceId, $row->evidenceId)
 					)->fetchAll();
 				}
-				
-				Nette\Diagnostics\Debugger::barDump($e);
-				
+								
 				if($e !== false) {
 
 					$sum = 0;
@@ -147,6 +140,28 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 						$classes[] = 'paid';
 					
 				}	
+				
+				// Storno faktury
+				if($issued && !in_array('paid', $classes)) {
+					if(!isset($linkedRecords[$row->id])) $linkedRecords[$row->id] = array();
+					
+					$cancelRecord = $presenter->context->connection->query(
+						'SELECT [evidenceId] FROM [accounting_records]',
+						'WHERE [md] = %s', $row->d->id,
+						'AND [d] = %s', $row->md->id,
+						'AND [value] = %f', $row->value,
+						'AND [subjectId] = %i', $row->subject->id,
+						'AND [subjectEvidenceId] = %s', $row->evidenceId
+					)->fetch();
+					
+					\bd($cancelRecord);
+					
+					if($cancelRecord !== FALSE) {
+						$classes[] = 'canceled';
+						$linkedRecords[$row->id][] = $cancelRecord['evidenceId'];
+					}
+				}
+				
 			/* } else {
 				$classes[] = 'paid';
 			} */
@@ -154,6 +169,46 @@ class IssuedInvoiceRecordPresenter extends RecordPresenter {
 			return empty($classes) ? null : implode(" ", $classes);
 		});
 		
+
+		if($issued) {
+			$presenter = $this;
+		
+			$grid->addButton("btnCancel", __('Cancel'), array(
+				"class" => "button_black button_cancel",
+				"confirmationQuestion" => function ($row) use ($grid) {
+					return __('Are you sure you want to cancel this invoice?');
+				},
+						  
+				"handler" => function ($row) use ($grid, $presenter) {
+					if(!$row) $presenter->flashMessage(__('Record not found'), 'warn');
+					else {
+						if(!($row->d && $row->md && $row->evidenceId && $row->value && $row->description))
+							$presenter->flashMessage(__('Cannot cancel incomplete record'), 'warn');
+						else {
+							// $evidenceId = $presenter->guessNextEvidenceId();
+							$evidenceId = 0;
+						
+							$record = $presenter->getContext()->repository->create(IssuedInvoiceRecordPresenter::ENTITY_RECORD);
+							
+							$record->d = $row->md;
+							$record->md = $row->d;
+							$record->value = $row->value;
+							$record->description = "Storno FA " . $row->evidenceId . " - " . $row->description;
+							$record->date = new \DateTime;
+							//$record->evidenceId = $evidenceId;
+							$record->subjectEvidenceId = $row->evidenceId;
+							$record->subject = $row->subject;
+							
+							$record->save();
+							
+							$presenter->flashMessage(_x("Canceling record %d has been added", array($evidenceId)));
+						}
+					}
+	
+					$grid->redirect("this");
+				}
+			));
+		}
 
 		
 		return $grid;

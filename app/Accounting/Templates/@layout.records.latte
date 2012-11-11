@@ -12,6 +12,8 @@
 
 	<div id="nav_top" class="clearfix  round_top">
 		<ul class="clearfix">
+			<li n:class="$presenter->name == 'Accounting:Default' ? current"><a href="{link Default:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:Default' ? 'white' : 'grey'}/Money.png"/><?php echo __('Dashboard'); ?></a></li>
+		
 			<li n:class="$presenter->name == 'Accounting:Record' ? current"><a href="{link Record:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:Record' ? 'white' : 'grey'}/Money.png"/><?php echo __('All records'); ?></a></li>
 			
 			<li n:class="$presenter->name == 'Accounting:IssuedInvoiceRecord' ? current"><a href="{link IssuedInvoiceRecord:default, editId => null}"><img src="{$basePath}/images/icons/small/{? echo $presenter->name == 'Accounting:IssuedInvoiceRecord' ? 'white' : 'grey'}/Box%20Outgoing.png"/><?php echo __('Issued invoices'); ?></a></li>
