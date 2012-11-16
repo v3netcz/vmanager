@@ -13,11 +13,11 @@ msgstr "Byl jste úspěšně odhlášen."
 msgid "Homepage"
 msgstr "Úvod"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SecuredPresenter.php:50
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SecuredPresenter.php:53
 msgid "You have been signed off during long inactivity."
 msgstr "Byl/a jste odhlášen z důvodu dlouhé nečinnosti."
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SecuredPresenter.php:57
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SecuredPresenter.php:60
 msgid "You don't have enough privileges to perform this action."
 msgstr "Nemáte dostatečné oprávnění k provedení této akce."
 
@@ -55,23 +55,23 @@ msgstr "Zapomněli jste heslo?"
 msgid "Access denied."
 msgstr "Přístup zamítnut."
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:169
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:184
 msgid "Administrator"
 msgstr "Administrátor"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:169
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:184
 msgid "User"
 msgstr "Uživatel"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:172
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:187
 msgid "settings"
 msgstr "nastavení"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:173
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:188
 msgid "logout"
 msgstr "odhlásit"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:197
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:212
 msgid "Search..."
 msgstr "Hledat..."
 
@@ -80,28 +80,28 @@ msgid_plural "entries"
 msgstr[0] "záznam"
 msgstr[1] "záznamů"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:118
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:125
 #, php-format
 msgid "Showing %d to %d of %d entries"
 msgstr "Zobrazen %d. až %d. záznam z %d záznamů"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:120
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:127
 msgid "Showing 1 of 1 entry"
 msgstr "Zobrazen jediný záznam"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:128
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:135
 msgid "First"
 msgstr "První"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:129
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:136
 msgid "Previous"
 msgstr "Předchozí"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:135
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:142
 msgid "Next"
 msgstr "Další"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:136
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:143
 msgid "Last"
 msgstr "Poslední"
 
@@ -133,7 +133,7 @@ msgstr "Nové heslo (znovu):"
 msgid "Confirmation password didnt match."
 msgstr "Zadaná hesla se neshodují."
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:97
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:98
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:134
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:182
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:229
@@ -222,7 +222,7 @@ msgstr "Osobní údaje"
 msgid "Change password"
 msgstr "Změnit heslo"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:61
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:62
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:91
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:162
 msgid "Save"
@@ -427,15 +427,17 @@ msgstr "Jazyk:"
 msgid "Environment"
 msgstr "Prostředí"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:102
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:109
 msgid "No results has been found matching your criteria."
 msgstr "Pro zadané parametry nebyly nalezeny žádné výsledky k zobrazení."
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:148
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:154
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:163
 msgid "Choose File"
 msgstr "Vybrat"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:149
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:155
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/@layout.latte:164
 msgid "No file selected"
 msgstr "Žádný soubor nebyl vybrán"
 
@@ -447,7 +449,7 @@ msgstr ""
 msgid "You may only upload images!"
 msgstr ""
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:58
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/SettingsPresenter.php:59
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Presenters/UserSettingsPresenter.php:88
 msgid "You can upload one file only"
 msgstr ""
@@ -584,11 +586,11 @@ msgstr "Systémová nastavení"
 msgid "Company info"
 msgstr "Informace o společnosti"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Settings/default.latte:13
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Templates/Settings/default.latte:17
 msgid "Current logo"
 msgstr "Současné logo"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Module.php:112
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Module.php:124
 msgid "Timeline"
 msgstr "Časová osa"
 
@@ -636,3 +638,55 @@ msgstr "Pátek"
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:157
 msgid "Saturday"
 msgstr "Sobota"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:152
+msgid "January"
+msgstr "Leden"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:153
+msgid "February"
+msgstr "Únor"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:154
+msgid "March"
+msgstr "Březen"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:155
+msgid "April"
+msgstr "Duben"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:156
+msgid "May"
+msgstr "Květen"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:157
+msgid "June"
+msgstr "Červen"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:158
+msgid "July"
+msgstr "Červenec"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:159
+msgid "August"
+msgstr "Srpen"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:160
+msgid "September"
+msgstr "Září"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:161
+msgid "October"
+msgstr "Říjen"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:162
+msgid "November"
+msgstr "Listopad"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Application/Helpers.php:163
+msgid "December"
+msgstr "Prosinec"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:38
+msgid "Export to Excel CSV"
+msgstr "Exportovat do Excelu (CSV)"
