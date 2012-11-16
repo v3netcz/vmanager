@@ -28,37 +28,45 @@ use vManager,
 	Nette;
 
 /**
- * Presenter of active user discounts
+ * Presenter of order discount statistics
  *
  * @author Adam Staněk (V3lbloud)
- * @since Nov 9, 2012
+ * @since Nov 16, 2012
  */
-class ActiveUserDiscountsPresenter extends MonthlyPresenter {
+class DiscountPresenter extends MonthlyPresenter {
 
 	/** @persistent */
 	public $month;
 	
-	private $_data;
+	private $_ordersByDiscount;
 	
 	public function actionDefault() {
 		$this->setupParams();
-		
-		try {
-			$this->_data = $this->profile->getActiveUserDiscounts($this->getSince(), $this->getUntil());
-			
-		} catch(Nette\MemberAccessException $e) {
-	
-		}
 	}
 	
-	public function renderDefault() {		
-		$this->template->enabled = $this->_data !== NULL;
+	public function renderDefault() {
+		$this->title = __("Order discount statistics");
+		
+		try {
+			$this->_ordersByDiscount = $this->profile->getTotalOrdersByDiscount($this->getSince(), $this->getUntil());
+			
+		} catch(Nette\MemberAccessException $e) {
+			$this->template->enabled = FALSE;
+		}
+			
+		$this->template->numOrdersByDiscount = $this->_ordersByDiscount['numOfOrders'];
+		$this->template->discountValue = $this->_ordersByDiscount['discountValue'];
+	}
+	
+	public function renderActiveUserDiscounts() {
+		$this->title = "Aktivní slevy k dnešnímu datu";
 	}
 	
 	protected function createComponentUserDiscountsGrid($name) {
+	
 		$grid = new vManager\Grid($this, $name);
 
-		$model = new vManager\Grid\ArrayModel($this->_data);
+		$model = new vManager\Grid\ArrayModel($this->profile->getActiveUserDiscounts($this->getSince(), $this->getUntil()));
 
 		$grid->setExport(TRUE);
 		$grid->setModel($model);

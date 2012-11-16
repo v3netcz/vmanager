@@ -42,7 +42,9 @@ class DefaultPresenter extends MonthlyPresenter {
 		$this->setupParams();
 	}
 	
-	public function renderDefault() {		
+	public function renderDefault() {	
+		$this->title = __('Sellings');
+		
 		$dailyOrders = $this->profile->getDailyOrders($this->getSince(), $this->getUntil());
 		$chartData = $this->createDateArray($dailyOrders);
 		$chartData2 = array();

@@ -34,9 +34,6 @@ use vManager,
  * @since Sep 12, 2012
  */
 class OrderPresenter extends MonthlyPresenter {
-
-	/** @persistent */
-	public $month;
 	
 	private $_totalClasses;
 	
@@ -45,7 +42,7 @@ class OrderPresenter extends MonthlyPresenter {
 	}
 	
 	public function renderDefault() {
-	
+		$this->title = __("Order detail statistics");
 		
 		try {
 			$this->getTotalClasses();
@@ -62,6 +59,8 @@ class OrderPresenter extends MonthlyPresenter {
 
 		$data = $this->getTotalClasses();
 		$model = new vManager\Grid\ArrayModel($data);
+		
+		$grid->setExport(true);
 
 		$grid->setModel($model);
 		$grid->setItemsPerPage(20);
@@ -73,6 +72,8 @@ class OrderPresenter extends MonthlyPresenter {
 				 if($row->min <= 0) echo "< " . $row->max;
 				 elseif($row->max === NULL) echo ">= " . $row->min;
 				 else echo $row->min . " - " . ($row->max - 1);
+				 
+				 echo " Kč";
 			 },
 			 "sortable" => true,
 		));

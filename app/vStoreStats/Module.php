@@ -45,7 +45,7 @@ class vStoreStats extends vManager\Application\Module implements vManager\Applic
 		$acl->addResource('vStoreStats:Default', 'vStoreStats');
 		$acl->addResource('vStoreStats:Annual', 'vStoreStats');
 		$acl->addResource('vStoreStats:Order', 'vStoreStats');
-		$acl->addResource('vStoreStats:ActiveUserDiscounts', 'vStoreStats');
+		$acl->addResource('vStoreStats:Discount', 'vStoreStats');
 
 		$acl->addRole('vStore manager', 'User');		
 				

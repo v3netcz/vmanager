@@ -1,0 +1,129 @@
+{extends '../@layout.latte'}
+
+{block recordHead}
+
+	<script type="text/javascript" src="{$basePath}/js/number_formater.js"></script>
+	<script src="{$basePath}/js/highcharts/highcharts.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	// format("### ###,##", Math.abs(this.y)) +' Kč'
+	
+	var chart1; // globally available
+	$(document).ready(function() {
+		var numOrdersChart = new Highcharts.Chart({
+
+			chart: {
+				renderTo: 'numOrdersChartContainer',
+			},
+			title: {
+				text: null
+			},
+			
+			tooltip: {
+				enabled: false
+			},
+			
+			plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b><br />'
+                            	+ (this.y ? format("### ###", this.y) : 0) + ' <?php echo __("orders") ?>'
+                            	+ (this.percentage ? ' (' + format("#0,#", this.percentage)  +' %)' : '');
+                        }
+                    }
+                }
+            },
+			
+			series: [{
+				type: 'pie',
+				name: 'Number of orders',
+				data: [
+					{
+						name: 'No discount',
+						y: {$numOrdersByDiscount['noDiscount']},
+						sliced: true,
+						selected: true
+					},
+					['Coupon discount', {$numOrdersByDiscount['couponDiscount']}],
+					['Other discount', {$numOrdersByDiscount['otherDiscount']}]
+				]
+			}],
+
+			
+			credits: {
+				enabled: false
+			},
+		});
+		
+		
+		var discountValueChart = new Highcharts.Chart({
+
+			chart: {
+				renderTo: 'discountValueChartContainer',
+			},
+			title: {
+				text: null
+			},
+			
+			tooltip: {
+				enabled: false
+			},
+			
+			plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b><br />'
+                            	+ (this.y ? format("### ###,##", this.y) : 0) + ' Kč'
+                            	+ (this.percentage ? ' (' + format("#0,#", this.percentage)  +' %)' : '');
+                        }
+                    }
+                }
+            },
+			
+			series: [{
+				type: 'pie',
+				name: 'Discount value',
+				data: [
+					['Coupon discount', {$discountValue['couponDiscount']}],
+					['Other discount', {$discountValue['otherDiscount']}]
+				]
+			}],
+
+			
+			credits: {
+				enabled: false
+			},
+		});
+   });
+   </script>
+{/block}
+
+{block #actionMenu}
+	<a href="{link activeUserDiscounts}" target="_blank" class="color-button button_black">Zobrazit seznam uživatelů s aktivní slevou</a>
+{/block}
+
+{block #statistics}
+<div class="box grid_16 round_all productGrid">
+	<h2 class="box_head grad_colour">Rozložení slev</h2>
+	<a href="#" class="grabber">&nbsp;</a>
+	<a href="#" class="toggle">&nbsp;</a>
+	<div class="toggle_container" style="padding: 30px 0;">
+	
+		<div id="numOrdersChartContainer" style="width: 45%; height: 250px; float: left; margin-left: 5%;"></div>
+		<div id="discountValueChartContainer" style="width: 40%; height: 300px; float: right; margin-left: 5%;"></div>
+		<div style="clear: both;"></div>
+
+	</div>
+</div>

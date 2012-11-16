@@ -111,6 +111,32 @@ class vBuilderCmsV2 extends BaseDataSource {
 		return intval($stats->numOfOrders);
 	}
 	
+	public function getTotalOrdersByDiscount(\DateTime $since, \DateTime $until) {
+		$data = $this->connection
+				->select('[productId] [discountType], COUNT(*) [numOfOrders], ABS(CEIL(SUM([amount]*[price]))) [discount]')
+				->from(self::TABLE_ORDERS)->as('o')
+				->leftJoin(self::TABLE_ORDER_ITEMS)->as('oi')->on('[o.id] = [oi.orderId] AND [productId] IN(-3, -4)')
+				->where('[timestamp] >= %s', $since->format('Y-m-d'))
+				->and('[timestamp] <= %s', $until->format('Y-m-d 23:59:59'))
+				->groupBy('[productId]')
+				->fetchAssoc('discountType');
+		
+		$stats = array(
+			"numOfOrders" => array(
+				"noDiscount" => isset($data['']) ? $data['']['numOfOrders'] : 0,
+				"couponDiscount" => isset($data[-4]) ? $data[-4]['numOfOrders'] : 0,
+				"otherDiscount"  => isset($data[-3]) ? $data[-3]['numOfOrders'] : 0,
+			),
+			
+			"discountValue" => array(
+				"couponDiscount" => isset($data[-4]) ? $data[-4]['discount'] : 0,
+				"otherDiscount"  => isset($data[-3]) ? $data[-3]['discount'] : 0,
+			)
+		);
+		
+		return $stats;
+	}
+	
 	public function getUniqueCustomers(\DateTime $since, \DateTime $until) {
 		$stats = $this->connection
 				->select('COUNT(DISTINCT [c.email]) numOfCustomers')

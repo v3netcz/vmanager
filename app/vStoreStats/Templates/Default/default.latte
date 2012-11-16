@@ -1,31 +1,6 @@
 {extends '../@layout.latte'}
 
-{block pageTitle}<?php echo __('E-shop statistics'); ?>{/block}
-
-{block head}
-	<style>
-		.productGrid .price,
-		.productGrid .amount {
-			text-align: right;
-		}
-		
-		FORM#frm-monthSelectionForm DIV {
-			float: left;
-			line-height: 32px;
-			padding-right: 5px;
-		}
-		
-		FORM#frm-monthSelectionForm LABEL {
-			padding-right: 5px;
-		}
-		
-		FORM#frm-monthSelectionForm BUTTON {
-			display: block !important;
-			float: left !important;
-			clear: none !important;
-		}
-	</style>
-
+{block recordHead}
 	<script src="{$basePath}/js/highcharts/highcharts.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
@@ -93,17 +68,11 @@
    </script>
 {/block}
 
-{block statsContent}
-<div class="flat_area grid_16">
-	<h2><?php echo __('E-shop statistics'); ?> - {$control->profile->name}</h2>
-	
-	{control monthSelectionForm}
-	
-	<div style="line-height: 32px; float: right">
-		<a href="{link Default:report}" target="_blank" class="color-button button_black"><?php echo __('Save report'); ?></a>
-	</div>
-	
-</div>
+{block #actionMenu}
+<a href="{link Default:report}" target="_blank" class="color-button button_black"><?php echo __('Save report'); ?></a>
+{/block}
+
+{block #statistics}
 
 <div class="box grid_16 round_all">
 	<h2 class="box_head grad_colour"><?php echo __('Number of recieved orders'); ?></h2>

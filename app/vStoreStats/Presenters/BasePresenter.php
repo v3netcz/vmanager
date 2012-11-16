@@ -41,6 +41,8 @@ class BasePresenter extends vManager\Modules\System\SecuredPresenter {
 	/** @persistent */
 	public $profileId;
 	
+	public $title;
+	
 	public function startup() {
 		parent::startup();
 

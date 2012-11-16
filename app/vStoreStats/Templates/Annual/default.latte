@@ -1,8 +1,6 @@
 {extends '../@layout.latte'}
 
-{block pageTitle}<?php echo __('Annual statistics'); ?>{/block}
-
-{block head}
+{block recordHead}
 	<style>
 	
 		.posVal {
@@ -107,15 +105,11 @@
    </script>
 {/block}
 
-{block statsContent}
-<div class="flat_area grid_16">
-	<h2><?php echo __('Annual statistics'); ?> - {$control->profile->name}</h2>
-		
-	<div style="line-height: 32px; float: right">
-		<a href="{link Annual:report}" target="_blank" class="color-button button_black"><?php echo __('Save report'); ?></a>
-	</div>
-	
-</div>
+{block #actionMenu}
+<a href="{link Annual:report}" target="_blank" class="color-button button_black"><?php echo __('Save report'); ?></a>
+{/block}
+
+{block #statistics}
 
 <div class="box grid_16 round_all">
 	<h2 class="box_head grad_colour"><?php echo __('Number of recieved orders'); ?></h2>

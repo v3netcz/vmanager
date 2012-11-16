@@ -4,8 +4,34 @@
 	<link rel="stylesheet" href="{$basePath}/css/accounting.css" type="text/css">
 	<script type="text/javascript" src="{$basePath}/js/vManager/accounting.js"></script>
 	
+	<style>
+		.productGrid .price,
+		.productGrid .amount {
+			text-align: right;
+		}
+		
+		FORM#frm-monthSelectionForm DIV {
+			float: left;
+			line-height: 32px;
+			padding-right: 5px;
+		}
+		
+		FORM#frm-monthSelectionForm LABEL {
+			padding-right: 5px;
+		}
+		
+		FORM#frm-monthSelectionForm BUTTON {
+			display: block !important;
+			float: left !important;
+			clear: none !important;
+		}
+	</style>
+	
 	{block recordHead}{/block}
 {/block}
+
+
+{block pageTitle}{$control->profile->name}{if $presenter->title} - {$presenter->title}{/if}{/block}
 
 {block content}
 	{*dump $presenter->name == 'Accounting:IssuedInvoiceRecord'*}
@@ -21,7 +47,7 @@
 				<ul class="dropdown">
 					<li><a href="{link Default:default, profileId => $pId, month => null}"><?php echo __('Monthly statistics'); ?></a>
 					<li><a href="{link Order:default, profileId => $pId, month => null}"><?php echo __('Order statistics'); ?></a>
-					<li><a href="{link ActiveUserDiscounts:default, profileId => $pId, month => null}"><?php echo __('Active user discounts'); ?></a>
+					<li><a href="{link Discount:default, profileId => $pId, month => null}"><?php echo __('Order discounts'); ?></a>
 					<li><a href="{link Annual:default, profileId => $pId, month => null}"><?php echo __('Annual summary'); ?></a>
 				</ul>
 			</li>
@@ -33,6 +59,22 @@
 			Požadovaný modul není v tomto e-shopu podporován.
 		</div>
 	{else}
-		{include #statsContent}
+		<div class="flat_area grid_16">
+			<h2>{$control->profile->name}{if $presenter->title} - {$presenter->title}{/if}</h2>
+	
+			{if $presenter instanceof vManager\Modules\vStoreStats\MonthlyPresenter}
+				{control monthSelectionForm}
+			{/if}
+			
+			{ifset #actionMenu}
+				<div style="line-height: 32px; float: right">
+					{include #actionMenu}
+				</div>
+			{/ifset}
+			
+			<div style="clear: both;"></div>
+		</div>
+	
+		{include #statistics}
 	{/if}
 {/block}

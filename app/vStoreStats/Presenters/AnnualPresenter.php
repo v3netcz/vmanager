@@ -33,14 +33,8 @@ use vManager,
  * @author Adam Staněk (V3lbloud)
  * @since Jun 27, 2012
  */
-class AnnualPresenter extends MonthlyPresenter {
+class AnnualPresenter extends BasePresenter {
 
-	/** @persistent */
-	public $month;
-	
-	public function actionDefault() {
-		$this->setupParams();
-	}
 	
 	public function getYears() {
 		$availableYears = range((int)$this->profile->getSince()->format('Y'), (int) $this->profile->getUntil()->format('Y'));
@@ -48,6 +42,8 @@ class AnnualPresenter extends MonthlyPresenter {
 	}
 	
 	public function renderDefault() {	
+		$this->title = __("Annual sellings");
+	
 		$years = $this->getYears();
 		$data = $this->gatherData($years);
 		
@@ -83,7 +79,6 @@ class AnnualPresenter extends MonthlyPresenter {
 	// <editor-fold defaultstate="collapsed" desc="Report">
 	
 	public function actionReport($id) {
-		$this->setupParams($id);
 		
 		$years = $this->getYears();
 		$data = $this->gatherData($years);
