@@ -37,12 +37,15 @@ class ReceivedInvoiceRecordPresenter extends IssuedInvoiceRecordPresenter {
 		return true;
 	}
 		
-	protected function getDPrefix() {
+	public function getDPrefix() {
 		return '321'; // Dodavatelé	
 	}
 	
-	protected function getMdPrefix() {
-		return '5';	// Náklady
+	public function getMdPrefix() {
+		return array(
+			'5', 	// Náklady
+			'213'	// Ceniny
+		);
 	}
 	
 	protected function createComponentGeneralRecordGrid($name) {

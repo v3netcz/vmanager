@@ -33,7 +33,7 @@ use vManager, vBuilder, Nette, vManager\Form, Gridito, Nette\Utils\Strings;
  */
 class OtherLiabilityRecordPresenter extends ReceivedInvoiceRecordPresenter {
 
-	protected function getDPrefix() {
+	public function getDPrefix() {
 		return '325';	// Ostatní závazky
 	}
 	

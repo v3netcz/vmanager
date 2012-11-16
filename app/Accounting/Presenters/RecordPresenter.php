@@ -54,11 +54,33 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 				->where('[date] >= %s', $this->getSince()->format('Y-m-d'))
 				->and('[date] <= %s', $this->getUntil()->format('Y-m-d 23:59:59'));
 				
-		if($this->getDPrefix() !== null)
-			$ds->and('[d] LIKE %like~', $this->getDPrefix());
+		if($this->getDPrefix() !== null) {
+			$d = is_array($this->getDPrefix()) ? $this->getDPrefix() : array($this->getDPrefix());
+			$counter = 0;
+			
+			foreach($d as $curr) {
+				$ending = ++$counter == count($d) ? ')' : ''; 
+			
+				if($counter == 1)
+					$ds->and('([d] LIKE %like~' . $ending, $curr);
+				else
+					$ds->or('[d] LIKE %like~' . $ending, $curr);
+			}
+		}
 		
-		if($this->getMdPrefix() !== null)
-			$ds->and('[md] LIKE %like~', $this->getMdPrefix());
+		if($this->getMdPrefix() !== null) {
+			$md = is_array($this->getMdPrefix()) ? $this->getMdPrefix() : array($this->getMdPrefix());
+			$counter = 0;
+			
+			foreach($md as $curr) {
+				$ending = ++$counter == count($md) ? ')' : ''; 
+			
+				if($counter == 1)
+					$ds->and('([md] LIKE %like~' . $ending, $curr);
+				else
+					$ds->or('[md] LIKE %like~' . $ending, $curr);
+			}
+		}
 			
 			
 		return $ds;
@@ -268,13 +290,20 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 		$values = $this->getBillingClasses();
 	
 		if($prefix !== null) {
+			if(!is_array($prefix)) $prefix = array($prefix);
+		
 			$values = array_filter($values, function ($value) use (&$values, $prefix) {
 				$id = key($values);							
 				next($values);
 				
 				if(Strings::endsWith($id, '0')) return false;
 				
-				return Strings::startsWith($id, $prefix);
+				foreach($prefix as $currPrefix) {
+					if(Strings::startsWith($id, $currPrefix))
+						return true;
+				}
+				
+				return false;
 			});
 		}
 	
@@ -285,11 +314,11 @@ class RecordPresenter extends vManager\Modules\System\SecuredPresenter {
 		}
 	}
 	
-	protected function getDPrefix() {
+	public function getDPrefix() {
 		return null;
 	}
 	
-	protected function getMdPrefix() {
+	public function getMdPrefix() {
 		return null;
 	}
 	

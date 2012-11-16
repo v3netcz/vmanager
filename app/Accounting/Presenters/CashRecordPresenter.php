@@ -176,8 +176,10 @@ class CashRecordPresenter extends RecordPresenter {
 			->setAttribute('autocomplete-src', $this->link('CashRecord:suggestSubjectEvidenceId'))
 			->setAttribute('title', __('To which receipt assign this transaction?'))
 			->addRule(function ($control) use ($context) {
+					$evidenceId = preg_replace("/\s+/", "", $control->value);
+			
 					return ($control->value == "") || ($context->repository->findAll(RecordPresenter::ENTITY_RECORD)
-						->where('[evidenceId] = %s OR [subjectEvidenceId] = %s', $control->value, $control->value)->fetch() !== false);
+						->where('[evidenceId] = %s OR [subjectEvidenceId] = %s', $evidenceId, $evidenceId)->fetch() !== false);
 					
 			}, __('Bound evidence ID does not exists.'));
 		

@@ -50,11 +50,11 @@ ORDER BY r.evidenceId
 		return false;
 	}
 		
-	protected function getDPrefix() {
+	public function getDPrefix() {
 		return '602';	// Tržby z prodeje služeb
 	}
 	
-	protected function getMdPrefix() {
+	public function getMdPrefix() {
 		return '311';	// Odběratelé
 	}
 	
@@ -114,7 +114,7 @@ ORDER BY r.evidenceId
 				if($issued) {
 					$e = $presenter->context->connection->query(
 						'SELECT [evidenceId], [value] FROM [accounting_records]',
-						'WHERE [d] = %s', $row->d->id,
+						'WHERE [d] LIKE %like~', $presenter->getMdPrefix(),
 						// 'AND [date] >= %s', $row->date->format('Y-m-d'),
 						'AND [subjectEvidenceId] = %s', $row->evidenceId
 					)->fetchAll();
