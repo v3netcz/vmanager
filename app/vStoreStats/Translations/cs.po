@@ -16,34 +16,32 @@ msgstr "Období:"
 msgid "Filter"
 msgstr "Zobrazit"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:78
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:82
 msgid "ID"
 msgstr "ID"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:79
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:83
 msgid "Product name"
 msgstr "Název produktu"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:80
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:84
 msgid "Amount"
 msgstr "Množství"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:81
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:85
 msgid "Revenue"
 msgstr "Tržba"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:3
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:98
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Module.php:64
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Module.php:66
 msgid "E-shop statistics"
 msgstr "Statistiky obchodu"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:86
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:61
 msgid "Number of recieved orders:"
 msgstr "Počet přijatých objednávek:"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:109
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Annual/default.latte:109
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:78
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Annual/default.latte:115
 msgid "Number of recieved orders"
 msgstr "Počet přijatých objednávek"
 
@@ -51,24 +49,78 @@ msgstr "Počet přijatých objednávek"
 msgid "Last 30 days"
 msgstr "Posledních 30 dní"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:103
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Annual/default.latte:103
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:72
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Annual/default.latte:109
 msgid "Save report"
 msgstr "Uložit report"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:125
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Default/default.latte:94
 msgid "Summary"
 msgstr "Souhrn"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Annual/default.latte:3
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Annual/default.latte:100
 msgid "Annual statistics"
 msgstr "Roční přehled"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/@layout.latte:22
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/@layout.latte:48
 msgid "Monthly statistics"
 msgstr "Měsíční statistiky"
 
-#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/@layout.latte:23
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/@layout.latte:51
 msgid "Annual summary"
 msgstr "Roční přehled"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/AnnualPresenter.php:45
+msgid "Annual sellings"
+msgstr "Roční prodeje"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DefaultPresenter.php:46
+msgid "Sellings"
+msgstr "Prodeje"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DiscountPresenter.php:48
+msgid "Order discount statistics"
+msgstr "Statistiky slev"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DiscountPresenter.php:77
+msgid "User ID"
+msgstr "ID uživatele"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DiscountPresenter.php:78
+msgid "Name"
+msgstr "Jméno"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DiscountPresenter.php:79
+msgid "Surname"
+msgstr "Příjmení"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DiscountPresenter.php:81
+msgid "Percentage discount"
+msgstr "Procentuální sleva"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/DiscountPresenter.php:87
+msgid "Until"
+msgstr "Do"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/OrderPresenter.php:45
+msgid "Order detail statistics"
+msgstr "Detailní statistiky objednávek"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/OrderPresenter.php:70
+msgid "Range"
+msgstr "Rozmezí"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Presenters/OrderPresenter.php:81
+msgid "Number of orders"
+msgstr "Počet objednávek"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/Discount/default.latte:36
+msgid "orders"
+msgstr "objednávek"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/@layout.latte:49
+msgid "Order statistics"
+msgstr "Statistika objednávek"
+
+#: /var/www/cz.v3net.bilahora.vmanager/tools/../app/vStoreStats/Templates/@layout.latte:50
+msgid "Order discounts"
+msgstr "Statistika slev"
