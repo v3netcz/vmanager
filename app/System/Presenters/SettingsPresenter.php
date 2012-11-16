@@ -53,7 +53,8 @@ class SettingsPresenter extends SecuredPresenter {
 					'jpg' => 'image/jpeg',
 					'JPG' => 'image/jpeg',
 					'png' => 'image/png',
-					'gif' => 'image/gif'
+					'gif' => 'image/gif',
+					'svg' => 'image/svg+xml'
 				))
 				->addRule(MultipleFileUploadControl::FILES_COUNT, __('You can upload one file only'), 1);
 		
@@ -77,12 +78,12 @@ class SettingsPresenter extends SecuredPresenter {
 			vBuilder\Utils\FileSystem::tryDeleteFiles(
 				vBuilder\Utils\FileSystem::findFilesWithBaseName(
 					FILES_DIR . '/logo',
-					array('jpg', 'png', 'gif')
+					array('jpg', 'png', 'gif', 'svg')
 				)
 			);			
 
 			$logo = $values->logo[0];			
-			$logo->setFilename('logo');
+			$logo->setFilename('logo.' . $logo->getExtension());
 			$path = FILES_DIR . $logo->save('/');
 			
 			/* $img = Nette\Image::fromFile($path);

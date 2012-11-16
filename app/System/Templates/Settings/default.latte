@@ -10,7 +10,12 @@
 		<div class="toggle_container">
 			<div class="block">
 				<div style="margin-bottom: 20px;" n:if="$module->ownerInfo->logoUrl">
-					<img src="{$module->ownerInfo->logoUrl}" alt="<?php echo __('Current logo'); ?>" style="max-width: 200px" />
+					{if Nette\Utils\Strings::endsWith($module->ownerInfo->logoUrl, '.svg')}
+						{var $h = vBuilder\Utils\Svg::computeHeight($module->ownerInfo->logoPath, 200)}
+						<embed src="{$module->ownerInfo->logoUrl}" type="image/svg+xml" style="width: 200px;{if $h > 0} height: {$h}px;{/if}" />
+					{else}
+						<img src="{$module->ownerInfo->logoUrl}" alt="<?php echo __('Current logo'); ?>" style="max-width: 200px" />
+					{/if}
 				</div>
 				
 				{control settingsForm}

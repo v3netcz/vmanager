@@ -84,7 +84,7 @@ class FileSaver extends Nette\Object
 	 */
 	private function generateFileName($autoRenameDuplicates)
 	{
-		return UploadManager::generateFileName(self::getFilesDir(), $this->getFile()->getName(), $autoRenameDuplicates);		
+		return UploadManager::generateFileName(self::getFilesDir(), $this->getFilename(), $autoRenameDuplicates);		
 	}
 	
 	public static function getFilesDir() {
