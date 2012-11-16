@@ -42,16 +42,16 @@
 			
 			series: [{
 				type: 'pie',
-				name: 'Number of orders',
+				name: 'Počet objednávek',
 				data: [
 					{
-						name: 'No discount',
+						name: 'Bez slevy',
 						y: {$numOrdersByDiscount['noDiscount']},
 						sliced: true,
 						selected: true
 					},
-					['Coupon discount', {$numOrdersByDiscount['couponDiscount']}],
-					['Other discount', {$numOrdersByDiscount['otherDiscount']}]
+					['Kupónová sleva', {$numOrdersByDiscount['couponDiscount']}],
+					['Jiná sleva', {$numOrdersByDiscount['otherDiscount']}]
 				]
 			}],
 
@@ -94,10 +94,10 @@
 			
 			series: [{
 				type: 'pie',
-				name: 'Discount value',
+				name: 'Hodnota slevy',
 				data: [
-					['Coupon discount', {$discountValue['couponDiscount']}],
-					['Other discount', {$discountValue['otherDiscount']}]
+					['Kupónová sleva', {$discountValue['couponDiscount']}],
+					['Jiná sleva', {$discountValue['otherDiscount']}]
 				]
 			}],
 

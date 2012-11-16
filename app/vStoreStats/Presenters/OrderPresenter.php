@@ -42,7 +42,7 @@ class OrderPresenter extends MonthlyPresenter {
 	}
 	
 	public function renderDefault() {
-		$this->title = __("Order detail statistics");
+		$this->title = "Detailní statistika objednávek";
 		
 		try {
 			$this->getTotalClasses();
@@ -67,7 +67,7 @@ class OrderPresenter extends MonthlyPresenter {
 		$grid->sortColumn = $grid->sortColumn ?: 'min';
 		$grid->sortType = $grid->sortType ?: 'asc';
 
-		$grid->addColumn("min", __("Range"), array(
+		$grid->addColumn("min", "Hodnota objednávky", array(
 			 "renderer" => function ($row) {
 				 if($row->min <= 0) echo "< " . $row->max;
 				 elseif($row->max === NULL) echo ">= " . $row->min;
