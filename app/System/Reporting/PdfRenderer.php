@@ -127,10 +127,10 @@ class PdfRenderer extends TemplateReportRenderer {
 			null,							// Default font
 			$this->pageMarginLeft,			// Margin left (in mm)
 			$this->pageMarginRight,			// Margin right (in mm)
-			$this->pageMarginTop,			// Margin top (in mm)
-			$this->pageMarginBottom,		// Margin bottom (in mm)
-			$this->headerHeight,			// Header margin (in mm)
-			$this->footerHeight				// Footer margin (in mm)
+			$this->pageMarginTop + $this->headerHeight, // Margin top (in mm)
+			$this->pageMarginBottom + $this->footerHeight,		// Margin bottom (in mm)
+			$this->pageMarginTop,			// Header margin (in mm)
+			$this->pageMarginBottom			// Footer margin (in mm)
 		);
 		
 		$mPdf->restoreBlockPageBreaks = true;

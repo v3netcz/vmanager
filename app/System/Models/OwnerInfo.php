@@ -41,15 +41,27 @@ class OwnerInfo extends vBuilder\Object {
 	 * @return string|null
 	 */
 	public function getLogoUrl() {
+		$logoFile = $this->getLogoPath();
+		if($logoFile == NULL) return NULL;
+		
+		return vManager\Modules\System\FilesPresenter::getLink('/' . pathinfo($logoFile, PATHINFO_BASENAME));
+	}
+	
+	/**
+	 * Returns file path of the owner's logo
+	 *
+	 * @return string|null
+	 */
+	public function getLogoPath() {
 		$matchingFiles = vBuilder\Utils\FileSystem::findFilesWithBaseName(
 				FILES_DIR . '/logo',
-				array('jpg', 'png', 'gif')
+				array('jpg', 'png', 'gif', 'svg')
 		);
-		
+
 		if(count($matchingFiles) == 0) return null;
 		list($logoFile) = $matchingFiles;
 		
-		return vManager\Modules\System\FilesPresenter::getLink('/' . pathinfo($logoFile, PATHINFO_BASENAME));
+		return $logoFile;
 	}
 	
 	/**
@@ -60,10 +72,12 @@ class OwnerInfo extends vBuilder\Object {
 	static function registerLogoFileHandler() {
 		vManager\Modules\System\FilesPresenter::$handers[] = function ($filename) {
 						
-			if(($matches = Nette\Utils\Strings::match($filename, '/^\/logo\.(png|jpg|gif)$/i')) !== null) {
+			if(($matches = Nette\Utils\Strings::match($filename, '/^\/logo\.(png|jpg|gif|svg)$/i')) !== null) {
 				$path = FILES_DIR . '/logo.' . $matches[1];
 				
-				return new vBuilder\Application\Responses\FileResponse($path);
+				$response = new vBuilder\Application\Responses\FileResponse($path, null, strcasecmp($matches[1], 'svg') == 0 ? 'image/svg+xml' : null);
+				$response->setContentDisposition('inline');
+				return $response;
 			}
 		};
 	}
