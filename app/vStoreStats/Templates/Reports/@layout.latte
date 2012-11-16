@@ -1,8 +1,10 @@
-{* Page margins in mm (top, left, bottom, right) *}
-{$renderer->setPageMargins(8, 8, 8, 8)}
-
 {* Fixed header height (in mm) *}
-{$renderer->setHeaderHeight(40)}
+{var $h = $ownerInfo->logoPath && Nette\Utils\Strings::endsWith($ownerInfo->logoPath, '.svg') ? vBuilder\Utils\Svg::computeHeight($ownerInfo->logoPath, 45) + 5 : 30}
+{$renderer->setHeaderHeight($h)}
+
+{* Page margins in mm (top, left, bottom, right) *}
+{$renderer->setPageMargins($h > 30 ? 3 : 8, 8, 8, 8)}
+
 <sethtmlpageheader name="ph1" page="ALL" value="on" show-this-page="1" />
 <htmlpageheader name="ph1">
 	{block pageHeader}
@@ -27,6 +29,7 @@
 
 	TABLE {
 		border-collapse: collapse;
+		font-family: Myriad Pro; font-size: 8pt;
 	}
 
 	TABLE.reportTable {
