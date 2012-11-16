@@ -199,7 +199,8 @@ class vBuilderCmsV2 extends BaseDataSource {
 			->select("[id], [username], [name], [surname], MAX([percentageDiscount]) [percentageDiscount], MIN([until]) [until]")
 			->from(self::TABLE_USERS)->as('u')
 			->join(self::TABLE_SCHEDULED_DISCOUNTS)->as('sd')->on('[u.id] = [sd.user]')
-			->where('[sd.until] >= %s', $since->format('Y-m-d'))
+			// ->where('[sd.until] >= %s', $since->format('Y-m-d'))
+			->where('[sd.until] >= NOW()')
 			->groupBy('[u.id]')
 			->orderBy('[u.surname], [u.name]');
 			
