@@ -1,6 +1,12 @@
+{*
+ * Alert types:
+ *		info
+ *		warn
+ *		error
+ *}
 {if count($flashes)}
 	<div class="grid_16">
-		<div n:foreach="$flashes as $flash" class="alert alert_{if $flash->type == 'info'}blue{else}orange{/if}">
+		<div n:foreach="$flashes as $flash" class="alert alert_{if $flash->type == 'info'}blue{elseif $flash->type == 'error'}red{else}orange{/if}">
 			<img height="24" width="24" src="{$basePath}/images/icons/small/white/Alert%202.png">
 			{$flash->message}
 		</div>
