@@ -32,10 +32,24 @@
 	        <table class="gridito-table">
                 <thead>
 						 {block tableHead}
-						 <tr n:if="$allowExports">
+						 <tr n:if="$allowExports || $allowFilter">
 							<td colspan="{=count($control['columns']->getComponents())+$control->hasActions()}" class="ui-widget-header">
 								<div class="filterHeader" style="text-align: right;">
-									<a href="{link exportToExcelCsv}" class="color-button button_black">Export to Excel CSV</a>
+									{if $allowFilter}
+										<span id="{$control->uniqueId}-filter">
+											{form filterForm}
+											<div n:class="filterForm, $form['f']->hasErrors() ? badFilterForm" style="{if !$form->isSubmitted() && $filter == ""}display: none;{/if} float: left;">
+												{label f /}
+												{input f}
+												{* input s *}
+												{* <button type="submit" class="button_black round_all">{$form['s']->caption}</button> *}
+											</div>
+											{/form}
+
+											<a href="#" class="color-button button_black filterTrigger" {if $form->isSubmitted() || $filter}style="display: none;"{/if}><?php echo __('Filter'); ?></a>
+										</span>
+									{/if}
+									{if $allowExports}<a href="{link exportToExcelCsv}" class="color-button button_black"><?php echo __('Export to Excel CSV'); ?></a>{/if}
 								</div>
 							</td>
 						 </tr>

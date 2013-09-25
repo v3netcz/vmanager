@@ -27,7 +27,11 @@ use vManager,
 	Nette,
 	Gridito,
 	vBuilder,
-	vBuilder\Utils\Csv;
+	vBuilder\Utils\Csv,
+	vBuilder\Utils\Filter,
+	vBuilder\Utils\FilterException,
+	vManager\Form,
+	Gridito\IModel;
 
 /**
  * Extended Gridito implementation
@@ -42,6 +46,18 @@ class Grid extends Gridito\Grid {
 
 	/** @var bool */
 	private $allowExports = false;
+
+	/** @var bool */
+	private $allowFilter = false;
+
+	/** @var array */
+	private $filterPresets = array();
+
+	/**
+	 * @var string
+	 * @persistent
+	 */
+	public $filter;
 
 	public function handleExportToExcelCsv() {
 
@@ -76,6 +92,67 @@ class Grid extends Gridito\Grid {
 		$this->getPresenter()->sendResponse($response);
 	}
 
+	public function createComponentFilterForm($name) {	
+		$model = $this->model;
+		$presenter = $this;
+		$filterPresets = $presenter->filterPresets;
+
+		$evaluateFilterPresets = function ($filterStr) use ($filterPresets) {
+			$exp = $filterStr;
+		
+			foreach($filterPresets as $pattern => $replacement) {
+				// Is regular expression? (delimiter detection)
+				if(mb_substr($pattern, 0, 1) == mb_substr($pattern, -1, 1)) {
+					$r = preg_replace($pattern, $replacement, $exp);
+					if($r === NULL) throw new Nette\InvalidArgumentException("Pattern '%$pattern' is not valid for filter preset");
+					if($r != $exp)
+						return $r;
+
+				} elseif($exp == $pattern)
+					return $replacement;
+			}
+			
+			return $filterStr;
+		};
+
+		$form = new Form($this, $name);
+		$form->addText('f', __('Filter exp:'))
+			->setDefaultValue($this->filter)
+			->addRule(function (Nette\Forms\Controls\TextInput $control) use ($model, $evaluateFilterPresets) {
+			
+				$exp = $evaluateFilterPresets($control->getValue());
+
+				try {
+					$ids = Filter::getIdentifiers($exp);
+
+					foreach($ids as $id) {
+						if(!$model->getEntityMetadata()->hasField($id))
+							return false;
+					}
+
+					return true;
+
+				} catch(FilterException $e) {
+					return false;
+				}
+
+     		}, __('Invalid filter'));
+
+		$form->addSubmit('s', __('Filter')); // ->getControlPrototype()->class('button_colour round_all');
+
+		
+		$form->onSuccess[] = function (Form $form) use ($presenter, $evaluateFilterPresets) {
+			$values = $form->getValues();
+
+			$exp = $evaluateFilterPresets($values->f);
+			$presenter->filter = $exp;
+
+			$presenter->redirect('this');
+		};
+
+		return $form;
+	}
+
 	/**
 	 * Sets absolute filename for template to render
 	 * 
@@ -94,6 +171,8 @@ class Grid extends Gridito\Grid {
 								 : __DIR__."/Templates/grid.latte");
 
 		$tpl->allowExports = $this->allowExports;
+		$tpl->allowFilter = $this->allowFilter;
+		$tpl->filter = $this->filter;
 
 		return $tpl;
 	}
@@ -123,4 +202,26 @@ class Grid extends Gridito\Grid {
 		return $this->allowExports;
 	}
 
+	public function setFilterEnabled($enabled) {
+		$this->allowFilter = (bool) $enabled;
+	}
+
+	public function setFilterPresets(array $presets) {
+		$this->filterPresets = $presets;
+	}
+	
+	public function getAppendFilterUrl($filterExp) {
+		$newFilter = ($this->filter != "") ? "($this->filter) and ($filterExp)" : $filterExp;
+		$newFilter = Filter::format($newFilter);
+	
+		return $this->link('this', array('filter' => $newFilter));
+	}
+	
+	public function setModel(IModel $model) {
+
+		if($this->filter)
+			$model->applyFilter($this->filter);
+
+		return parent::setModel($model);
+	}
 }

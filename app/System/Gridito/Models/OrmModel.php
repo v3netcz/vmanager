@@ -26,7 +26,8 @@ namespace vManager\Grid;
 use vBuilder,
 		vManager,
 		Gridito,
-		Nette;
+		Nette,
+		vBuilder\Utils\Filter;
 
 /**
  * Model for ORM queries
@@ -48,6 +49,10 @@ class OrmModel implements Gridito\IModel {
 		$this->_fluent = $fluent;
 	}
 	
+	public function applyFilter($filter) {
+		$this->_fluent->where(Filter::formatSql($filter));
+	}
+
 	public function getUniqueId($item) {
 		$idFields = array_flip($this->getEntityMetadata()->getIdFields());
 		foreach($idFields as $key=>$value) $idFields[$key] = $item->$key;
@@ -145,7 +150,7 @@ class OrmModel implements Gridito\IModel {
 	 * 
 	 * @return string class name
 	 */
-	protected function getEntityClass() {
+	public function getEntityClass() {
 		return $this->_fluent->getRowClass();
 	}
 	
@@ -154,7 +159,7 @@ class OrmModel implements Gridito\IModel {
 	 * 
 	 * @return vBuilder\Orm\IEntityMetadata 
 	 */
-	protected function getEntityMetadata() {
+	public function getEntityMetadata() {
 		$class = $this->getEntityClass();
 		return $class::getMetadata();
 	}
