@@ -68,6 +68,8 @@ class GitHub extends vManager\Application\Module implements vManager\Application
 	public function getTimelineRecords(\DateTime $since, \DateTime $until, array $forUids) {
 		$context = Nette\Environment::getContext();
 		
+		if(count($forUids) == 0) return array();
+		
 		$commits = $context->repository->findAll('vManager\\Modules\\GitHub\\Commit')
 				->where('[timestamp] BETWEEN %d AND %t', $since, $until)
 				->fetchAll();
