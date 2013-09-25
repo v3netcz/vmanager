@@ -66,6 +66,9 @@ class PdfRenderer extends TemplateReportRenderer {
 	/** @var int page margin - left (in mm) */
 	protected $pageMarginLeft = 15;
 	
+	/** @var string page orientation (P: Portrait, L: Landscape) */
+	protected $pageOrientation = 'P';
+	
 	/** @var function ($mPdf) **/
 	public $onBeforeOutput = array();
 	
@@ -73,10 +76,10 @@ class PdfRenderer extends TemplateReportRenderer {
 	/**
 	 * Renders report into output buffer
 	 */
-	function render() {
+	function render($filename = NULL) {
 		$this->setup();
 		$this->onBeforeOutput($this->mPdf);
-		$this->mPdf->Output();
+		$this->mPdf->Output($filename ?: 'document.pdf', 'I');
 	}
 		
 	/**
@@ -122,7 +125,7 @@ class PdfRenderer extends TemplateReportRenderer {
 		// http://mpdf1.com/manual/index.php?tid=184
 		$mPdf = new mPDF(
 			'utf-8',						// Mode
-			'a4',							// Format
+			$this->pageOrientation == 'L' ? 'A4-L' : 'A4',							// Format
 			null,							// Default font size
 			null,							// Default font
 			$this->pageMarginLeft,			// Margin left (in mm)
@@ -179,6 +182,12 @@ class PdfRenderer extends TemplateReportRenderer {
 		if($this->mPdf) throw new Nette\InvalidStateException("mPDF engine has been already initialized.");
 		
 		$this->footerHeight = $height;
+	}
+	
+	public function setPageOrientation($orientation) {
+		if($this->mPdf) throw new Nette\InvalidStateException("mPDF engine has been already initialized.");
+		
+		$this->pageOrientation = $orientation;
 	}
 	
 }
