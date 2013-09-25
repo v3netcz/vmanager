@@ -68,7 +68,7 @@ abstract class TemplateReportRenderer extends vBuilder\Object {
 	/**
 	 * Renders report into output buffer
 	 */
-	abstract function render();
+	abstract function render($filename = NULL);
 	
 	/**
 	 * Renders report into file
@@ -95,7 +95,7 @@ abstract class TemplateReportRenderer extends vBuilder\Object {
 		$template = new Nette\Templating\FileTemplate($this->templateFile);
 		
 		$template->registerFilter(new Nette\Latte\Engine);
-		$template->registerHelperLoader('Nette\Templating\DefaultHelpers::loader');
+		$template->registerHelperLoader('Nette\Templating\Helpers::loader');
 		
 		$template->baseUrl = rtrim($this->context->httpRequest->getUrl()->getBaseUrl(), '/');
 		$template->renderer = $this;
