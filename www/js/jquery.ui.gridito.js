@@ -70,6 +70,25 @@ $.widget("ui.gridito", {
 			}
 		});
 		
+		this.table.find(".filterHeader .badFilterForm INPUT").each(function () {
+			$(this).focus();
+		});
+
+		this.element.find("A.filterTrigger").each(function () {
+			var el = $(this),
+				formDivEl = el.parents(".filterHeader").find("FORM DIV");
+
+			el.click(function (e) {
+				formDivEl.show();
+				el.hide();
+
+				formDivEl.find("INPUT").focus();
+
+				/* formDivEl.show("slide", { direction: "left" }, 1000); 
+				el.hide("slide", { direction: "right" }, 1000);  */
+			});
+		});
+
 		this.element.find("a.gridito-button").each(function () {
 			var el = $(this);
 			/*el.button({

@@ -1,5 +1,13 @@
 /* Coloured Header Gradients, eg. Sortable Boxes, Tab Boxes, Date-picker, etc. */
 
+div.main_container #nav_top ul li.current {
+	margin-top: -1px;
+}
+
+div.main_container #nav_top ul li.current:first-child {
+	margin-top: 0px;
+}
+
 body .grad_colour,
 .ui-widget-header,
 div.main_container #nav_top ul li.current a,

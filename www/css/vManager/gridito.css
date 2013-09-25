@@ -248,7 +248,8 @@ A.color-button {
 }
 
 .gridito-table TBODY TD.gridito-actioncell A.gridito-button,
-A.color-button {
+A.color-button,
+.gridito-table BUTTON.button_black {
 	margin-left: 4px;
 
 	line-height: 13px !important;
@@ -287,7 +288,8 @@ A.color-button:first-child {
 }
 
 .gridito-table TBODY TD.gridito-actioncell A.gridito-button:hover,
-A.color-button:hover {
+A.color-button:hover,
+.gridito-table BUTTON.button_black:hover {
 	border: 1px solid #313841;
 	
 	background: #313841; /* old browsers */
@@ -316,7 +318,8 @@ A.button_orange {
 }
 
 .gridito-table TBODY TD.gridito-actioncell A.button_black,
-A.button_black {
+A.button_black,
+.gridito-table BUTTON.button_black {
 background: #4c5766; /* old browsers */
 
 background: -moz-linear-gradient(top, #4c5766 0%, #313841 99%); /* firefox */
@@ -331,7 +334,7 @@ border:1px solid #313841;
 zoom:1;
 }
 
-.gridito-table .ui-widget-header A.button_black {
+.gridito-table .ui-widget-header .button_black {
 	-moz-box-shadow:0px 1px 0px rgba(30,40,66,1),inset 0px 1px 0px rgba(30,40,66,0.2);
 	-webkit-box-shadow:0px 1px 0px rgba(30,40,66,1),	inset 0px 1px 0px rgba(30,40,66,0.2);
 }
@@ -352,4 +355,32 @@ zoom:1;
 .gridito-table .noResultsCell {
 	text-align: center;
 	padding: 20px 0px 10px 0px;
+}
+
+.gridito-table .filterHeader LABEL {
+	padding-right: 5px;
+}
+
+.gridito-table .filterHeader .filterForm INPUT {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #aaa;
+	color: yellow;
+	width: 300px;
+	padding: 0 4px 1px 4px;
+	margin-top: 0;
+}
+
+.gridito-table .filterHeader .filterForm INPUT:active,
+.gridito-table .filterHeader .filterForm INPUT:focus {
+	background: black;
+}
+
+.gridito-table .filterHeader .badFilterForm INPUT {
+	color: #ff6666;
+}
+
+.gridito-table .filterHeader BUTTON {
+	clear: none !important;
+	display: inline-block;
 }
