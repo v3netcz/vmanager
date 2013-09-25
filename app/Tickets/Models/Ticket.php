@@ -80,7 +80,7 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 	 * 
 	 * @return ITicketState 
 	 */
-	function getState() {
+	function getState() {	
 			return vManager\Modules\Tickets::getInstance()
 							->getTicketState($this->data->state);
 	}
@@ -104,7 +104,7 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 				if(!$state->isInitial()) {
 					$found = false;
 					
-					foreach($this->state->successorIds as $succId) {
+					foreach($this->getState()->successorIds as $succId) {
 						if($succId == $state->id) {
 							$found = true;
 							break;
@@ -112,7 +112,7 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 					}
 					
 				if(!$found)
-					throw new Nette\InvalidStateException("Cannot change ticket state from '".$this->state->id."' to '".$state->id."'");
+					throw new Nette\InvalidStateException("Cannot change ticket state from '".$this->getState()->id."' to '".$state->id."'");
 				}	
 				
 			} elseif(!$state->isInitial()) {
@@ -127,10 +127,10 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 	 * 
 	 * @return array of ITicketState
 	 */
-	function getPossibleStates() {
-		return $this->state->isFinal()
+	function getPossibleStates() {	
+		return $this->getState()->isFinal()
 						? vManager\Modules\Tickets::getInstance()->initialTicketStates
-						: $this->state->successors;;
+						: $this->getState()->successors;
 	}
 	
 	/**
