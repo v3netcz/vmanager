@@ -10,6 +10,7 @@
 							<img src="{=$curr->author->avatarUrl}" width="30" alt="Avatar" style="vertical-align:middle; padding-top:10px; padding-bottom:10px; padding-right:10px" />
 							{if $curr->author !== null}{if $curr->author->exists()}{$curr->author->username}{else}<?php echo _x('User n. %d', array($curr->author->id)); ?>{/if}{else}<?php echo __('nobody'); ?>{/if}
 							@ <abbr title="{$curr->timestamp}">{$curr->timestamp|timeAgoInWords}</abbr>
+							<span class="printDate" style="display: none">{$curr->timestamp->format('j. n. Y')}</span>
 							
 							{*if $curr->author->id == Nette\Environment::getUser()->id}
 								{if $curr->comment && $curr->comment->private}

@@ -41,6 +41,6 @@
 			}
 		</style>
     
-		<span n:class="$deadline > (new \DateTime) ? countDownBeforeDeadline : countDownPassedDeadline" id="countdown" n:if="$deadline"></span>
+		<span n:class="$deadline > (new \DateTime) ? countDownBeforeDeadline : countDownPassedDeadline, dontPrint" id="countdown" n:if="$deadline"></span>
 	{/if}
 {/block}

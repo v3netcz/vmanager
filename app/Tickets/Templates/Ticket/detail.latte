@@ -16,6 +16,16 @@
 	.ticketAttachments {
 		margin: 20px 5px;
 	}
+	
+	@media print {
+		.history H2 ABBR {
+			display: none !important;
+		}
+		
+		.history H2 .printDate {
+			display: inline !important;
+		}
+	}
 </style>
 <script type="text/javascript">
 $(function () {
@@ -40,7 +50,7 @@ $(function () {
 		{block beforeTicketSummary}{/block}
 		
 		<div class="ticketSummary">
-			{if $data->project}<?php echo __('Project:'); ?> <span class="value"><a n:href="Project:detail $data->project->id">{$data->project->name}</a></span> (<a n:href="Ticket:default, projectId => $data->project->id"><?php echo __('show other project tasks'); ?></a>)<br />{/if}
+			{if $data->project}<?php echo __('Project:'); ?> <span class="value"><a n:href="Project:detail $data->project->id">{$data->project->name}</a></span><span class="dontPrint"> (<a n:href="Ticket:default, projectId => $data->project->id"><?php echo __('show other project tasks'); ?></a>)</span><br />{/if}
 			<?php echo _x('Created by: <span class="value">%s</span>', array($firstRevision->author !== null ? ($firstRevision->author->exists() ? $firstRevision->author->username : _x('user n. %d', array($firstRevision->author->id))) : __('anonymous'))); ?><br />
 			<?php echo _x('Assigned to: <span class="value">%s</span>', array($data->assignedTo !== null ? ($data->assignedTo->exists() ? $data->assignedTo->username : _x('user n. %d', array($data->assignedTo->id))) : __('nobody'))); ?><br />
 			{if $data->deadline}
@@ -82,7 +92,7 @@ $(function () {
 		</script>
 	{/if}
 	
-	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all" id="ticketUpdateFormTabs">
+	<div class="box grid_16 tabs ui-tabs ui-widget ui-widget-content ui-corner-all dontPrint" id="ticketUpdateFormTabs">
 		<ul class="tab_header grad_colour clearfix ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1"><?php echo __('Add comment'); ?></a></li>
 			<li class="ui-state-default ui-corner-top" n:if="isset($form['attachments'])"><a href="#tabs-2"><?php echo __('Attach files'); ?></a></li>
