@@ -253,7 +253,8 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		$this->template->registerHelper('texy', callback($texy, 'process'));
 		$this->template->project = $this->getProject();
-		$this->template->historyWidget = new VersionableEntityView('vManager\\Modules\\Tickets\\Project', $id);
+		$this->template->historyWidget = $versionableEntityView = new VersionableEntityView('vManager\\Modules\\Tickets\\Project', $id);
+		$this->addComponent($versionableEntityView, 'historyWidget');
 	}
 	
 	// </editor-fold>
