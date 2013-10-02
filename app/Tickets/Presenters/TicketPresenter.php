@@ -52,16 +52,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 	// <editor-fold defaultstate="collapsed" desc="Ticket listing (default)">
 	
-	/**
-	 * Ticket listing table grid component factory
-	 * 
-	 * @param string $name
-	 * @return vManager\Grid
-	 */
-	protected function createComponentTicketListingGrid($name) {
-		$grid = new vManager\Grid($this, $name);
-		$grid->setTemplateFile(__DIR__ . '/../Templates/Gridito/ticketGrid.latte');
-
+	protected function getTicketDataSource($sortColumn = NULL) {
 		$uid = Nette\Environment::getUser()->getId();
 		$table = Ticket::getMetadata()->getTableName();
 
@@ -107,11 +98,25 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		// Konec filteru
 
 		$order = '[s.timestamp] DESC';
-		if($grid->sortColumn === null)
+		if($sortColumn === null)
 			$ds->orderBy($order.', IF([state] IN %in, 1, 0)', $finalStateIds,', IF([deadline2] IS NULL, 0, 1) DESC, [deadline2], [p.weight] DESC, [assignedTo], [ticketId]');
 		else
 			$ds->orderBy($order);
+			
+		return $ds;
+	}
+	
+	/**
+	 * Ticket listing table grid component factory
+	 * 
+	 * @param string $name
+	 * @return vManager\Grid
+	 */
+	protected function createComponentTicketListingGrid($name) {
+		$grid = new vManager\Grid($this, $name);
+		$grid->setTemplateFile(__DIR__ . '/../Templates/Gridito/ticketGrid.latte');
 
+		$ds = $this->getTicketDataSource($grid->sortColumn);
 		$grid->setModel(new Gridito\DibiFluentModel($ds, 'vManager\\Modules\\Tickets\\Ticket'));
 		$grid->setItemsPerPage(20);
 
@@ -202,28 +207,7 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 
 		// Deadline
 		$grid->addColumn("deadline", __('Deadline'), array(
-			 "renderer" => function ($ticket) {
-
-			   if($ticket->deadline == null) {
-       			if ($ticket->getProject() == null || $ticket->project->deadline == null) {
-              		echo "-";
-              		return;
-            	} 
-            
-            	$deadline = $ticket->getProject()->deadline;
-
-			   } else {
-			   		$deadline = $ticket->deadline;
-			   }
-			   
-			   $deadline2 = clone $deadline;
-			   $deadline2->add(\DateInterval::createFromDateString('1 day'));
-			   
-				echo Nette\Utils\Html::el("abbr")
-				 	->title($deadline->format("d. m. Y"))
-				 	->setText(vManager\Application\Helpers::timeAgoInWords($deadline2));
-
-			 },
+			 "renderer" => __CLASS__ . '::renderTicketDeadline',
 			 "sortable" => true
 		))->setCellClass("date deadline");
 		
@@ -247,6 +231,35 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 			 },
 			 "sortable" => true,
 		))->setCellClass("state");
+	}
+	
+	public static function renderTicketDeadline(Ticket $ticket, $allowShort = true) {
+		if($ticket->deadline == null) {
+			if ($ticket->getProject() == null || $ticket->project->deadline == null) {
+      		echo "-";
+      		return;
+    	} 
+    
+    	$deadline = $ticket->getProject()->deadline;
+
+	   } else {
+	   		$deadline = $ticket->deadline;
+	   }
+	   	   
+	   if($allowShort) {
+	   	  $deadline2 = clone $deadline;
+	   	  $deadline2->add(\DateInterval::createFromDateString('1 day'));
+	   
+		  echo Nette\Utils\Html::el("abbr")
+		 	->title($deadline->format("d. m. Y"))
+		 	->setText(vManager\Application\Helpers::timeAgoInWords($deadline2));
+		   
+	   } else {
+	   	  echo Nette\Utils\Html::el("span")
+		 	->class('date')
+		 	->setText(mb_substr(vManager\Application\Helpers::dayOfWeekInWords($deadline), 0, 2) . str_repeat("\xc2\xa0", $deadline->format('j') < 10 ? 2 : 1) . $deadline->format("j. n. Y"));
+			   
+	   }
 	}
 	
 	protected function createComponentTicketFilter() {
@@ -336,6 +349,27 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 		$this->addComponent($versionableEntityView, 'versionableEntityView');
 		$this->template->historyWidget = $versionableEntityView;
 		
+	}
+	
+	// </editor-fold>
+	
+	// <editor-fold defaultstate="collapsed" desc="Ticket listing print (print)">
+	
+	public function renderPrintTickets() {
+	
+		if($this->getParam('projectId')) {
+			$this->template->project = $this->context->repository->findAll('vManager\\Modules\\Tickets\\Project')
+			  ->where('[revision] > 0')
+			  ->and('[projectId] = %i', $this->getParam('projectId'))->fetch();
+		}
+		
+		if($this->assignedTo) {
+			$this->template->assignedTo = $this->context->repository->findAll('vManager\\Security\\User')
+				->where('[id] = %i', $this->assignedTo)->fetch();
+		}
+	
+		$ds = $this->getTicketDataSource();
+		$this->template->tickets = $ds->fetchAll();
 	}
 	
 	// </editor-fold>

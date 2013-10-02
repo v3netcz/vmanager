@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{var $day = new DateTime}
+		{var $title = "Úkoly " . vManager\Application\Helpers::dayOfWeekInWords($day) . ' ' . $day->format('j. n. Y')}
+		
+		<title>vManager: {$title}</title>
+		
+		<style>
+			BODY {
+				font-family: monospace;
+				letter-spacing: -1px;
+			}
+		
+			TABLE {
+				width: 100%;
+				margin-top: 2.5em;
+				border-collapse: collapse;
+			}
+			
+			TABLE TD {
+				border: 1px dotted #ccc;
+				padding: 7px 12px;
+			}
+			
+			TABLE THEAD TD {
+				font-weight: bold;
+			}
+		
+			TD.id {
+				width: 40px;
+			}
+		
+			TD.deadline {
+				text-align: right;
+				width: 130px;
+			}
+			
+			TD.priority {
+				text-align: center;
+				width: 100px;
+			}
+			
+			.project {
+				color: brown;
+				font-style: italic;
+			}
+			
+			.assignedUser {
+				color: green;
+				font-style: italic;
+			}
+		
+			@media screen {
+				TABLE {
+					width: 700px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>{$title}</h1>
+		
+		<h2 n:if="$project || $assignedTo">
+			{if $project}Projekt: <span class="project">{$project->name}</span>{if $assignedTo},{/if}{/if}
+			{if $assignedTo}Uživatel: <span class="assignedUser">{$assignedTo->username}</span>{/if}
+		</h2>
+		
+		<table>
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>Úkol</td>
+					<td class="deadline">Deadline</td>
+					<td class="priority">Priorita</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr n:foreach="$tickets as $ticket">
+					<td class="id">#{$ticket->id}</td>
+		
+					<td>
+						<span class="project" n:if="$ticket->project && !$project">[{$ticket->project->name}]</span>
+						{$ticket->name}
+					</td>
+					
+					<td class="deadline">{$presenter::renderTicketDeadline($ticket, false)}</td>
+					
+					<td class="priority">
+						{if $ticket->priority}
+							{$ticket->priority->label}
+						{else}
+							-
+						{/if}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<script type="text/javascript">
+			window.print();
+		</script>
+	</body>
+</html>

@@ -63,6 +63,7 @@
 	<h2><?php echo __('Tickets'); ?></h2>
 	<p>Následující stránka obsahuje všechny úkoly k plnění. Pro založení nového úkolu klikněte na tlačítko "<?php echo __('Create new ticket'); ?>".</p>
 	<a href="{link create, projectId => $presenter->getParam('projectId')}" class="color-button"><?php echo __('Create new ticket'); ?></a>
+	<a href="{link printTickets, projectId => $presenter->getParam('projectId')}" target="_blank" class="color-button button_orange"><?php echo 'Vytisknout mé úkoly'; // __('Print my tickets'); ?></a>
 </div>
 <div class="box grid_16 round_all ticketListingBlock" style="margin-top: 20px; border: none;">	
 {control ticketListingGrid}
