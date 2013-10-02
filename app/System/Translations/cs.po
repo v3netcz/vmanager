@@ -690,3 +690,6 @@ msgstr "Prosinec"
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/System/Gridito/Templates/grid.latte:38
 msgid "Export to Excel CSV"
 msgstr "Exportovat do Excelu (CSV)"
+
+msgid "Recently logged in"
+msgstr "Naposledy přihlášen"

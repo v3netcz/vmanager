@@ -670,3 +670,6 @@ msgstr "zobrazit všechny projektové úkoly"
 
 msgid "To nobody"
 msgstr "Nikomu"
+
+msgid "Print my tickets"
+msgstr "Vytisknout mé úkoly"
