@@ -664,3 +664,9 @@ msgstr "<span class=\"author\" style=\"color: %s\">uživatelem č. %d</span>"
 #: /var/www/cz.v3net.bilahora.vmanager/tools/../app/Tickets/Templates/Ticket/multipleInsert.latte:3
 msgid "Multiple insert"
 msgstr ""
+
+msgid "show other project tasks"
+msgstr "zobrazit všechny projektové úkoly"
+
+msgid "To nobody"
+msgstr "Nikomu"
