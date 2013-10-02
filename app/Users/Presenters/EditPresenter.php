@@ -93,6 +93,7 @@ class EditPresenter extends vManager\Modules\System\SecuredPresenter {
 							 }, __('Desired username is already taken. Please use something else.'));
 
 		$form->addText('email', 'E-mail:')
+			->addCondition(Form::FILLED)
 				  ->addRule(Form::EMAIL, __('E-mail is not valid'));
 
 		// TODO: Vyclenit to do specialniho formulare pri editu

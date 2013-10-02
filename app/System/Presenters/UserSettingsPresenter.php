@@ -75,7 +75,8 @@ class UserSettingsPresenter extends SecuredPresenter {
 				  
 		$form->addText('email', 'E-mail:')
 				  ->setDefaultValue($user->email)
-				  ->addRule(Form::EMAIL, __('E-mail is not valid'));
+				  ->addCondition(Form::FILLED)
+					  ->addRule(Form::EMAIL, __('E-mail is not valid'));
 		
 		$form->addMultipleFileUpload('avatar', __('Select your avatar'))
 				->addRule(MultipleFileUploadControl::VALID, __('You may only upload images!'), array (
