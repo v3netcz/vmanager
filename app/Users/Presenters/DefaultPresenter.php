@@ -44,7 +44,12 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 	protected function createComponentUserGrid($name) {
 		$grid = new vManager\Grid($this, $name);
 
-		$model = new Gridito\DibiFluentModel($this->context->repository->findAll('vManager\Security\User'), 'vManager\Security\User');
+		$lastLoginInfo = $this->context->database->connection->query("SELECT * FROM [security_lastLoginInfo]")->fetchAssoc('userId');
+
+		$ds = $this->context->repository->findAll('vManager\Security\User');
+		// $ds->leftJoin('[security_lastLoginInfo]')->on('[userId] = [id]');
+
+		$model = new Gridito\DibiFluentModel($ds, 'vManager\Security\User');
 		$model->setPrimaryKey('id');
 
 		$grid->setModel($model);
@@ -53,10 +58,22 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 		// columns
 		$grid->addColumn("id", "ID")->setSortable(true);
 		$grid->addColumn("username", __('Username'))->setSortable(true);
-		$grid->addColumn("name", __("Name"))->setSortable(true);
-		$grid->addColumn("surname", __("Surname"))->setSortable(true);
+		$grid->addColumn("surname", __("Name"), array(
+			"renderer" => function ($row) {
+				echo Nette\Utils\Html::el('span', $row->surname)->class("surname");
+				if($row->surname != "" && $row->name != "") echo ", ";
+				echo Nette\Templating\Helpers::escapeHtml($row->name);
+			},
+			 "sortable" => true,
+		));
+
 		$grid->addColumn("email", __("E-mail"), array(
 			 "renderer" => function ($row) {
+			 	 if($row->email == "") {
+			 	 	echo "<div class=\"na\">-</div>";
+			 	 	return ;
+			 	 }
+
 				 echo Nette\Utils\Html::el("a")->href("mailto:$row->email")->setText($row->email);
 			 },
 			 "sortable" => true,
@@ -65,10 +82,22 @@ class DefaultPresenter extends vManager\Modules\System\SecuredPresenter {
 		$grid->addColumn("roles", __("User groups"), array(
 			 "renderer" => function ($row) {
 				 $roles = count($row->roles) > 1 ? array_diff($row->roles, array('User')) : $row->roles;
-				 echo implode($roles, ', ');
+				 echo Nette\Templating\Helpers::escapeHtml(implode($roles, ', '));
 			 },
 			 "sortable" => false,
 		));
+
+		$grid->addColumn("lastLogin", __("Recently logged in"), array(
+			"renderer" => function ($row) use ($lastLoginInfo) {
+				if(isset($lastLoginInfo[$row->id])) {
+					$time = $lastLoginInfo[$row->id]->time;
+					echo Nette\Utils\Html::el("abbr")->title($time->format("j. n. Y H:i:s"))->setText(vManager\Application\Helpers::timeAgoInWords($time));
+
+				} else
+					echo "<div class=\"na\">-</div>";
+			},
+			"sortable" => false,
+		))->setCellClass('lastLogin');;
 
 		$grid->addButton("btnEdit", __('Edit'), array(					  
 			"handler" => function ($row) use ($grid) {

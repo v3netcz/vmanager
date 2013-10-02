@@ -1,12 +1,30 @@
 {block pageTitle}<?php echo __('Users - vManager'); ?>{/block}
 
+{block head}
+<style>
+	.userTableBlock SPAN.surname {
+		font-weight: bold;
+		padding-right: 0.3em;
+	}
+
+	.userTableBlock DIV.na {
+		text-align: center;
+		color: #999;
+	}
+
+	.userTableBlock TD.lastLogin {
+		text-align: center;
+	}
+</style>
+{/block}
+
 {block content}
 <div class="flat_area grid_16">
 	<h2><?php echo __('User administration'); ?></h2>
 	<p>V tabulce níže, jsou vypsány všechny uživatelské účty v systému. Pro založení nového úkolu klikněte na tlačítko "<?php echo __('Add new user'); ?>".</p>
 	<a href="{link Edit:addNewUser}" class="color-button"><?php echo __('Add new user'); ?></a>
 </div>
-<div class="box grid_16 round_all" style="margin-top: 20px;">
+<div class="box grid_16 round_all userTableBlock" style="margin-top: 20px;">
 {control userGrid}
 </div>
 {/block}
