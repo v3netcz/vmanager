@@ -199,18 +199,19 @@ class Ticket extends vBuilder\Orm\ActiveEntity {
 										? $t1->$field->label : __('unknown priority') ));
 				}	
 				
-			} elseif($t2->$field != $t1->$field) {
+			} elseif($t2->data->$field != $t1->data->$field) {
+			
 				if(is_object($t1->$field) && $t1->$field instanceof vBuilder\Orm\DataTypes\DateTime)
 					$change = _x('Changed field <strong class="field">%s</strong> to <strong class="value">%s</strong>', array($field, $t1->$field->format("d. m. Y")));
 				elseif($field == 'state') {
 					$module = vManager\Modules\Tickets::getInstance();
 					
-					if(!$t1->state->isFinal() && $t2->state->isFinal() && count($module->initialTicketStates) < 2)
+					if(!$t1->getState()->isFinal() && $t2->getState()->isFinal() && count($module->initialTicketStates) < 2)
 							$change = __('Reopened this ticket');
-					elseif($t1->state->isFinal())
-							$change = _x('Resolved this ticket as <strong class="field">%s</strong>', array($t1->state->name));
+					elseif($t1->getState()->isFinal())
+							$change = _x('Resolved this ticket as <strong class="field">%s</strong>', array($t1->getState()->name));
 					else
-							$change = _x('Changed ticket state to <strong class="field">%s</strong>', array($t1->state->name));
+							$change = _x('Changed ticket state to <strong class="field">%s</strong>', array($t1->getState()->name));
 
 				} elseif($t1->$field == "") 
 					$change = _x('Unset field <strong class="field">%s</strong>', array($field));
