@@ -21,7 +21,7 @@
 
 LOCK TABLES `pm_comments` WRITE;
 /*!40000 ALTER TABLE `pm_comments` DISABLE KEYS */;
-INSERT INTO `pm_comments` (`commentId`,`comment`,`public`)
+INSERT INTO `pm_comments` (`commentId`,`comment`,`private`)
 VALUES
 	(1,'Upraven popis problému',0),
 	(2,'Chtělo by to tu mít také nějaký další komentář',0);

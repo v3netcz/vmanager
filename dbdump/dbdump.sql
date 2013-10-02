@@ -190,7 +190,7 @@ CREATE TABLE `pm_stars` (
   `starId` int(8) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned NOT NULL,
   `entityId` int(11) NOT NULL,
-  `entity` varchar(128) CHARACTER SET utf8mb4 NOT NULL,
+  `entity` varchar(128) CHARACTER SET utf8 NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`starId`),
   UNIQUE KEY `userId_entityId_entity` (`userId`,`entityId`,`entity`)
