@@ -66,7 +66,7 @@ class ProjectPresenter extends vManager\Modules\System\SecuredPresenter {
 		// vlastni nejaky ticket nebo, ktere jsou explicitne prirazeny uzivateli (zodpovedna osoba)
 		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
 			$ticketTable = Ticket::getMetadata()->getTableName();
-			$ds->and('([assignedTo] = %i OR [author] = %i OR EXISTS (SELECT * FROM ['.$ticketTable.'] WHERE [projectId] = [d.projectId] AND [revision] > 0 AND ([author] = %i OR [assignedTo] = %i)))', $uid, $uid, $uid, $uid);
+			$ds->and('([assignedTo] = %i OR EXISTS (SELECT * FROM ['.$ticketTable.'] WHERE [projectId] = [d.projectId] AND [revision] > 0 AND ([author] = %i OR [assignedTo] = %i)))', $uid, $uid, $uid);
 		}
 
 		// Filtery		

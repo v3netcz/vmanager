@@ -68,16 +68,16 @@ class TicketPresenter extends vManager\Modules\System\SecuredPresenter {
 				  ->removeClause('from')
 				  ->from(Ticket::getMetadata()->getTableName())
 				  ->as('d')
-				  ->leftJoin(Priority::getMetadata()->getTableName())->as('p')->on('[priority] = [p.id]')
-				  ->leftJoin(Star::getMetadata()->getTableName())->as('s')->on('[s.entity] = %s AND [s.entityId] = [d.ticketId] AND [s.userId] = %i', 'vManager\\Modules\\Tickets\\Ticket', $uid)
+				  ->leftJoin(Priority::getMetadata()->getTableName())->as('p')->on('([priority] = [p.id])')
+				  ->leftJoin(Star::getMetadata()->getTableName())->as('s')->on('([s.entity] = %s AND [s.entityId] = [d.ticketId] AND [s.userId] = %i)', 'vManager\\Modules\\Tickets\\Ticket', $uid)
 				  ->where('[revision] > 0');
 		
 		// Pokud to neni spravce ticketu, zobrazuju jen tickety, ktere uzivatel zalozil
 		// nebo kterym je prirazen
 		if(!Nette\Environment::getUser()->getIdentity()->isInRole('Project manager')) {
 			$projectTable = Project::getMetadata()->getTableName();
-			$owningProjectCondition = "[projectId] IS NOT NULL AND EXISTS (SELECT * FROM [$projectTable] WHERE [projectId] = [d.projectId] AND [revision] > 0 AND ([author] = %i OR [assignedTo] = %i))";
-			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [ticketId] = [d.ticketId])) OR ($owningProjectCondition))", $uid, $uid, $uid, $uid, $uid);
+			$owningProjectCondition = "[projectId] IS NOT NULL AND EXISTS (SELECT * FROM [$projectTable] WHERE [projectId] = [d.projectId] AND [revision] > 0 AND [assignedTo] = %i)";
+			$ds->and("([assignedTo] = %i OR [author] = %i OR ([revision] > 1 AND EXISTS (SELECT * FROM [$table] WHERE [author] = %i AND [revision] = -1 AND [ticketId] = [d.ticketId])) OR ($owningProjectCondition))", $uid, $uid, $uid, $uid);
 		}
 		
 		$finalStateIds = array();
